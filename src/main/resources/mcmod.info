@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "${modid}",
+    "name": "${modname}",
+    "description": "",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "logoFile": "craftorium.png",
+    "url": "https://github.com/ripley2459/craftorium",
+    "authorList": [
+      "Ripley2459"
+    ],
+    "credits": "",
+    "dependencies": []
+  }
+]
