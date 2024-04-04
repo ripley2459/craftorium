@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium;
 
 import fr.cyrilneveu.craftorium.api.net.NetManager;
-import fr.cyrilneveu.craftorium.proxy.ACommonProxy;
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -16,7 +16,7 @@ public class Craftorium {
     public static final Logger LOGGER = LogManager.getLogger(CraftoriumTags.MODID);
     @Mod.Instance
     public static Craftorium instance;
-    @SidedProxy(clientSide = "fr.cyrilneveu.craftorium.proxy.ClientProxy", serverSide = "fr.cyrilneveu.craftorium.proxy.ServerProxy")
+    @SidedProxy(clientSide = "fr.cyrilneveu.craftorium.client.ClientProxy", serverSide = "fr.cyrilneveu.craftorium.server.ServerProxy")
     public static ACommonProxy proxy;
 
     public Craftorium() {

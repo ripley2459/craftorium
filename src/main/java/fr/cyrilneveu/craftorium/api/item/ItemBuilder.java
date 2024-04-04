@@ -1,23 +1,22 @@
 package fr.cyrilneveu.craftorium.api.item;
 
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
-import fr.cyrilneveu.craftorium.inventory.CustomCreativeTab;
-import net.minecraft.creativetab.CreativeTabs;
+import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.render.RenderUtils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.proxy.ACommonProxy.ITEMS;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS;
 
 public class ItemBuilder {
     private String name;
     private ResourceLocation registryName;
     private String translation;
     private List<FaceProvider> faceProviderList;
-    private CreativeTabs creativeTab = CustomCreativeTab.tabCommon;
+    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.tabCommon;
 
     public ItemBuilder(String name) {
         this.name = name;
@@ -36,7 +35,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setCreativeTab(CreativeTabs creativeTab) {
+    public ItemBuilder setCreativeTab(net.minecraft.creativetab.CreativeTabs creativeTab) {
         this.creativeTab = creativeTab;
         return this;
     }

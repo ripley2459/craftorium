@@ -1,8 +1,9 @@
-package fr.cyrilneveu.craftorium.proxy;
+package fr.cyrilneveu.craftorium.client;
 
 import fr.cyrilneveu.craftorium.api.fluid.CustomFluidBlock;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
-import fr.cyrilneveu.craftorium.api.render.RenderUtils;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -56,7 +57,7 @@ public final class ClientProxy extends ACommonProxy {
         FLUIDS.getAll().values().forEach(f -> {
             Block block = f.getBlock();
             if (block instanceof CustomFluidBlock)
-                ModelLoader.setCustomStateMapper(block, RenderUtils.SIMPLE_STATE_MAPPER.apply(block));
+                ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
         });
     }
 
@@ -69,8 +70,8 @@ public final class ClientProxy extends ACommonProxy {
             Block block = f.getBlock();
             if (block instanceof CustomFluidBlock) {
                 ModelFluid modelFluid = new ModelFluid(f);
-                IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, RenderUtils::getTexture);
-                event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(block), bakedModel);
+                IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, Utils::getTexture);
+                event.getModelRegistry().putObject(Utils.getSimpleModelLocation(block), bakedModel);
             }
         });
     }

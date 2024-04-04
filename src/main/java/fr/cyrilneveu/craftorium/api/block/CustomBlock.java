@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
-import fr.cyrilneveu.craftorium.api.render.RenderUtils;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-import static fr.cyrilneveu.craftorium.api.render.RenderUtils.BLOCK_MODEL_BUILDER;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.BLOCK_MODEL_BUILDER;
 
 public class CustomBlock extends Block implements ICustomModel, IBlockColor {
     private final FaceProvider[] faceProviders;
@@ -42,8 +42,8 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor {
 
     @Override
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, RenderUtils.SIMPLE_STATE_MAPPER.apply(this));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, RenderUtils.getSimpleModelLocation(this));
+        ModelLoader.setCustomStateMapper(this, Utils.SIMPLE_STATE_MAPPER.apply(this));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, Utils.getSimpleModelLocation(this));
     }
 
     @Override
@@ -55,6 +55,6 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor {
         for (FaceProvider face : faceProviders)
             BLOCK_MODEL_BUILDER.addLayer(face.getTexture());
 
-        event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
+        event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
     }
 }

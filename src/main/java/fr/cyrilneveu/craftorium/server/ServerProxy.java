@@ -1,5 +1,6 @@
-package fr.cyrilneveu.craftorium.proxy;
+package fr.cyrilneveu.craftorium.server;
 
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

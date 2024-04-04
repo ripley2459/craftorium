@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.proxy;
+package fr.cyrilneveu.craftorium.common;
 
 import crafttweaker.CraftTweakerAPI;
 import fr.cyrilneveu.craftorium.CraftoriumTags;

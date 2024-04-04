@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.inventory;
+package fr.cyrilneveu.craftorium.api.inventory;
 
 import fr.cyrilneveu.craftorium.Craftorium;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,10 +9,6 @@ import net.minecraft.item.ItemStack;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 public class CustomCreativeTab extends CreativeTabs {
-    public static CreativeTabs tabCommon = new CustomCreativeTab("common", "test_item_a");
-    public static CreativeTabs tabSubstances = new CustomCreativeTab("substances", "test_item_b");
-    public static CreativeTabs tabTools = new CustomCreativeTab("tools", "test_item_c");
-    public static CreativeTabs tabMachines = new CustomCreativeTab("machines", "test_item_d");
     private final String item;
 
     public CustomCreativeTab(String label, String item) {

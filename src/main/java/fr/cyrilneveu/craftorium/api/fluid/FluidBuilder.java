@@ -1,16 +1,15 @@
 package fr.cyrilneveu.craftorium.api.fluid;
 
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
-import fr.cyrilneveu.craftorium.inventory.CustomCreativeTab;
+import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.render.RenderUtils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.proxy.ACommonProxy.BLOCKS;
-import static fr.cyrilneveu.craftorium.proxy.ACommonProxy.FLUIDS;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.FLUIDS;
 
 
 public class FluidBuilder {
@@ -19,7 +18,7 @@ public class FluidBuilder {
     private String translation;
     private FaceProvider still;
     private FaceProvider flowing;
-    private CreativeTabs creativeTab = CustomCreativeTab.tabCommon;
+    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.tabCommon;
     private boolean isGaseous = false;
     private int color = ERROR_COLOR;
     private int luminosity = 0;
@@ -46,7 +45,7 @@ public class FluidBuilder {
         return this;
     }
 
-    public FluidBuilder setCreativeTab(CreativeTabs creativeTab) {
+    public FluidBuilder setCreativeTab(net.minecraft.creativetab.CreativeTabs creativeTab) {
         this.creativeTab = creativeTab;
         return this;
     }

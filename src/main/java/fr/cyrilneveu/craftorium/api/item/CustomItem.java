@@ -3,7 +3,7 @@ package fr.cyrilneveu.craftorium.api.item;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
-import fr.cyrilneveu.craftorium.api.render.RenderUtils;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-import static fr.cyrilneveu.craftorium.api.render.RenderUtils.ITEM_MODEL_BUILDER;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.ITEM_MODEL_BUILDER;
 
 public class CustomItem extends Item implements ICustomModel, IItemColor {
     private final FaceProvider[] faceProviders;
@@ -38,7 +38,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
 
     @Override
     public void onModelRegister() {
-        ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
+        ModelResourceLocation location = Utils.getSimpleModelLocation(this);
         ModelBakery.registerItemVariants(this, location);
         ModelLoader.setCustomMeshDefinition(this, stack -> location);
     }
@@ -50,6 +50,6 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
         for (FaceProvider face : faceProviders)
             ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-        event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+        event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
     }
 }
