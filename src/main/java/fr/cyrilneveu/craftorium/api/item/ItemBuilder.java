@@ -9,14 +9,14 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
 
 public class ItemBuilder {
     private String name;
     private ResourceLocation registryName;
     private String translation;
     private List<FaceProvider> faceProviderList;
-    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.tabCommon;
+    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.COMMON;
 
     public ItemBuilder(String name) {
         this.name = name;
@@ -58,7 +58,7 @@ public class ItemBuilder {
         item.setTranslationKey(translation);
         item.setCreativeTab(creativeTab);
 
-        ITEMS.put(name, item);
+        ITEMS_REGISTRY.put(name, item);
 
         return item;
     }

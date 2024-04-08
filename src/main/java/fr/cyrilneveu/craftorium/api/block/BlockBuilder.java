@@ -10,15 +10,15 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
 
 public class BlockBuilder {
     private String name;
     private ResourceLocation registryName;
     private String translation;
     private List<FaceProvider> faceProviderList;
-    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.tabCommon;
+    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.COMMON;
     private Material material = Material.IRON;
 
     public BlockBuilder(String name) {
@@ -71,8 +71,8 @@ public class BlockBuilder {
         item.setTranslationKey(translation);
         item.setCreativeTab(creativeTab);
 
-        BLOCKS.put(name, block);
-        ITEMS.put(name, item);
+        BLOCKS_REGISTRY.put(name, block);
+        ITEMS_REGISTRY.put(name, item);
 
         return block;
     }

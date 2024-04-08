@@ -39,9 +39,9 @@ public final class ClientProxy extends ACommonProxy {
     public static void onTextureStitching(TextureStitchEvent.Pre event) {
         Set<ResourceLocation> sprites = new HashSet<>();
 
-        ITEMS.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).addTextures(sprites));
-        BLOCKS.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).addTextures(sprites));
-        FLUIDS.getAll().values().forEach(f -> {
+        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).addTextures(sprites));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).addTextures(sprites));
+        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
             event.getMap().registerSprite(f.getStill());
             event.getMap().registerSprite(f.getFlowing());
         });
@@ -52,9 +52,9 @@ public final class ClientProxy extends ACommonProxy {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onModelRegister(ModelRegistryEvent event) {
-        ITEMS.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelRegister());
-        BLOCKS.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelRegister());
-        FLUIDS.getAll().values().forEach(f -> {
+        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelRegister());
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelRegister());
+        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
             Block block = f.getBlock();
             if (block instanceof CustomFluidBlock)
                 ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
@@ -64,9 +64,9 @@ public final class ClientProxy extends ACommonProxy {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onModelBake(ModelBakeEvent event) {
-        ITEMS.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelBake(event));
-        BLOCKS.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelBake(event));
-        FLUIDS.getAll().values().forEach(f -> {
+        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelBake(event));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelBake(event));
+        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
             Block block = f.getBlock();
             if (block instanceof CustomFluidBlock) {
                 ModelFluid modelFluid = new ModelFluid(f);
@@ -79,15 +79,15 @@ public final class ClientProxy extends ACommonProxy {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onHandlingItemColors(ColorHandlerEvent.Item event) {
-        ITEMS.getAll().values().stream().filter(i -> i instanceof IItemColor).forEach(i -> event.getItemColors().registerItemColorHandler((IItemColor) i, i));
-        BLOCKS.getAll().values().stream().filter(b -> b instanceof IItemColor).forEach(b -> event.getItemColors().registerItemColorHandler((IItemColor) b, b));
+        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof IItemColor).forEach(i -> event.getItemColors().registerItemColorHandler((IItemColor) i, i));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof IItemColor).forEach(b -> event.getItemColors().registerItemColorHandler((IItemColor) b, b));
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onHandlingBlockColors(ColorHandlerEvent.Block event) {
-        BLOCKS.getAll().values().stream().filter(b -> b instanceof IBlockColor).forEach(b -> event.getBlockColors().registerBlockColorHandler((IBlockColor) b, b));
-        FLUIDS.getAll().values().stream().filter(f -> f instanceof IBlockColor).forEach(f -> event.getBlockColors().registerBlockColorHandler((IBlockColor) f.getBlock(), f.getBlock()));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof IBlockColor).forEach(b -> event.getBlockColors().registerBlockColorHandler((IBlockColor) b, b));
+        FLUIDS_REGISTRY.getAll().values().stream().filter(f -> f instanceof IBlockColor).forEach(f -> event.getBlockColors().registerBlockColorHandler((IBlockColor) f.getBlock(), f.getBlock()));
     }
 
     @Override

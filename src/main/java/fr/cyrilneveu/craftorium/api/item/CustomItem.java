@@ -19,7 +19,7 @@ import java.util.Set;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ITEM_MODEL_BUILDER;
 
 public class CustomItem extends Item implements ICustomModel, IItemColor {
-    private final FaceProvider[] faceProviders;
+    protected final FaceProvider[] faceProviders;
 
     public CustomItem(FaceProvider[] faceProviders) {
         this.faceProviders = faceProviders;

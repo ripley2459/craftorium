@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.api.utils;
 
+import com.google.common.base.CaseFormat;
 import fr.cyrilneveu.craftorium.api.render.ModelBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,8 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -23,6 +26,7 @@ public final class Utils {
     public static final ModelBuilder ITEM_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.ITEM);
     public static final ModelBuilder BLOCK_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.BLOCK);
     public static final int ERROR_COLOR = 0xFFff00ff;
+    public static final int WHITE_COLOR = 0xFFffffff;
 
     public static String localise(String localisationKey, Object... substitutions) {
         return FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? net.minecraft.util.text.translation.I18n.translateToLocalFormatted(localisationKey, substitutions) : net.minecraft.client.resources.I18n.format(localisationKey, substitutions);
@@ -38,6 +42,14 @@ public final class Utils {
 
     public static boolean isAdvancedTooltipsOn() {
         return Minecraft.getMinecraft().gameSettings.advancedItemTooltips;
+    }
+
+    public static String toCamelCase(String s) {
+        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, s);
+    }
+
+    public static String[] cleanArray(String[] array) {
+        return Arrays.stream(array).filter(x -> !StringUtils.isBlank(x)).toArray(String[]::new);
     }
 
     public static <I> boolean atLeastOne(Iterable<I> iterable, Function<I, Boolean> condition) {

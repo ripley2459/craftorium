@@ -5,10 +5,13 @@ import fr.cyrilneveu.craftorium.CraftoriumTags;
 import fr.cyrilneveu.craftorium.api.block.BlockBuilder;
 import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
+import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.object.SubstanceFluid;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.config.Config;
@@ -24,12 +27,18 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nullable;
+
+import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 @Mod.EventBusSubscriber
 public abstract class ACommonProxy {
-    public static final Registry<String, Item> ITEMS = new Registry<>();
-    public static final Registry<String, Block> BLOCKS = new Registry<>();
-    public static final Registry<String, Fluid> FLUIDS = new Registry<>();
+    public static final Registry<String, Item> ITEMS_REGISTRY = new Registry<>();
+    public static final Registry<String, Block> BLOCKS_REGISTRY = new Registry<>();
+    public static final Registry<String, Fluid> FLUIDS_REGISTRY = new Registry<>();
 
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
@@ -37,38 +46,39 @@ public abstract class ACommonProxy {
             ConfigManager.sync(CraftoriumTags.MODID, Config.Type.INSTANCE);
     }
 
-    private static ItemBuilder createItem(String name) {
-        return new ItemBuilder(name);
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
+        SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
+        SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v)).forEach(v::createObject));
 
-        ITEMS.close();
-        ITEMS.getAll().forEach((k, v) -> event.getRegistry().register(v));
+        ITEMS_REGISTRY.close();
+        ITEMS_REGISTRY.getAll().forEach((k, v) -> event.getRegistry().register(v));
     }
 
-    private static BlockBuilder createBlock(String name) {
-        return new BlockBuilder(name);
+    protected static ItemBuilder createItem(String name) {
+        return new ItemBuilder(name);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     protected static void registerBlocks(RegistryEvent.Register<Block> event) {
+        SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v)).forEach(v::createObject));
+        SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v)).forEach(v::createObject));
 
-        registerFluids(event);
-
-        BLOCKS.close();
-        BLOCKS.getAll().forEach((s, b) -> event.getRegistry().register(b));
+        FLUIDS_REGISTRY.close();
+        BLOCKS_REGISTRY.close();
+        BLOCKS_REGISTRY.getAll().forEach((s, b) -> event.getRegistry().register(b));
     }
 
-    private static FluidBuilder createFluid(String name) {
+    protected static BlockBuilder createBlock(String name) {
+        return new BlockBuilder(name);
+    }
+
+    protected static FluidBuilder createFluid(String name) {
         return new FluidBuilder(name);
     }
 
-    protected static void registerFluids(RegistryEvent.Register<Block> event) {
+    protected static void createFluid(SubstanceFluid reference, Substance substance) {
 
-        FLUIDS.close();
-        // FLUIDS.getAll().forEach((s, f) -> { /* *** */ }); // Fluids are registered when they are created to also register their associated block.
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -77,7 +87,27 @@ public abstract class ACommonProxy {
     }
 
     protected static void registerOres() {
+        SUBSTANCES_REGISTRY.getAll().values().forEach(s -> {
+            s.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(s), i.getItemStack(s)));
+            s.getTools().forEach(t -> OreDictionary.registerOre(t.getOre(s), t.getItemStack(s)));
+            s.getBlocks().forEach(b -> OreDictionary.registerOre(b.getOre(s), b.getItemStack(s)));
+        });
+    }
 
+    @Nullable
+    public static Item getItem(String name) {
+        return ITEMS_REGISTRY.get(name);
+    }
+
+    @Nullable
+    public static ItemStack getItemStack(String name) {
+        return getItemStack(name, 1);
+    }
+
+    @Nullable
+    public static ItemStack getItemStack(String name, int count) {
+        Item item = getItem(name);
+        return item == null ? null : new ItemStack(item, count);
     }
 
     public EntityPlayer getPlayer(MessageContext context) {
@@ -91,6 +121,12 @@ public abstract class ACommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
+
+        SUBSTANCES_REGISTRY.close();
+        SUBSTANCE_ITEMS_REGISTRY.close();
+        SUBSTANCE_TOOLS_REGISTRY.close();
+        SUBSTANCE_BLOCKS_REGISTRY.close();
+        SUBSTANCE_FLUIDS_REGISTRY.close();
     }
 
     public void init(FMLInitializationEvent event) {

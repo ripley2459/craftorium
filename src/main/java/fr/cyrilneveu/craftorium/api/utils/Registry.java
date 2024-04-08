@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.api.utils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,12 +23,17 @@ public final class Registry<K extends Comparable<K>, V> {
         return values.remove(key) != null;
     }
 
+    @Nullable
     public V get(K key) {
         return values.get(key);
     }
 
     public Map<K, V> getAll() {
         return values;
+    }
+
+    public boolean contains(K key) {
+        return values.containsKey(key);
     }
 
     public void close() {

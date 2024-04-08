@@ -9,7 +9,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -21,8 +24,8 @@ import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.api.utils.Utils.BLOCK_MODEL_BUILDER;
 
-public class CustomBlock extends Block implements ICustomModel, IBlockColor {
-    private final FaceProvider[] faceProviders;
+public class CustomBlock extends Block implements ICustomModel, IBlockColor, IItemColor {
+    protected final FaceProvider[] faceProviders;
 
     public CustomBlock(Material material, FaceProvider[] faceProviders) {
         super(material);
@@ -30,7 +33,17 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor {
     }
 
     @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
     public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
+        return faceProviders[layer].getColor();
+    }
+
+    @Override
+    public int colorMultiplier(ItemStack stack, int layer) {
         return faceProviders[layer].getColor();
     }
 
