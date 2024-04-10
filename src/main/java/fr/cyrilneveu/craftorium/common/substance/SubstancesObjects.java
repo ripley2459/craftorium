@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.block.SubstanceItemBlock;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
+import net.minecraft.block.material.Material;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS_REGISTRY;
@@ -96,22 +97,22 @@ public final class SubstancesObjects {
     }
 
     private static void createBlock(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(reference, substance);
+        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
         createBlock(reference, substance, block);
     }
 
     private static void createFrame(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(reference, substance);
+        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
         createBlock(reference, substance, block);
     }
 
     private static void createHull(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(reference, substance);
+        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
         createBlock(reference, substance, block);
     }
 
     private static void createOre(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(reference, substance);
+        fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock(Material.ROCK, reference, substance);
         createBlock(reference, substance, block);
     }
 

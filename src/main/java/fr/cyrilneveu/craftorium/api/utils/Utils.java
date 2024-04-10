@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -81,16 +80,8 @@ public final class Utils {
         return new ModelResourceLocation(Objects.requireNonNull(Item.REGISTRY.getNameForObject(item)), "inventory");
     }
 
-    public static TextureMap getTextureMap() {
-        return Minecraft.getMinecraft().getTextureMapBlocks();
-    }
-
-    public static TextureAtlasSprite getTexture(String location) {
-        return getTextureMap().getAtlasSprite(location);
-    }
-
     public static TextureAtlasSprite getTexture(ResourceLocation location) {
-        return getTexture(location.toString());
+        return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
     }
 
     private static class CustomStateMapper extends StateMapperBase {

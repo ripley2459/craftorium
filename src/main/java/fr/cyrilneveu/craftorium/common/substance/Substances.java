@@ -1,12 +1,19 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.substance.Element;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
 
+@ZenClass("mods." + MODID + ".substance.Substances")
+@ZenRegister
 public final class Substances {
     public static final Registry<String, Substance> SUBSTANCES_REGISTRY = new Registry<>();
 
@@ -722,5 +729,21 @@ public final class Substances {
 
     private static SubstanceBuilder createSubstance(String name) {
         return new SubstanceBuilder(name);
+    }
+
+    @ZenMethod
+    public static Substance get(String name) {
+        return SUBSTANCES_REGISTRY.get(name);
+    }
+
+    @ZenMethod
+    public static boolean remove(String name) {
+        return SUBSTANCES_REGISTRY.remove(name);
+    }
+
+    @ZenMethod
+    public static void list() {
+        CraftTweakerAPI.logInfo("Registered substances:");
+        SUBSTANCES_REGISTRY.getAll().forEach((n, s) -> CraftTweakerAPI.logInfo(" - " + s.getName()));
     }
 }

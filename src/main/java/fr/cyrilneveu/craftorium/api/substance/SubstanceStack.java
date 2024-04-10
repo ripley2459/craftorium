@@ -1,8 +1,9 @@
 package fr.cyrilneveu.craftorium.api.substance;
 
 import com.google.common.base.Preconditions;
+import org.jetbrains.annotations.NotNull;
 
-public final class SubstanceStack {
+public final class SubstanceStack implements Comparable<SubstanceStack> {
     private final Substance substance;
     private final int amount;
     private final int chance;
@@ -17,5 +18,10 @@ public final class SubstanceStack {
         this.substance = substance;
         this.amount = amount;
         this.chance = chance;
+    }
+
+    @Override
+    public int compareTo(@NotNull SubstanceStack other) {
+        return substance.compareTo(other.substance);
     }
 }

@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.api.substance;
 
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
@@ -10,6 +11,7 @@ import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import org.jetbrains.annotations.NotNull;
+import stanhebben.zenscript.annotations.ZenClass;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -17,6 +19,8 @@ import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
+@ZenClass("mods." + MODID + ".substance.Substance")
+@ZenRegister
 public final class Substance implements Comparable<Substance> {
     private final String name;
     private final Composition composition;

@@ -8,7 +8,7 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
 
 public final class SubstanceTool extends ASubstanceObject {
-    public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModel model) {
+    public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
         super(name, self, prefix, suffix, provider, faces, model);
     }
 

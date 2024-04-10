@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
+
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final String name;
     protected final boolean self;
@@ -18,9 +20,9 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final String suffix;
     protected final ICreateObject provider;
     protected final IGetFaces faces;
-    protected final IGetModel model;
+    protected final IGetModelTemplate model;
 
-    public ASubstanceObject(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModel model) {
+    public ASubstanceObject(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
         this.name = name;
         this.self = self;
         this.prefix = prefix;
@@ -46,8 +48,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         return faces.getFaces(this, substance);
     }
 
-    public final ModelTemplate getModel(Substance substance) {
-        return model.getModel(this, substance);
+    public final ModelTemplate getModelTemplate(Substance substance) {
+        return model.getModelTemplate(this, substance);
     }
 
     public ItemStack getItemStack(Substance substance) {
@@ -115,7 +117,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     @FunctionalInterface
-    public interface IGetModel {
-        ModelTemplate getModel(ASubstanceObject reference, Substance substance);
+    public interface IGetModelTemplate {
+        ModelTemplate getModelTemplate(ASubstanceObject reference, Substance substance);
     }
 }

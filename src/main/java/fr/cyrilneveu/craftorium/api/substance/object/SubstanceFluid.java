@@ -5,7 +5,7 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import javax.annotation.Nullable;
 
 public final class SubstanceFluid extends ASubstanceObject {
-    public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModel model) {
+    public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
         super(name, self, prefix, suffix, provider, faces, model);
     }
 

@@ -8,12 +8,15 @@ import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceFluid;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
+import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
+import fr.cyrilneveu.craftorium.common.config.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IThreadListener;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
@@ -27,12 +30,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
+import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
 public abstract class ACommonProxy {
@@ -107,7 +113,7 @@ public abstract class ACommonProxy {
     @Nullable
     public static ItemStack getItemStack(String name, int count) {
         Item item = getItem(name);
-        return item == null ? null : new ItemStack(item, count);
+        return item == null ? null : new ItemStack(item, count, WILDCARD_VALUE);
     }
 
     public EntityPlayer getPlayer(MessageContext context) {
@@ -122,15 +128,19 @@ public abstract class ACommonProxy {
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
 
-        SUBSTANCES_REGISTRY.close();
         SUBSTANCE_ITEMS_REGISTRY.close();
         SUBSTANCE_TOOLS_REGISTRY.close();
         SUBSTANCE_BLOCKS_REGISTRY.close();
         SUBSTANCE_FLUIDS_REGISTRY.close();
+        VEINS_REGISTRY.close();
+        SUBSTANCES_REGISTRY.close();
     }
 
     public void init(FMLInitializationEvent event) {
-
+        if (!Settings.generationSettings.enableVanillaOreGeneration)
+            MinecraftForge.ORE_GEN_BUS.register(new VeinGenerator.WorldGeneratorReplacer());
+        if (Settings.generationSettings.enableOreGeneration)
+            GameRegistry.registerWorldGenerator(new VeinGenerator(), 1);
     }
 
     public void postInit(FMLPostInitializationEvent event) {

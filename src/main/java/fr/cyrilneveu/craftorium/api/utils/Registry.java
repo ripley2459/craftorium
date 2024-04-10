@@ -36,6 +36,10 @@ public final class Registry<K extends Comparable<K>, V> {
         return values.containsKey(key);
     }
 
+    public boolean isClosed() {
+        return closed;
+    }
+
     public void close() {
         Preconditions.checkArgument(!closed, "Can't close an already closed registry!");
 

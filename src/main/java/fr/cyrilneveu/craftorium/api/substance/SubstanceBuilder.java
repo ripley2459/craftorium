@@ -3,6 +3,8 @@ package fr.cyrilneveu.craftorium.api.substance;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
@@ -11,18 +13,23 @@ import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
+import net.minecraft.block.SoundType;
+import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
+@ZenClass("mods." + MODID + ".substance.Builder")
+@ZenRegister
 public final class SubstanceBuilder {
     private String name;
-    private Set<SubstanceStack> composition, chanced;
+    private Set<SubstanceStack> composition, possible;
     @Nullable
     private Element element;
     @Nullable
@@ -36,11 +43,63 @@ public final class SubstanceBuilder {
     private Set<SubstanceFluid> fluids = new TreeSet<>();
     private Map<ASubstanceObject, String> overrides = new HashMap<>();
     private String style = "metal";
-    private boolean shiny, glow;
+    private boolean shiny, glow = false;
     private int baseColor, oreColor, fluidColor = ERROR_COLOR;
+    private SoundType soundType = SoundType.METAL;
 
     public SubstanceBuilder(String name) {
         this.name = name;
+    }
+
+    @ZenMethod
+    public static SubstanceBuilder build(String name) {
+        return new SubstanceBuilder(name);
+    }
+
+    @ZenMethod
+    public SubstanceBuilder composition(Object... composition) {
+        Preconditions.checkArgument(composition.length % 2 == 0);
+
+        Set<SubstanceStack> composition1 = new TreeSet<>();
+
+        for (int i = 0; i < composition.length; i += 2) {
+            Preconditions.checkArgument((composition[i] instanceof Substance || composition[i] instanceof String) && (composition[i + 1] instanceof Integer));
+
+            Substance substance;
+            if (composition[i] instanceof String) {
+                Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains((String) composition[i]));
+
+                substance = SUBSTANCES_REGISTRY.get((String) composition[i]);
+            } else substance = (Substance) composition[i];
+
+            composition1.add(new SubstanceStack(substance, (Integer) composition[i + 1]));
+        }
+
+        this.composition = ImmutableSortedSet.copyOf(composition1);
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder possible(Object... chanced) {
+        Preconditions.checkArgument(chanced.length % 3 == 0);
+
+        Set<SubstanceStack> possible1 = new TreeSet<>();
+
+        for (int i = 0; i < chanced.length; i += 3) {
+            Preconditions.checkArgument((chanced[i] instanceof Substance || chanced[i] instanceof String) && (chanced[i + 1] instanceof Integer) && (chanced[i + 2] instanceof Integer));
+
+            Substance substance;
+            if (chanced[i] instanceof String) {
+                Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains((String) chanced[i]));
+
+                substance = SUBSTANCES_REGISTRY.get((String) chanced[i]);
+            } else substance = (Substance) chanced[i];
+
+            possible1.add(new SubstanceStack(substance, (Integer) chanced[i + 1], (Integer) chanced[i + 2]));
+        }
+
+        this.possible = ImmutableSortedSet.copyOf(possible1);
+        return this;
     }
 
     @ZenMethod
@@ -67,6 +126,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setHalogen() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -75,6 +135,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setNobleGas() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -83,6 +144,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setAlkaliMetal() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -91,6 +153,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setAlkalineEarthMetal() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -99,6 +162,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setMetalloid() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -107,6 +171,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setNonMetal() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -115,6 +180,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setPostTransitionMetal() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -123,6 +189,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setTransitionMetal() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -131,6 +198,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setLanthanide() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -139,6 +207,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setActinide() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -147,6 +216,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
     public SubstanceBuilder setUnknown() {
         items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -208,11 +278,24 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public Substance build() {
-        Preconditions.checkArgument((composition != null && chanced != null && element == null) || (composition == null && chanced == null && element != null));
-        Composition composition1 = element != null ? new Composition(element) : new Composition(composition, chanced);
+    public SubstanceBuilder sound(String soundName) {
+        switch (soundName) {
+            case "metal" -> this.soundType = SoundType.METAL;
+            case "wood" -> this.soundType = SoundType.WOOD;
+            case "stone" -> this.soundType = SoundType.STONE;
+            case "sand" -> this.soundType = SoundType.SAND;
+            default -> CraftTweakerAPI.logError("This type of sound does not exists: " + soundName);
+        }
 
-        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor), ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        return this;
+    }
+
+    @ZenMethod
+    public Substance build() {
+        Preconditions.checkArgument((composition != null && possible != null && element == null) || (composition == null && possible == null && element != null));
+        Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible);
+
+        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
         SUBSTANCES_REGISTRY.put(name, substance);
         return substance;
     }

@@ -9,7 +9,7 @@ public abstract class ASubstanceObjectBuilder<T> {
     protected String suffix;
     protected ASubstanceObject.ICreateObject provider;
     protected ASubstanceObject.IGetFaces faces;
-    protected ASubstanceObject.IGetModel model;
+    protected ASubstanceObject.IGetModelTemplate model;
 
     public ASubstanceObjectBuilder(String name) {
         this.name = name;
@@ -40,7 +40,7 @@ public abstract class ASubstanceObjectBuilder<T> {
         return this;
     }
 
-    public ASubstanceObjectBuilder<T> model(ASubstanceObject.IGetModel modelProvider) {
+    public ASubstanceObjectBuilder<T> model(ASubstanceObject.IGetModelTemplate modelProvider) {
         this.model = modelProvider;
         return this;
     }
