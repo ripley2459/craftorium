@@ -727,6 +727,13 @@ public final class Substances {
             .setUnknown()
             .build();
 
+    public static final Substance TEST_SUBSTANCE = createSubstance("test")
+            .composition(HYDROGEN, 3, OGANESSON, 1, CHROMIUM, 5)
+            .temperature(Float.NaN, 350f)
+            .color(ERROR_COLOR)
+            .setUnknown()
+            .build();
+
     private static SubstanceBuilder createSubstance(String name) {
         return new SubstanceBuilder(name);
     }

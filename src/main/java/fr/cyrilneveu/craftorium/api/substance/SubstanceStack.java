@@ -20,6 +20,18 @@ public final class SubstanceStack implements Comparable<SubstanceStack> {
         this.chance = chance;
     }
 
+    public Substance getSubstance() {
+        return substance;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public int getChance() {
+        return chance;
+    }
+
     @Override
     public int compareTo(@NotNull SubstanceStack other) {
         return substance.compareTo(other.substance);

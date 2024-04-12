@@ -108,7 +108,7 @@ public class FluidBuilder {
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        CustomFluidBlock block = new CustomFluidBlock(fluid, material);
+        CustomFluid.CustomFluidBlock block = new CustomFluid.CustomFluidBlock(fluid, material);
         block.setRegistryName(registryName);
         block.setTranslationKey(translation);
         block.setCreativeTab(creativeTab);

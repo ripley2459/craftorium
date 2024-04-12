@@ -379,6 +379,7 @@ public final class Veins {
     public static Vein getVein(Random random, int dimension) {
         WeightedList<Vein> veins = new WeightedList<>();
         VEINS_REGISTRY.getAll().entrySet().stream().filter(v -> v.getValue().getDimension() == dimension).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).forEach((s, v) -> veins.put(v, v.getChance()));
+
         return veins.isEmpty() ? null : veins.get(random);
     }
 }

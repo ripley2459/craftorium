@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public final class StoneTypes {
     public static final Registry<String, StoneType> STONES_REGISTRY = new Registry<>();
+
     private static int META = 0;
     public static final StoneType STONE = createStone("stone", "minecraft:blocks/stone", Blocks.STONE.getStateFromMeta(0), 0);
     public static final StoneType GRANITE = createStone("granite", "minecraft:blocks/stone_granite", Blocks.STONE.getStateFromMeta(1), 0);
@@ -21,8 +22,8 @@ public final class StoneTypes {
         Preconditions.checkArgument(META + 1 >= 0 && META + 1 <= 16);
 
         StoneType stoneType = new StoneType(name, META++, new ResourceLocation(texture), blockState, dimension);
-        STONES_REGISTRY.put(name, stoneType);
 
+        STONES_REGISTRY.put(name, stoneType);
         return stoneType;
     }
 }

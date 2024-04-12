@@ -6,10 +6,10 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.ACommonProxy.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
@@ -52,12 +52,13 @@ public final class SubstancesObjects {
     public static final SubstanceBlock HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
     public static final SubstanceBlock ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstanceBlock::oreModel).faces(SubstanceBlock::oreFaces).build();
 
-    public static final SubstanceFluid LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).build();
+    public static final SubstanceFluid LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstanceFluid::defaultFaces).build();
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstanceItem::defaultFaces);
+
         return builder;
     }
 
@@ -65,16 +66,19 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
         builder.faces(SubstanceTool::defaultFaces);
+
         return builder;
     }
 
     private static ASubstanceObjectBuilder.SubstanceBlockBuilder createBlock(String name, ASubstanceObject.ICreateObject provider) {
         ASubstanceObjectBuilder.SubstanceBlockBuilder builder = new ASubstanceObjectBuilder.SubstanceBlockBuilder(name, provider);
+
         return builder;
     }
 
     private static ASubstanceObjectBuilder.SubstanceFluidBuilder createFluid(String name, ASubstanceObject.ICreateObject provider) {
         ASubstanceObjectBuilder.SubstanceFluidBuilder builder = new ASubstanceObjectBuilder.SubstanceFluidBuilder(name, provider);
+
         return builder;
     }
 
@@ -88,7 +92,7 @@ public final class SubstancesObjects {
     }
 
     private static void createTool(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem(reference, substance);
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool(reference, substance);
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(TOOLS);
@@ -131,6 +135,21 @@ public final class SubstancesObjects {
     }
 
     private static void createLiquid(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid fluid = new fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid(reference, substance);
+        /*fluid.setGaseous(substance.getComposition().getState() == Element.ElementState.Gas).setLuminosity(15)
+                .setDensity(substance.getComposition().getState() == Element.ElementState.Gas ? -100 : 3000)
+                .setViscosity(substance.getComposition().getState() == Element.ElementState.Gas ? 200 : 1000)
+                .setTemperature((int) substance.getComposition().getTemperature());*/
+        fluid.setUnlocalizedName(String.join(".", MODID, reference.getName(null), "name"));
 
+        FLUIDS_REGISTRY.put(reference.getName(substance), fluid);
+        FluidRegistry.registerFluid(fluid);
+        FluidRegistry.addBucketForFluid(fluid);
+
+        fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid.SubstanceFluidBlock block = new fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid.SubstanceFluidBlock(fluid, Material.LAVA);
+        block.setTranslationKey(String.join(".", MODID, reference.getName(null), "name"));
+        block.setRegistryName(reference.getName(substance));
+
+        BLOCKS_REGISTRY.put(reference.getName(substance), block);
     }
 }

@@ -6,10 +6,10 @@ import fr.cyrilneveu.craftorium.api.block.BlockBuilder;
 import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.substance.object.SubstanceFluid;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
 import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -83,21 +83,22 @@ public abstract class ACommonProxy {
         return new FluidBuilder(name);
     }
 
-    protected static void createFluid(SubstanceFluid reference, Substance substance) {
-
-    }
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     protected static void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
         registerOres();
+
+        RecipesHandler.unregisterRecipes(event);
+        RecipesHandler.registerRecipes(event);
+
+        SUBSTANCES_REGISTRY.getAll().values().forEach(s -> s.getProcess().registerRecipes(s));
     }
 
     protected static void registerOres() {
-        SUBSTANCES_REGISTRY.getAll().values().forEach(s -> {
-            s.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(s), i.getItemStack(s)));
-            s.getTools().forEach(t -> OreDictionary.registerOre(t.getOre(s), t.getItemStack(s)));
-            s.getBlocks().forEach(b -> OreDictionary.registerOre(b.getOre(s), b.getItemStack(s)));
-        });
+        for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
+            substance.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(substance), i.asItemStack(substance)));
+            substance.getTools().forEach(t -> OreDictionary.registerOre(t.getOre(substance), t.asItemStack(substance)));
+            substance.getBlocks().forEach(b -> OreDictionary.registerOre(b.getOre(substance), b.asItemStack(substance)));
+        }
     }
 
     @Nullable

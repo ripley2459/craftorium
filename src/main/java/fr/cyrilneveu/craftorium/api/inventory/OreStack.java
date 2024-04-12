@@ -49,8 +49,8 @@ public final class OreStack {
     }
 
     public static boolean oresExist(String... ores) {
-        for (String o : ores) {
-            if (!OreDictionary.doesOreNameExist(o))
+        for (String ore : ores) {
+            if (!OreDictionary.doesOreNameExist(ore))
                 return false;
         }
 
@@ -135,11 +135,11 @@ public final class OreStack {
             if (!itemStack.isEmpty())
                 list.add(new ItemStack(itemStack.getItem(), amount, itemStack.getItemDamage()));
         } else {
-            OreDictionary.getOres(oreDictName).forEach(s -> {
+            for (ItemStack s : OreDictionary.getOres(oreDictName)) {
                 ItemStack stack = s.copy();
                 stack.setCount(amount);
                 list.add(stack);
-            });
+            }
         }
 
         return list;

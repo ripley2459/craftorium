@@ -19,6 +19,8 @@ import org.lwjgl.input.Keyboard;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Utils {
     public static final Function<Block, CustomStateMapper> SIMPLE_STATE_MAPPER = block -> new CustomStateMapper(getSimpleModelLocation(block));
@@ -70,6 +72,25 @@ public final class Utils {
         }
 
         return validate > size / 2;
+    }
+
+    public static String numbersToDown(String input) {
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        StringBuffer buffer = new StringBuffer();
+        while (matcher.find()) {
+            int digit = Integer.parseInt(matcher.group());
+            String replacement = toSubscript(digit);
+            matcher.appendReplacement(buffer, replacement);
+        }
+
+        matcher.appendTail(buffer);
+        return buffer.toString();
+    }
+
+    private static String toSubscript(int digit) {
+        char subscriptDigit = (char) ('\u2080' + digit);
+        return Character.toString(subscriptDigit);
     }
 
     public static ModelResourceLocation getSimpleModelLocation(Block block) {

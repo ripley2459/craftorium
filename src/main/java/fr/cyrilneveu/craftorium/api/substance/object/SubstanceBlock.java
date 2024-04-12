@@ -38,6 +38,6 @@ public final class SubstanceBlock extends ASubstanceObject {
     }
 
     public Block getBlock(Substance substance) {
-        return Block.getBlockFromItem(getItemStack(substance).getItem());
+        return Block.getBlockFromItem(asItemStack(substance).getItem());
     }
 }

@@ -61,7 +61,7 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
 
     @Override
     public void onModelBake(ModelBakeEvent event) {
-        Preconditions.checkArgument(faceProviders.length == 1, "This kind of block use exactly 1 texture!");
+        Preconditions.checkArgument(faceProviders.length == 1);
 
         BLOCK_MODEL_BUILDER.newOperation(ModelTemplate.BLOCK);
 

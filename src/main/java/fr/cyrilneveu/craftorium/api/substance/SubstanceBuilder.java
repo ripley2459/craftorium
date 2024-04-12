@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.api.substance;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -9,6 +10,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
+import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
@@ -22,6 +24,7 @@ import java.util.*;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
@@ -36,6 +39,7 @@ public final class SubstanceBuilder {
     private Efficiency efficiency;
     private Toughness toughness = new Toughness(5.0f, 10.0f, "pickaxe", 2);
     private Temperature temperature = Temperature.EMPTY;
+    private AProcess process = DEFAULT_PROCESS;
     private Map<ESubstanceProperties, ASubstanceProperty> properties = new HashMap<>();
     private Set<SubstanceItem> items = new TreeSet<>();
     private Set<SubstanceTool> tools = new TreeSet<>();
@@ -60,7 +64,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder composition(Object... composition) {
         Preconditions.checkArgument(composition.length % 2 == 0);
 
-        Set<SubstanceStack> composition1 = new TreeSet<>();
+        Set<SubstanceStack> composition1 = new LinkedHashSet<>();
 
         for (int i = 0; i < composition.length; i += 2) {
             Preconditions.checkArgument((composition[i] instanceof Substance || composition[i] instanceof String) && (composition[i + 1] instanceof Integer));
@@ -75,7 +79,8 @@ public final class SubstanceBuilder {
             composition1.add(new SubstanceStack(substance, (Integer) composition[i + 1]));
         }
 
-        this.composition = ImmutableSortedSet.copyOf(composition1);
+        this.composition = ImmutableSet.copyOf(composition1);
+        this.element = null;
         return this;
     }
 
@@ -83,7 +88,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder possible(Object... chanced) {
         Preconditions.checkArgument(chanced.length % 3 == 0);
 
-        Set<SubstanceStack> possible1 = new TreeSet<>();
+        Set<SubstanceStack> possible1 = new LinkedHashSet<>();
 
         for (int i = 0; i < chanced.length; i += 3) {
             Preconditions.checkArgument((chanced[i] instanceof Substance || chanced[i] instanceof String) && (chanced[i + 1] instanceof Integer) && (chanced[i + 2] instanceof Integer));
@@ -98,13 +103,16 @@ public final class SubstanceBuilder {
             possible1.add(new SubstanceStack(substance, (Integer) chanced[i + 1], (Integer) chanced[i + 2]));
         }
 
-        this.possible = ImmutableSortedSet.copyOf(possible1);
+        this.possible = ImmutableSet.copyOf(possible1);
+        this.element = null;
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder element(int atomicNumber, String symbol, String name, Element.EGroup group, double atomicMass) {
         this.element = new Element(atomicNumber, symbol, name, group, atomicMass);
+        this.composition = null;
+        this.possible = null;
         return this;
     }
 
@@ -292,10 +300,11 @@ public final class SubstanceBuilder {
 
     @ZenMethod
     public Substance build() {
-        Preconditions.checkArgument((composition != null && possible != null && element == null) || (composition == null && possible == null && element != null));
-        Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible);
+        Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
+        Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());
 
-        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+
         SUBSTANCES_REGISTRY.put(name, substance);
         return substance;
     }

@@ -35,7 +35,7 @@ public final class WeightedList<K> implements Iterable<K> {
             dirty = false;
         }
 
-        double r = Math.random() * total;
+        double r = random.nextDouble() * total;
         for (Map.Entry<K, Integer> entry : values.entrySet()) {
             r -= entry.getValue();
             if (r <= 0)

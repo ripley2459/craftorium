@@ -1,6 +1,6 @@
 package fr.cyrilneveu.craftorium.client;
 
-import fr.cyrilneveu.craftorium.api.fluid.CustomFluidBlock;
+import fr.cyrilneveu.craftorium.api.fluid.CustomFluid;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
@@ -56,7 +56,7 @@ public final class ClientProxy extends ACommonProxy {
         BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelRegister());
         FLUIDS_REGISTRY.getAll().values().forEach(f -> {
             Block block = f.getBlock();
-            if (block instanceof CustomFluidBlock)
+            if (block instanceof CustomFluid.CustomFluidBlock)
                 ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
         });
     }
@@ -68,7 +68,7 @@ public final class ClientProxy extends ACommonProxy {
         BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelBake(event));
         FLUIDS_REGISTRY.getAll().values().forEach(f -> {
             Block block = f.getBlock();
-            if (block instanceof CustomFluidBlock) {
+            if (block instanceof CustomFluid.CustomFluidBlock) {
                 ModelFluid modelFluid = new ModelFluid(f);
                 IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, Utils::getTexture);
                 event.getModelRegistry().putObject(Utils.getSimpleModelLocation(block), bakedModel);

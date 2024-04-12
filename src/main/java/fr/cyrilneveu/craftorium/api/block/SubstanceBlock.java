@@ -117,17 +117,18 @@ public class SubstanceBlock extends CustomBlock {
                     return new ModelResourceLocation(state.getBlock().getRegistryName().toString() + "_" + state.getValue(STONE_VARIANT).getName());
                 }
             });
-            blockState.getValidStates().forEach(s -> {
+
+            for (IBlockState s : blockState.getValidStates()) {
                 StoneType stoneType = s.getValue(STONE_VARIANT);
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), stoneType.getMeta(), new ModelResourceLocation(getRegistryName() + "_" + stoneType.getName()));
-            });
+            }
         }
 
         @Override
         public void onModelBake(ModelBakeEvent event) {
             ModelTemplate template = reference.getModelTemplate(substance);
 
-            blockState.getValidStates().forEach(s -> {
+            for (IBlockState s : blockState.getValidStates()) {
                 BLOCK_MODEL_BUILDER.newOperation(template);
 
                 StoneType stoneType = s.getValue(STONE_VARIANT);
@@ -135,7 +136,7 @@ public class SubstanceBlock extends CustomBlock {
                 BLOCK_MODEL_BUILDER.addLayer(faceProviders[0].getTexture()); // The ore return a single texture.
 
                 event.getModelRegistry().putObject(new ModelResourceLocation(getRegistryName() + "_" + stoneType.getName()), BLOCK_MODEL_BUILDER.build().getModel());
-            });
+            }
         }
     }
 }

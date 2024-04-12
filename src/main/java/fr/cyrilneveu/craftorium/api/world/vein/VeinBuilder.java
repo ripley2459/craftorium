@@ -7,8 +7,6 @@ import net.minecraft.util.math.MathHelper;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.DUST;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.ORE;
 import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
 
 public final class VeinBuilder {
@@ -63,7 +61,6 @@ public final class VeinBuilder {
         Preconditions.checkArgument(params.length % 2 == 0);
 
         this.substances = new WeightedList<>();
-
         for (int i = 0; i < params.length; i += 2) {
             Preconditions.checkArgument((params[i] instanceof Substance || params[i] instanceof String) && (params[i + 1] instanceof Integer));
 
@@ -91,6 +88,7 @@ public final class VeinBuilder {
         }*/
 
         VEINS_REGISTRY.put(name, vein);
+
         return vein;
     }
 }

@@ -18,4 +18,9 @@ public final class SubstanceTool extends ASubstanceObject {
         faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", (reference.self ? substance.getName() : reference.name).concat("_base"))), WHITE_COLOR);
         return faces;
     }
+
+    @Override
+    public String getOre(Substance substance) {
+        return name;
+    }
 }

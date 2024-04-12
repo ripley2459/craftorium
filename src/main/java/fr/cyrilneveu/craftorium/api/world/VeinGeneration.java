@@ -100,6 +100,7 @@ public class VeinGeneration extends WorldGenerator {
             }
 
             meta = null;
+
             return false;
         }
 

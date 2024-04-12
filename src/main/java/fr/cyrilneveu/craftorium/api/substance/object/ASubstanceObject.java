@@ -7,11 +7,10 @@ import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
-import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final String name;
@@ -52,11 +51,15 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         return model.getModelTemplate(this, substance);
     }
 
-    public ItemStack getItemStack(Substance substance) {
-        return getItemStack(substance, 1);
+    public Ingredient asIngredient(Substance substance) {
+        return OreStack.getIngredient(getOre(substance));
     }
 
-    public ItemStack getItemStack(Substance substance, int amount) {
+    public ItemStack asItemStack(Substance substance) {
+        return asItemStack(substance, 1);
+    }
+
+    public ItemStack asItemStack(Substance substance, int amount) {
         /*if (substance.shouldUse(this)) {
             String[] parts = substance.getOverrides().get(this).split(":");
             Preconditions.checkArgument(parts.length >= 2 && parts.length <= 3);

@@ -42,6 +42,9 @@ tile.craftorium.ore.name=%s Ore
 tile.craftorium.hull.name=%s Hull
 tile.craftorium.frame.name=%s Frame
 
+# Fluids
+fluid.craftorium.liquid.name=%s
+
 # Substances
 
 # Elements
@@ -163,3 +166,6 @@ substance.craftorium.moscovium.name=Moscovium
 substance.craftorium.livermorium.name=Livermorium
 substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
+
+# Tooltips
+tooltip.craftorium.formula=§e%s

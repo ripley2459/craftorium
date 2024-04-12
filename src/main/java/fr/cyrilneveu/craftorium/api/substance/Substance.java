@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
+import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
@@ -29,6 +30,7 @@ public final class Substance implements Comparable<Substance> {
     private final Toughness toughness;
     private final Temperature temperature;
     private final Aestheticism aestheticism;
+    private final AProcess process;
     private final Map<ESubstanceProperties, ASubstanceProperty> properties;
     private final Set<SubstanceItem> items;
     private final Set<SubstanceTool> tools;
@@ -36,13 +38,14 @@ public final class Substance implements Comparable<Substance> {
     private final Set<SubstanceFluid> fluids;
     private final Map<ASubstanceObject, String> overrides;
 
-    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism aestheticism, Map<ESubstanceProperties, ASubstanceProperty> properties, Set<SubstanceItem> items, Set<SubstanceTool> tools, Set<SubstanceBlock> blocks, Set<SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
+    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism aestheticism, AProcess process, Map<ESubstanceProperties, ASubstanceProperty> properties, Set<SubstanceItem> items, Set<SubstanceTool> tools, Set<SubstanceBlock> blocks, Set<SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
         this.name = name;
         this.composition = composition;
         this.efficiency = efficiency;
         this.toughness = toughness;
         this.temperature = temperature;
         this.aestheticism = aestheticism;
+        this.process = process;
         this.properties = properties;
         this.items = items;
         this.tools = tools;
@@ -68,8 +71,16 @@ public final class Substance implements Comparable<Substance> {
         return toughness;
     }
 
+    public Temperature getTemperature() {
+        return temperature;
+    }
+
     public Aestheticism getAestheticism() {
         return aestheticism;
+    }
+
+    public AProcess getProcess() {
+        return process;
     }
 
     public Map<ESubstanceProperties, ASubstanceProperty> getProperties() {
