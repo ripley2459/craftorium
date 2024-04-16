@@ -4,9 +4,13 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.init.Items;
 import net.minecraft.item.crafting.Ingredient;
+
+import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
@@ -105,6 +109,30 @@ public final class Processes {
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(INGOT.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), INGOT.asIngredient(substance));
             if (OreStack.oresExist(MORTAR.getOre(substance), ORE.getOre(substance)))
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
+
+            if (substance.getComposition().isNative())
+                return;
+
+            Set<SubstanceStack> composition = substance.getComposition().getComposition();
+            int amount = 0;
+            for (SubstanceStack stack : composition)
+                amount += stack.getAmount();
+
+            blend:
+            {
+                if (amount <= 0 || amount > 9 || !Utils.all(composition, s -> OreStack.oresExist(DUST.getOre(s.getSubstance()))))
+                    break blend;
+
+                Ingredient[] dusts = new Ingredient[amount];
+
+                int i = 0;
+                for (SubstanceStack stack : composition) {
+                    for (int j = 0; j < stack.getAmount(); j++)
+                        dusts[i++] = DUST.asIngredient(stack.getSubstance());
+                }
+
+                RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("blend"), DUST.asItemStack(substance, amount), dusts);
+            }
         }
 
         private void foil(Substance substance) {

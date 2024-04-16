@@ -1,8 +1,14 @@
 package fr.cyrilneveu.craftorium.api.world.vein;
 
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.utils.WeightedList;
+import stanhebben.zenscript.annotations.ZenClass;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+
+@ZenClass("mods." + MODID + ".vein.Vein")
+@ZenRegister
 public final class Vein {
     private final String name;
     private final int minY;

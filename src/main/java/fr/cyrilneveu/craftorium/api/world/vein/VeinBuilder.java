@@ -1,14 +1,19 @@
 package fr.cyrilneveu.craftorium.api.world.vein;
 
 import com.google.common.base.Preconditions;
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.utils.WeightedList;
 import net.minecraft.util.math.MathHelper;
+import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
 
+@ZenClass("mods." + MODID + ".vein.Builder")
+@ZenRegister
 public final class VeinBuilder {
     private String name;
     private int minY;

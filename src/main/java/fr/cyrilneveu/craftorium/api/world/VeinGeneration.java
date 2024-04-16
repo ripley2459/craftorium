@@ -68,7 +68,7 @@ public class VeinGeneration extends WorldGenerator {
                                     BlockPos blockpos = new BlockPos(posX, posY, posZ);
                                     IBlockState state = world.getBlockState(blockpos);
                                     if (state.getBlock().isReplaceableOreGen(state, world, blockpos, predicate) && predicate.getMeta() != null) {
-                                        IBlockState block = ORE.getBlock(vein.getSubstances().get(random)).getDefaultState().withProperty(STONE_VARIANT, STONE_VARIANT.getAllowedValues().get(predicate.getMeta()));
+                                        IBlockState block = ORE.asBlock(vein.getSubstances().get(random)).getDefaultState().withProperty(STONE_VARIANT, STONE_VARIANT.getAllowedValues().get(predicate.getMeta()));
                                         world.setBlockState(blockpos, block, 2);
                                     }
                                 }

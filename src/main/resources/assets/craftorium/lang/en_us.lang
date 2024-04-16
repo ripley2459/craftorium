@@ -4,7 +4,22 @@ itemGroup.machines=Machines
 itemGroup.substances=Substances
 itemGroup.tools=Tools
 
+# Tiers
+tier.craftorium.one.name=Tier 1
+
 # Items
+
+# Tier
+item.craftorium.battery.name=Battery %s
+item.craftorium.emitter.name=Emitter %s
+item.craftorium.heat_exchanger.name=Heat Exchanger %s
+item.craftorium.large_battery.name=Large Battery %s
+item.craftorium.motor.name=Motor %s
+item.craftorium.piston.name=Piston %s
+item.craftorium.pump.name=Pump %s
+item.craftorium.robot_arm.name=Robot Arm %s
+item.craftorium.scanner.name=Scanner %s
+item.craftorium.sensor.name=Sensor %s
 
 # Tools
 item.craftorium.axe.name=%s Axe

@@ -37,6 +37,8 @@ import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
+import static fr.cyrilneveu.craftorium.common.tier.Tiers.TIERS_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.TIER_ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
@@ -54,6 +56,8 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
+        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
+
         SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v)).forEach(v::createObject));
 
@@ -94,6 +98,8 @@ public abstract class ACommonProxy {
     }
 
     protected static void registerOres() {
+        TIERS_REGISTRY.getAll().values().forEach(tier -> tier.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(tier), i.asItemStack(tier))));
+
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
             substance.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(substance), i.asItemStack(substance)));
             substance.getTools().forEach(t -> OreDictionary.registerOre(t.getOre(substance), t.asItemStack(substance)));
@@ -135,6 +141,7 @@ public abstract class ACommonProxy {
         SUBSTANCE_FLUIDS_REGISTRY.close();
         VEINS_REGISTRY.close();
         SUBSTANCES_REGISTRY.close();
+        TIERS_REGISTRY.close();
     }
 
     public void init(FMLInitializationEvent event) {

@@ -16,6 +16,7 @@ import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
 import net.minecraft.block.SoundType;
+import net.minecraftforge.common.util.EnumHelper;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -53,11 +54,6 @@ public final class SubstanceBuilder {
 
     public SubstanceBuilder(String name) {
         this.name = name;
-    }
-
-    @ZenMethod
-    public static SubstanceBuilder build(String name) {
-        return new SubstanceBuilder(name);
     }
 
     @ZenMethod
@@ -233,8 +229,30 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
+    public SubstanceBuilder items(String... items) {
+        for (String item : items) {
+            if (SUBSTANCE_ITEMS_REGISTRY.contains(item))
+                this.items(SUBSTANCE_ITEMS_REGISTRY.get(item));
+            else CraftTweakerAPI.logError("This type of item does not exists: " + item);
+        }
+
+        return this;
+    }
+
     public SubstanceBuilder items(SubstanceItem... items) {
         this.items.addAll(Arrays.asList(items));
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder tools(String... tools) {
+        for (String tool : tools) {
+            if (SUBSTANCE_TOOLS_REGISTRY.contains(tool))
+                this.tools(SUBSTANCE_TOOLS_REGISTRY.get(tool));
+            else CraftTweakerAPI.logError("This type of tool does not exists: " + tool);
+        }
+
         return this;
     }
 
@@ -243,8 +261,30 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    @ZenMethod
+    public SubstanceBuilder blocks(String... blocks) {
+        for (String block : blocks) {
+            if (SUBSTANCE_BLOCKS_REGISTRY.contains(block))
+                this.blocks(SUBSTANCE_BLOCKS_REGISTRY.get(block));
+            else CraftTweakerAPI.logError("This type of block does not exists: " + block);
+        }
+
+        return this;
+    }
+
     public SubstanceBuilder blocks(SubstanceBlock... blocks) {
         this.blocks.addAll(Arrays.asList(blocks));
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder fluids(String... fluids) {
+        for (String fluid : fluids) {
+            if (SUBSTANCE_FLUIDS_REGISTRY.contains(fluid))
+                this.fluids(SUBSTANCE_FLUIDS_REGISTRY.get(fluid));
+            else CraftTweakerAPI.logError("This type of fluid does not exists: " + fluid);
+        }
+
         return this;
     }
 
@@ -303,7 +343,14 @@ public final class SubstanceBuilder {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
         Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());
 
-        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+
+        if (efficiency != null) {
+            /*
+             * .setRepairItem(INGOT.asItemStack(substance)); isn't called anywhere because the ingot.getOre(sub) is used to get the repair material.
+             */
+            EnumHelper.addToolMaterial(name, efficiency.getHarvestLevel(), efficiency.getDurability(), efficiency.getSpeed(), efficiency.getDamage(), efficiency.getEnchantability());
+        }
 
         SUBSTANCES_REGISTRY.put(name, substance);
         return substance;

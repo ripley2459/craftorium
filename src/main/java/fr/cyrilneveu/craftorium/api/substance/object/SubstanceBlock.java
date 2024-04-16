@@ -24,7 +24,6 @@ public final class SubstanceBlock extends ASubstanceObject {
 
     public static FaceProvider[] oreFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[1];
-        // faces[0] = new FaceProvider(new ResourceLocation("minecraft", String.join("/", "blocks", "stone")), WHITE_COLOR);
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.self ? substance.getName() : reference.name)), substance.getAestheticism().getOreColor());
         return faces;
     }
@@ -37,7 +36,7 @@ public final class SubstanceBlock extends ASubstanceObject {
         return ModelTemplate.BLOCK_OVERLAY_TINTED;
     }
 
-    public Block getBlock(Substance substance) {
+    public Block asBlock(Substance substance) {
         return Block.getBlockFromItem(asItemStack(substance).getItem());
     }
 }

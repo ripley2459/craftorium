@@ -23,11 +23,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Utils {
+    public static final float EPSILON = 0.001f;
+    public static final int ERROR_COLOR = 0xFFff00ff;
+    public static final int WHITE_COLOR = 0xFFffffff;
     public static final Function<Block, CustomStateMapper> SIMPLE_STATE_MAPPER = block -> new CustomStateMapper(getSimpleModelLocation(block));
     public static final ModelBuilder ITEM_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.ITEM);
     public static final ModelBuilder BLOCK_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.BLOCK);
-    public static final int ERROR_COLOR = 0xFFff00ff;
-    public static final int WHITE_COLOR = 0xFFffffff;
 
     public static String localise(String localisationKey, Object... substitutions) {
         return FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? net.minecraft.util.text.translation.I18n.translateToLocalFormatted(localisationKey, substitutions) : net.minecraft.client.resources.I18n.format(localisationKey, substitutions);
@@ -51,6 +52,15 @@ public final class Utils {
 
     public static String[] cleanArray(String[] array) {
         return Arrays.stream(array).filter(x -> !StringUtils.isBlank(x)).toArray(String[]::new);
+    }
+
+    public static <I> boolean all(Iterable<I> iterable, Function<I, Boolean> condition) {
+        for (I value : iterable) {
+            if (!condition.apply(value))
+                return false;
+        }
+
+        return true;
     }
 
     public static <I> boolean atLeastOne(Iterable<I> iterable, Function<I, Boolean> condition) {

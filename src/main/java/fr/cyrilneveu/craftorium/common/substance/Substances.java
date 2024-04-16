@@ -172,6 +172,7 @@ public final class Substances {
             .temperature(1811f, 3134f)
             .color(0xFFe06633)
             .setTransitionMetal()
+            .tools(4.0f, 2.0f, 250, 3, 3)
             .shiny()
             .build();
     public static final Substance COBALT = createSubstance("cobalt")

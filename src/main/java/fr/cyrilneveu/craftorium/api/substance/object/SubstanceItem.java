@@ -1,9 +1,7 @@
 package fr.cyrilneveu.craftorium.api.substance.object;
 
-import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;

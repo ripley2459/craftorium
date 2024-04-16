@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static fr.cyrilneveu.craftorium.common.recipe.Processes.PROCESSES_REGISTRY;
-
 public abstract class AProcess {
     protected final String name;
     protected final List<Consumer<Substance>> recipes = new ArrayList<>();
