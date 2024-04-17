@@ -6,6 +6,10 @@ itemGroup.tools=Tools
 
 # Tiers
 tier.craftorium.one.name=Tier 1
+tier.craftorium.two.name=Tier 2
+tier.craftorium.three.name=Tier 3
+tier.craftorium.four.name=Tier 4
+tier.craftorium.five.name=Tier 5
 
 # Items
 
@@ -181,6 +185,24 @@ substance.craftorium.moscovium.name=Moscovium
 substance.craftorium.livermorium.name=Livermorium
 substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
+
+# Others
+substance.craftorium.boron_arsenide_alloy.name=Boron Arsenide Alloy
+substance.craftorium.cupronickel.name=Cupronickel
+substance.craftorium.electrum.name=Electrum
+substance.craftorium.graphene.name=Graphene
+substance.craftorium.haste_alloy.name=Haste Alloy
+substance.craftorium.hsla_steel.name=HSLA Steel
+substance.craftorium.magnesium_diboride_alloy.name=Magnesium Diboride Alloy
+substance.craftorium.nichrome.name=Nichrome
+substance.craftorium.osmiridium.name=Osmiridium
+substance.craftorium.rtm_alloy.name=RTM Alloy
+substance.craftorium.stainless_steel.name=Stainless Steel
+substance.craftorium.steel.name=Steel
+substance.craftorium.super_alloy.name=Super Alloy
+substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
+substance.craftorium.tungsten_steel.name=Tungsten Steel
+substance.craftorium.ybco.name=YBCO
 
 # Tooltips
 tooltip.craftorium.formula=§e%s

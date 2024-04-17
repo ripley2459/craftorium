@@ -48,8 +48,11 @@ public final class SubstanceBuilder {
     private Set<SubstanceFluid> fluids = new TreeSet<>();
     private Map<ASubstanceObject, String> overrides = new HashMap<>();
     private String style = "metal";
-    private boolean shiny, glow = false;
-    private int baseColor, oreColor, fluidColor = ERROR_COLOR;
+    private boolean shiny = false;
+    private boolean glow = false;
+    private int baseColor = ERROR_COLOR;
+    private int oreColor = ERROR_COLOR;
+    private int fluidColor = ERROR_COLOR;
     private SoundType soundType = SoundType.METAL;
 
     public SubstanceBuilder(String name) {
@@ -230,6 +233,15 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
+    public SubstanceBuilder setMetalExtended() {
+        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
+        blocks(BLOCK, FRAME, HULL, ORE);
+        fluids(LIQUID);
+        return this;
+    }
+
+    @ZenMethod
     public SubstanceBuilder items(String... items) {
         for (String item : items) {
             if (SUBSTANCE_ITEMS_REGISTRY.contains(item))
@@ -294,6 +306,21 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
+    public SubstanceBuilder colorAverage() {
+        if (composition.isEmpty())
+            return this.color(ERROR_COLOR);
+
+        int color = 0;
+        int total = 0;
+        for (SubstanceStack stack : composition) {
+            color += stack.getSubstance().getAestheticism().getBaseColor() * stack.getAmount();
+            total += stack.getAmount();
+        }
+
+        return this.color(color / total);
+    }
+
+    @ZenMethod
     public SubstanceBuilder color(int color) {
         this.color(color, color, color);
         return this;
@@ -342,6 +369,9 @@ public final class SubstanceBuilder {
     public Substance build() {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
         Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());
+
+        if (baseColor == ERROR_COLOR)
+            colorAverage();
 
         Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
 
