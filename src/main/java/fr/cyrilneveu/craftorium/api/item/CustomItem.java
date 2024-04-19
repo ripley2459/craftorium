@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -26,17 +28,20 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int colorMultiplier(@NotNull ItemStack itemStack, int layer) {
         return faceProviders[layer].getColor();
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void addTextures(Set<ResourceLocation> textures) {
         for (FaceProvider faceProvider : faceProviders)
             textures.add(faceProvider.getTexture());
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelRegister() {
         ModelResourceLocation location = Utils.getSimpleModelLocation(this);
         ModelBakery.registerItemVariants(this, location);
@@ -44,6 +49,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelBake(ModelBakeEvent event) {
         ITEM_MODEL_BUILDER.newOperation(ModelTemplate.ITEM);
 

@@ -1,19 +1,9 @@
-# Tabs
-itemGroup.common=Common
-itemGroup.machines=Machines
-itemGroup.substances=Substances
-itemGroup.tools=Tools
+#PARSE_ESCAPES
 
-# Tiers
-tier.craftorium.one.name=Tier 1
-tier.craftorium.two.name=Tier 2
-tier.craftorium.three.name=Tier 3
-tier.craftorium.four.name=Tier 4
-tier.craftorium.five.name=Tier 5
-
+# ##################################################
 # Items
 
-# Tier
+# Tiered
 item.craftorium.battery.name=Battery %s
 item.craftorium.emitter.name=Emitter %s
 item.craftorium.heat_exchanger.name=Heat Exchanger %s
@@ -55,7 +45,28 @@ item.craftorium.screw.name=%s Screw
 item.craftorium.spring.name=%s Spring
 item.craftorium.wire.name=%s Wire
 
+# Circuits
+item.craftorium.redstone_circuit.name=Redstone Circuit
+item.craftorium.advanced_redstone_circuit.name=Advanced Redstone Circuit
+item.craftorium.primitive_circuit.name=Primitive Circuit
+item.craftorium.advanced_circuit.name=Advanced Circuit
+item.craftorium.maxed_circuit.name=Maxed Circuit
+item.craftorium.microprocessor.name=Microprocessor
+item.craftorium.quantum_microprocessor.name=Quantum Microprocessor
+item.craftorium.wetware_microprocessor.name=Wetware Microprocessor
+item.craftorium.processor.name=Processor
+item.craftorium.quantum_processor.name=Quantum Processor
+item.craftorium.wetware_processor.name=Wetware Processor
+item.craftorium.advanced_processor.name=Advanced Processor
+item.craftorium.mainframe.name=Mainframe
+item.craftorium.wetware_mainframe.name=Wetware Mainframe
+item.craftorium.machine_spirit_infused_processor.name=Machine Spirit Infused Processor
+
+
+# ##################################################
 # Blocks
+
+# Substances
 tile.craftorium.block.name=Block of %s
 tile.craftorium.ore.name=%s Ore
 tile.craftorium.hull.name=%s Hull
@@ -64,6 +75,8 @@ tile.craftorium.frame.name=%s Frame
 # Fluids
 fluid.craftorium.liquid.name=%s
 
+
+# ##################################################
 # Substances
 
 # Elements
@@ -203,6 +216,34 @@ substance.craftorium.super_alloy.name=Super Alloy
 substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
 substance.craftorium.tungsten_steel.name=Tungsten Steel
 substance.craftorium.ybco.name=YBCO
+substance.craftorium.diamond.name=Diamond
+substance.craftorium.graphite.name=Graphite
+substance.craftorium.rubber.name=Rubber
+substance.craftorium.plastic.name=Plastic
+substance.craftorium.emerald.name=Emerald
+substance.craftorium.coal.name=Coal
+substance.craftorium.charcoal.name=Charcoal
+substance.craftorium.quartz.name=Quartz
+substance.craftorium.ender.name=Ender
+substance.craftorium.obsidian.name=Obsidian
+substance.craftorium.redstone.name=Redstone
+
+
+# ##################################################
+# Others
+
+# Tabs
+itemGroup.common=Common
+itemGroup.machines=Machines
+itemGroup.substances=Substances
+itemGroup.tools=Tools
+
+# Tiers
+tier.craftorium.one.name=Tier 1
+tier.craftorium.two.name=Tier 2
+tier.craftorium.three.name=Tier 3
+tier.craftorium.four.name=Tier 4
+tier.craftorium.five.name=Tier 5
 
 # Tooltips
 tooltip.craftorium.formula=§e%s

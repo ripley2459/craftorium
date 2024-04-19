@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
 
 public class ItemBuilder {
@@ -41,7 +41,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder addTexture(String path) {
-        return addTexture(path, ERROR_COLOR);
+        return addTexture(path, WHITE_COLOR);
     }
 
     public ItemBuilder addTexture(String path, int color) {

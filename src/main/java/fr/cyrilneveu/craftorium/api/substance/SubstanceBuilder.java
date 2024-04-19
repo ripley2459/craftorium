@@ -33,7 +33,8 @@ import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 @ZenRegister
 public final class SubstanceBuilder {
     private String name;
-    private Set<SubstanceStack> composition, possible;
+    private Set<SubstanceStack> composition = new LinkedHashSet<>();
+    private Set<SubstanceStack> possible = new LinkedHashSet<>();
     @Nullable
     private Element element;
     @Nullable
@@ -134,8 +135,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setHalogen() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageHalogen() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -143,8 +144,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setNobleGas() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageNobleGas() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -152,8 +153,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setAlkaliMetal() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageAlkaliMetal() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -161,8 +162,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setAlkalineEarthMetal() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageAlkalineEarthMetal() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -170,8 +171,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setMetalloid() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageMetalloid() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -179,8 +180,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setNonMetal() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageNonMetal() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -188,8 +189,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setPostTransitionMetal() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packagePostTransitionMetal() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -197,8 +198,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setTransitionMetal() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageTransitionMetal() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -206,8 +207,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setLanthanide() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageLanthanide() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -215,8 +216,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setActinide() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageActinide() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -224,8 +225,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setUnknown() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageUnknown() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -233,10 +234,27 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder setMetalExtended() {
-        items(INGOT, NUGGET, PLATE, CASING, DUST, FOIL, GEAR, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+    public SubstanceBuilder packageMetalExtended() {
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
+        fluids(LIQUID);
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder packageGem() {
+        items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
+        blocks(BLOCK, FRAME, HULL, ORE);
+        fluids(LIQUID);
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder packageMineral() {
+        items(DUST, PLATE, ROD);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
@@ -360,6 +378,19 @@ public final class SubstanceBuilder {
             case "stone" -> this.soundType = SoundType.STONE;
             case "sand" -> this.soundType = SoundType.SAND;
             default -> CraftTweakerAPI.logError("This type of sound does not exists: " + soundName);
+        }
+
+        return this;
+    }
+
+    @ZenMethod
+    public SubstanceBuilder overrides(Object... overrides) {
+        Preconditions.checkArgument(overrides.length % 2 == 0);
+
+        for (int i = 0; i < overrides.length; i += 2) {
+            Preconditions.checkArgument((overrides[i] instanceof ASubstanceObject) && (overrides[i + 1] instanceof String));
+
+            this.overrides.put((ASubstanceObject) overrides[i], (String) overrides[i + 1]);
         }
 
         return this;

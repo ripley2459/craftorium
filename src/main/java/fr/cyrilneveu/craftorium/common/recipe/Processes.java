@@ -28,13 +28,15 @@ public final class Processes {
 
         @Override
         protected void addRecipes() {
-            recipes.add(this::ingot);
-            recipes.add(this::nugget);
-            recipes.add(this::plate);
             recipes.add(this::casing);
             recipes.add(this::dust);
             recipes.add(this::foil);
             recipes.add(this::gear);
+            recipes.add(this::gem);
+            recipes.add(this::ingot);
+            recipes.add(this::nugget);
+            recipes.add(this::pearl);
+            recipes.add(this::plate);
             recipes.add(this::ring);
             recipes.add(this::rod);
             recipes.add(this::rotor);
@@ -63,36 +65,6 @@ public final class Processes {
             recipes.add(this::liquid);
         }
 
-        private void ingot(Substance substance) {
-            if (!substance.getItems().contains(INGOT))
-                return;
-
-            if (OreStack.oresExist(ORE.getOre(substance)))
-                RecipeManager.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), INGOT.asItemStack(substance), 0.7f);
-            if (OreStack.oresExist(DUST.getOre(substance)))
-                RecipeManager.addFurnaceRecipe(new OreStack(DUST.getOre(substance)), INGOT.asItemStack(substance));
-            if (OreStack.oresExist(NUGGET.getOre(substance)))
-                RecipeManager.zip(substance, NUGGET, INGOT);
-            if (OreStack.oresExist(BLOCK.getOre(substance)))
-                RecipeManager.unzip(substance, BLOCK, INGOT);
-        }
-
-        private void nugget(Substance substance) {
-            if (!substance.getItems().contains(NUGGET))
-                return;
-
-            if (OreStack.oresExist(INGOT.getOre(substance)))
-                RecipeManager.unzip(substance, INGOT, NUGGET);
-        }
-
-        private void plate(Substance substance) {
-            if (!substance.getItems().contains(PLATE))
-                return;
-
-            if (OreStack.oresExist(HAMMER.getOre(substance), INGOT.getOre(substance)))
-                RecipeManager.addShapedRecipe(PLATE.getName(substance), PLATE.asItemStack(substance), "H", "I", "I", 'H', HAMMER.asIngredient(substance), 'I', INGOT.asIngredient(substance));
-        }
-
         private void casing(Substance substance) {
             if (!substance.getItems().contains(CASING))
                 return;
@@ -107,6 +79,10 @@ public final class Processes {
 
             if (OreStack.oresExist(MORTAR.getOre(substance), INGOT.getOre(substance)))
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(INGOT.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), INGOT.asIngredient(substance));
+            if (OreStack.oresExist(MORTAR.getOre(substance), GEM.getOre(substance)))
+                RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(GEM.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), GEM.asIngredient(substance));
+            if (OreStack.oresExist(MORTAR.getOre(substance), PEARL.getOre(substance)))
+                RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(PEARL.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), PEARL.asIngredient(substance));
             if (OreStack.oresExist(MORTAR.getOre(substance), ORE.getOre(substance)))
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
 
@@ -114,6 +90,9 @@ public final class Processes {
                 return;
 
             Set<SubstanceStack> composition = substance.getComposition().getComposition();
+            if (composition.size() < 2)
+                return;
+
             int amount = 0;
             for (SubstanceStack stack : composition)
                 amount += stack.getAmount();
@@ -149,6 +128,57 @@ public final class Processes {
 
             if (OreStack.oresExist(KNIFE.getOre(substance), PLATE.getOre(substance), FILE.getOre(substance)))
                 RecipeManager.addShapedRecipe(GEAR.getName(substance), GEAR.asItemStack(substance), "C", "P", "F", 'C', KNIFE.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'F', FILE.asIngredient(substance));
+        }
+
+        private void gem(Substance substance) {
+            if (!substance.getItems().contains(GEM))
+                return;
+
+            if (OreStack.oresExist(ORE.getOre(substance)))
+                RecipeManager.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), GEM.asItemStack(substance), 0.7f);
+            if (OreStack.oresExist(NUGGET.getOre(substance)))
+                RecipeManager.zip(substance, NUGGET, GEM);
+            if (OreStack.oresExist(BLOCK.getOre(substance)))
+                RecipeManager.unzip(substance, BLOCK, GEM);
+        }
+
+        private void ingot(Substance substance) {
+            if (!substance.getItems().contains(INGOT))
+                return;
+
+            if (OreStack.oresExist(ORE.getOre(substance)))
+                RecipeManager.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), INGOT.asItemStack(substance), 0.7f);
+            if (OreStack.oresExist(DUST.getOre(substance)))
+                RecipeManager.addFurnaceRecipe(new OreStack(DUST.getOre(substance)), INGOT.asItemStack(substance));
+            if (OreStack.oresExist(NUGGET.getOre(substance)))
+                RecipeManager.zip(substance, NUGGET, INGOT);
+            if (OreStack.oresExist(BLOCK.getOre(substance)))
+                RecipeManager.unzip(substance, BLOCK, INGOT);
+        }
+
+        private void nugget(Substance substance) {
+            if (!substance.getItems().contains(NUGGET))
+                return;
+
+            if (OreStack.oresExist(INGOT.getOre(substance)))
+                RecipeManager.unzip(substance, INGOT, NUGGET);
+        }
+
+        private void pearl(Substance substance) {
+            if (!substance.getItems().contains(PEARL))
+                return;
+            if (OreStack.oresExist(NUGGET.getOre(substance)))
+                RecipeManager.zip(substance, NUGGET, PEARL);
+            if (OreStack.oresExist(BLOCK.getOre(substance)))
+                RecipeManager.unzip(substance, BLOCK, PEARL);
+        }
+
+        private void plate(Substance substance) {
+            if (!substance.getItems().contains(PLATE))
+                return;
+
+            if (OreStack.oresExist(HAMMER.getOre(substance), INGOT.getOre(substance)))
+                RecipeManager.addShapedRecipe(PLATE.getName(substance), PLATE.asItemStack(substance), "H", "I", "I", 'H', HAMMER.asIngredient(substance), 'I', INGOT.asIngredient(substance));
         }
 
         private void ring(Substance substance) {
@@ -309,6 +339,10 @@ public final class Processes {
 
             if (OreStack.oresExist(INGOT.getOre(substance)))
                 RecipeManager.zip(substance, INGOT, BLOCK);
+            if (OreStack.oresExist(GEM.getOre(substance)))
+                RecipeManager.zip(substance, GEM, BLOCK);
+            if (OreStack.oresExist(PEARL.getOre(substance)))
+                RecipeManager.zip(substance, PEARL, BLOCK);
         }
 
         private void frame(Substance substance) {

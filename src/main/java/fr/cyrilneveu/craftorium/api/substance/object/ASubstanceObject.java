@@ -6,11 +6,14 @@ import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fml.common.Loader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final String name;
@@ -36,7 +39,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public String getOre(Substance substance) {
-        return self ? OreStack.createOre(prefix, substance.getName(), suffix) : OreStack.createOre(prefix, name, substance.getName(), suffix);
+        return /*self ? OreStack.createOre(prefix, substance.getName(), suffix) :*/ OreStack.createOre(prefix, name, substance.getName(), suffix);
     }
 
     public final void createObject(Substance substance) {
@@ -60,7 +63,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public ItemStack asItemStack(Substance substance, int amount) {
-        /*if (substance.shouldUse(this)) {
+        if (substance.shouldUse(this)) {
             String[] parts = substance.getOverrides().get(this).split(":");
             Preconditions.checkArgument(parts.length >= 2 && parts.length <= 3);
 
@@ -78,7 +81,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
                     return new ItemStack(item, amount, meta);
                 }
             }
-        }*/
+        }
 
         ItemStack stack = ACommonProxy.getItemStack(getName(substance), amount);
         if (stack == null) {

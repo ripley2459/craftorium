@@ -19,13 +19,15 @@ public final class SubstancesObjects {
     public static final Registry<String, SubstanceBlock> SUBSTANCE_BLOCKS_REGISTRY = new Registry<>();
     public static final Registry<String, SubstanceFluid> SUBSTANCE_FLUIDS_REGISTRY = new Registry<>();
 
-    public static final SubstanceItem INGOT = createItem("ingot").prefix("test").build();
-    public static final SubstanceItem NUGGET = createItem("nugget").build();
-    public static final SubstanceItem PLATE = createItem("plate").build();
     public static final SubstanceItem CASING = createItem("casing").build();
     public static final SubstanceItem DUST = createItem("dust").build();
     public static final SubstanceItem FOIL = createItem("foil").build();
     public static final SubstanceItem GEAR = createItem("gear").build();
+    public static final SubstanceItem GEM = createItem("gem").self().build();
+    public static final SubstanceItem INGOT = createItem("ingot").build();
+    public static final SubstanceItem NUGGET = createItem("nugget").build();
+    public static final SubstanceItem PEARL = createItem("pearl").build();
+    public static final SubstanceItem PLATE = createItem("plate").build();
     public static final SubstanceItem RING = createItem("ring").build();
     public static final SubstanceItem ROD = createItem("rod").build();
     public static final SubstanceItem ROTOR = createItem("rotor").build();

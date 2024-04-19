@@ -44,7 +44,7 @@ public final class Tier implements Comparable<Tier> {
     }
 
     @Nullable
-    public Pack getSubstances() {
+    public Pack getPack() {
         return substances;
     }
 

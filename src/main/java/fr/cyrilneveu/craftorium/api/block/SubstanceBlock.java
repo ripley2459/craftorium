@@ -44,6 +44,7 @@ public class SubstanceBlock extends CustomBlock {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onModelBake(ModelBakeEvent event) {
         BLOCK_MODEL_BUILDER.newOperation(reference.getModelTemplate(substance));
 
@@ -100,16 +101,19 @@ public class SubstanceBlock extends CustomBlock {
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
             return layer == 1 ? faceProviders[0].getColor() : WHITE_COLOR;
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public int colorMultiplier(ItemStack stack, int layer) {
             return layer == 1 ? faceProviders[0].getColor() : WHITE_COLOR;
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public void onModelRegister() {
             ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
                 @Override
@@ -125,6 +129,7 @@ public class SubstanceBlock extends CustomBlock {
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public void onModelBake(ModelBakeEvent event) {
             ModelTemplate template = reference.getModelTemplate(substance);
 

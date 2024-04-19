@@ -56,10 +56,26 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
+        createItem("redstone_circuit").addTexture("circuits/redstone_circuit").build();
+        createItem("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
+        createItem("primitive_circuit").addTexture("circuits/primitive_circuit").build();
+        createItem("advanced_circuit").addTexture("circuits/advanced_circuit").build();
+        createItem("maxed_circuit").addTexture("circuits/maxed_circuit").build();
+        createItem("microprocessor").addTexture("circuits/microprocessor").build();
+        createItem("processor").addTexture("circuits/processor").build();
+        createItem("advanced_processor").addTexture("circuits/advanced_processor").build();
+        createItem("mainframe").addTexture("circuits/mainframe").build();
+        createItem("quantum_microprocessor").addTexture("circuits/quantum_microprocessor").build();
+        createItem("quantum_processor").addTexture("circuits/quantum_processor").build();
+        createItem("wetware_microprocessor").addTexture("circuits/wetware_microprocessor").build();
+        createItem("wetware_processor").addTexture("circuits/wetware_processor").build();
+        createItem("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
+        createItem("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
+
         TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
 
-        SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
-        SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v)).forEach(v::createObject));
+        SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
+        SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
         ITEMS_REGISTRY.close();
         ITEMS_REGISTRY.getAll().forEach((k, v) -> event.getRegistry().register(v));
@@ -71,8 +87,8 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     protected static void registerBlocks(RegistryEvent.Register<Block> event) {
-        SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v)).forEach(v::createObject));
-        SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v)).forEach(v::createObject));
+        SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
+        SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
         FLUIDS_REGISTRY.close();
         BLOCKS_REGISTRY.close();
@@ -98,6 +114,22 @@ public abstract class ACommonProxy {
     }
 
     protected static void registerOres() {
+        OreDictionary.registerOre("circuitTier0", getItem("redstone_circuit"));
+        OreDictionary.registerOre("circuitTier1", getItem("advanced_redstone_circuit"));
+        OreDictionary.registerOre("circuitTier1", getItem("primitive_circuit"));
+        OreDictionary.registerOre("circuitTier2", getItem("advanced_circuit"));
+        OreDictionary.registerOre("circuitTier2", getItem("microprocessor"));
+        OreDictionary.registerOre("circuitTier3", getItem("maxed_circuit"));
+        OreDictionary.registerOre("circuitTier3", getItem("processor"));
+        OreDictionary.registerOre("circuitTier3", getItem("quantum_microprocessor"));
+        OreDictionary.registerOre("circuitTier3", getItem("wetware_microprocessor"));
+        OreDictionary.registerOre("circuitTier4", getItem("advanced_processor"));
+        OreDictionary.registerOre("circuitTier4", getItem("quantum_processor"));
+        OreDictionary.registerOre("circuitTier4", getItem("wetware_processor"));
+        OreDictionary.registerOre("circuitTier5", getItem("mainframe"));
+        OreDictionary.registerOre("circuitTier5", getItem("wetware_mainframe"));
+        OreDictionary.registerOre("circuitTier6", getItem("machine_spirit_infused_processor"));
+
         TIERS_REGISTRY.getAll().values().forEach(tier -> tier.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(tier), i.asItemStack(tier))));
 
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {

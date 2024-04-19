@@ -11,6 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
 
 public class CustomFluid extends Fluid {
@@ -37,11 +39,13 @@ public class CustomFluid extends Fluid {
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
             return getFluid().getColor();
         }
 
         @Override
+        @SideOnly(Side.CLIENT)
         public int colorMultiplier(ItemStack stack, int tintIndex) {
             return getFluid().getColor();
         }

@@ -11,6 +11,7 @@ import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.common.config.Settings;
 import org.jetbrains.annotations.NotNull;
 import stanhebben.zenscript.annotations.ZenClass;
 
@@ -113,6 +114,14 @@ public final class Substance implements Comparable<Substance> {
 
     public String getTranslationKey() {
         return String.join(".", "substance", MODID, name, "name");
+    }
+
+    public boolean shouldRegister(ASubstanceObject substanceObject) {
+        return Settings.substancesSettings.registerOverrides || !overrides.containsKey(substanceObject);
+    }
+
+    public boolean shouldUse(ASubstanceObject substanceObject) {
+        return !Settings.substancesSettings.registerOverrides && overrides.containsKey(substanceObject);
     }
 
     @Override
