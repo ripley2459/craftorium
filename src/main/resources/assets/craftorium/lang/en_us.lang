@@ -62,6 +62,20 @@ item.craftorium.mainframe.name=Mainframe
 item.craftorium.wetware_mainframe.name=Wetware Mainframe
 item.craftorium.machine_spirit_infused_processor.name=Machine Spirit Infused Processor
 
+item.craftorium.capacitor.name=Capacitor
+item.craftorium.chip.name=Chip
+item.craftorium.diode.name=Diode
+item.craftorium.redstone_capacitor.name=Redstone Capacitor
+item.craftorium.redstone_chip.name=Redstone Chip
+item.craftorium.resistor.name=Resistor
+item.craftorium.transistor.name=Transistor
+item.craftorium.vacuum_tube.name=Vacuum Tube
+
+item.craftorium.circuit_board_redstone.name=Redstone Circuit Board
+item.craftorium.circuit_board_1.name=Circuit Board
+item.craftorium.circuit_board_2.name=Advanced Circuit Board
+item.craftorium.circuit_board_3.name=Maxed Circuit Board
+
 
 # ##################################################
 # Blocks
@@ -92,7 +106,7 @@ substance.craftorium.fluorine.name=Fluorine
 substance.craftorium.neon.name=Neon
 substance.craftorium.sodium.name=Sodium
 substance.craftorium.magnesium.name=Magnesium
-substance.craftorium.aluminium.name=Aluminium
+substance.craftorium.aluminum.name=Aluminum
 substance.craftorium.silicon.name=Silicon
 substance.craftorium.phosphorus.name=Phosphorus
 substance.craftorium.sulfur.name=Sulfur
@@ -227,6 +241,10 @@ substance.craftorium.quartz.name=Quartz
 substance.craftorium.ender.name=Ender
 substance.craftorium.obsidian.name=Obsidian
 substance.craftorium.redstone.name=Redstone
+substance.craftorium.redstone_alloy.name=Redstone Alloy
+substance.craftorium.lazurite.name=Lazurite
+substance.craftorium.lapis_lazuli.name=Lapis Lazuli
+substance.craftorium.sodalite.name=Sodalite
 
 
 # ##################################################

@@ -53,8 +53,8 @@ public final class Substances {
             .color(0xFFf5a945)
             .shiny()
             .build();
-    public static final Substance ALUMINIUM = createSubstance("aluminium")
-            .element(13, "Al", "aluminium", Element.EGroup.POST_TRANSITION_METAL, 26.98153857)
+    public static final Substance ALUMINUM = createSubstance("aluminum")
+            .element(13, "Al", "aluminum", Element.EGroup.POST_TRANSITION_METAL, 26.98153857)
             .temperature(933.47f, 2743f)
             .color(0xFFbfa6a6)
             .packagePostTransitionMetal()
@@ -64,7 +64,7 @@ public final class Substances {
             .temperature(1811f, 3134f)
             .packageTransitionMetal()
             .tools(4.0f, 2.0f, 250, 3, 3)
-            .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget")
+            .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget", HOE, "minecraft:iron_hoe", PICKAXE, "minecraft:iron_pickaxe", HOE, "minecraft:iron_hoe", SHOVEL, "minecraft:iron_shovel", SWORD, "minecraft:iron_sword", AXE, "minecraft:iron_axe")
             .color(0xFFd4d4d4, 0xFFd4d4d4, 0xFFa31000)
             .shiny()
             .build();
@@ -113,7 +113,7 @@ public final class Substances {
             .temperature(1337.33f, 3243f)
             .packageTransitionMetal()
             .tools(4.0f, 2.0f, 32, 3, 3)
-            .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget")
+            .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget", HOE, "minecraft:golden_hoe", PICKAXE, "minecraft:golden_pickaxe", HOE, "minecraft:golden_hoe", SHOVEL, "minecraft:golden_shovel", SWORD, "minecraft:golden_sword", AXE, "minecraft:golden_axe")
             .color(0xFFffd123)
             .build();
     public static final Substance SILVER = createSubstance("silver")
@@ -202,7 +202,7 @@ public final class Substances {
             .packageTransitionMetal()
             .build();
     public static final Substance HASTE_ALLOY = createSubstance("haste_alloy")
-            .composition(NICKEL, 2, COBALT, 2, IRON, 2, TITANIUM, 1, ALUMINIUM, 1)
+            .composition(NICKEL, 2, COBALT, 2, IRON, 2, TITANIUM, 1, ALUMINUM, 1)
             .packageMetalExtended()
             .build();
     public static final Substance BORON = createSubstance("boron")
@@ -284,7 +284,7 @@ public final class Substances {
             .packageMetalExtended()
             .build();
     public static final Substance EMERALD = createSubstance("emerald")
-            .composition(BERYLLIUM, 3, ALUMINIUM, 2, SILICON, 18, OXYGEN, 18)
+            .composition(BERYLLIUM, 3, ALUMINUM, 2, SILICON, 18, OXYGEN, 18)
             .possible(CHROMIUM, 2, 3, VANADIUM, 2, 3, IRON, 2, 3)
             .packageGem()
             .overrides(BLOCK, "minecraft:emerald_block", GEM, "minecraft:emerald")
@@ -317,7 +317,7 @@ public final class Substances {
     public static final Substance DIAMOND = createSubstance("diamond")
             .packageGem()
             .tools(6.0f, 3.0f, 1561, 5, 4)
-            .overrides(ORE, "minecraft:diamond_ore", BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond")
+            .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", HOE, "minecraft:diamond_hoe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
             .color(0xFF91f5e6)
             .style("gem")
             .shiny()
@@ -328,6 +328,12 @@ public final class Substances {
             .color(0xFFc9c5b9)
             .style("gem")
             .build();
+    public static final Substance TANTALUM = createSubstance("tantalum")
+            .element(73, "Ta", "tantalum", Element.EGroup.TRANSITION_METAL, 180.947882)
+            .temperature(3290f, 5731f)
+            .packageTransitionMetal()
+            .color(0xFF4da6ff)
+            .build();
     public static final Substance REDSTONE = createSubstance("redstone")
             .items(DUST)
             .blocks(BLOCK, ORE)
@@ -336,6 +342,63 @@ public final class Substances {
             .color(0xFFc80000)
             .style("mineral")
             .shiny()
+            .build();
+    public static final Substance REDSTONE_ALLOY = createSubstance("redstone_alloy")
+            .composition(REDSTONE, 3, COPPER, 1)
+            .packageMetalExtended()
+            .color(0xFFc80000)
+            .shiny()
+            .build();
+    public static final Substance SODIUM = createSubstance("sodium")
+            .element(11, "Na", "sodium", Element.EGroup.ALKALI_METAL, 22.989769282)
+            .temperature(370.944f, 1156.09f)
+            .packageAlkaliMetal()
+            .color(0xFFab5cf2)
+            .build();
+    public static final Substance CALCIUM = createSubstance("calcium")
+            .element(20, "Ca", "calcium", Element.EGroup.ALKALINE_EARTH_METAL, 40.0784)
+            .temperature(1115f, 1757f)
+            .packageAlkaliMetal()
+            .color(0xFF3dff00)
+            .build();
+    public static final Substance POTASSIUM = createSubstance("potassium")
+            .element(19, "K", "potassium", Element.EGroup.ALKALI_METAL, 39.09831)
+            .temperature(336.7f, 1032f)
+            .color(0xFF8f40d4)
+            .packageAlkaliMetal()
+            .build();
+    public static final Substance SULFUR = createSubstance("sulfur")
+            .element(16, "S", "sulfur", Element.EGroup.NON_METAL, 32.06)
+            .temperature(388.36f, 717.8f)
+            .color(0xFFffff30)
+            .packageNonMetal()
+            .build();
+    public static final Substance LAZURITE = createSubstance("lazurite")
+            .composition(SODIUM, 8, CALCIUM, 8, ALUMINUM, 12, SILICON, 12, OXYGEN, 24, SULFUR, 2)
+            .packageMineral()
+            .style("mineral")
+            .color(0xFF191b59)
+            .build();
+    public static final Substance CHLORINE = createSubstance("chlorine")
+            .element(17, "Cl", "chlorine", Element.EGroup.HALOGEN, 35.45)
+            .temperature(171.6f, 239.11f)
+            .color(0xFF1ff01f)
+            .packageHalogen()
+            .build();
+    public static final Substance SODALITE = createSubstance("sodalite")
+            .composition(SODIUM, 8, ALUMINUM, 6, SILICON, 6, OXYGEN, 24, SULFUR, 2, CHLORINE, 2)
+            .possible(IRON, 1, 5, MANGANESE, 1, 5, POTASSIUM, 1, 5, CALCIUM, 1, 5)
+            .packageMineral()
+            .style("mineral")
+            .color(0xFF3b4852)
+            .build();
+    public static final Substance LAPIS_LAZULI = createSubstance("lapis_lazuli")
+            .composition(LAZURITE, 1, SODALITE, 1)
+            .packageMineral()
+            .items(GEM)
+            .overrides(BLOCK, "minecraft:lapis_block", GEM, "minecraft:dye:4")
+            .style("mineral")
+            .color(0xFF1b0f8a)
             .build();
 
     private static SubstanceBuilder createSubstance(String name) {

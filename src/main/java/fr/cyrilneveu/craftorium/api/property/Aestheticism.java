@@ -45,4 +45,8 @@ public final class Aestheticism {
     public int getFluidColor() {
         return fluidColor;
     }
+
+    public SoundType getSoundType() {
+        return soundType;
+    }
 }

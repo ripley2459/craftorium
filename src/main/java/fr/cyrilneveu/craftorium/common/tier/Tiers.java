@@ -19,7 +19,7 @@ public final class Tiers {
     public static final Tier TWO = createTier("two")
             .storage(2.0f)
             .setFull()
-            .pack(ALUMINIUM, HSLA_STEEL, ELECTRUM, BRONZE, CUPRONICKEL)
+            .pack(ALUMINUM, HSLA_STEEL, ELECTRUM, BRONZE, CUPRONICKEL)
             .color(0xFFff6400)
             .build();
     public static final Tier THREE = createTier("three")

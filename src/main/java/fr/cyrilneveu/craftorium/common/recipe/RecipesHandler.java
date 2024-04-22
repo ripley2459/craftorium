@@ -4,6 +4,9 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 
@@ -15,6 +18,119 @@ import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
+        RecipeManager.addShapedRecipe("circuit_board_redstone", ACommonProxy.getItemStack("circuit_board_redstone", 6),
+                "TSR",
+                "PPP",
+                "RSG",
+                'T', SAW.asIngredient(null),
+                'S', new ItemStack(Blocks.STONE_SLAB, 1, 0) /* OreStack.getIngredient("slabStone"), TODO: WHY THE ORE DOESN'T WORK? */,
+                'P', PLATE.asIngredient(REDSTONE_ALLOY),
+                'G', OreStack.getIngredient("glue"),
+                'R', DUST.asIngredient(REDSTONE)
+        );
+        RecipeManager.addShapedRecipe("redstone_circuit", ACommonProxy.getItemStack("redstone_circuit"),
+                " C ",
+                "RPR",
+                "FRD",
+                'C', ACommonProxy.getItemStack("redstone_chip"),
+                'R', WIRE.asIngredient(REDSTONE_ALLOY),
+                'P', ACommonProxy.getItemStack("circuit_board_redstone"),
+                'F', ACommonProxy.getItemStack("resistor"),
+                'D', ACommonProxy.getItemStack("redstone_capacitor")
+        );
+        RecipeManager.addShapedRecipe("advanced_redstone_circuit", ACommonProxy.getItemStack("advanced_redstone_circuit"),
+                "RCR",
+                "FPD",
+                "RCR",
+                'R', WIRE.asIngredient(REDSTONE_ALLOY),
+                'C', ACommonProxy.getItemStack("redstone_chip"),
+                'F', ACommonProxy.getItemStack("resistor"),
+                'P', ACommonProxy.getItemStack("circuit_board_redstone"),
+                'D', ACommonProxy.getItemStack("redstone_capacitor")
+        );
+
+        RecipeManager.addShapedRecipe("primitive_circuit", ACommonProxy.getItemStack("primitive_circuit"),
+                "RCR",
+                "FPD",
+                'C', ACommonProxy.getItemStack("chip"),
+                'R', WIRE.asIngredient(COPPER),
+                'P', ACommonProxy.getItemStack("circuit_board_1"),
+                'F', ACommonProxy.getItemStack("resistor"),
+                'D', ACommonProxy.getItemStack("diode")
+        );
+        RecipeManager.addShapedRecipe("advanced_circuit", ACommonProxy.getItemStack("advanced_circuit"),
+                "RCR",
+                "FPD",
+                "FGW",
+                'C', ACommonProxy.getItemStack("chip"),
+                'R', WIRE.asIngredient(GOLD),
+                'P', ACommonProxy.getItemStack("circuit_board_2"),
+                'F', ACommonProxy.getItemStack("resistor"),
+                'D', ACommonProxy.getItemStack("diode"),
+                'W', ACommonProxy.getItemStack("capacitor"),
+                'G', WIRE.asIngredient(COPPER)
+        );
+        RecipeManager.addShapedRecipe("maxed_circuit", ACommonProxy.getItemStack("maxed_circuit"),
+                "RCR",
+                "FPD",
+                "FCW",
+                'C', ACommonProxy.getItemStack("chip"),
+                'R', WIRE.asIngredient(ELECTRUM),
+                'P', ACommonProxy.getItemStack("circuit_board_3"),
+                'F', ACommonProxy.getItemStack("resistor"),
+                'D', ACommonProxy.getItemStack("diode"),
+                'W', ACommonProxy.getItemStack("capacitor")
+        );
+
+        RecipeManager.addShapedRecipe("redstone_capacitor", ACommonProxy.getItemStack("redstone_capacitor", 3),
+                "FFF",
+                "MST",
+                "WCW",
+                'F', OreStack.getIngredient("paper"),
+                'M', FOIL.asIngredient(MANGANESE),
+                'S', FOIL.asIngredient(SILVER),
+                'T', FOIL.asIngredient(TANTALUM),
+                'C', CUTTER.asIngredient(null),
+                'W', WIRE.asIngredient(REDSTONE_ALLOY)
+        );
+        RecipeManager.addShapedRecipe("redstone_resistor", ACommonProxy.getItemStack("resistor", 4),
+                " W ",
+                "FDC",
+                " W ",
+                'F', OreStack.getIngredient("paper"),
+                'D', DUST.asIngredient(COAL),
+                'C', CUTTER.asIngredient(null),
+                'W', WIRE.asIngredient(REDSTONE_ALLOY)
+        );
+        RecipeManager.addShapedRecipe("resistor", ACommonProxy.getItemStack("resistor", 2),
+                " W ",
+                "FDC",
+                " W ",
+                'F', OreStack.getIngredient("paper"),
+                'D', DUST.asIngredient(COAL),
+                'C', CUTTER.asIngredient(null),
+                'W', WIRE.asIngredient(COPPER)
+        );
+        RecipeManager.addShapedRecipe("redstone_chip", ACommonProxy.getItemStack("redstone_chip"),
+                "PCP",
+                "VVV",
+                "PWP",
+                'P', OreStack.getIngredient("paper"),
+                'C', CUTTER.asIngredient(null),
+                'V', ACommonProxy.getItemStack("vacuum_tube"),
+                'W', WIRE.asIngredient(REDSTONE_ALLOY)
+        );
+        RecipeManager.addShapedRecipe("vacuum_tube", ACommonProxy.getItemStack("vacuum_tube", 3),
+                "TRG",
+                "JWC",
+                'T', FOIL.asIngredient(TIN),
+                'R', FOIL.asIngredient(REDSTONE_ALLOY),
+                'J', WIRE.asIngredient(TIN),
+                'G', OreStack.getIngredient("blockGlass"),
+                'C', CUTTER.asIngredient(null),
+                'W', WIRE.asIngredient(REDSTONE_ALLOY)
+        );
+
         if (ONE.getPack() != null) {
             registerMotorRecipe(ONE);
             registerPistonRecipe(ONE);
@@ -25,6 +141,54 @@ public final class RecipesHandler {
             registerBatteryRecipe(ONE);
             registerLargeBatteryRecipe(ONE);
             registerRobotArmRecipe(ONE, "circuitTier1");
+        }
+
+        if (TWO.getPack() != null) {
+            registerMotorRecipe(TWO);
+            registerPistonRecipe(TWO);
+            registerHeatExchangerRecipe(TWO, RUBBER);
+            registerPumpRecipe(TWO, RUBBER);
+            registerEmitterRecipe(TWO, DIAMOND, "circuitTier2");
+            registerSensorRecipe(TWO, ENDER, "circuitTier2");
+            registerBatteryRecipe(TWO);
+            registerLargeBatteryRecipe(TWO);
+            registerRobotArmRecipe(TWO, "circuitTier2");
+        }
+
+        if (THREE.getPack() != null) {
+            registerMotorRecipe(THREE);
+            registerPistonRecipe(THREE);
+            registerHeatExchangerRecipe(THREE, RUBBER);
+            registerPumpRecipe(THREE, RUBBER);
+            registerEmitterRecipe(THREE, DIAMOND, "circuitTier3");
+            registerSensorRecipe(THREE, ENDER, "circuitTier3");
+            registerBatteryRecipe(THREE);
+            registerLargeBatteryRecipe(THREE);
+            registerRobotArmRecipe(THREE, "circuitTier3");
+        }
+
+        if (FOUR.getPack() != null) {
+            registerMotorRecipe(FOUR);
+            registerPistonRecipe(FOUR);
+            registerHeatExchangerRecipe(FOUR, RUBBER);
+            registerPumpRecipe(FOUR, RUBBER);
+            registerEmitterRecipe(FOUR, DIAMOND, "circuitTier4");
+            registerSensorRecipe(FOUR, ENDER, "circuitTier4");
+            registerBatteryRecipe(FOUR);
+            registerLargeBatteryRecipe(FOUR);
+            registerRobotArmRecipe(FOUR, "circuitTier4");
+        }
+
+        if (FIVE.getPack() != null) {
+            registerMotorRecipe(FIVE);
+            registerPistonRecipe(FIVE);
+            registerHeatExchangerRecipe(FIVE, RUBBER);
+            registerPumpRecipe(FIVE, RUBBER);
+            registerEmitterRecipe(FIVE, DIAMOND, "circuitTier5");
+            registerSensorRecipe(FIVE, ENDER, "circuitTier5");
+            registerBatteryRecipe(FIVE);
+            registerLargeBatteryRecipe(FIVE);
+            registerRobotArmRecipe(FIVE, "circuitTier5");
         }
     }
 

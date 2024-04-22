@@ -30,7 +30,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static fr.cyrilneveu.craftorium.api.utils.Utils.BLOCK_MODEL_BUILDER;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
-import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONE;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 
 public class SubstanceBlock extends CustomBlock {
@@ -41,6 +40,10 @@ public class SubstanceBlock extends CustomBlock {
         super(material, reference.getFaces(substance));
         this.reference = reference;
         this.substance = substance;
+        setHardness(substance.getToughness().getHardness());
+        setHarvestLevel(substance.getToughness().getToolClass(), substance.getToughness().getHarvestLevel());
+        setResistance(substance.getToughness().getResistance());
+        setSoundType(substance.getAestheticism().getSoundType());
     }
 
     @Override
@@ -59,7 +62,10 @@ public class SubstanceBlock extends CustomBlock {
 
         public OreBlock(Material material, ASubstanceObject reference, Substance substance) {
             super(material, reference, substance);
-            setDefaultState(getBlockState().getBaseState().withProperty(STONE_VARIANT, STONE));
+            setHardness(substance.getToughness().getHardness());
+            setHarvestLevel("pickaxe", substance.getToughness().getHarvestLevel());
+            setResistance(substance.getToughness().getResistance());
+            setSoundType(substance.getAestheticism().getSoundType());
         }
 
         @Override

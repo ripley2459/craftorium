@@ -56,6 +56,19 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
+        createItem( "redstone_capacitor").addTexture("circuits/redstone_capacitor").build();
+        createItem( "redstone_chip").addTexture("circuits/redstone_chip").build();
+        createItem( "diode").addTexture("circuits/diode").build();
+        createItem( "vacuum_tube").addTexture("circuits/vacuum_tube").build();
+        createItem( "transistor").addTexture("circuits/transistor").build();
+        createItem( "resistor").addTexture("circuits/resistor").build();
+        createItem( "capacitor").addTexture("circuits/capacitor").build();
+        createItem( "chip").addTexture("circuits/chip").build();
+        createItem( "circuit_board_redstone").addTexture("circuits/circuit_board_redstone").build();
+        createItem( "circuit_board_1").addTexture("circuits/circuit_board_1").build();
+        createItem( "circuit_board_2").addTexture("circuits/circuit_board_2").build();
+        createItem( "circuit_board_3").addTexture("circuits/circuit_board_3").build();
+
         createItem("redstone_circuit").addTexture("circuits/redstone_circuit").build();
         createItem("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
         createItem("primitive_circuit").addTexture("circuits/primitive_circuit").build();
