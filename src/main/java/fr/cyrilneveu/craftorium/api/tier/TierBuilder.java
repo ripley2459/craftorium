@@ -118,9 +118,11 @@ public final class TierBuilder {
     }
 
     @ZenMethod
-    public fr.cyrilneveu.craftorium.api.tier.Tier build() {
-        fr.cyrilneveu.craftorium.api.tier.Tier tier = new fr.cyrilneveu.craftorium.api.tier.Tier(name, aestheticism, pack, new Process(simultaneousRecipe, additionalChance, recipeSpeed), storage, ImmutableSortedSet.copyOf(items));
+    public Tier build() {
+        Tier tier = new Tier(name, aestheticism, pack, new Process(simultaneousRecipe, additionalChance, recipeSpeed), storage, ImmutableSortedSet.copyOf(items));
+
         TIERS_REGISTRY.put(name, tier);
+
         return tier;
     }
 }

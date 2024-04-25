@@ -35,6 +35,11 @@ public final class VeinBuilder {
     }
 
     @ZenMethod
+    public static VeinBuilder createVein(String name, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, Object... substances) {
+        return new VeinBuilder(name, minY, maxY, sizeH, sizeV, chance, dimension, substances);
+    }
+
+    @ZenMethod
     public VeinBuilder y(int minY, int maxY) {
         minY = MathHelper.clamp(minY, 0, 255);
         maxY = MathHelper.clamp(maxY, 0, 255);
@@ -84,15 +89,12 @@ public final class VeinBuilder {
 
     @ZenMethod
     public Vein build() {
-        Vein vein = new Vein(name, minY, maxY, sizeH, sizeV, chance, dimension, substances);
-
-        /*for (Substance substance : substances) {
+        for (Substance substance : substances) {
             Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains(substance.getName()));
+            Preconditions.checkArgument(substance.getBlocks().contains(ORE));
+        }
 
-            boolean flag = substance.getBlocks().contains(ORE);
-            if (!flag)
-                System.out.println(substance.getName() + " does not contains the ORE block.");
-        }*/
+        Vein vein = new Vein(name, minY, maxY, sizeH, sizeV, chance, dimension, substances);
 
         VEINS_REGISTRY.put(name, vein);
 

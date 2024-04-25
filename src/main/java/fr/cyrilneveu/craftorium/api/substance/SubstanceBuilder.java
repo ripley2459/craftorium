@@ -61,6 +61,11 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
+    public static SubstanceBuilder createSubstance(String name) {
+        return new SubstanceBuilder(name);
+    }
+
+    @ZenMethod
     public SubstanceBuilder composition(Object... composition) {
         Preconditions.checkArgument(composition.length % 2 == 0);
 
@@ -135,6 +140,27 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
+    public SubstanceBuilder temperatureAverage() {
+        if (composition.isEmpty())
+            return this;
+
+        float melt = 0;
+        float boil = 0;
+        int total = 0;
+        for (SubstanceStack stack : composition) {
+            Temperature temperature = stack.getSubstance().getTemperature();
+            if (temperature == Temperature.EMPTY)
+                return this;
+
+            melt += temperature.getMeltingPoint() * stack.getAmount();
+            boil += temperature.getBoilingPoint() * stack.getAmount();
+            total += stack.getAmount();
+        }
+
+        return this.temperature(melt / total, boil / total);
+    }
+
+    @ZenMethod
     public SubstanceBuilder packageOre() {
         items(DUST);
         blocks(ORE);
@@ -198,7 +224,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder packageTransitionMetal() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
     }
@@ -223,7 +249,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder packageUnknown() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
     }
@@ -232,7 +258,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder packageMetalExtended() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
     }
@@ -241,7 +267,7 @@ public final class SubstanceBuilder {
     public SubstanceBuilder packageGem() {
         items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
     }
@@ -398,6 +424,8 @@ public final class SubstanceBuilder {
 
         if (baseColor == ERROR_COLOR)
             colorAverage();
+        if (temperature == Temperature.EMPTY)
+            temperatureAverage();
 
         Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
 
@@ -409,6 +437,7 @@ public final class SubstanceBuilder {
         }
 
         SUBSTANCES_REGISTRY.put(name, substance);
+
         return substance;
     }
 }

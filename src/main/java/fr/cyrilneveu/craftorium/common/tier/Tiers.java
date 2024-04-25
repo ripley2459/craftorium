@@ -1,12 +1,17 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.tier.TierBuilder;
+import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 
+@ZenClass("mods." + MODID + ".tier.Tiers")
+@ZenRegister
 public final class Tiers {
     public static Tier ONE;
     public static Tier TWO;

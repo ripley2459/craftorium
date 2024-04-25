@@ -24,6 +24,7 @@ public final class StoneTypes {
         StoneType stoneType = new StoneType(name, META++, new ResourceLocation(texture), blockState, dimension);
 
         STONES_REGISTRY.put(name, stoneType);
+
         return stoneType;
     }
 }

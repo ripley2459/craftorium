@@ -11,10 +11,10 @@
 And importing some packages:
 
 ```ZenScript
-import mods.craftorium.tier.Tier;
+import mods.craftorium.tier.Tiers;
 import mods.craftorium.tier.Builder;
 ```
 
-With the `Tier` package you can list and delete tiers. But also have access to information about a particular.
+With the `Tiers` package you can list and delete tiers. But also have access to information about a particular.
 
 The `Builder` package gives you ways to create tiers from scratch or modify existing ones.

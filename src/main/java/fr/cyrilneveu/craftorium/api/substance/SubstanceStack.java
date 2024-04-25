@@ -13,6 +13,7 @@ public final class SubstanceStack implements Comparable<SubstanceStack> {
     }
 
     public SubstanceStack(Substance substance, int amount, int chance) {
+        Preconditions.checkArgument(amount > 0);
         Preconditions.checkArgument(chance > 0 && chance <= 100);
 
         this.substance = substance;

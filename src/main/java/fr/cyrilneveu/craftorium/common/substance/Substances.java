@@ -156,6 +156,7 @@ public final class Substances {
         GRAPHITE = createSubstance("graphite")
                 .composition(CARBON, 1)
                 .packageMetalExtended()
+                .packageOre()
                 .color(0xFF1b1b1b)
                 .build();
         COAL = createSubstance("coal")
@@ -242,6 +243,7 @@ public final class Substances {
                 .composition(BERYLLIUM, 3, ALUMINUM, 2, SILICON, 18, OXYGEN, 18)
                 .possible(CHROMIUM, 2, 3, VANADIUM, 2, 3, IRON, 2, 3)
                 .packageGem()
+                .packageOre()
                 .overrides(BLOCK, "minecraft:emerald_block", GEM, "minecraft:emerald")
                 .color(0xFF45b32d)
                 .style("gem")
@@ -271,6 +273,7 @@ public final class Substances {
                 .build();
         DIAMOND = createSubstance("diamond")
                 .packageGem()
+                .packageOre()
                 .tools(6.0f, 3.0f, 1561, 5, 4)
                 .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", HOE, "minecraft:diamond_hoe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
                 .color(0xFF91f5e6)
@@ -279,6 +282,7 @@ public final class Substances {
                 .build();
         QUARTZ = createSubstance("quartz")
                 .packageGem()
+                .packageOre()
                 .overrides(BLOCK, "minecraft:quartz_block:0", GEM, "minecraft:quartz")
                 .color(0xFFc9c5b9)
                 .style("gem")
@@ -535,6 +539,7 @@ public final class Substances {
                 .element(47, "Ag", "silver", Element.EGroup.TRANSITION_METAL, 107.86822)
                 .temperature(1234.93f, 2435f)
                 .packageTransitionMetal()
+                .packageOre()
                 .color(0xFFc0c0c0)
                 .build();
         NICKEL = createSubstance("nickel")
@@ -561,12 +566,14 @@ public final class Substances {
                 .temperature(2896f, 4912f)
                 .color(0xFF54b5b5)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         COBALT = createSubstance("cobalt")
                 .element(27, "Co", "cobalt", Element.EGroup.TRANSITION_METAL, 58.9331944)
                 .temperature(1768f, 3200f)
                 .color(0xFFf090a0)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         TITANIUM = createSubstance("titanium")
                 .element(22, "Ti", "titanium", Element.EGroup.TRANSITION_METAL, 47.8671)
@@ -579,12 +586,14 @@ public final class Substances {
                 .temperature(2180f, 2944f)
                 .color(0xFF8a99c7)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         TUNGSTEN = createSubstance("tungsten")
                 .element(74, "W", "tungsten", Element.EGroup.TRANSITION_METAL, 183.841)
                 .temperature(3695f, 6203f)
                 .color(0xFF2194d6)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         OXYGEN = createSubstance("oxygen")
                 .element(8, "O", "oxygen", Element.EGroup.HALOGEN, 15.999)
@@ -604,6 +613,7 @@ public final class Substances {
                 .temperature(2183f, 3680f)
                 .color(0xFFa6a6ab)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         TIN = createSubstance("tin")
                 .element(50, "Sn", "tin", Element.EGroup.POST_TRANSITION_METAL, 118.7107)
@@ -617,6 +627,7 @@ public final class Substances {
                 .temperature(1357.77f, 2835f)
                 .color(0xFFc88033)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         THALLIUM = createSubstance("thallium")
                 .element(81, "Tl", "thallium", Element.EGroup.POST_TRANSITION_METAL, 204.38)
@@ -682,6 +693,7 @@ public final class Substances {
                 .element(79, "Au", "gold", Element.EGroup.TRANSITION_METAL, 196.9665695)
                 .temperature(1337.33f, 3243f)
                 .packageTransitionMetal()
+                .packageOre()
                 .tools(4.0f, 2.0f, 32, 3, 3)
                 .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget", HOE, "minecraft:golden_hoe", PICKAXE, "minecraft:golden_pickaxe", HOE, "minecraft:golden_hoe", SHOVEL, "minecraft:golden_shovel", SWORD, "minecraft:golden_sword", AXE, "minecraft:golden_axe")
                 .color(0xFFffd123)
@@ -691,12 +703,14 @@ public final class Substances {
                 .temperature(3306f, 5285f)
                 .color(0xFF266696)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         IRIDIUM = createSubstance("iridium")
                 .element(77, "Ir", "iridium", Element.EGroup.TRANSITION_METAL, 192.2173)
                 .temperature(2719f, 4403f)
                 .color(0xFF175487)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         YTTRIUM = createSubstance("yttrium")
                 .element(39, "Y", "yttrium", Element.EGroup.TRANSITION_METAL, 88.905842)
@@ -722,12 +736,14 @@ public final class Substances {
                 .temperature(2750f, 5017f)
                 .color(0xFF73c2c9)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         RHENIUM = createSubstance("rhenium")
                 .element(75, "Re", "rhenium", Element.EGroup.TRANSITION_METAL, 186.2071)
                 .temperature(3459f, 5869f)
                 .color(0xFF267dab)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         BARIUM = createSubstance("barium")
                 .element(56, "Ba", "barium", Element.EGroup.ALKALINE_EARTH_METAL, 137.3277)
@@ -747,6 +763,7 @@ public final class Substances {
                 .temperature(1519f, 2334f)
                 .color(0xFF9c7ac7)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         ALUMINUM = createSubstance("aluminum")
                 .element(13, "Al", "aluminum", Element.EGroup.POST_TRANSITION_METAL, 26.98153857)
@@ -759,6 +776,7 @@ public final class Substances {
                 .element(26, "Fe", "iron", Element.EGroup.TRANSITION_METAL, 55.8452)
                 .temperature(1811f, 3134f)
                 .packageTransitionMetal()
+                .packageOre()
                 .tools(4.0f, 2.0f, 250, 3, 3)
                 .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget", HOE, "minecraft:iron_hoe", PICKAXE, "minecraft:iron_pickaxe", HOE, "minecraft:iron_hoe", SHOVEL, "minecraft:iron_shovel", SWORD, "minecraft:iron_sword", AXE, "minecraft:iron_axe")
                 .color(0xFFd4d4d4, 0xFFd4d4d4, 0xFFa31000)
@@ -795,6 +813,7 @@ public final class Substances {
                 .element(73, "Ta", "tantalum", Element.EGroup.TRANSITION_METAL, 180.947882)
                 .temperature(3290f, 5731f)
                 .packageTransitionMetal()
+                .packageOre()
                 .color(0xFF4da6ff)
                 .build();
         PLATINUM = createSubstance("platinum")
@@ -802,12 +821,14 @@ public final class Substances {
                 .temperature(2041.4f, 4098f)
                 .color(0xFFd0d0e0)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         ZINC = createSubstance("zinc")
                 .element(30, "Zn", "zinc", Element.EGroup.TRANSITION_METAL, 65.382)
                 .temperature(692.68f, 1180f)
                 .color(0xFF7d80b0)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         SELENIUM = createSubstance("selenium")
                 .element(34, "Se", "selenium", Element.EGroup.NON_METAL, 78.9718)
@@ -862,6 +883,7 @@ public final class Substances {
                 .temperature(2237f, 3968f)
                 .color(0xFF0a7d8c)
                 .packageTransitionMetal()
+                .packageOre()
                 .build();
         URANIUM = createSubstance("uranium")
                 .element(92, "U", "uranium", Element.EGroup.ACTINIDE, 238.028913)

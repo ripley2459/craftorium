@@ -1,17 +1,22 @@
 package fr.cyrilneveu.craftorium.common.world;
 
+import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.utils.WeightedList;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
 import fr.cyrilneveu.craftorium.api.world.vein.VeinBuilder;
+import stanhebben.zenscript.annotations.ZenClass;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 
+@ZenClass("mods." + MODID + ".vein.Veins")
+@ZenRegister
 public final class Veins {
     public static Vein VEIN_BAUXITE;
     public static Vein VEIN_BARITE;
