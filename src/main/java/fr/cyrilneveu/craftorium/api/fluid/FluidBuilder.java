@@ -7,9 +7,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.BLOCKS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.FLUIDS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.FLUIDS_REGISTRY;
 
 public class FluidBuilder {
     private String name;

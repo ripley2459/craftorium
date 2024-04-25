@@ -9,8 +9,9 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.ORE;
 
 @ZenClass("mods." + MODID + ".vein.Builder")
 @ZenRegister
@@ -88,8 +89,9 @@ public final class VeinBuilder {
         /*for (Substance substance : substances) {
             Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains(substance.getName()));
 
-            substance.modify().blocks(ORE).build();
-            substance.modify().items(DUST).build();
+            boolean flag = substance.getBlocks().contains(ORE);
+            if (!flag)
+                System.out.println(substance.getName() + " does not contains the ORE block.");
         }*/
 
         VEINS_REGISTRY.put(name, vein);

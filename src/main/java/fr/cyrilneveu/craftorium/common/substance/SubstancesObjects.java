@@ -4,57 +4,98 @@ import fr.cyrilneveu.craftorium.api.block.CustomBlock;
 import fr.cyrilneveu.craftorium.api.block.SubstanceItemBlock;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
-import fr.cyrilneveu.craftorium.api.utils.Registry;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.*;
+import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
 public final class SubstancesObjects {
-    public static final Registry<String, SubstanceItem> SUBSTANCE_ITEMS_REGISTRY = new Registry<>();
-    public static final Registry<String, SubstanceTool> SUBSTANCE_TOOLS_REGISTRY = new Registry<>();
-    public static final Registry<String, SubstanceBlock> SUBSTANCE_BLOCKS_REGISTRY = new Registry<>();
-    public static final Registry<String, SubstanceFluid> SUBSTANCE_FLUIDS_REGISTRY = new Registry<>();
+    public static SubstanceItem CASING;
+    public static SubstanceItem DUST;
+    public static SubstanceItem FOIL;
+    public static SubstanceItem GEAR;
+    public static SubstanceItem GEM;
+    public static SubstanceItem INGOT;
+    public static SubstanceItem NUGGET;
+    public static SubstanceItem PEARL;
+    public static SubstanceItem PLATE;
+    public static SubstanceItem RING;
+    public static SubstanceItem ROD;
+    public static SubstanceItem ROTOR;
+    public static SubstanceItem SCREW;
+    public static SubstanceItem SPRING;
+    public static SubstanceItem WIRE;
 
-    public static final SubstanceItem CASING = createItem("casing").build();
-    public static final SubstanceItem DUST = createItem("dust").build();
-    public static final SubstanceItem FOIL = createItem("foil").build();
-    public static final SubstanceItem GEAR = createItem("gear").build();
-    public static final SubstanceItem GEM = createItem("gem").self().build();
-    public static final SubstanceItem INGOT = createItem("ingot").build();
-    public static final SubstanceItem NUGGET = createItem("nugget").build();
-    public static final SubstanceItem PEARL = createItem("pearl").build();
-    public static final SubstanceItem PLATE = createItem("plate").build();
-    public static final SubstanceItem RING = createItem("ring").build();
-    public static final SubstanceItem ROD = createItem("rod").build();
-    public static final SubstanceItem ROTOR = createItem("rotor").build();
-    public static final SubstanceItem SCREW = createItem("screw").build();
-    public static final SubstanceItem SPRING = createItem("spring").build();
-    public static final SubstanceItem WIRE = createItem("wire").build();
+    public static SubstanceTool AXE;
+    public static SubstanceTool CUTTER;
+    public static SubstanceTool FILE;
+    public static SubstanceTool HAMMER;
+    public static SubstanceTool HOE;
+    public static SubstanceTool KNIFE;
+    public static SubstanceTool MORTAR;
+    public static SubstanceTool PICKAXE;
+    public static SubstanceTool SAW;
+    public static SubstanceTool SCREWDRIVER;
+    public static SubstanceTool SHOVEL;
+    public static SubstanceTool SWORD;
+    public static SubstanceTool WRENCH;
 
-    public static final SubstanceTool AXE = createTool("axe").build();
-    public static final SubstanceTool CUTTER = createTool("cutter").build();
-    public static final SubstanceTool FILE = createTool("file").build();
-    public static final SubstanceTool HAMMER = createTool("hammer").build();
-    public static final SubstanceTool HOE = createTool("hoe").build();
-    public static final SubstanceTool KNIFE = createTool("knife").build();
-    public static final SubstanceTool MORTAR = createTool("mortar").build();
-    public static final SubstanceTool PICKAXE = createTool("pickaxe").build();
-    public static final SubstanceTool SAW = createTool("saw").build();
-    public static final SubstanceTool SCREWDRIVER = createTool("screwdriver").build();
-    public static final SubstanceTool SHOVEL = createTool("shovel").build();
-    public static final SubstanceTool SWORD = createTool("sword").build();
-    public static final SubstanceTool WRENCH = createTool("wrench").build();
+    public static SubstanceBlock BLOCK;
+    public static SubstanceBlock FRAME;
+    public static SubstanceBlock HULL;
+    public static SubstanceBlock ORE;
 
-    public static final SubstanceBlock BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-    public static final SubstanceBlock FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-    public static final SubstanceBlock HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-    public static final SubstanceBlock ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstanceBlock::oreModel).faces(SubstanceBlock::oreFaces).build();
+    public static SubstanceFluid LIQUID;
 
-    public static final SubstanceFluid LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstanceFluid::defaultFaces).build();
+    public static void init() {
+        if (SUBSTANCE_ITEMS_REGISTRY.isInitialized() || SUBSTANCE_TOOLS_REGISTRY.isInitialized() || SUBSTANCE_BLOCKS_REGISTRY.isInitialized() || SUBSTANCE_FLUIDS_REGISTRY.isInitialized())
+            return;
+
+        SUBSTANCE_ITEMS_REGISTRY.initialize();
+        SUBSTANCE_TOOLS_REGISTRY.initialize();
+        SUBSTANCE_BLOCKS_REGISTRY.initialize();
+        SUBSTANCE_FLUIDS_REGISTRY.initialize();
+
+        CASING = createItem("casing").build();
+        DUST = createItem("dust").build();
+        FOIL = createItem("foil").build();
+        GEAR = createItem("gear").build();
+        GEM = createItem("gem").self().build();
+        INGOT = createItem("ingot").build();
+        NUGGET = createItem("nugget").build();
+        PEARL = createItem("pearl").build();
+        PLATE = createItem("plate").build();
+        RING = createItem("ring").build();
+        ROD = createItem("rod").build();
+        ROTOR = createItem("rotor").build();
+        SCREW = createItem("screw").build();
+        SPRING = createItem("spring").build();
+        WIRE = createItem("wire").build();
+
+        AXE = createTool("axe").build();
+        CUTTER = createTool("cutter").build();
+        FILE = createTool("file").build();
+        HAMMER = createTool("hammer").build();
+        HOE = createTool("hoe").build();
+        KNIFE = createTool("knife").build();
+        MORTAR = createTool("mortar").build();
+        PICKAXE = createTool("pickaxe").build();
+        SAW = createTool("saw").build();
+        SCREWDRIVER = createTool("screwdriver").build();
+        SHOVEL = createTool("shovel").build();
+        SWORD = createTool("sword").build();
+        WRENCH = createTool("wrench").build();
+
+        BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
+        FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
+        HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
+        ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstanceBlock::oreModel).faces(SubstanceBlock::oreFaces).build();
+
+        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstanceFluid::defaultFaces).build();
+    }
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
@@ -156,5 +197,12 @@ public final class SubstancesObjects {
         block.setRegistryName(reference.getName(substance));
 
         BLOCKS_REGISTRY.put(reference.getName(substance), block);
+    }
+
+    public static void close() {
+        SUBSTANCE_ITEMS_REGISTRY.close();
+        SUBSTANCE_TOOLS_REGISTRY.close();
+        SUBSTANCE_BLOCKS_REGISTRY.close();
+        SUBSTANCE_FLUIDS_REGISTRY.close();
     }
 }

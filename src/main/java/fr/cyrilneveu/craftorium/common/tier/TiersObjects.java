@@ -7,7 +7,7 @@ import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.BLOCKS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
 
 public class BlockBuilder {
     private String name;

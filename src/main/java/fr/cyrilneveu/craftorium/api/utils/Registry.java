@@ -8,17 +8,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class Registry<K extends Comparable<K>, V> {
-    private boolean closed = false;
+    private EState state = EState.NONE;
     private Map<K, V> values = new LinkedHashMap<>();
 
     public boolean put(K key, V value) {
-        Preconditions.checkArgument(!closed, "Can't add an element from an already closed registry!");
+        Preconditions.checkArgument(!isClosed(), "Can't add an element from an already closed registry!");
 
         return values.put(key, value) == null;
     }
 
     public boolean remove(K key) {
-        Preconditions.checkArgument(!closed, "Can't remove an element from an already closed registry!");
+        Preconditions.checkArgument(!isClosed(), "Can't remove an element from an already closed registry!");
 
         return values.remove(key) != null;
     }
@@ -36,14 +36,24 @@ public final class Registry<K extends Comparable<K>, V> {
         return values.containsKey(key);
     }
 
+    public void initialize() {
+        Preconditions.checkArgument(!isClosed(), "Can't initialize an already closed registry!");
+
+        state = EState.INITIALIZED;
+    }
+
+    public boolean isInitialized() {
+        return state == EState.INITIALIZED;
+    }
+
     public boolean isClosed() {
-        return closed;
+        return state == EState.CLOSED;
     }
 
     public void close() {
-        Preconditions.checkArgument(!closed, "Can't close an already closed registry!");
+        Preconditions.checkArgument(!isClosed(), "Can't close an already closed registry!");
 
-        closed = true;
+        state = EState.CLOSED;
 
         /* List<Map.Entry<K, V>> entries = values.entrySet()
                 .stream()
@@ -54,5 +64,11 @@ public final class Registry<K extends Comparable<K>, V> {
         values = builder.build(); */
 
         values = ImmutableMap.copyOf(values);
+    }
+
+    private enum EState {
+        NONE,
+        INITIALIZED,
+        CLOSED;
     }
 }

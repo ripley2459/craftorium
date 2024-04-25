@@ -24,9 +24,9 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
-import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 @ZenClass("mods." + MODID + ".substance.Builder")

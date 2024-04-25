@@ -6,10 +6,13 @@ import fr.cyrilneveu.craftorium.api.block.BlockBuilder;
 import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.utils.Registry;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
 import fr.cyrilneveu.craftorium.common.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
+import fr.cyrilneveu.craftorium.common.substance.Substances;
+import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
+import fr.cyrilneveu.craftorium.common.tier.Tiers;
+import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,7 +23,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -35,19 +37,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
-import static fr.cyrilneveu.craftorium.common.substance.Substances.SUBSTANCES_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
-import static fr.cyrilneveu.craftorium.common.tier.Tiers.TIERS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.TIER_ITEMS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.world.Veins.VEINS_REGISTRY;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
 public abstract class ACommonProxy {
-    public static final Registry<String, Item> ITEMS_REGISTRY = new Registry<>();
-    public static final Registry<String, Block> BLOCKS_REGISTRY = new Registry<>();
-    public static final Registry<String, Fluid> FLUIDS_REGISTRY = new Registry<>();
-
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(CraftoriumTags.MODID))
@@ -177,16 +172,18 @@ public abstract class ACommonProxy {
     }
 
     public void preInit(FMLPreInitializationEvent event) {
+        SubstancesObjects.init();
+        Substances.init();
+        Veins.init();
+        Tiers.init();
+
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
 
-        SUBSTANCE_ITEMS_REGISTRY.close();
-        SUBSTANCE_TOOLS_REGISTRY.close();
-        SUBSTANCE_BLOCKS_REGISTRY.close();
-        SUBSTANCE_FLUIDS_REGISTRY.close();
-        VEINS_REGISTRY.close();
-        SUBSTANCES_REGISTRY.close();
-        TIERS_REGISTRY.close();
+        SubstancesObjects.close();
+        Substances.close();
+        Veins.close();
+        Tiers.close();
     }
 
     public void init(FMLInitializationEvent event) {

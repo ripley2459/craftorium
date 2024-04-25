@@ -31,6 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashSet;
 import java.util.Set;
 
+import static fr.cyrilneveu.craftorium.api.Registries.*;
+
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
 public final class ClientProxy extends ACommonProxy {

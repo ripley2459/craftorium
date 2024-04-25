@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.ITEMS_REGISTRY;
 
 public class ItemBuilder {
     private String name;

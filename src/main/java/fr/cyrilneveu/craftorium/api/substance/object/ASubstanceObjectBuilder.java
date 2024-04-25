@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.substance.object;
 
 import javax.annotation.Nullable;
 
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
+import static fr.cyrilneveu.craftorium.api.Registries.*;
 
 public abstract class ASubstanceObjectBuilder<T> {
     protected String name;

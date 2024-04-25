@@ -5,7 +5,6 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,7 +78,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public final List<String> getTooltips(Substance substance) {
-        return tooltips.getTooltips(this, substance);
+        return tooltips == null ? Collections.emptyList() : tooltips.getTooltips(this, substance);
     }
 
     public Ingredient asIngredient(Substance substance) {
