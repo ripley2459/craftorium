@@ -95,15 +95,15 @@ public class SubstanceBlock extends CustomBlock {
 
         @Override
         public int damageDropped(IBlockState state) {
-            return state.getValue(STONE_VARIANT).getMeta();
+            // return state.getValue(STONE_VARIANT).getMeta();
+            return 0;
         }
 
         @Override
         @SideOnly(Side.CLIENT)
         public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-            for (StoneType stoneType : STONES_REGISTRY.getAll().values()) {
+            for (StoneType stoneType : STONES_REGISTRY.getAll().values())
                 items.add(new ItemStack(this, 1, stoneType.getMeta()));
-            }
         }
 
         @Override

@@ -18,6 +18,8 @@ public class Settings {
     public static class SubstancesSettings {
         @Config.Comment({"Should substances that overrides objects (like items or blocks) register their own objects?", "Default: false"})
         public boolean registerOverrides = false;
+        @Config.Comment({"Show tooltips on substances items? They are partially implemented.", "Default: false"})
+        public boolean showAdvancedTooltips = false;
     }
 
     public static class GenerationSettings {

@@ -1,6 +1,6 @@
 package fr.cyrilneveu.craftorium.api.tier.object;
 
-import fr.cyrilneveu.craftorium.api.substance.object.SubstanceItem;
+import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.TIER_ITEMS_REGISTRY;
 
@@ -9,6 +9,8 @@ public abstract class ATierObjectBuilder<T> {
     protected ATierObject.ICreateObject provider;
     protected ATierObject.IGetFaces faces;
     protected ATierObject.IGetModelTemplate model;
+    @Nullable
+    protected ATierObject.IGetTooltips tooltips;
 
     public ATierObjectBuilder(String name) {
         this.name = name;
@@ -29,6 +31,11 @@ public abstract class ATierObjectBuilder<T> {
         return this;
     }
 
+    public ATierObjectBuilder<T> tooltips(@Nullable ATierObject.IGetTooltips tooltips) {
+        this.tooltips = tooltips;
+        return this;
+    }
+
     public abstract T build();
 
     public static final class TierItemBuilder extends ATierObjectBuilder<TierItem> {
@@ -38,7 +45,7 @@ public abstract class ATierObjectBuilder<T> {
 
         @Override
         public TierItem build() {
-            TierItem item = new TierItem(name, provider, faces, model);
+            TierItem item = new TierItem(name, provider, faces, model, tooltips);
             TIER_ITEMS_REGISTRY.put(name, item);
             return item;
         }

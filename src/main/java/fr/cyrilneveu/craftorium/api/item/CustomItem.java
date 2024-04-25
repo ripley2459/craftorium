@@ -7,24 +7,38 @@ import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ITEM_MODEL_BUILDER;
 
 public class CustomItem extends Item implements ICustomModel, IItemColor {
     protected final FaceProvider[] faceProviders;
+    @Nullable
+    protected final Supplier<List<String>> toolTips;
 
-    public CustomItem(FaceProvider[] faceProviders) {
+    public CustomItem(FaceProvider[] faceProviders, @Nullable Supplier<List<String>> toolTips) {
         this.faceProviders = faceProviders;
+        this.toolTips = toolTips;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (toolTips != null)
+            tooltip.addAll(toolTips.get());
     }
 
     @Override

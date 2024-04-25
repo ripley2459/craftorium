@@ -1,5 +1,7 @@
 package fr.cyrilneveu.craftorium.api.substance.object;
 
+import javax.annotation.Nullable;
+
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public abstract class ASubstanceObjectBuilder<T> {
@@ -10,6 +12,8 @@ public abstract class ASubstanceObjectBuilder<T> {
     protected ASubstanceObject.ICreateObject provider;
     protected ASubstanceObject.IGetFaces faces;
     protected ASubstanceObject.IGetModelTemplate model;
+    @Nullable
+    protected ASubstanceObject.IGetTooltips tooltips;
 
     public ASubstanceObjectBuilder(String name) {
         this.name = name;
@@ -45,6 +49,11 @@ public abstract class ASubstanceObjectBuilder<T> {
         return this;
     }
 
+    public ASubstanceObjectBuilder<T> tooltips(@Nullable ASubstanceObject.IGetTooltips tooltips) {
+        this.tooltips = tooltips;
+        return this;
+    }
+
     public abstract T build();
 
     public static final class SubstanceItemBuilder extends ASubstanceObjectBuilder<SubstanceItem> {
@@ -54,7 +63,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public SubstanceItem build() {
-            SubstanceItem item = new SubstanceItem(name, self, prefix, suffix, provider, faces, model);
+            SubstanceItem item = new SubstanceItem(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_ITEMS_REGISTRY.put(name, item);
             return item;
         }
@@ -67,7 +76,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public SubstanceTool build() {
-            SubstanceTool tool = new SubstanceTool(name, self, prefix, suffix, provider, faces, model);
+            SubstanceTool tool = new SubstanceTool(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_TOOLS_REGISTRY.put(name, tool);
             return tool;
         }
@@ -81,7 +90,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public SubstanceBlock build() {
-            SubstanceBlock block = new SubstanceBlock(name, self, prefix, suffix, provider, faces, model);
+            SubstanceBlock block = new SubstanceBlock(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_BLOCKS_REGISTRY.put(name, block);
             return block;
         }
@@ -95,7 +104,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public SubstanceFluid build() {
-            SubstanceFluid fluid = new SubstanceFluid(name, self, prefix, suffix, provider, faces, model);
+            SubstanceFluid fluid = new SubstanceFluid(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_FLUIDS_REGISTRY.put(name, fluid);
             return fluid;
         }

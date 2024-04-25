@@ -10,7 +10,7 @@ public class TierItem extends CustomItem {
     protected final Tier tier;
 
     public TierItem(ATierObject reference, Tier tier) {
-        super(reference.getFaces(tier));
+        super(reference.getFaces(tier), () -> reference.getTooltips(tier));
         this.reference = reference;
         this.tier = tier;
     }

@@ -13,7 +13,7 @@ public class SubstanceItem extends CustomItem {
     protected final Substance substance;
 
     public SubstanceItem(ASubstanceObject reference, Substance substance) {
-        super(reference.getFaces(substance));
+        super(reference.getFaces(substance), () -> reference.getTooltips(substance));
         this.reference = reference;
         this.substance = substance;
     }

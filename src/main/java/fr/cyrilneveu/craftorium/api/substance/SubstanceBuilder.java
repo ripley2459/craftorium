@@ -135,71 +135,68 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
+    public SubstanceBuilder packageOre() {
+        items(DUST);
+        blocks(ORE);
+        return this;
+    }
+
+    @ZenMethod
     public SubstanceBuilder packageHalogen() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageNobleGas() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageAlkaliMetal() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST, INGOT, NUGGET);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageAlkalineEarthMetal() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST, INGOT, NUGGET);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageMetalloid() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST, INGOT, NUGGET);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageNonMetal() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packagePostTransitionMetal() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
+        blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageTransitionMetal() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
+        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL, ORE);
         fluids(LIQUID);
@@ -208,18 +205,16 @@ public final class SubstanceBuilder {
 
     @ZenMethod
     public SubstanceBuilder packageLanthanide() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST, INGOT, NUGGET, PLATE, ROD);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
 
     @ZenMethod
     public SubstanceBuilder packageActinide() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL, ORE);
+        items(DUST, INGOT, NUGGET, PLATE, ROD);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }

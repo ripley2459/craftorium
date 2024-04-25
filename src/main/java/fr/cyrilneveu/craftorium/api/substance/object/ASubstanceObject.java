@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,8 @@ import net.minecraftforge.fml.common.Loader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
@@ -23,8 +26,10 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final ICreateObject provider;
     protected final IGetFaces faces;
     protected final IGetModelTemplate model;
+    @Nullable
+    protected final IGetTooltips tooltips;
 
-    public ASubstanceObject(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
+    public ASubstanceObject(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
         this.name = name;
         this.self = self;
         this.prefix = prefix;
@@ -32,6 +37,24 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         this.provider = provider;
         this.faces = faces;
         this.model = model;
+        this.tooltips = tooltips;
+    }
+
+    public static List<String> defaultTooltips(ASubstanceObject reference, Substance substance) {
+        List<String> lines = new ArrayList<>();
+        /*
+        String formula = substance.getComposition().getFormula();
+        if (!formula.isEmpty())
+            lines.add(Utils.localise("tooltip.craftorium.formula", formula));
+        float temperature = substance.getTemperature().getMeltingPoint();
+        if (!Float.isNaN(temperature))
+            lines.add(Utils.localise("tooltip.craftorium.temperature", temperature));
+        lines.add(Utils.localise("tooltip.craftorium.state.solid"));
+        lines.add(Utils.localise("tooltip.craftorium.state.liquid"));
+        lines.add(Utils.localise("tooltip.craftorium.state.gaseous"));
+        lines.add(Utils.localise("tooltip.craftorium.state.unknown"));
+        */
+        return lines;
     }
 
     public String getName(@Nullable Substance substance) {
@@ -52,6 +75,10 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
 
     public final ModelTemplate getModelTemplate(Substance substance) {
         return model.getModelTemplate(this, substance);
+    }
+
+    public final List<String> getTooltips(Substance substance) {
+        return tooltips.getTooltips(this, substance);
     }
 
     public Ingredient asIngredient(Substance substance) {
@@ -125,5 +152,10 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     @FunctionalInterface
     public interface IGetModelTemplate {
         ModelTemplate getModelTemplate(ASubstanceObject reference, Substance substance);
+    }
+
+    @FunctionalInterface
+    public interface IGetTooltips {
+        List<String> getTooltips(ASubstanceObject reference, Substance substance);
     }
 }

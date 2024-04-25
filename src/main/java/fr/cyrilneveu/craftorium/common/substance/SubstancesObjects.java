@@ -60,6 +60,7 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstanceItem::defaultFaces);
+        // builder.tooltips(SubstanceItem::defaultTooltips);
 
         return builder;
     }
@@ -68,12 +69,14 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
         builder.faces(SubstanceTool::defaultFaces);
+        // builder.tooltips(SubstanceTool::toolTooltips);
 
         return builder;
     }
 
     private static ASubstanceObjectBuilder.SubstanceBlockBuilder createBlock(String name, ASubstanceObject.ICreateObject provider) {
         ASubstanceObjectBuilder.SubstanceBlockBuilder builder = new ASubstanceObjectBuilder.SubstanceBlockBuilder(name, provider);
+        // builder.tooltips(SubstanceItem::defaultTooltips);
 
         return builder;
     }

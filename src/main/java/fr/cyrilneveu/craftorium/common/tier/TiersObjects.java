@@ -28,6 +28,7 @@ public final class TiersObjects {
         ATierObjectBuilder.TierItemBuilder builder = new ATierObjectBuilder.TierItemBuilder(name);
         builder.provider(TiersObjects::createItem);
         builder.faces(TierItem::defaultFaces);
+        builder.tooltips(TierItem::defaultTooltips);
 
         return builder;
     }

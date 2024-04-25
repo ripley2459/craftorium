@@ -9,8 +9,8 @@ import javax.annotation.Nullable;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 public final class SubstanceFluid extends ASubstanceObject {
-    public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
-        super(name, self, prefix, suffix, provider, faces, model);
+    public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+        super(name, self, prefix, suffix, provider, faces, model, tooltips);
     }
 
     public static FaceProvider[] defaultFaces(ASubstanceObject reference, Substance substance) {

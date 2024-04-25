@@ -6,12 +6,14 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
+
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
 
 public final class SubstanceBlock extends ASubstanceObject {
-    public SubstanceBlock(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model) {
-        super(name, self, prefix, suffix, provider, faces, model);
+    public SubstanceBlock(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+        super(name, self, prefix, suffix, provider, faces, model, tooltips);
     }
 
     public static FaceProvider[] defaultFaces(ASubstanceObject reference, Substance substance) {
