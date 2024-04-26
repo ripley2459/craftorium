@@ -66,7 +66,7 @@ public class BlockBuilder {
         block.setTranslationKey(translation);
         block.setCreativeTab(creativeTab);
 
-        CustomItemBlock item = new CustomItemBlock(block);
+        CustomBlock.CustomItemBlock item = new CustomBlock.CustomItemBlock(block);
         item.setRegistryName(registryName);
         item.setTranslationKey(translation);
         item.setCreativeTab(creativeTab);

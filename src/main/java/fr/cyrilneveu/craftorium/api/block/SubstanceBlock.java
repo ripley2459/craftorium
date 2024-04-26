@@ -7,6 +7,7 @@ import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneProperty;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneType;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -148,6 +149,20 @@ public class SubstanceBlock extends CustomBlock {
 
                 event.getModelRegistry().putObject(new ModelResourceLocation(getRegistryName() + "_" + stoneType.getName()), BLOCK_MODEL_BUILDER.build().getModel());
             }
+        }
+    }
+
+    public static class SubstanceItemBlock extends CustomItemBlock {
+        protected final Substance substance;
+
+        public SubstanceItemBlock(Block block, Substance substance) {
+            super(block);
+            this.substance = substance;
+        }
+
+        @Override
+        public String getItemStackDisplayName(ItemStack stack) {
+            return Utils.localise(String.join(".", getTranslationKey(), "name"), substance.getDisplayName());
         }
     }
 }

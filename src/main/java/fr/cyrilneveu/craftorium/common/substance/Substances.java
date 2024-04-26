@@ -133,6 +133,7 @@ public final class Substances {
     public static Substance SMITHSONITE;
     public static Substance LITHIUM;
     public static Substance SPDODUMENE;
+    public static Substance STONE;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -143,14 +144,24 @@ public final class Substances {
         initElements();
         initOres();
 
+        STONE = createSubstance("stone")
+                .items(DUST, PLATE, ROD)
+                .tools(HAMMER)
+                .blocks(BLOCK, HULL)
+                .tools(4.0f, 1.0f, 131, 1, 5)
+                .overrides(BLOCK, "minecraft:cobblestone", HOE, "minecraft:stone_hoe", PICKAXE, "minecraft:stone_pickaxe", HOE, "minecraft:stone_hoe", SHOVEL, "minecraft:stone_shovel", SWORD, "minecraft:stone_sword", AXE, "minecraft:stone_axe")
+                .style("mineral")
+                .color(0xFFb5b5b5)
+                .build();
         BRONZE = createSubstance("bronze")
+                .packageMetalExtended()
                 .composition(COPPER, 3, TIN, 1)
-                .tools(4.0f, 6.0f, 325, 3, 3)
                 .color(0xFFf5a945)
                 .shiny()
                 .build();
         STEEL = createSubstance("steel")
                 .composition(IRON, 1, CARBON, 3)
+                .tools(7.5f, 4.0f, 375, 4, 15)
                 .packageMetalExtended()
                 .build();
         GRAPHITE = createSubstance("graphite")
@@ -179,6 +190,7 @@ public final class Substances {
         HSLA_STEEL = createSubstance("hsla_steel")
                 .composition(IRON, 4, GRAPHITE, 1, MANGANESE, 1)
                 .packageMetalExtended()
+                .tools(9.3f, 6f, 563, 6, 16)
                 .build();
         ELECTRUM = createSubstance("electrum")
                 .composition(GOLD, 1, SILVER, 1)
@@ -192,15 +204,17 @@ public final class Substances {
         TUNGSTEN_STEEL = createSubstance("tungsten_steel")
                 .composition(TUNGSTEN, 1, STEEL, 1)
                 .packageMetalExtended()
-                .tools(5.0f, 4.0f, 5300, 3, 2)
+                .tools(4.6f, 4.0f, 2047, 4, 8)
                 .build();
         TUNGSTEN_CARBIDE_ALLOY = createSubstance("tungsten_carbide_alloy")
                 .composition(TUNGSTEN, 1, CARBON, 1)
                 .packageMetalExtended()
+                .tools(14.6f, 10.0f, 1266, 10, 18)
                 .build();
         STAINLESS_STEEL = createSubstance("stainless_steel")
                 .composition(IRON, 4, MAGNESIUM, 3, MANGANESE, 1, CHROMIUM, 1)
                 .packageMetalExtended()
+                .tools(11.75f, 8.0f, 844, 8, 17)
                 .build();
         NICHROME = createSubstance("nichrome")
                 .composition(NICKEL, 2, CHROMIUM, 8)
@@ -213,6 +227,7 @@ public final class Substances {
                 .build();
         HASTE_ALLOY = createSubstance("haste_alloy")
                 .composition(NICKEL, 2, COBALT, 2, IRON, 2, TITANIUM, 1, ALUMINUM, 1)
+                .tools(4.80f, 5.0f, 5117, 5, 9)
                 .packageMetalExtended()
                 .build();
         MAGNESIUM_DIBORIDE_ALLOY = createSubstance("magnesium_diboride_alloy")
@@ -225,11 +240,13 @@ public final class Substances {
                 .build();
         SUPER_ALLOY = createSubstance("super_alloy")
                 .composition(HASTE_ALLOY, 2, CARBON, 2, NIOBIUM, 1, RHENIUM, 1, TUNGSTEN, 1)
+                .tools(5.1f, 6.0f, 12793, 6, 10)
                 .packageMetalExtended()
                 .build();
         OSMIRIDIUM = createSubstance("osmiridium")
                 .composition(OSMIUM, 6, IRIDIUM, 3)
                 .packageMetalExtended()
+                .tools(18.3f, 12.0f, 1844, 12, 19)
                 .build();
         YBCO = createSubstance("ybco")
                 .composition(YTTRIUM, 1, BARIUM, 2, COPPER, 3)
@@ -274,7 +291,7 @@ public final class Substances {
         DIAMOND = createSubstance("diamond")
                 .packageGem()
                 .packageOre()
-                .tools(6.0f, 3.0f, 1561, 5, 4)
+                .tools(8.0f, 3.0f, 1561, 3, 10)
                 .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", HOE, "minecraft:diamond_hoe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
                 .color(0xFF91f5e6)
                 .style("gem")
@@ -694,7 +711,7 @@ public final class Substances {
                 .temperature(1337.33f, 3243f)
                 .packageTransitionMetal()
                 .packageOre()
-                .tools(4.0f, 2.0f, 32, 3, 3)
+                .tools(12.0f, 0.0f, 32, 0, 22)
                 .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget", HOE, "minecraft:golden_hoe", PICKAXE, "minecraft:golden_pickaxe", HOE, "minecraft:golden_hoe", SHOVEL, "minecraft:golden_shovel", SWORD, "minecraft:golden_sword", AXE, "minecraft:golden_axe")
                 .color(0xFFffd123)
                 .build();
@@ -768,6 +785,7 @@ public final class Substances {
         ALUMINUM = createSubstance("aluminum")
                 .element(13, "Al", "aluminum", Element.EGroup.POST_TRANSITION_METAL, 26.98153857)
                 .temperature(933.47f, 2743f)
+                .tools(4.41f, 3f, 819, 3, 7)
                 .color(0xFFbfa6a6)
                 .packagePostTransitionMetal()
                 .packageOre()
@@ -777,7 +795,7 @@ public final class Substances {
                 .temperature(1811f, 3134f)
                 .packageTransitionMetal()
                 .packageOre()
-                .tools(4.0f, 2.0f, 250, 3, 3)
+                .tools(6.0f, 2.0f, 250, 2, 14)
                 .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget", HOE, "minecraft:iron_hoe", PICKAXE, "minecraft:iron_pickaxe", HOE, "minecraft:iron_hoe", SHOVEL, "minecraft:iron_shovel", SWORD, "minecraft:iron_sword", AXE, "minecraft:iron_axe")
                 .color(0xFFd4d4d4, 0xFFd4d4d4, 0xFFa31000)
                 .shiny()

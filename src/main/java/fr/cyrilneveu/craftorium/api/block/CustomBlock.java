@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
@@ -77,5 +78,11 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
             BLOCK_MODEL_BUILDER.addLayer(face.getTexture());
 
         event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
+    }
+
+    public static class CustomItemBlock extends ItemBlock {
+        public CustomItemBlock(Block block) {
+            super(block);
+        }
     }
 }

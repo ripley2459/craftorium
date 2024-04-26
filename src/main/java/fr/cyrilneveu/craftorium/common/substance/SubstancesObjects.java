@@ -1,10 +1,10 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
-import fr.cyrilneveu.craftorium.api.block.CustomBlock;
-import fr.cyrilneveu.craftorium.api.block.SubstanceItemBlock;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
@@ -75,18 +75,18 @@ public final class SubstancesObjects {
         SPRING = createItem("spring").build();
         WIRE = createItem("wire").build();
 
-        AXE = createTool("axe").build();
+        AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();
         FILE = createTool("file").build();
         HAMMER = createTool("hammer").build();
-        HOE = createTool("hoe").build();
+        HOE = createTool("hoe").provider(SubstancesObjects::createHoe).build();
         KNIFE = createTool("knife").build();
         MORTAR = createTool("mortar").build();
-        PICKAXE = createTool("pickaxe").build();
+        PICKAXE = createTool("pickaxe").provider(SubstancesObjects::createPickaxe).build();
         SAW = createTool("saw").build();
         SCREWDRIVER = createTool("screwdriver").build();
-        SHOVEL = createTool("shovel").build();
-        SWORD = createTool("sword").build();
+        SHOVEL = createTool("shovel").provider(SubstancesObjects::createShovel).build();
+        SWORD = createTool("sword").provider(SubstancesObjects::createSword).build();
         WRENCH = createTool("wrench").build();
 
         BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
@@ -101,7 +101,6 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstanceItem::defaultFaces);
-        // builder.tooltips(SubstanceItem::defaultTooltips);
 
         return builder;
     }
@@ -110,14 +109,12 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
         builder.faces(SubstanceTool::defaultFaces);
-        // builder.tooltips(SubstanceTool::toolTooltips);
 
         return builder;
     }
 
     private static ASubstanceObjectBuilder.SubstanceBlockBuilder createBlock(String name, ASubstanceObject.ICreateObject provider) {
         ASubstanceObjectBuilder.SubstanceBlockBuilder builder = new ASubstanceObjectBuilder.SubstanceBlockBuilder(name, provider);
-        // builder.tooltips(SubstanceItem::defaultTooltips);
 
         return builder;
     }
@@ -137,8 +134,43 @@ public final class SubstancesObjects {
         ITEMS_REGISTRY.put(reference.getName(substance), item);
     }
 
+    private static void createAxe(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceAxe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceAxe(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
+    private static void createHoe(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceHoe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceHoe(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
+    private static void createPickaxe(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstancePickaxe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstancePickaxe(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
+    private static void createShovel(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceShovel item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceShovel(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
+    private static void createSword(ASubstanceObject reference, Substance substance) {
+        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceSword item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceSword(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
     private static void createTool(ASubstanceObject reference, Substance substance) {
         fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool(reference, substance);
+
+        createTool(reference, substance, item);
+    }
+
+    private static void createTool(ASubstanceObject reference, Substance substance, Item item) {
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(TOOLS);
@@ -148,30 +180,34 @@ public final class SubstancesObjects {
 
     private static void createBlock(ASubstanceObject reference, Substance substance) {
         fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+
         createBlock(reference, substance, block);
     }
 
     private static void createFrame(ASubstanceObject reference, Substance substance) {
         fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+
         createBlock(reference, substance, block);
     }
 
     private static void createHull(ASubstanceObject reference, Substance substance) {
         fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+
         createBlock(reference, substance, block);
     }
 
     private static void createOre(ASubstanceObject reference, Substance substance) {
         fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock(Material.ROCK, reference, substance);
+
         createBlock(reference, substance, block);
     }
 
-    private static void createBlock(ASubstanceObject reference, Substance substance, CustomBlock block) {
+    private static void createBlock(ASubstanceObject reference, Substance substance, Block block) {
         block.setRegistryName(reference.getName(substance));
         block.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         block.setCreativeTab(SUBSTANCES);
 
-        SubstanceItemBlock item = new SubstanceItemBlock(block, substance);
+        fr.cyrilneveu.craftorium.api.block.SubstanceBlock.SubstanceItemBlock item = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock.SubstanceItemBlock(block, substance);
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
