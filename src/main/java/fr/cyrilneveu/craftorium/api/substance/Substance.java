@@ -33,13 +33,13 @@ public final class Substance implements Comparable<Substance> {
     private final Aestheticism aestheticism;
     private final AProcess process;
     private final Map<ESubstanceProperties, ASubstanceProperty> properties;
-    private final Set<SubstanceItem> items;
-    private final Set<SubstanceTool> tools;
-    private final Set<SubstanceBlock> blocks;
-    private final Set<SubstanceFluid> fluids;
+    private final Set<ASubstanceObject.SubstanceItem> items;
+    private final Set<ASubstanceObject.SubstanceTool> tools;
+    private final Set<ASubstanceObject.SubstanceBlock> blocks;
+    private final Set<ASubstanceObject.SubstanceFluid> fluids;
     private final Map<ASubstanceObject, String> overrides;
 
-    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism aestheticism, AProcess process, Map<ESubstanceProperties, ASubstanceProperty> properties, Set<SubstanceItem> items, Set<SubstanceTool> tools, Set<SubstanceBlock> blocks, Set<SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
+    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism aestheticism, AProcess process, Map<ESubstanceProperties, ASubstanceProperty> properties, Set<ASubstanceObject.SubstanceItem> items, Set<ASubstanceObject.SubstanceTool> tools, Set<ASubstanceObject.SubstanceBlock> blocks, Set<ASubstanceObject.SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
         this.name = name;
         this.composition = composition;
         this.efficiency = efficiency;
@@ -88,19 +88,19 @@ public final class Substance implements Comparable<Substance> {
         return properties;
     }
 
-    public Set<SubstanceItem> getItems() {
+    public Set<ASubstanceObject.SubstanceItem> getItems() {
         return items;
     }
 
-    public Set<SubstanceTool> getTools() {
+    public Set<ASubstanceObject.SubstanceTool> getTools() {
         return tools;
     }
 
-    public Set<SubstanceBlock> getBlocks() {
+    public Set<ASubstanceObject.SubstanceBlock> getBlocks() {
         return blocks;
     }
 
-    public Set<SubstanceFluid> getFluids() {
+    public Set<ASubstanceObject.SubstanceFluid> getFluids() {
         return fluids;
     }
 

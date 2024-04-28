@@ -146,6 +146,6 @@ public final class Veins {
     }
 
     public static void close() {
-        VEINS_REGISTRY.close();
+        VEINS_REGISTRY.order().close();
     }
 }

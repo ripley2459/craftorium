@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.tier;
 
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
-import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
+import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.property.Pack;
 import fr.cyrilneveu.craftorium.api.tier.property.Process;
 import fr.cyrilneveu.craftorium.api.tier.property.Storage;
@@ -24,9 +24,9 @@ public final class Tier implements Comparable<Tier> {
     private final Pack substances;
     private final Process process;
     private final Storage storage;
-    private final Set<TierItem> items;
+    private final Set<ATierObject.TierItem> items;
 
-    public Tier(String name, Aestheticism aestheticism, Pack substances, Process process, Storage storage, Set<TierItem> items) {
+    public Tier(String name, Aestheticism aestheticism, Pack substances, Process process, Storage storage, Set<ATierObject.TierItem> items) {
         this.name = name;
         this.aestheticism = aestheticism;
         this.substances = substances;
@@ -56,7 +56,7 @@ public final class Tier implements Comparable<Tier> {
         return storage;
     }
 
-    public Set<TierItem> getItems() {
+    public Set<ATierObject.TierItem> getItems() {
         return items;
     }
 

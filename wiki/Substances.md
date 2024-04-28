@@ -162,6 +162,9 @@ Default: `5.0f, 10.0f, "pickaxe", 2`.
 newSubstance.temperature(float meltingPoint, float boilingPoint);
 ```
 
+- `meltingPoint` >= 0
+- `boilingPoint` >= 0
+
 ```ZenScript
 newSubstance.temperatureAverage();
 ```
@@ -201,7 +204,6 @@ newSubstance.style(string style);
 - "gem"
 - "metal"
 - "mineral"
-- "sand"
 - "wood"
 
 </details>

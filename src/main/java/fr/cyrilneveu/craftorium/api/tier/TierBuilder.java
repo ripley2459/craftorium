@@ -5,7 +5,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
+import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.property.Pack;
 import fr.cyrilneveu.craftorium.api.tier.property.Process;
 import fr.cyrilneveu.craftorium.api.tier.property.Storage;
@@ -35,7 +35,7 @@ public final class TierBuilder {
     private int additionalChance = 0;
     private float recipeSpeed = 1f;
     private Storage storage = new Storage(1f);
-    private Set<TierItem> items = new TreeSet<>();
+    private Set<ATierObject.TierItem> items = new TreeSet<>();
 
     public TierBuilder(String name) {
         this.name = name;
@@ -112,7 +112,7 @@ public final class TierBuilder {
         return this;
     }
 
-    public TierBuilder items(TierItem... items) {
+    public TierBuilder items(ATierObject.TierItem... items) {
         this.items.addAll(Arrays.asList(items));
         return this;
     }

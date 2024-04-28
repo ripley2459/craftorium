@@ -11,7 +11,7 @@ import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
-import fr.cyrilneveu.craftorium.api.substance.object.*;
+import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
@@ -43,10 +43,10 @@ public final class SubstanceBuilder {
     private Temperature temperature = Temperature.EMPTY;
     private AProcess process = DEFAULT_PROCESS;
     private Map<ESubstanceProperties, ASubstanceProperty> properties = new HashMap<>();
-    private Set<SubstanceItem> items = new TreeSet<>();
-    private Set<SubstanceTool> tools = new TreeSet<>();
-    private Set<SubstanceBlock> blocks = new TreeSet<>();
-    private Set<SubstanceFluid> fluids = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceItem> items = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceTool> tools = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceBlock> blocks = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceFluid> fluids = new TreeSet<>();
     private Map<ASubstanceObject, String> overrides = new HashMap<>();
     private String style = "metal";
     private boolean shiny = false;
@@ -246,15 +246,6 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder packageUnknown() {
-        items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL);
-        fluids(LIQUID);
-        return this;
-    }
-
-    @ZenMethod
     public SubstanceBuilder packageMetalExtended() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -265,8 +256,8 @@ public final class SubstanceBuilder {
 
     @ZenMethod
     public SubstanceBuilder packageGem() {
-        items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
-        tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
+        items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, ROD);
+        tools(AXE, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL);
         fluids(LIQUID);
         return this;
@@ -291,7 +282,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder items(SubstanceItem... items) {
+    public SubstanceBuilder items(ASubstanceObject.SubstanceItem... items) {
         this.items.addAll(Arrays.asList(items));
         return this;
     }
@@ -307,7 +298,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder tools(SubstanceTool... tools) {
+    public SubstanceBuilder tools(ASubstanceObject.SubstanceTool... tools) {
         this.tools.addAll(Arrays.asList(tools));
         return this;
     }
@@ -323,7 +314,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder blocks(SubstanceBlock... blocks) {
+    public SubstanceBuilder blocks(ASubstanceObject.SubstanceBlock... blocks) {
         this.blocks.addAll(Arrays.asList(blocks));
         return this;
     }
@@ -339,7 +330,7 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder fluids(SubstanceFluid... fluids) {
+    public SubstanceBuilder fluids(ASubstanceObject.SubstanceFluid... fluids) {
         this.fluids.addAll(Arrays.asList(fluids));
         return this;
     }

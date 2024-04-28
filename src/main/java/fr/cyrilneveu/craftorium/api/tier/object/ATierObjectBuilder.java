@@ -38,14 +38,14 @@ public abstract class ATierObjectBuilder<T> {
 
     public abstract T build();
 
-    public static final class TierItemBuilder extends ATierObjectBuilder<TierItem> {
+    public static final class TierItemBuilder extends ATierObjectBuilder<ATierObject.TierItem> {
         public TierItemBuilder(String name) {
             super(name);
         }
 
         @Override
-        public TierItem build() {
-            TierItem item = new TierItem(name, provider, faces, model, tooltips);
+        public ATierObject.TierItem build() {
+            ATierObject.TierItem item = new ATierObject.TierItem(name, provider, faces, model, tooltips);
             TIER_ITEMS_REGISTRY.put(name, item);
             return item;
         }

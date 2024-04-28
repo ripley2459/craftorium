@@ -6,6 +6,7 @@ import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.common.Loader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -41,20 +41,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public static List<String> defaultTooltips(ASubstanceObject reference, Substance substance) {
-        List<String> lines = new ArrayList<>();
-        /*
-        String formula = substance.getComposition().getFormula();
-        if (!formula.isEmpty())
-            lines.add(Utils.localise("tooltip.craftorium.formula", formula));
-        float temperature = substance.getTemperature().getMeltingPoint();
-        if (!Float.isNaN(temperature))
-            lines.add(Utils.localise("tooltip.craftorium.temperature", temperature));
-        lines.add(Utils.localise("tooltip.craftorium.state.solid"));
-        lines.add(Utils.localise("tooltip.craftorium.state.liquid"));
-        lines.add(Utils.localise("tooltip.craftorium.state.gaseous"));
-        lines.add(Utils.localise("tooltip.craftorium.state.unknown"));
-        */
-        return lines;
+        return Collections.emptyList();
     }
 
     public String getName(@Nullable Substance substance) {
@@ -62,7 +49,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public String getOre(Substance substance) {
-        return /*self ? OreStack.createOre(prefix, substance.getName(), suffix) :*/ OreStack.createOre(prefix, name, substance.getName(), suffix);
+        return OreStack.createOre(prefix, name, substance.getName(), suffix);
     }
 
     public final void createObject(Substance substance) {
@@ -157,5 +144,48 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     @FunctionalInterface
     public interface IGetTooltips {
         List<String> getTooltips(ASubstanceObject reference, Substance substance);
+    }
+
+    public static final class SubstanceBlock extends ASubstanceObject {
+        public SubstanceBlock(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        }
+
+        public Block asBlock(Substance substance) {
+            return Block.getBlockFromItem(asItemStack(substance).getItem());
+        }
+    }
+
+    public static final class SubstanceFluid extends ASubstanceObject {
+        public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        }
+
+        @Override
+        public String getOre(Substance substance) {
+            return getName(substance);
+        }
+
+        @Override
+        public String getName(@Nullable Substance substance) {
+            return substance == null ? name : substance.getName();
+        }
+    }
+
+    public static final class SubstanceTool extends ASubstanceObject {
+        public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        }
+
+        @Override
+        public String getOre(Substance substance) {
+            return name;
+        }
+    }
+
+    public static final class SubstanceItem extends ASubstanceObject {
+        public SubstanceItem(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        }
     }
 }

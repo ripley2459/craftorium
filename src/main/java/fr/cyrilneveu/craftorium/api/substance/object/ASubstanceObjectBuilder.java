@@ -56,55 +56,55 @@ public abstract class ASubstanceObjectBuilder<T> {
 
     public abstract T build();
 
-    public static final class SubstanceItemBuilder extends ASubstanceObjectBuilder<SubstanceItem> {
+    public static final class SubstanceItemBuilder extends ASubstanceObjectBuilder<ASubstanceObject.SubstanceItem> {
         public SubstanceItemBuilder(String name) {
             super(name);
         }
 
         @Override
-        public SubstanceItem build() {
-            SubstanceItem item = new SubstanceItem(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public ASubstanceObject.SubstanceItem build() {
+            ASubstanceObject.SubstanceItem item = new ASubstanceObject.SubstanceItem(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_ITEMS_REGISTRY.put(name, item);
             return item;
         }
     }
 
-    public static final class SubstanceToolBuilder extends ASubstanceObjectBuilder<SubstanceTool> {
+    public static final class SubstanceToolBuilder extends ASubstanceObjectBuilder<ASubstanceObject.SubstanceTool> {
         public SubstanceToolBuilder(String name) {
             super(name);
         }
 
         @Override
-        public SubstanceTool build() {
-            SubstanceTool tool = new SubstanceTool(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public ASubstanceObject.SubstanceTool build() {
+            ASubstanceObject.SubstanceTool tool = new ASubstanceObject.SubstanceTool(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_TOOLS_REGISTRY.put(name, tool);
             return tool;
         }
     }
 
-    public static final class SubstanceBlockBuilder extends ASubstanceObjectBuilder<SubstanceBlock> {
+    public static final class SubstanceBlockBuilder extends ASubstanceObjectBuilder<ASubstanceObject.SubstanceBlock> {
         public SubstanceBlockBuilder(String name, ASubstanceObject.ICreateObject provider) {
             super(name);
             this.provider = provider;
         }
 
         @Override
-        public SubstanceBlock build() {
-            SubstanceBlock block = new SubstanceBlock(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public ASubstanceObject.SubstanceBlock build() {
+            ASubstanceObject.SubstanceBlock block = new ASubstanceObject.SubstanceBlock(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_BLOCKS_REGISTRY.put(name, block);
             return block;
         }
     }
 
-    public static final class SubstanceFluidBuilder extends ASubstanceObjectBuilder<SubstanceFluid> {
+    public static final class SubstanceFluidBuilder extends ASubstanceObjectBuilder<ASubstanceObject.SubstanceFluid> {
         public SubstanceFluidBuilder(String name, ASubstanceObject.ICreateObject provider) {
             super(name);
             this.provider = provider;
         }
 
         @Override
-        public SubstanceFluid build() {
-            SubstanceFluid fluid = new SubstanceFluid(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public ASubstanceObject.SubstanceFluid build() {
+            ASubstanceObject.SubstanceFluid fluid = new ASubstanceObject.SubstanceFluid(name, self, prefix, suffix, provider, faces, model, tooltips);
             SUBSTANCE_FLUIDS_REGISTRY.put(name, fluid);
             return fluid;
         }

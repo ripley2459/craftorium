@@ -1,32 +1,31 @@
 package fr.cyrilneveu.craftorium.api.substance.object;
 
-import fr.cyrilneveu.craftorium.api.render.FaceProvider;
+import fr.cyrilneveu.craftorium.api.fluid.CustomFluid;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import net.minecraft.util.ResourceLocation;
+import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-import javax.annotation.Nullable;
+public class SubstanceFluid extends CustomFluid {
+    protected final ASubstanceObject reference;
+    protected final Substance substance;
 
-import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-
-public final class SubstanceFluid extends ASubstanceObject {
-    public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
-        super(name, self, prefix, suffix, provider, faces, model, tooltips);
-    }
-
-    public static FaceProvider[] defaultFaces(ASubstanceObject reference, Substance substance) {
-        FaceProvider[] faces = new FaceProvider[2];
-        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "still")), substance.getAestheticism().getFluidColor());
-        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "flow")), substance.getAestheticism().getFluidColor());
-        return faces;
-    }
-
-    @Override
-    public String getOre(Substance substance) {
-        return getName(substance);
+    public SubstanceFluid(ASubstanceObject reference, Substance substance) {
+        super(reference.getName(substance), reference.getFaces(substance)[0], reference.getFaces(substance)[1], substance.getAestheticism().getFluidColor());
+        this.reference = reference;
+        this.substance = substance;
     }
 
     @Override
-    public String getName(@Nullable Substance substance) {
-        return substance == null ? name : substance.getName();
+    public String getLocalizedName(FluidStack stack) {
+        return Utils.localise(getUnlocalizedName(), substance.getDisplayName());
+    }
+
+    public static class SubstanceFluidBlock extends CustomFluidBlock {
+        public SubstanceFluidBlock(Fluid fluid, Material material) {
+            super(fluid, material);
+        }
     }
 }

@@ -15,6 +15,10 @@ public abstract class AProcess {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     protected abstract void addRecipes();
 
     public final void registerRecipes(Substance substance) {

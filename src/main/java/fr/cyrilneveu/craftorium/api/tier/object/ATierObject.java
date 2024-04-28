@@ -4,6 +4,8 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +56,14 @@ public abstract class ATierObject implements Comparable<ATierObject> {
         return OreStack.getIngredient(getOre(tier));
     }
 
+    public ItemStack asItemStack(Tier tier) {
+        return asItemStack(tier, 1);
+    }
+
+    public ItemStack asItemStack(Tier tier, int amount) {
+        return ACommonProxy.getItemStack(getName(tier), amount);
+    }
+
     @Override
     public int compareTo(@NotNull ATierObject other) {
         return name.compareTo(other.getName(null));
@@ -77,5 +87,11 @@ public abstract class ATierObject implements Comparable<ATierObject> {
     @FunctionalInterface
     public interface IGetTooltips {
         List<String> getTooltips(ATierObject reference, Tier tier);
+    }
+
+    public static final class TierItem extends ATierObject {
+        public TierItem(String name, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetTooltips tooltips) {
+            super(name, provider, faces, model, tooltips);
+        }
     }
 }

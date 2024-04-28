@@ -1,54 +1,63 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.render.FaceProvider;
+import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.BASE_TEMPERATURE;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
 public final class SubstancesObjects {
-    public static SubstanceItem CASING;
-    public static SubstanceItem DUST;
-    public static SubstanceItem FOIL;
-    public static SubstanceItem GEAR;
-    public static SubstanceItem GEM;
-    public static SubstanceItem INGOT;
-    public static SubstanceItem NUGGET;
-    public static SubstanceItem PEARL;
-    public static SubstanceItem PLATE;
-    public static SubstanceItem RING;
-    public static SubstanceItem ROD;
-    public static SubstanceItem ROTOR;
-    public static SubstanceItem SCREW;
-    public static SubstanceItem SPRING;
-    public static SubstanceItem WIRE;
+    public static ASubstanceObject.SubstanceItem CASING;
+    public static ASubstanceObject.SubstanceItem DUST;
+    public static ASubstanceObject.SubstanceItem FOIL;
+    public static ASubstanceObject.SubstanceItem GEAR;
+    public static ASubstanceObject.SubstanceItem GEM;
+    public static ASubstanceObject.SubstanceItem INGOT;
+    public static ASubstanceObject.SubstanceItem NUGGET;
+    public static ASubstanceObject.SubstanceItem PEARL;
+    public static ASubstanceObject.SubstanceItem PLATE;
+    public static ASubstanceObject.SubstanceItem RING;
+    public static ASubstanceObject.SubstanceItem ROD;
+    public static ASubstanceObject.SubstanceItem ROTOR;
+    public static ASubstanceObject.SubstanceItem SCREW;
+    public static ASubstanceObject.SubstanceItem SPRING;
+    public static ASubstanceObject.SubstanceItem WIRE;
 
-    public static SubstanceTool AXE;
-    public static SubstanceTool CUTTER;
-    public static SubstanceTool FILE;
-    public static SubstanceTool HAMMER;
-    public static SubstanceTool HOE;
-    public static SubstanceTool KNIFE;
-    public static SubstanceTool MORTAR;
-    public static SubstanceTool PICKAXE;
-    public static SubstanceTool SAW;
-    public static SubstanceTool SCREWDRIVER;
-    public static SubstanceTool SHOVEL;
-    public static SubstanceTool SWORD;
-    public static SubstanceTool WRENCH;
+    public static ASubstanceObject.SubstanceTool AXE;
+    public static ASubstanceObject.SubstanceTool CUTTER;
+    public static ASubstanceObject.SubstanceTool FILE;
+    public static ASubstanceObject.SubstanceTool HAMMER;
+    public static ASubstanceObject.SubstanceTool HOE;
+    public static ASubstanceObject.SubstanceTool KNIFE;
+    public static ASubstanceObject.SubstanceTool MORTAR;
+    public static ASubstanceObject.SubstanceTool PICKAXE;
+    public static ASubstanceObject.SubstanceTool SAW;
+    public static ASubstanceObject.SubstanceTool SCREWDRIVER;
+    public static ASubstanceObject.SubstanceTool SHOVEL;
+    public static ASubstanceObject.SubstanceTool SWORD;
+    public static ASubstanceObject.SubstanceTool WRENCH;
 
-    public static SubstanceBlock BLOCK;
-    public static SubstanceBlock FRAME;
-    public static SubstanceBlock HULL;
-    public static SubstanceBlock ORE;
+    public static ASubstanceObject.SubstanceBlock BLOCK;
+    public static ASubstanceObject.SubstanceBlock FRAME;
+    public static ASubstanceObject.SubstanceBlock HULL;
+    public static ASubstanceObject.SubstanceBlock ORE;
 
-    public static SubstanceFluid LIQUID;
+    public static ASubstanceObject.SubstanceFluid LIQUID;
 
     public static void init() {
         if (SUBSTANCE_ITEMS_REGISTRY.isInitialized() || SUBSTANCE_TOOLS_REGISTRY.isInitialized() || SUBSTANCE_BLOCKS_REGISTRY.isInitialized() || SUBSTANCE_FLUIDS_REGISTRY.isInitialized())
@@ -89,18 +98,18 @@ public final class SubstancesObjects {
         SWORD = createTool("sword").provider(SubstancesObjects::createSword).build();
         WRENCH = createTool("wrench").build();
 
-        BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-        FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-        HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstanceBlock::defaultModel).faces(SubstanceBlock::defaultFaces).build();
-        ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstanceBlock::oreModel).faces(SubstanceBlock::oreFaces).build();
+        BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
+        FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
+        HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
+        ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
 
-        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstanceFluid::defaultFaces).build();
+        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).build();
     }
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
-        builder.faces(SubstanceItem::defaultFaces);
+        builder.faces(SubstancesObjects::itemFaces);
 
         return builder;
     }
@@ -108,7 +117,7 @@ public final class SubstancesObjects {
     private static ASubstanceObjectBuilder.SubstanceToolBuilder createTool(String name) {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
-        builder.faces(SubstanceTool::defaultFaces);
+        builder.faces(SubstancesObjects::toolFaces);
 
         return builder;
     }
@@ -126,7 +135,7 @@ public final class SubstancesObjects {
     }
 
     private static void createItem(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem(reference, substance);
+        SubstanceItem item = new SubstanceItem(reference, substance);
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
@@ -135,37 +144,37 @@ public final class SubstancesObjects {
     }
 
     private static void createAxe(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceAxe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceAxe(reference, substance);
+        SubstanceItem.SubstanceAxe item = new SubstanceItem.SubstanceAxe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createHoe(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceHoe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceHoe(reference, substance);
+        SubstanceItem.SubstanceHoe item = new SubstanceItem.SubstanceHoe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createPickaxe(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstancePickaxe item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstancePickaxe(reference, substance);
+        SubstanceItem.SubstancePickaxe item = new SubstanceItem.SubstancePickaxe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createShovel(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceShovel item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceShovel(reference, substance);
+        SubstanceItem.SubstanceShovel item = new SubstanceItem.SubstanceShovel(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createSword(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceSword item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceSword(reference, substance);
+        SubstanceItem.SubstanceSword item = new SubstanceItem.SubstanceSword(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createTool(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool item = new fr.cyrilneveu.craftorium.api.item.SubstanceItem.SubstanceTool(reference, substance);
+        SubstanceItem.SubstanceTool item = new SubstanceItem.SubstanceTool(reference, substance);
 
         createTool(reference, substance, item);
     }
@@ -179,25 +188,25 @@ public final class SubstancesObjects {
     }
 
     private static void createBlock(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+        SubstanceBlock block = new SubstanceBlock(Material.IRON, reference, substance);
 
         createBlock(reference, substance, block);
     }
 
     private static void createFrame(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+        SubstanceBlock.FrameBlock block = new SubstanceBlock.FrameBlock(Material.IRON, reference, substance);
 
         createBlock(reference, substance, block);
     }
 
     private static void createHull(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock(Material.IRON, reference, substance);
+        SubstanceBlock block = new SubstanceBlock(Material.IRON, reference, substance);
 
         createBlock(reference, substance, block);
     }
 
     private static void createOre(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock block = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock(Material.ROCK, reference, substance);
+        SubstanceBlock.OreBlock block = new SubstanceBlock.OreBlock(Material.ROCK, reference, substance);
 
         createBlock(reference, substance, block);
     }
@@ -207,7 +216,7 @@ public final class SubstancesObjects {
         block.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         block.setCreativeTab(SUBSTANCES);
 
-        fr.cyrilneveu.craftorium.api.block.SubstanceBlock.SubstanceItemBlock item = new fr.cyrilneveu.craftorium.api.block.SubstanceBlock.SubstanceItemBlock(block, substance);
+        SubstanceBlock.SubstanceItemBlock item = new SubstanceBlock.SubstanceItemBlock(block, substance);
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
@@ -217,18 +226,22 @@ public final class SubstancesObjects {
     }
 
     private static void createLiquid(ASubstanceObject reference, Substance substance) {
-        fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid fluid = new fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid(reference, substance);
-        /*fluid.setGaseous(substance.getComposition().getState() == Element.ElementState.Gas).setLuminosity(15)
-                .setDensity(substance.getComposition().getState() == Element.ElementState.Gas ? -100 : 3000)
-                .setViscosity(substance.getComposition().getState() == Element.ElementState.Gas ? 200 : 1000)
-                .setTemperature((int) substance.getComposition().getTemperature());*/
+        SubstanceFluid fluid = new SubstanceFluid(reference, substance);
+
+        boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
+
+        fluid.setGaseous(gaseous);
+        fluid.setLuminosity(15);
+        fluid.setTemperature((int) (gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
+        fluid.setDensity(gaseous ? -100 : 3000);
+        fluid.setViscosity(gaseous ? 200 : 1000);
         fluid.setUnlocalizedName(String.join(".", MODID, reference.getName(null), "name"));
 
         FLUIDS_REGISTRY.put(reference.getName(substance), fluid);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid.SubstanceFluidBlock block = new fr.cyrilneveu.craftorium.api.fluid.SubstanceFluid.SubstanceFluidBlock(fluid, Material.LAVA);
+        SubstanceFluid.SubstanceFluidBlock block = new SubstanceFluid.SubstanceFluidBlock(fluid, Material.LAVA);
         block.setTranslationKey(String.join(".", MODID, reference.getName(null), "name"));
         block.setRegistryName(reference.getName(substance));
 
@@ -236,9 +249,75 @@ public final class SubstancesObjects {
     }
 
     public static void close() {
-        SUBSTANCE_ITEMS_REGISTRY.close();
-        SUBSTANCE_TOOLS_REGISTRY.close();
-        SUBSTANCE_BLOCKS_REGISTRY.close();
-        SUBSTANCE_FLUIDS_REGISTRY.close();
+        SUBSTANCE_ITEMS_REGISTRY.order().close();
+        SUBSTANCE_TOOLS_REGISTRY.order().close();
+        SUBSTANCE_BLOCKS_REGISTRY.order().close();
+        SUBSTANCE_FLUIDS_REGISTRY.order().close();
+    }
+
+    private static FaceProvider[] blockFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
+        if (substance.getAestheticism().isShiny())
+            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), WHITE_COLOR);
+        return faces;
+    }
+
+    private static FaceProvider[] oreFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[1];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getOreColor());
+        return faces;
+    }
+
+    private static ModelTemplate blockModel(ASubstanceObject reference, Substance substance) {
+        return substance.getAestheticism().isShiny() ? ModelTemplate.BLOCK_TINTED_OVERLAY : ModelTemplate.BLOCK_TINTED;
+    }
+
+    private static ModelTemplate oreModel(ASubstanceObject reference, Substance substance) {
+        return ModelTemplate.BLOCK_OVERLAY_TINTED;
+    }
+
+    private static FaceProvider[] fluidFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[2];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "still")), substance.getAestheticism().getFluidColor());
+        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "flow")), substance.getAestheticism().getFluidColor());
+        return faces;
+    }
+
+    private static FaceProvider[] toolFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[2];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
+        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_base"))), WHITE_COLOR);
+        return faces;
+    }
+
+    private static FaceProvider[] itemFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
+        if (substance.getAestheticism().isShiny())
+            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), WHITE_COLOR);
+        return faces;
+    }
+
+    private static List<String> baseTooltips(ASubstanceObject reference, Substance substance) {
+        List<String> lines = new ArrayList<>();
+        String formula = substance.getComposition().getFormula();
+        if (!formula.isEmpty())
+            lines.add(Utils.localise("tooltip.craftorium.formula", formula));
+        if (Utils.isAdvancedTooltipsOn())
+            lines.add(Utils.localise("tooltip.craftorium.temperature", BASE_TEMPERATURE));
+        lines.add(Utils.localise("tooltip.craftorium.state.solid"));
+        return lines;
+    }
+
+    private static List<String> fluidTooltips(ASubstanceObject reference, Substance substance) {
+        List<String> lines = new ArrayList<>();
+        String formula = substance.getComposition().getFormula();
+        if (!formula.isEmpty())
+            lines.add(Utils.localise("tooltip.craftorium.formula", formula));
+        boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
+        lines.add(Utils.localise("tooltip.craftorium.temperature", gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
+        lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
+        return lines;
     }
 }

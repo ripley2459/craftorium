@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-import static fr.cyrilneveu.craftorium.api.block.SubstanceBlock.OreBlock.STONE_VARIANT;
+import static fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock.OreBlock.STONE_VARIANT;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.ORE;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 

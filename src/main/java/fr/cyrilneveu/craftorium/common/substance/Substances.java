@@ -134,6 +134,7 @@ public final class Substances {
     public static Substance LITHIUM;
     public static Substance SPDODUMENE;
     public static Substance STONE;
+    public static Substance WOOD;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -144,14 +145,27 @@ public final class Substances {
         initElements();
         initOres();
 
+        WOOD = createSubstance("wood")
+                .items(CASING, DUST, FOIL, GEAR, PLATE, ROD, ROTOR, SCREW)
+                .tools(HAMMER, MORTAR, WRENCH, PICKAXE, HOE, PICKAXE, SWORD, SHOVEL, AXE)
+                .blocks(BLOCK, HULL, FRAME)
+                .tools(2.0f, 0.0f, 59, 0, 15)
+                .toughness(2.0f,5.0f, "axe", 0)
+                .overrides(ROD, "minecraft:stick", BLOCK, "ore:plankWood", HOE, "minecraft:wooden_hoe", PICKAXE, "minecraft:wooden_pickaxe", SHOVEL, "minecraft:wooden_shovel", SWORD, "minecraft:wooden_sword", AXE, "minecraft:wooden_axe")
+                .style("wood")
+                .color(0xFF663f16)
+                .sound("wood")
+                .build();
         STONE = createSubstance("stone")
                 .items(DUST, PLATE, ROD)
-                .tools(HAMMER)
+                .tools(HAMMER, PICKAXE, HOE, PICKAXE, SWORD, SHOVEL, AXE)
                 .blocks(BLOCK, HULL)
                 .tools(4.0f, 1.0f, 131, 1, 5)
-                .overrides(BLOCK, "minecraft:cobblestone", HOE, "minecraft:stone_hoe", PICKAXE, "minecraft:stone_pickaxe", HOE, "minecraft:stone_hoe", SHOVEL, "minecraft:stone_shovel", SWORD, "minecraft:stone_sword", AXE, "minecraft:stone_axe")
+                .toughness(2.0f,10.0f, "pickaxe", 1)
+                .overrides(BLOCK, "minecraft:cobblestone", HOE, "minecraft:stone_hoe", PICKAXE, "minecraft:stone_pickaxe", SHOVEL, "minecraft:stone_shovel", SWORD, "minecraft:stone_sword", AXE, "minecraft:stone_axe")
                 .style("mineral")
                 .color(0xFFb5b5b5)
+                .sound("stone")
                 .build();
         BRONZE = createSubstance("bronze")
                 .packageMetalExtended()
@@ -292,7 +306,7 @@ public final class Substances {
                 .packageGem()
                 .packageOre()
                 .tools(8.0f, 3.0f, 1561, 3, 10)
-                .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", HOE, "minecraft:diamond_hoe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
+                .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
                 .color(0xFF91f5e6)
                 .style("gem")
                 .shiny()
@@ -712,7 +726,7 @@ public final class Substances {
                 .packageTransitionMetal()
                 .packageOre()
                 .tools(12.0f, 0.0f, 32, 0, 22)
-                .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget", HOE, "minecraft:golden_hoe", PICKAXE, "minecraft:golden_pickaxe", HOE, "minecraft:golden_hoe", SHOVEL, "minecraft:golden_shovel", SWORD, "minecraft:golden_sword", AXE, "minecraft:golden_axe")
+                .overrides(BLOCK, "minecraft:gold_block", INGOT, "minecraft:gold_ingot", NUGGET, "minecraft:gold_nugget", HOE, "minecraft:golden_hoe", PICKAXE, "minecraft:golden_pickaxe", SHOVEL, "minecraft:golden_shovel", SWORD, "minecraft:golden_sword", AXE, "minecraft:golden_axe")
                 .color(0xFFffd123)
                 .build();
         OSMIUM = createSubstance("osmium")
@@ -737,7 +751,7 @@ public final class Substances {
                 .build();
         ARSENIC = createSubstance("arsenic")
                 .element(33, "As", "arsenic", Element.EGroup.METALLOID, 74.9215956)
-                .temperature(Float.NaN, Float.NaN)
+                .temperature(1090f, 887f)
                 .color(0xFFbd80e3)
                 .packageMetalloid()
                 .build();
@@ -796,7 +810,7 @@ public final class Substances {
                 .packageTransitionMetal()
                 .packageOre()
                 .tools(6.0f, 2.0f, 250, 2, 14)
-                .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget", HOE, "minecraft:iron_hoe", PICKAXE, "minecraft:iron_pickaxe", HOE, "minecraft:iron_hoe", SHOVEL, "minecraft:iron_shovel", SWORD, "minecraft:iron_sword", AXE, "minecraft:iron_axe")
+                .overrides(BLOCK, "minecraft:iron_block", INGOT, "minecraft:iron_ingot", NUGGET, "minecraft:iron_nugget", HOE, "minecraft:iron_hoe", PICKAXE, "minecraft:iron_pickaxe", SHOVEL, "minecraft:iron_shovel", SWORD, "minecraft:iron_sword", AXE, "minecraft:iron_axe")
                 .color(0xFFd4d4d4, 0xFFd4d4d4, 0xFFa31000)
                 .shiny()
                 .build();
@@ -864,7 +878,7 @@ public final class Substances {
                 .build();
         CARBON = createSubstance("carbon")
                 .element(6, "C", "carbon", Element.EGroup.NON_METAL, 12.011)
-                .temperature(Float.NaN, Float.NaN)
+                .temperature(3915f, 3915f)
                 .color(0xFF909090)
                 .packageNonMetal()
                 .build();
@@ -945,6 +959,6 @@ public final class Substances {
     }
 
     public static void close() {
-        SUBSTANCES_REGISTRY.close();
+        SUBSTANCES_REGISTRY.order().close();
     }
 }
