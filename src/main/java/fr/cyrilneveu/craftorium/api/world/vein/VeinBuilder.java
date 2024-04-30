@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.api.world.vein;
 import com.google.common.base.Preconditions;
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.WeightedList;
 import net.minecraft.util.math.MathHelper;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -11,7 +12,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.ORE;
 
 @ZenClass("mods." + MODID + ".vein.Builder")
 @ZenRegister
@@ -91,7 +91,7 @@ public final class VeinBuilder {
     public Vein build() {
         for (Substance substance : substances) {
             Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains(substance.getName()));
-            Preconditions.checkArgument(substance.getBlocks().contains(ORE));
+            substance.getProperties().get(SubstanceProperties.KeyProperties.VEIN_MEMBER).verify(substance);
         }
 
         Vein vein = new Vein(name, minY, maxY, sizeH, sizeV, chance, dimension, substances);

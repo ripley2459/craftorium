@@ -156,6 +156,14 @@ Indicates blocks hardness and resistances values as well which tool class is rea
 
 Default: `5.0f, 10.0f, "pickaxe", 2`.
 
+#### Vein Member
+
+```ZenScript
+newSubstance.veinMember();
+```
+
+Ensures that the substance can be integrated in a vein and used during the world generation process.
+
 #### Temperature
 
 ```ZenScript

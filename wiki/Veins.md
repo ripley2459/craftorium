@@ -91,6 +91,8 @@ newVein.addSubstances([Substance/string substance₁, int chance₁, Substance/s
 
 The `addSubstances` method will determine which substances are present in the vein and in what quantity.
 
+Adding a substance without calling `veinMember()` on the said substance will crash your game.
+
 ### Example of creating a vein
 
 ```ZenScript

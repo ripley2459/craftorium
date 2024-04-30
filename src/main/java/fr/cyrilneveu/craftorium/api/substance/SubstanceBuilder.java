@@ -12,9 +12,9 @@ import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
-import fr.cyrilneveu.craftorium.api.substance.property.ASubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
-import fr.cyrilneveu.craftorium.api.substance.property.ESubstanceProperties;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
+import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
 import net.minecraft.block.SoundType;
 import net.minecraftforge.common.util.EnumHelper;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -42,7 +42,7 @@ public final class SubstanceBuilder {
     private Toughness toughness = new Toughness(5.0f, 10.0f, "pickaxe", 2);
     private Temperature temperature = Temperature.EMPTY;
     private AProcess process = DEFAULT_PROCESS;
-    private Map<ESubstanceProperties, ASubstanceProperty> properties = new HashMap<>();
+    private Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties = new HashMap<>();
     private Set<ASubstanceObject.SubstanceItem> items = new TreeSet<>();
     private Set<ASubstanceObject.SubstanceTool> tools = new TreeSet<>();
     private Set<ASubstanceObject.SubstanceBlock> blocks = new TreeSet<>();
@@ -161,7 +161,8 @@ public final class SubstanceBuilder {
     }
 
     @ZenMethod
-    public SubstanceBuilder packageOre() {
+    public SubstanceBuilder veinMember() {
+        properties.put(SubstanceProperties.KeyProperties.VEIN_MEMBER, SubstanceProperties.VEIN_MEMBER_PROPERTY);
         items(DUST);
         blocks(ORE);
         return this;
