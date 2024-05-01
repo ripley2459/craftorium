@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.api.world.vein;
 
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.utils.WeightedList;
 import stanhebben.zenscript.annotations.ZenClass;
 
@@ -32,6 +33,15 @@ public final class Vein {
 
     public String getName() {
         return name;
+    }
+
+
+    public String getDisplayName() {
+        return Utils.localise(getTranslationKey());
+    }
+
+    public String getTranslationKey() {
+        return String.join(".", "vein", MODID, name, "name");
     }
 
     public int getMinY() {

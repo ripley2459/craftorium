@@ -282,6 +282,63 @@ substance.craftorium.wood.name=Wood
 
 
 # ##################################################
+# Veins
+
+vein.craftorium.argentite.name=Argentite
+vein.craftorium.azurite.name=Azurite
+vein.craftorium.barite.name=Barite
+vein.craftorium.bauxite.name=Bauxite
+vein.craftorium.bauxite_end.name=Bauxite (End)
+vein.craftorium.beryl.name=Beryl
+vein.craftorium.bismuthinite.name=Bismuthinite
+vein.craftorium.carnotite.name=Carnotite
+vein.craftorium.carrollite.name=Carrollite
+vein.craftorium.carrollite_nether.name=Carrollite (Nether)
+vein.craftorium.cassiterite.name=Cassiterite
+vein.craftorium.cerussite.name=Cerussite
+vein.craftorium.chalcopyrite.name=Chalcopyrite
+vein.craftorium.chromite.name=Chromite
+vein.craftorium.cinnabar.name=Cinnabar
+vein.craftorium.coal.name=Coal
+vein.craftorium.copper.name=Copper
+vein.craftorium.copper_tin.name=Copper & Tin
+vein.craftorium.diamond.name=Diamond
+vein.craftorium.emerald.name=Emerald
+vein.craftorium.emerald_nether.name=Emerald (Nether)
+vein.craftorium.galena.name=Galena
+vein.craftorium.garnierite.name=Garnierite
+vein.craftorium.graphite.name=Graphite
+vein.craftorium.hematite.name=Hematite
+vein.craftorium.ilmenite.name=Ilmenite
+vein.craftorium.lazurite.name=Lazurite
+vein.craftorium.magnetite.name=Magnetite
+vein.craftorium.magnetite_end.name=Magnetite (End)
+vein.craftorium.malachite.name=Malachite
+vein.craftorium.molybdenite.name=Molybdenite
+vein.craftorium.native_copper.name=Copper
+vein.craftorium.native_gold.name=Gold
+vein.craftorium.native_iridium.name=Iridium
+vein.craftorium.native_osmium.name=Osmium
+vein.craftorium.native_platinum.name=Platinum
+vein.craftorium.orthoclase.name=Orthoclase
+vein.craftorium.pentlandite.name=Pentlandite
+vein.craftorium.pyrite.name=Pyrite
+vein.craftorium.pyrochlore.name=Pyrochlore
+vein.craftorium.pyrolusite.name=Pyrolusite
+vein.craftorium.quartzite.name=Quartzite
+vein.craftorium.quartzite_nether.name=Quartzite (Nether)
+vein.craftorium.redstone.name=Redstone
+vein.craftorium.rutile.name=Rutile
+vein.craftorium.scheelite.name=Scheelite
+vein.craftorium.smaltite.name=Smaltite
+vein.craftorium.smithsonite.name=Smithsonite
+vein.craftorium.sodalite.name=Sodalite
+vein.craftorium.spdodumene.name=Spdodumene
+vein.craftorium.stibnite.name=Stibnite
+vein.craftorium.stibnite_nether.name=Stibnite (Nether)
+
+
+# ##################################################
 # Others
 
 # Tabs
@@ -305,3 +362,9 @@ tooltip.craftorium.state.solid=§aState: Solid§r
 tooltip.craftorium.state.liquid=§aState: Liquid§r
 tooltip.craftorium.state.gaseous=§aState: Gaseous§r
 tooltip.craftorium.state.unknown=§4State: Unknown§r
+
+# JEI
+jei.craftorium.vein_generation.name=Ore Generation
+jei.craftorium.vein.chance=Weight: %s
+jei.craftorium.vein.depth=Y: %s-%s
+jei.craftorium.vein.dimension=Dimension: %s

@@ -121,7 +121,7 @@ public final class Veins {
         VEIN_ORTHOCLASE = createVein("orthoclase", 5, 60, 5, 5, 25, 0, ORTHOCLASE, 6, IRON, 1, ALUMINUM, 1, BARIUM, 1).build();
         VEIN_PYRITE = createVein("pyrite", 20, 30, 5, 5, 10, 0, PYRITE, 1).build();
         VEIN_REDSTONE = createVein("redstone", 5, 40, 5, 5, 60, 0, REDSTONE, 3, CINNABAR, 1).build();
-        VEIN_QUARTZITE = createVein("quartzite", 80, 120, 5, 5, 30, -1, QUARTZ, 1).build();
+        VEIN_QUARTZITE = createVein("quartzite", 80, 120, 5, 5, 30, 0, QUARTZ, 1).build();
         VEIN_EMERALD = createVein("emerald", 5, 25, 1, 1, 10, 0, EMERALD, 1, BERYLLIUM, 1, THORIUM, 1).build();
 
         VEIN_EMERALD_NETHER = createVein("emerald_nether", 5, 30, 3, 3, 10, -1, EMERALD, 1, BERYLLIUM, 1, THORIUM, 1).build();
