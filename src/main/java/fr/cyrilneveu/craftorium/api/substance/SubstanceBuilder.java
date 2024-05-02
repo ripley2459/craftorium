@@ -4,8 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
-import crafttweaker.CraftTweakerAPI;
-import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
@@ -13,24 +11,19 @@ import fr.cyrilneveu.craftorium.api.property.Toughness;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
-import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import net.minecraft.block.SoundType;
 import net.minecraftforge.common.util.EnumHelper;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.Registries.*;
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
-@ZenClass("mods." + MODID + ".substance.Builder")
-@ZenRegister
 public final class SubstanceBuilder {
     private String name;
     private Set<SubstanceStack> composition = new LinkedHashSet<>();
@@ -60,12 +53,6 @@ public final class SubstanceBuilder {
         this.name = name;
     }
 
-    @ZenMethod
-    public static SubstanceBuilder createSubstance(String name) {
-        return new SubstanceBuilder(name);
-    }
-
-    @ZenMethod
     public SubstanceBuilder composition(Object... composition) {
         Preconditions.checkArgument(composition.length % 2 == 0);
 
@@ -89,7 +76,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder possible(Object... chanced) {
         Preconditions.checkArgument(chanced.length % 3 == 0);
 
@@ -113,7 +99,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder element(int atomicNumber, String symbol, String name, Element.EGroup group, double atomicMass) {
         this.element = new Element(atomicNumber, symbol, name, group, atomicMass);
         this.composition = null;
@@ -121,25 +106,26 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
+    public SubstanceBuilder property(SubstanceProperties.KeyProperties key, ISubstanceProperty value) {
+        properties.put(key, value);
+        return this;
+    }
+
     public SubstanceBuilder tools(float speed, float damage, int durability, int harvestLevel, int enchantability) {
         this.efficiency = new Efficiency(speed, damage, durability, harvestLevel, enchantability);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder toughness(float hardness, float resistance, String toolClass, int harvestLevel) {
         this.toughness = new Toughness(hardness, resistance, toolClass, harvestLevel);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder temperature(float meltingPoint, float boilingPoint) {
         this.temperature = new Temperature(meltingPoint, boilingPoint);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder temperatureAverage() {
         if (composition.isEmpty())
             return this;
@@ -160,29 +146,24 @@ public final class SubstanceBuilder {
         return this.temperature(melt / total, boil / total);
     }
 
-    @ZenMethod
     public SubstanceBuilder veinMember() {
-        properties.put(SubstanceProperties.KeyProperties.VEIN_MEMBER, SubstanceProperties.VEIN_MEMBER_PROPERTY);
         items(DUST);
         blocks(ORE);
-        return this;
+        return property(SubstanceProperties.KeyProperties.VEIN_MEMBER, SubstanceProperties.VEIN_MEMBER_PROPERTY);
     }
 
-    @ZenMethod
     public SubstanceBuilder packageHalogen() {
         items(DUST);
         fluids(LIQUID);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageNobleGas() {
         items(DUST);
         fluids(LIQUID);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageAlkaliMetal() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
@@ -190,7 +171,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageAlkalineEarthMetal() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
@@ -198,7 +178,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageMetalloid() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
@@ -206,14 +185,12 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageNonMetal() {
         items(DUST);
         fluids(LIQUID);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packagePostTransitionMetal() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         blocks(BLOCK, FRAME, HULL);
@@ -221,7 +198,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageTransitionMetal() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -230,7 +206,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageLanthanide() {
         items(DUST, INGOT, NUGGET, PLATE, ROD);
         blocks(BLOCK);
@@ -238,7 +213,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageActinide() {
         items(DUST, INGOT, NUGGET, PLATE, ROD);
         blocks(BLOCK);
@@ -246,7 +220,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageMetalExtended() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
@@ -255,7 +228,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageGem() {
         items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, ROD);
         tools(AXE, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SHOVEL, SWORD, WRENCH);
@@ -264,7 +236,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder packageMineral() {
         items(DUST, PLATE, ROD);
         blocks(BLOCK);
@@ -272,71 +243,34 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
-    public SubstanceBuilder items(String... items) {
-        for (String item : items) {
-            if (SUBSTANCE_ITEMS_REGISTRY.contains(item))
-                this.items(SUBSTANCE_ITEMS_REGISTRY.get(item));
-            else CraftTweakerAPI.logError("This type of item does not exists: " + item);
-        }
-
-        return this;
-    }
-
     public SubstanceBuilder items(ASubstanceObject.SubstanceItem... items) {
+        if (items.length == 0)
+            this.items = new TreeSet<>();
         this.items.addAll(Arrays.asList(items));
         return this;
     }
 
-    @ZenMethod
-    public SubstanceBuilder tools(String... tools) {
-        for (String tool : tools) {
-            if (SUBSTANCE_TOOLS_REGISTRY.contains(tool))
-                this.tools(SUBSTANCE_TOOLS_REGISTRY.get(tool));
-            else CraftTweakerAPI.logError("This type of tool does not exists: " + tool);
-        }
-
-        return this;
-    }
-
     public SubstanceBuilder tools(ASubstanceObject.SubstanceTool... tools) {
+        if (tools.length == 0)
+            this.tools = new TreeSet<>();
         this.tools.addAll(Arrays.asList(tools));
         return this;
     }
 
-    @ZenMethod
-    public SubstanceBuilder blocks(String... blocks) {
-        for (String block : blocks) {
-            if (SUBSTANCE_BLOCKS_REGISTRY.contains(block))
-                this.blocks(SUBSTANCE_BLOCKS_REGISTRY.get(block));
-            else CraftTweakerAPI.logError("This type of block does not exists: " + block);
-        }
-
-        return this;
-    }
-
     public SubstanceBuilder blocks(ASubstanceObject.SubstanceBlock... blocks) {
+        if (blocks.length == 0)
+            this.blocks = new TreeSet<>();
         this.blocks.addAll(Arrays.asList(blocks));
         return this;
     }
 
-    @ZenMethod
-    public SubstanceBuilder fluids(String... fluids) {
-        for (String fluid : fluids) {
-            if (SUBSTANCE_FLUIDS_REGISTRY.contains(fluid))
-                this.fluids(SUBSTANCE_FLUIDS_REGISTRY.get(fluid));
-            else CraftTweakerAPI.logError("This type of fluid does not exists: " + fluid);
-        }
-
-        return this;
-    }
-
     public SubstanceBuilder fluids(ASubstanceObject.SubstanceFluid... fluids) {
+        if (fluids.length == 0)
+            this.fluids = new TreeSet<>();
         this.fluids.addAll(Arrays.asList(fluids));
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder colorAverage() {
         if (composition.isEmpty())
             return this.color(ERROR_COLOR);
@@ -351,13 +285,11 @@ public final class SubstanceBuilder {
         return this.color(color / total);
     }
 
-    @ZenMethod
     public SubstanceBuilder color(int color) {
         this.color(color, color, color);
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder color(int baseColor, int oreColor, int fluidColor) {
         this.baseColor = baseColor;
         this.oreColor = oreColor;
@@ -365,38 +297,26 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder shiny() {
         this.shiny = !this.shiny;
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder glow() {
         this.glow = !this.glow;
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder style(String style) {
         this.style = style;
         return this;
     }
 
-    @ZenMethod
-    public SubstanceBuilder sound(String soundName) {
-        switch (soundName) {
-            case "metal" -> this.soundType = SoundType.METAL;
-            case "wood" -> this.soundType = SoundType.WOOD;
-            case "stone" -> this.soundType = SoundType.STONE;
-            case "sand" -> this.soundType = SoundType.SAND;
-            default -> CraftTweakerAPI.logError("This type of sound does not exists: " + soundName);
-        }
-
+    public SubstanceBuilder sound(SoundType soundType) {
+        this.soundType = soundType;
         return this;
     }
 
-    @ZenMethod
     public SubstanceBuilder overrides(Object... overrides) {
         Preconditions.checkArgument(overrides.length % 2 == 0);
 
@@ -409,7 +329,6 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    @ZenMethod
     public Substance build() {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
         Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());

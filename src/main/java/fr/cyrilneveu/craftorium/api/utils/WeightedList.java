@@ -45,6 +45,14 @@ public final class WeightedList<K> implements Iterable<K> {
         return null;
     }
 
+    public Map<K, Integer> getValues() {
+        return values;
+    }
+
+    public int size() {
+        return values.size();
+    }
+
     public boolean isEmpty() {
         return values.isEmpty();
     }

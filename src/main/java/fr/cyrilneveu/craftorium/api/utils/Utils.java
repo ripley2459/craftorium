@@ -16,6 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
@@ -118,6 +120,17 @@ public final class Utils {
 
     public static TextureAtlasSprite getTexture(ResourceLocation location) {
         return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
+    }
+
+    @Nullable
+    public static Field getField(Class<?> clazz, String name) {
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getName().equals(name))
+                return field;
+        }
+
+        return null;
     }
 
     private static class CustomStateMapper extends StateMapperBase {

@@ -174,8 +174,6 @@ public abstract class ACommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         SubstancesObjects.init();
         Substances.init();
-        Veins.init();
-        Tiers.init();
 
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
