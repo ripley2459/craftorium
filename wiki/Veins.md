@@ -53,6 +53,7 @@ newVein.y(int minY, int maxY)
 
 - `minY` ∈ [1;255]
 - `maxY` ∈ [1;255]
+- `minY` < `maxY`
 
 #### Size
 
@@ -62,8 +63,8 @@ newVein.size(int sizeH, int sizeV)
 
 Higher values will create a larger vein with more ores.
 
-- `sizeH` ∈ [1;32]
-- `sizeV` ∈ [1;32]
+- `sizeH` ∈ [1;8]
+- `sizeV` ∈ [1;8]
 
 #### Chance
 
@@ -83,17 +84,17 @@ newVein.dimension(int dimension)
 
 Dimension where this vein will be generated.
 
-#### AddSubstances
+#### Composition
 
 ```ZenScript
-newVein.addSubstances([Substance/string substance₁, int chance₁, Substance/string substance₂, int chance₂, [...], Substance/string substanceₙ, int chanceₙ])
+newVein.composition([Substance/string substance₁, int chance₁, Substance/string substance₂, int chance₂, [...], Substance/string substanceₙ, int chanceₙ])
 ```
 
-The `addSubstances` method will determine which substances are present in the vein and in what quantity.
+The `composition` method will determine which substances are present in the vein and in what quantity.
 
 Adding a substance without calling `veinMember()` on the said substance will crash your game.
 
-### Example of creating a vein
+### Example: Create
 
 ```ZenScript
 #loader craftorium
@@ -102,11 +103,11 @@ import mods.craftorium.vein.Veins;
 import mods.craftorium.substance.Substances;
 import mods.craftorium.vein.Builder;
 
-var newVein = Builder.createVein("test",
-                      1, 50,
-                      5, 5,
-                      1000,
-                      0,
-                      [Substances.get("iron"), 3, "copper", 3, "lead", 3])
-                     .build();
+var newVein = Veins.create("test", // ID
+                    1, 50, // Y
+                    5, 5, // Sizes
+                    1000, // Chance to spawn
+                    0, // The dimension id
+                    [Substances.get("iron"), 3, "copper", 3, "lead", 3]) // The composition
+                   .build(); // Finalizes the process
 ```

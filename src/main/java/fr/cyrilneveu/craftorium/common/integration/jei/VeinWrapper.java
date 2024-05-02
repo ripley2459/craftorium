@@ -30,7 +30,7 @@ public final class VeinWrapper implements IRecipeWrapper {
     @Override
     public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> allItemsOut = new ArrayList<>();
-        for (Substance substance : vein.getSubstances())
+        for (Substance substance : vein.getComposition())
             allItemsOut.add(new OreStack(ORE.getOre(substance)).getStacks());
 
         if (!allItemsOut.isEmpty())

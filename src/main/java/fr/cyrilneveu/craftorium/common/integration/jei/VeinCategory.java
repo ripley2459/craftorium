@@ -32,13 +32,13 @@ public final class VeinCategory extends ACategory<VeinWrapper> {
         Vein vein = recipeWrapper.getVein();
 
         int slot = 0;
-        if (!vein.getSubstances().isEmpty()) {
+        if (!vein.getComposition().isEmpty()) {
             for (int i = 0; i < ingredients.getOutputs(VanillaTypes.ITEM).size(); i++)
                 items.init(slot++, false, i * 16, 4 * 9);
         }
 
         slot = 0;
-        if (!vein.getSubstances().isEmpty()) {
+        if (!vein.getComposition().isEmpty()) {
             for (int i = 0; i < ingredients.getOutputs(VanillaTypes.ITEM).size(); i++)
                 items.set(slot++, ingredients.getOutputs(VanillaTypes.ITEM).get(i));
         }
