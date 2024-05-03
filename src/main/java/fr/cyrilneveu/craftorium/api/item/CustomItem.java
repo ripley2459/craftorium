@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.api.item;
 
+import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
@@ -21,36 +22,39 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ITEM_MODEL_BUILDER;
 
 public class CustomItem extends Item implements ICustomModel, IItemColor {
-    protected final FaceProvider[] faceProviders;
-    @Nullable
-    protected final Supplier<List<String>> toolTips;
+    protected final Aestheticism.ObjectAestheticism aestheticism;
 
-    public CustomItem(FaceProvider[] faceProviders, @Nullable Supplier<List<String>> toolTips) {
-        this.faceProviders = faceProviders;
-        this.toolTips = toolTips;
+    public CustomItem(Aestheticism.ObjectAestheticism aestheticism) {
+        this.aestheticism = aestheticism;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (toolTips != null)
-            tooltip.addAll(toolTips.get());
+        if (aestheticism.getToolTips() != null)
+            tooltip.addAll(aestheticism.getToolTips().get());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return aestheticism.isGlint();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(@NotNull ItemStack itemStack, int layer) {
-        return faceProviders[layer].getColor();
+        return aestheticism.getFaceProviders()[layer].getColor();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void addTextures(Set<ResourceLocation> textures) {
-        for (FaceProvider faceProvider : faceProviders)
+        for (FaceProvider faceProvider : aestheticism.getFaceProviders())
             textures.add(faceProvider.getTexture());
     }
 
@@ -67,7 +71,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     public void onModelBake(ModelBakeEvent event) {
         ITEM_MODEL_BUILDER.newOperation(ModelTemplates.ITEM);
 
-        for (FaceProvider face : faceProviders)
+        for (FaceProvider face : aestheticism.getFaceProviders())
             ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
         event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());

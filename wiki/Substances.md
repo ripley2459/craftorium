@@ -345,13 +345,13 @@ Call `shiny` to make the substance with a semi-transparent white layer.
 
 Default: `false`.
 
-#### Glow
+#### Glint
 
 ```ZenScript
-newSubstance.glow();
+newSubstance.glint();
 ```
 
-Call `glow` to make the substance with an enchantment effect.
+Call `glint` to make the substance with an enchantment effect.
 
 Default: `false`.
 

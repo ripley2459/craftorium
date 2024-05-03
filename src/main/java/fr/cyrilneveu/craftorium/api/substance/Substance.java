@@ -1,9 +1,6 @@
 package fr.cyrilneveu.craftorium.api.substance;
 
-import fr.cyrilneveu.craftorium.api.property.Aestheticism;
-import fr.cyrilneveu.craftorium.api.property.Efficiency;
-import fr.cyrilneveu.craftorium.api.property.Temperature;
-import fr.cyrilneveu.craftorium.api.property.Toughness;
+import fr.cyrilneveu.craftorium.api.property.*;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
@@ -26,7 +23,7 @@ public final class Substance implements Comparable<Substance> {
     private final Efficiency efficiency;
     private final Toughness toughness;
     private final Temperature temperature;
-    private final Aestheticism aestheticism;
+    private final Aestheticism.SubstanceAestheticism aestheticism;
     private final AProcess process;
     private final Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties;
     private final Set<ASubstanceObject.SubstanceItem> items;
@@ -35,7 +32,7 @@ public final class Substance implements Comparable<Substance> {
     private final Set<ASubstanceObject.SubstanceFluid> fluids;
     private final Map<ASubstanceObject, String> overrides;
 
-    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism aestheticism, AProcess process, Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties, Set<ASubstanceObject.SubstanceItem> items, Set<ASubstanceObject.SubstanceTool> tools, Set<ASubstanceObject.SubstanceBlock> blocks, Set<ASubstanceObject.SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
+    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism.SubstanceAestheticism aestheticism, AProcess process, Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties, Set<ASubstanceObject.SubstanceItem> items, Set<ASubstanceObject.SubstanceTool> tools, Set<ASubstanceObject.SubstanceBlock> blocks, Set<ASubstanceObject.SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
         this.name = name;
         this.composition = composition;
         this.efficiency = efficiency;
@@ -72,7 +69,7 @@ public final class Substance implements Comparable<Substance> {
         return temperature;
     }
 
-    public Aestheticism getAestheticism() {
+    public Aestheticism.SubstanceAestheticism getAestheticism() {
         return aestheticism;
     }
 

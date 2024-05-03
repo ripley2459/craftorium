@@ -165,6 +165,7 @@ public final class Substances {
         BRONZE = new SubstanceBuilder("bronze")
                 .packageMetalExtended()
                 .composition(COPPER, 3, TIN, 1)
+                .tools(6.0f, 5.0f, 325, 2, 10)
                 .color(0xFFf5a945)
                 .shiny()
                 .build();
@@ -651,6 +652,7 @@ public final class Substances {
                 .temperature(1357.77f, 2835f)
                 .color(0xFFc88033)
                 .packageTransitionMetal()
+                .tools(4.0f, 4.0f, 175, 1, 7)
                 .veinMember()
                 .build();
         THALLIUM = new SubstanceBuilder("thallium")

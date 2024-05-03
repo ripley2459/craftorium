@@ -28,7 +28,7 @@ import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 @ZenRegister
 public final class TierBuilder {
     private String name;
-    private Aestheticism aestheticism = new Aestheticism("default", false, false, WHITE_COLOR, SoundType.METAL);
+    private Aestheticism.SubstanceAestheticism aestheticism = new Aestheticism.SubstanceAestheticism("default", false, false, WHITE_COLOR, SoundType.METAL);
     @Nullable
     private Pack pack;
     private int simultaneousRecipe = 1;
@@ -43,13 +43,13 @@ public final class TierBuilder {
 
     @ZenMethod
     public TierBuilder color(int color) {
-        this.aestheticism = new Aestheticism(this.aestheticism.getStyle(), false, false, color, SoundType.METAL);
+        this.aestheticism = new Aestheticism.SubstanceAestheticism(this.aestheticism.getStyle(), false, false, color, SoundType.METAL);
         return this;
     }
 
     @ZenMethod
     public TierBuilder style(String style) {
-        this.aestheticism = new Aestheticism(style, false, false, this.aestheticism.getBaseColor(), SoundType.METAL);
+        this.aestheticism = new Aestheticism.SubstanceAestheticism(style, false, false, this.aestheticism.getBaseColor(), SoundType.METAL);
         return this;
     }
 

@@ -4,10 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
-import fr.cyrilneveu.craftorium.api.property.Aestheticism;
-import fr.cyrilneveu.craftorium.api.property.Efficiency;
-import fr.cyrilneveu.craftorium.api.property.Temperature;
-import fr.cyrilneveu.craftorium.api.property.Toughness;
+import fr.cyrilneveu.craftorium.api.property.*;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
@@ -43,7 +40,7 @@ public final class SubstanceBuilder {
     private Map<ASubstanceObject, String> overrides = new HashMap<>();
     private String style = "metal";
     private boolean shiny = false;
-    private boolean glow = false;
+    private boolean glint = false;
     private int baseColor = ERROR_COLOR;
     private int oreColor = ERROR_COLOR;
     private int fluidColor = ERROR_COLOR;
@@ -302,8 +299,8 @@ public final class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder glow() {
-        this.glow = !this.glow;
+    public SubstanceBuilder glint() {
+        this.glint = !this.glint;
         return this;
     }
 
@@ -339,7 +336,7 @@ public final class SubstanceBuilder {
         if (temperature == Temperature.EMPTY)
             temperatureAverage();
 
-        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism.SubstanceAestheticism(style, shiny, glint, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
 
         if (efficiency != null) {
             EnumHelper.addToolMaterial(name, efficiency.getHarvestLevel(), efficiency.getDurability(), efficiency.getSpeed(), efficiency.getDamage(), efficiency.getEnchantability());

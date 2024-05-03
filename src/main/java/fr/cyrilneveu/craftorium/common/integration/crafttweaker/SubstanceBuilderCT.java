@@ -241,7 +241,7 @@ public final class SubstanceBuilderCT {
 
     @ZenMethod
     public SubstanceBuilderCT glow() {
-        builder.glow();
+        builder.glint();
         return this;
     }
 

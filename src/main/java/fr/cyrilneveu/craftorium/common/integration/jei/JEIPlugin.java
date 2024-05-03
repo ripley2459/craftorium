@@ -10,7 +10,7 @@ import java.util.List;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.SENSOR;
+import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.SCANNER;
 
 @mezz.jei.api.JEIPlugin
 public final class JEIPlugin implements IModPlugin {
@@ -23,7 +23,7 @@ public final class JEIPlugin implements IModPlugin {
     public void register(IModRegistry registry) {
         List<VeinWrapper> veins = new ArrayList<>();
         String id = String.join(":", MODID, "vein_generation");
-        TIERS_REGISTRY.getAll().values().stream().filter(tier -> tier.getItems().contains(SENSOR)).forEach(tier -> registry.addRecipeCatalyst(SENSOR.asItemStack(tier), id));
+        TIERS_REGISTRY.getAll().values().stream().filter(tier -> tier.getItems().contains(SCANNER)).forEach(tier -> registry.addRecipeCatalyst(SCANNER.asItemStack(tier), id));
         VEINS_REGISTRY.getAll().values().forEach(v -> veins.add(new VeinWrapper(v)));
         registry.addRecipes(veins, id);
     }

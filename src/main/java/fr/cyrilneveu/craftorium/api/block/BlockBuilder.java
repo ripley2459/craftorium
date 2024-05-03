@@ -1,12 +1,15 @@
 package fr.cyrilneveu.craftorium.api.block;
 
+import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.BLOCKS_REGISTRY;
@@ -18,6 +21,9 @@ public class BlockBuilder {
     private ResourceLocation registryName;
     private String translation;
     private List<FaceProvider> faceProviderList;
+    @Nullable
+    private Supplier<List<String>> toolTips;
+    private boolean glint;
     private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.COMMON;
     private Material material = Material.IRON;
 
@@ -57,11 +63,21 @@ public class BlockBuilder {
         return this;
     }
 
+    public BlockBuilder tooltips(@Nullable Supplier<List<String>> toolTips) {
+        this.toolTips = toolTips;
+        return this;
+    }
+
+    public BlockBuilder glint() {
+        this.glint = !this.glint;
+        return this;
+    }
+
     public CustomBlock build() {
         if (faceProviderList.isEmpty())
             addTexture(name);
 
-        CustomBlock block = new CustomBlock(material, faceProviderList.toArray(new FaceProvider[0]));
+        CustomBlock block = new CustomBlock(material, new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint));
         block.setRegistryName(registryName);
         block.setTranslationKey(translation);
         block.setCreativeTab(creativeTab);

@@ -40,10 +40,6 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         this.tooltips = tooltips;
     }
 
-    public static List<String> defaultTooltips(ASubstanceObject reference, Substance substance) {
-        return Collections.emptyList();
-    }
-
     public String getName(@Nullable Substance substance) {
         return self ? substance != null ? substance.getName() : name : substance == null ? name : String.join("_", substance.getName(), name);
     }

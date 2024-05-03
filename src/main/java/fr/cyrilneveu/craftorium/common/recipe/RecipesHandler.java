@@ -318,7 +318,7 @@ public final class RecipesHandler {
             return;
 
         RecipeManager.addShapedRecipe(ROBOT_ARM.getName(tier), ROBOT_ARM.asItemStack(tier),
-                "CWC", "GMG", "PSR",
+                "GWG", "RMR", "PSC",
                 'G', GEAR.asIngredient(tier.getPack().getMechanical()),
                 'M', MOTOR.asItemStack(tier),
                 'R', ROD.asIngredient(tier.getPack().getMechanical()),

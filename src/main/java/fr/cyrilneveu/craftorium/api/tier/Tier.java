@@ -19,14 +19,14 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 @ZenRegister
 public final class Tier implements Comparable<Tier> {
     private final String name;
-    private final Aestheticism aestheticism;
+    private final Aestheticism.SubstanceAestheticism aestheticism;
     @Nullable
     private final Pack substances;
     private final Process process;
     private final Storage storage;
     private final Set<ATierObject.TierItem> items;
 
-    public Tier(String name, Aestheticism aestheticism, Pack substances, Process process, Storage storage, Set<ATierObject.TierItem> items) {
+    public Tier(String name, Aestheticism.SubstanceAestheticism aestheticism, Pack substances, Process process, Storage storage, Set<ATierObject.TierItem> items) {
         this.name = name;
         this.aestheticism = aestheticism;
         this.substances = substances;
@@ -39,7 +39,7 @@ public final class Tier implements Comparable<Tier> {
         return name;
     }
 
-    public Aestheticism getAestheticism() {
+    public Aestheticism.SubstanceAestheticism getAestheticism() {
         return aestheticism;
     }
 
