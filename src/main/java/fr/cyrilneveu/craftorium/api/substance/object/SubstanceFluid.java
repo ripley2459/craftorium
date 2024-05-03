@@ -2,7 +2,6 @@ package fr.cyrilneveu.craftorium.api.substance.object;
 
 import fr.cyrilneveu.craftorium.api.fluid.CustomFluid;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;

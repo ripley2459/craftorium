@@ -10,14 +10,14 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
@@ -122,7 +122,30 @@ public final class Utils {
         return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
     }
 
-    private static class CustomStateMapper extends StateMapperBase {
+    public static NBTTagCompound getNBT(ItemStack itemStack) {
+        if (!itemStack.hasTagCompound())
+            itemStack.setTagCompound(new NBTTagCompound());
+        return itemStack.getTagCompound();
+    }
+
+    public static int getIntValue(String name, ItemStack itemStack) {
+        return getNBT(itemStack).getInteger(name);
+    }
+
+    public static NBTTagCompound setValue(String name, int value, ItemStack itemStack) {
+        return setValue(name, value, getNBT(itemStack));
+    }
+
+    public static NBTTagCompound setValue(String name, int value) {
+        return setValue(name, value, new NBTTagCompound());
+    }
+
+    public static NBTTagCompound setValue(String name, int value, NBTTagCompound nbt) {
+        nbt.setInteger(name, value);
+        return nbt;
+    }
+
+    public static class CustomStateMapper extends StateMapperBase {
         private final ModelResourceLocation location;
 
         public CustomStateMapper(ModelResourceLocation location) {

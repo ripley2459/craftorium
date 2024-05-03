@@ -1,14 +1,10 @@
 package fr.cyrilneveu.craftorium.common.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
-import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
 import fr.cyrilneveu.craftorium.api.world.vein.VeinBuilder;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 

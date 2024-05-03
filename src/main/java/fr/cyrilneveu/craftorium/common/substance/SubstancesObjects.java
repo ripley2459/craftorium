@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.common.substance;
 
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
+import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
@@ -144,37 +145,37 @@ public final class SubstancesObjects {
     }
 
     private static void createAxe(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstanceAxe item = new SubstanceItem.SubstanceAxe(reference, substance);
+        SubstanceTool.SubstanceAxe item = new SubstanceTool.SubstanceAxe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createHoe(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstanceHoe item = new SubstanceItem.SubstanceHoe(reference, substance);
+        SubstanceTool.SubstanceHoe item = new SubstanceTool.SubstanceHoe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createPickaxe(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstancePickaxe item = new SubstanceItem.SubstancePickaxe(reference, substance);
+        SubstanceTool.SubstancePickaxe item = new SubstanceTool.SubstancePickaxe(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createShovel(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstanceShovel item = new SubstanceItem.SubstanceShovel(reference, substance);
+        SubstanceTool.SubstanceShovel item = new SubstanceTool.SubstanceShovel(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createSword(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstanceSword item = new SubstanceItem.SubstanceSword(reference, substance);
+        SubstanceTool.SubstanceSword item = new SubstanceTool.SubstanceSword(reference, substance);
 
         createTool(reference, substance, item);
     }
 
     private static void createTool(ASubstanceObject reference, Substance substance) {
-        SubstanceItem.SubstanceTool item = new SubstanceItem.SubstanceTool(reference, substance);
+        SubstanceTool item = new SubstanceTool(reference, substance);
 
         createTool(reference, substance, item);
     }
@@ -270,11 +271,11 @@ public final class SubstancesObjects {
     }
 
     private static ModelTemplate blockModel(ASubstanceObject reference, Substance substance) {
-        return substance.getAestheticism().isShiny() ? ModelTemplate.BLOCK_TINTED_OVERLAY : ModelTemplate.BLOCK_TINTED;
+        return substance.getAestheticism().isShiny() ? ModelTemplates.BLOCK_TINTED_OVERLAY : ModelTemplates.BLOCK_TINTED;
     }
 
     private static ModelTemplate oreModel(ASubstanceObject reference, Substance substance) {
-        return ModelTemplate.BLOCK_OVERLAY_TINTED;
+        return ModelTemplates.BLOCK_OVERLAY_TINTED;
     }
 
     private static FaceProvider[] fluidFaces(ASubstanceObject reference, Substance substance) {

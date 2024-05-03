@@ -8,14 +8,14 @@
 #loader craftorium
 ```
 
-And importing some packages:
+And import some packages:
 
 ```ZenScript
 import mods.craftorium.vein.Veins;
 import mods.craftorium.vein.Builder;
 ```
 
-With the `Veins` package you can list and delete veins. But also have access to information about a particular.
+With the `Veins` package you can list veins. But also have access to information about a particular.
 
 The `Builder` package gives you ways to create veins from scratch or modify existing ones.
 
@@ -90,6 +90,9 @@ Dimension where this vein will be generated.
 newVein.composition([Substance/string substance₁, int chance₁, Substance/string substance₂, int chance₂, [...], Substance/string substanceₙ, int chanceₙ])
 ```
 
+- `Substance/string` can either be a substance (see how to get a substance) or a substance id.
+- `chance` > 0
+
 The `composition` method will determine which substances are present in the vein and in what quantity.
 
 Adding a substance without calling `veinMember()` on the said substance will crash your game.
@@ -100,8 +103,8 @@ Adding a substance without calling `veinMember()` on the said substance will cra
 #loader craftorium
 
 import mods.craftorium.vein.Veins;
-import mods.craftorium.substance.Substances;
 import mods.craftorium.vein.Builder;
+import mods.craftorium.substance.Substances;
 
 var newVein = Veins.create("test", // ID
                     1, 50, // Y

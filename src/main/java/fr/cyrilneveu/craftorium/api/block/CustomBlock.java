@@ -3,7 +3,7 @@ package fr.cyrilneveu.craftorium.api.block;
 import com.google.common.base.Preconditions;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
-import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
+import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -72,7 +72,7 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
     public void onModelBake(ModelBakeEvent event) {
         Preconditions.checkArgument(faceProviders.length == 1);
 
-        BLOCK_MODEL_BUILDER.newOperation(ModelTemplate.BLOCK);
+        BLOCK_MODEL_BUILDER.newOperation(ModelTemplates.BLOCK);
 
         for (FaceProvider face : faceProviders)
             BLOCK_MODEL_BUILDER.addLayer(face.getTexture());

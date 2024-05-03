@@ -38,8 +38,8 @@ public final class SubstanceBuilderCT {
     }
 
     @ZenMethod
-    public SubstanceBuilderCT element(int atomicNumber, String symbol, String name, Element.EGroup group, double atomicMass) {
-        builder.element(atomicNumber, symbol, name, group, atomicMass);
+    public SubstanceBuilderCT element(int atomicNumber, String symbol, String name, String group, double atomicMass) {
+        builder.element(atomicNumber, symbol, name, Element.EGroup.valueOf(group.toUpperCase()), atomicMass);
         return this;
     }
 

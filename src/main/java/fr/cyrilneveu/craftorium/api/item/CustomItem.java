@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.item;
 
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
-import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
+import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -65,7 +65,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelBake(ModelBakeEvent event) {
-        ITEM_MODEL_BUILDER.newOperation(ModelTemplate.ITEM);
+        ITEM_MODEL_BUILDER.newOperation(ModelTemplates.ITEM);
 
         for (FaceProvider face : faceProviders)
             ITEM_MODEL_BUILDER.addLayer(face.getTexture());

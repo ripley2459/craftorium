@@ -16,7 +16,7 @@ import static fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock.OreBl
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.ORE;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 
-public class VeinGeneration extends WorldGenerator {
+public final class VeinGeneration extends WorldGenerator {
     private final Vein vein;
     private final int numberOfBlocks;
 
@@ -30,12 +30,12 @@ public class VeinGeneration extends WorldGenerator {
         CustomPredicate predicate = new CustomPredicate(world.provider.getDimension());
 
         float randomBetween0Pi = random.nextFloat() * (float) Math.PI;
-        double limitMinX = (double) ((float) (position.getX() + 8) + MathHelper.sin(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f);
-        double limitMaxX = (double) ((float) (position.getX() + 8) - MathHelper.sin(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f);
-        double limitMinZ = (double) ((float) (position.getZ() + 8) + MathHelper.cos(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f);
-        double limitMaxZ = (double) ((float) (position.getZ() + 8) - MathHelper.cos(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f);
-        double limitMinY = (double) (position.getY() + random.nextInt(vein.getSizeV()) - vein.getSizeV() / 2);
-        double limitMaxY = (double) (position.getY() + random.nextInt(vein.getSizeV()) - vein.getSizeV() / 2);
+        double limitMinX = (float) (position.getX() + 8) + MathHelper.sin(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f;
+        double limitMaxX = (float) (position.getX() + 8) - MathHelper.sin(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f;
+        double limitMinZ = (float) (position.getZ() + 8) + MathHelper.cos(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f;
+        double limitMaxZ = (float) (position.getZ() + 8) - MathHelper.cos(randomBetween0Pi) * (float) this.numberOfBlocks / 8.0f;
+        double limitMinY = position.getY() + random.nextInt(vein.getSizeV()) - (double) vein.getSizeV() / 2;
+        double limitMaxY = position.getY() + random.nextInt(vein.getSizeV()) - (double) vein.getSizeV() / 2;
 
         for (int i = 0; i < this.numberOfBlocks; ++i) {
             float progress = (float) i / (float) this.numberOfBlocks;
@@ -82,7 +82,7 @@ public class VeinGeneration extends WorldGenerator {
         return true;
     }
 
-    private static class CustomPredicate implements Predicate<IBlockState> {
+    private static final class CustomPredicate implements Predicate<IBlockState> {
         private final int dimensionId;
         private Integer meta;
 

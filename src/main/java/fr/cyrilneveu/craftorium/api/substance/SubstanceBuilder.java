@@ -331,6 +331,7 @@ public final class SubstanceBuilder {
 
     public Substance build() {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
+
         Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());
 
         if (baseColor == ERROR_COLOR)
@@ -341,10 +342,8 @@ public final class SubstanceBuilder {
         Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism(style, shiny, glow, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
 
         if (efficiency != null) {
-            /*
-             * .setRepairItem(INGOT.asItemStack(substance)); isn't called anywhere because the ingot.getOre(sub) is used to get the repair material.
-             */
             EnumHelper.addToolMaterial(name, efficiency.getHarvestLevel(), efficiency.getDurability(), efficiency.getSpeed(), efficiency.getDamage(), efficiency.getEnchantability());
+            // .setRepairItem(INGOT.asItemStack(substance)); isn't called anywhere because the ingot.getOre(sub) is used to get the repair material.
         }
 
         SUBSTANCES_REGISTRY.put(name, substance);

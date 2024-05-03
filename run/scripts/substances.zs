@@ -1,3 +1,4 @@
+#norun
 #loader craftorium
 
 import mods.craftorium.substance.Substances;
@@ -9,8 +10,9 @@ var copper = Substances.get("copper");
 var test = Substances.create("test_substance") // Starting the process
                      .composition([silicon, 3, "electrum", 1]) // Defining a composition
                      .possible([copper, 3, 20, "obsidian", 1, 5]) // And byproducts
-                     .items(["ingot", "dust", "pearl"]) // Determines which items will be registered with this substance
-                     .tools(["wrench"]) // Same for the tools
+                     .packageMetalExtended() // Adds a lot of things
+                     .tools([]) // Remove every tools
+                     .tools(["wrench"]) // But re-add the wrench
                      .tools(5.0f, 2.0f, 500, 3, 5) // Defines the tools properties
                      .style("metal") // Gives the substance a style
                      .shiny() // Makes it shiny (white layer over the texture)

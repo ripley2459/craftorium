@@ -70,6 +70,6 @@ public final class Registry<K extends Comparable<K>, V> {
     private enum EState {
         NONE,
         INITIALIZED,
-        CLOSED;
+        CLOSED
     }
 }

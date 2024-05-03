@@ -5,24 +5,24 @@ import net.minecraftforge.common.config.Config;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 @Config(modid = MODID)
-public class Settings {
+public final class Settings {
     @Config.Name("Substances settings")
     @Config.Comment("Config settings for substances related features.")
     @Config.RequiresMcRestart
-    public static SubstancesSettings substancesSettings = new SubstancesSettings();
+    public static final SubstancesSettings substancesSettings = new SubstancesSettings();
     @Config.Name("Generation settings")
     @Config.Comment("Settings for world generation related features.")
     @Config.RequiresMcRestart
-    public static GenerationSettings generationSettings = new GenerationSettings();
+    public static final GenerationSettings generationSettings = new GenerationSettings();
 
-    public static class SubstancesSettings {
+    public static final class SubstancesSettings {
         @Config.Comment({"Should substances that overrides objects (like items or blocks) register their own objects?", "Default: false"})
         public boolean registerOverrides = false;
         @Config.Comment({"Show tooltips on substances items? They are partially implemented.", "Default: false"})
         public boolean showAdvancedTooltips = false;
     }
 
-    public static class GenerationSettings {
+    public static final class GenerationSettings {
         @Config.Comment({"Enable vanilla ore generation.", "Default: false"})
         public boolean enableVanillaOreGeneration = false;
         @Config.Comment({"Enable Craftorium ore generation.", "Default: true"})

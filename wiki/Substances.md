@@ -8,16 +8,22 @@
 #loader craftorium
 ```
 
-And importing some packages:
+And import some packages:
 
 ```ZenScript
 import mods.craftorium.substance.Substances;
 import mods.craftorium.substance.Builder;
 ```
 
-With the `Substances` package you can list and delete substances. But also have access to information about a particular.
+The `Substances` package you can list substances. But also have access to information about a particular.
 
-The `Builder` package gives you ways to create substances from scratch or modify existing ones.
+The `Builder` package gives you ways to create substances from scratch.
+
+## Get a substance
+
+```ZenScript
+var substance = Substances.get(string substanceId);
+```
 
 ## Substance creation
 
@@ -31,7 +37,7 @@ var newSubstance = Builder.createSubstance(string id);
 
 The `createSubstance` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
 
-If you use an `id` already in use, the existing substance will be overwritten.
+If you use an `id` already in use, the existing substance will be overwritten. (**You can't override the default substances.**)
 
 The obtained `Builder` is totally empty.
 
@@ -53,6 +59,7 @@ newSubstance.composition([Substance/string substance₁, int amount₁, Substanc
 
 The `composition` method will determine which substances are present in the main substance and in what quantity.
 
+- `Substance/string` can either be a substance (see how to get a substance) or a substance id.
 - `amount` > 0
 
 #### Possible
@@ -63,8 +70,98 @@ newSubstance.possible([Substance/string substance₁, int amount₁, int chance�
 
 The `possible` method will determine which substances may be present in the main substance, in what quantity and at what frequency.
 
+- `Substance/string` can either be a substance (see how to get a substance) or a substance id.
 - `amount` > 0
 - `chance` ∈ ]0;100]
+
+#### Package
+
+```ZenScript
+newSubstance.packageMetalExtended();
+```
+
+These methods are macros to tell the substances which items, blocks, tools and fluids to register. In fact, it's like calling `items`, `tools`, `blocks` or `fluids` (see bellow).
+
+<details>
+  <summary><b>Packages possible values</b></summary>
+
+##### Items
+
+| Package                    | "casing" | "dust" | "foil" | "gear" | "gem" | "ingot" | "nugget" | "pearl" | "plate" | "ring" | "rod" | "rotor" | "screw" | "spring" | "wire" |
+|----------------------------|----------|--------|--------|--------|-------|---------|----------|---------|---------|--------|-------|---------|---------|----------|--------|
+| packageOre                 |          | ✔      |        |        |       |         |          |         |         |        |       |         |         |          |        |
+| packageHalogen             |          | ✔      |        |        |       |         |          |         |         |        |       |         |         |          |        |
+| packageNobleGas            |          | ✔      |        |        |       |         |          |         |         |        |       |         |         |          |        |
+| packageAlkaliMetal         |          | ✔      |        |        |       | ✔       | ✔        |         |         |        |       |         |         |          |        |
+| packageAlkalineEarthMetal  |          | ✔      |        |        |       | ✔       | ✔        |         |         |        |       |         |         |          |        |
+| packageMetalloid           |          | ✔      |        |        |       | ✔       | ✔        |         |         |        |       |         |         |          |        |
+| packageNonMetal            |          | ✔      |        |        |       |         |          |         |         |        |       |         |         |          |        |
+| packagePostTransitionMetal | ✔        | ✔      | ✔      | ✔      |       | ✔       | ✔        |         | ✔       | ✔      | ✔     |         | ✔       | ✔        | ✔      |
+| packageTransitionMetal     | ✔        | ✔      | ✔      | ✔      |       | ✔       | ✔        |         | ✔       | ✔      | ✔     |         | ✔       | ✔        | ✔      |
+| packageLanthanide          |          | ✔      |        |        |       | ✔       | ✔        |         | ✔       |        | ✔     |         |         |          |        |
+| packageActinide            |          | ✔      |        |        |       | ✔       | ✔        |         | ✔       |        | ✔     |         |         |          |        |
+| packageMetalExtended       | ✔        | ✔      | ✔      | ✔      |       | ✔       | ✔        |         | ✔       | ✔      | ✔     | ✔       | ✔       | ✔        | ✔      |
+| packageGem                 | ✔        | ✔      | ✔      | ✔      | ✔     |         | ✔        |         | ✔       |        | ✔     |         |         |          |        |
+| packageMineral             |          | ✔      |        |        |       |         |          |         | ✔       |        | ✔     |         |         |          |        |
+
+##### Tools
+
+| Package                    | "axe" | "cutter" | "file" | "hammer" | "hoe" | "knife" | "mortar" | "pickaxe" | "saw" | "screwdriver" | "shovel" | "sword" | "wrench" |
+|----------------------------|-------|----------|--------|----------|-------|---------|----------|-----------|-------|---------------|----------|---------|----------|
+| packageOre                 |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageHalogen             |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageNobleGas            |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageAlkaliMetal         |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageAlkalineEarthMetal  |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageMetalloid           |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageNonMetal            |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packagePostTransitionMetal |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageTransitionMetal     | ✔     | ✔        | ✔      | ✔        | ✔     | ✔       | ✔        | ✔         | ✔     | ✔             | ✔        | ✔       | ✔        |
+| packageLanthanide          |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageActinide            |       |          |        |          |       |         |          |           |       |               |          |         |          |
+| packageMetalExtended       | ✔     | ✔        | ✔      | ✔        | ✔     | ✔       | ✔        | ✔         | ✔     | ✔             | ✔        | ✔       | ✔        |
+| packageGem                 | ✔     |          | ✔      | ✔        | ✔     | ✔       | ✔        | ✔         | ✔     |               | ✔        | ✔       | ✔        |
+| packageMineral             |       |          |        |          |       |         |          |           |       |               |          |         |          |
+
+##### Blocks
+
+| Package                    | "block" | "frame" | "hull" | "ore" |
+|----------------------------|---------|---------|--------|-------|
+| packageOre                 |         |         |        | ✔     |
+| packageHalogen             |         |         |        |       |
+| packageNobleGas            |         |         |        |       |
+| packageAlkaliMetal         | ✔       |         |        |       |
+| packageAlkalineEarthMetal  | ✔       |         |        |       |
+| packageMetalloid           | ✔       |         |        |       |
+| packageNonMetal            |         |         |        |       |
+| packagePostTransitionMetal | ✔       | ✔       | ✔      |       |
+| packageTransitionMetal     | ✔       | ✔       | ✔      |       |
+| packageLanthanide          | ✔       |         |        |       |
+| packageActinide            | ✔       |         |        |       |
+| packageMetalExtended       | ✔       | ✔       | ✔      |       |
+| packageGem                 | ✔       | ✔       | ✔      |       |
+| packageMineral             | ✔       |         |        |       |
+
+##### Fluids
+
+| Package                    | "liquid" |
+|----------------------------|----------|
+| packageOre                 |          |
+| packageHalogen             | ✔        |
+| packageNobleGas            | ✔        |
+| packageAlkaliMetal         | ✔        |
+| packageAlkalineEarthMetal  | ✔        |
+| packageMetalloid           | ✔        |
+| packageNonMetal            | ✔        |
+| packagePostTransitionMetal | ✔        |
+| packageTransitionMetal     | ✔        |
+| packageLanthanide          | ✔        |
+| packageActinide            | ✔        |
+| packageMetalExtended       | ✔        |
+| packageGem                 | ✔        |
+| packageMineral             | ✔        |
+
+</details>
 
 #### Items, blocks, fluids and tools
 
@@ -134,9 +231,19 @@ These methods will tell the substances which items, blocks, tools and fluids to 
 
 </details>
 
-**If a substance is registered inside at least one vein, the "ore" block and the "dust" item have to be added to the substance.**
+**Calling these methods with without parameters will remove the currently present objects.**
 
 **Providing tools without giving their stats with the eponymous method will not register any tools.**
+
+**If a substance is registered inside at least one vein, its mandatory to call `veinMember` (see below).**
+
+#### Vein Member
+
+```ZenScript
+newSubstance.veinMember();
+```
+
+Ensures that the substance can be integrated in a vein and used during the world generation process.
 
 #### Tools stats
 
@@ -156,14 +263,6 @@ Indicates blocks hardness and resistances values as well which tool class is rea
 
 Default: `5.0f, 10.0f, "pickaxe", 2`.
 
-#### Vein Member
-
-```ZenScript
-newSubstance.veinMember();
-```
-
-Ensures that the substance can be integrated in a vein and used during the world generation process.
-
 #### Temperature
 
 ```ZenScript
@@ -179,7 +278,7 @@ newSubstance.temperatureAverage();
 
 Try to give average temperatures based on the composition.
 
-Default: if no temperatures are provided, `temperatureAverage` will be called to generate the temperatures based on the composition.
+Default: if no temperatures are provided, `temperatureAverage` will be called.
 
 #### Color
 
@@ -256,6 +355,31 @@ Call `glow` to make the substance with an enchantment effect.
 
 Default: `false`.
 
+#### Element
+
+```ZenScript
+newSubstance.element(int atomicNumber, String symbol, String name, String group, double atomicMass)
+```
+
+You can define your substance as an element. In that case, the composition and possible must be undefined.
+
+<details>
+  <summary><b>Group possible values</b></summary>
+
+- "actinide",
+- "alkaline_earth_metal",
+- "alkali_metal",
+- "halogen",
+- "lanthanide",
+- "metalloid",
+- "noble_gas",
+- "non_metal",
+- "post_transition_metal",
+- "transition_metal",
+- "unknown"
+
+</details>
+
 ### Example: Create
 
 ```ZenScript
@@ -270,8 +394,9 @@ var copper = Substances.get("copper");
 var test = Substances.create("test_substance") // Starting the process
                      .composition([silicon, 3, "electrum", 1]) // Defining a composition
                      .possible([copper, 3, 20, "obsidian", 1, 5]) // And byproducts
-                     .items(["ingot", "dust", "pearl"]) // Determines which items will be registered with this substance
-                     .tools(["wrench"]) // Same for the tools
+                     .packageMetalExtended() // Adds a lot of things
+                     .tools([]) // Remove every tools
+                     .tools(["wrench"]) // But re-add the wrench
                      .tools(5.0f, 2.0f, 500, 3, 5) // Defines the tools properties
                      .style("metal") // Gives the substance a style
                      .shiny() // Makes it shiny (white layer over the texture)

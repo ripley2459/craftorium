@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Arrays;
 import java.util.Random;
 
-public class VeinGenerator implements IWorldGenerator {
+public final class VeinGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         for (int i = 0; i < Settings.generationSettings.veinDensity; i++) {

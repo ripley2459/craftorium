@@ -2,7 +2,6 @@ package fr.cyrilneveu.craftorium.api.tier.object;
 
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
-import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.item.ItemStack;
 

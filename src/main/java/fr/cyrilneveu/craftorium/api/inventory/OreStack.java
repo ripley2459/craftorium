@@ -14,16 +14,14 @@ public final class OreStack {
     private boolean strict = false;
     private boolean consumable = true;
 
+    public OreStack(String oreDictName) {
+        this(oreDictName, 1);
+    }
+
     public OreStack(String oreDictName, int amount) {
         this.oreDictName = oreDictName;
         this.itemStack = ItemStack.EMPTY;
         this.amount = amount;
-    }
-
-    public OreStack(String oreDictName) {
-        this.oreDictName = oreDictName;
-        this.itemStack = ItemStack.EMPTY;
-        this.amount = 1;
     }
 
     public OreStack(ItemStack itemStack, int amount) {

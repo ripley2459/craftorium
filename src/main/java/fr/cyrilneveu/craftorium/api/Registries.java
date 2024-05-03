@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.api;
 
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.substance.object.*;
+import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
