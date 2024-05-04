@@ -2,12 +2,10 @@ package fr.cyrilneveu.craftorium.common;
 
 import crafttweaker.CraftTweakerAPI;
 import fr.cyrilneveu.craftorium.CraftoriumTags;
-import fr.cyrilneveu.craftorium.api.block.BlockBuilder;
-import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.common.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
@@ -39,7 +37,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.api.Registries.*;
-import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
@@ -52,34 +49,34 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
-        createItem("redstone_capacitor").addTexture("circuits/redstone_capacitor").build();
-        createItem("redstone_chip").addTexture("circuits/redstone_chip").build();
-        createItem("diode").addTexture("circuits/diode").build();
-        createItem("vacuum_tube").addTexture("circuits/vacuum_tube").build();
-        createItem("transistor").addTexture("circuits/transistor").build();
-        createItem("resistor").addTexture("circuits/resistor").build();
-        createItem("capacitor").addTexture("circuits/capacitor").build();
-        createItem("chip").addTexture("circuits/chip").build();
-        createItem("circuit_board_redstone").addTexture("circuits/circuit_board_redstone").build();
-        createItem("circuit_board_1").addTexture("circuits/circuit_board_1").build();
-        createItem("circuit_board_2").addTexture("circuits/circuit_board_2").build();
-        createItem("circuit_board_3").addTexture("circuits/circuit_board_3").build();
+        new ItemBuilder("redstone_capacitor").addTexture("circuits/redstone_capacitor").build();
+        new ItemBuilder("redstone_chip").addTexture("circuits/redstone_chip").build();
+        new ItemBuilder("diode").addTexture("circuits/diode").build();
+        new ItemBuilder("vacuum_tube").addTexture("circuits/vacuum_tube").build();
+        new ItemBuilder("transistor").addTexture("circuits/transistor").build();
+        new ItemBuilder("resistor").addTexture("circuits/resistor").build();
+        new ItemBuilder("capacitor").addTexture("circuits/capacitor").build();
+        new ItemBuilder("chip").addTexture("circuits/chip").build();
+        new ItemBuilder("circuit_board_redstone").addTexture("circuits/circuit_board_redstone").build();
+        new ItemBuilder("circuit_board_1").addTexture("circuits/circuit_board_1").build();
+        new ItemBuilder("circuit_board_2").addTexture("circuits/circuit_board_2").build();
+        new ItemBuilder("circuit_board_3").addTexture("circuits/circuit_board_3").build();
 
-        createItem("redstone_circuit").addTexture("circuits/redstone_circuit").build();
-        createItem("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
-        createItem("primitive_circuit").addTexture("circuits/primitive_circuit").build();
-        createItem("advanced_circuit").addTexture("circuits/advanced_circuit").build();
-        createItem("maxed_circuit").addTexture("circuits/maxed_circuit").build();
-        createItem("microprocessor").addTexture("circuits/microprocessor").build();
-        createItem("processor").addTexture("circuits/processor").build();
-        createItem("advanced_processor").addTexture("circuits/advanced_processor").build();
-        createItem("mainframe").addTexture("circuits/mainframe").build();
-        createItem("quantum_microprocessor").addTexture("circuits/quantum_microprocessor").build();
-        createItem("quantum_processor").addTexture("circuits/quantum_processor").build();
-        createItem("wetware_microprocessor").addTexture("circuits/wetware_microprocessor").build();
-        createItem("wetware_processor").addTexture("circuits/wetware_processor").build();
-        createItem("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
-        createItem("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
+        new ItemBuilder("redstone_circuit").addTexture("circuits/redstone_circuit").build();
+        new ItemBuilder("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
+        new ItemBuilder("primitive_circuit").addTexture("circuits/primitive_circuit").build();
+        new ItemBuilder("advanced_circuit").addTexture("circuits/advanced_circuit").build();
+        new ItemBuilder("maxed_circuit").addTexture("circuits/maxed_circuit").build();
+        new ItemBuilder("microprocessor").addTexture("circuits/microprocessor").build();
+        new ItemBuilder("processor").addTexture("circuits/processor").build();
+        new ItemBuilder("advanced_processor").addTexture("circuits/advanced_processor").build();
+        new ItemBuilder("mainframe").addTexture("circuits/mainframe").build();
+        new ItemBuilder("quantum_microprocessor").addTexture("circuits/quantum_microprocessor").build();
+        new ItemBuilder("quantum_processor").addTexture("circuits/quantum_processor").build();
+        new ItemBuilder("wetware_microprocessor").addTexture("circuits/wetware_microprocessor").build();
+        new ItemBuilder("wetware_processor").addTexture("circuits/wetware_processor").build();
+        new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
+        new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
 
         TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
 
@@ -90,10 +87,6 @@ public abstract class ACommonProxy {
         ITEMS_REGISTRY.getAll().forEach((k, v) -> event.getRegistry().register(v));
     }
 
-    protected static ItemBuilder createItem(String name) {
-        return new ItemBuilder(name);
-    }
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     protected static void registerBlocks(RegistryEvent.Register<Block> event) {
         SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
@@ -102,14 +95,6 @@ public abstract class ACommonProxy {
         FLUIDS_REGISTRY.close();
         BLOCKS_REGISTRY.close();
         BLOCKS_REGISTRY.getAll().forEach((s, b) -> event.getRegistry().register(b));
-    }
-
-    protected static BlockBuilder createBlock(String name) {
-        return new BlockBuilder(name);
-    }
-
-    protected static FluidBuilder createFluid(String name) {
-        return new FluidBuilder(name);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

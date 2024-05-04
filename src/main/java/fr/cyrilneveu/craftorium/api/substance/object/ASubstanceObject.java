@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -49,15 +50,15 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public final void createObject(Substance substance) {
-        provider.createObject(this, substance);
+        provider.create(this, substance);
     }
 
     public final FaceProvider[] getFaces(Substance substance) {
-        return faces.getFaces(this, substance);
+        return faces.get(this, substance);
     }
 
     public final ModelTemplate getModelTemplate(Substance substance) {
-        return model.getModelTemplate(this, substance);
+        return model.get(this, substance);
     }
 
     public final List<String> getTooltips(Substance substance) {
@@ -124,17 +125,22 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
 
     @FunctionalInterface
     public interface ICreateObject {
-        void createObject(ASubstanceObject reference, Substance substance);
+        void create(ASubstanceObject reference, Substance substance);
     }
 
     @FunctionalInterface
     public interface IGetFaces {
-        FaceProvider[] getFaces(ASubstanceObject reference, Substance substance);
+        FaceProvider[] get(ASubstanceObject reference, Substance substance);
     }
 
     @FunctionalInterface
     public interface IGetModelTemplate {
-        ModelTemplate getModelTemplate(ASubstanceObject reference, Substance substance);
+        ModelTemplate get(ASubstanceObject reference, Substance substance);
+    }
+
+    @FunctionalInterface
+    public interface IGetBehaviours {
+        IItemBehaviour[] get(ASubstanceObject reference, Substance substance);
     }
 
     @FunctionalInterface
@@ -142,7 +148,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         List<String> getTooltips(ASubstanceObject reference, Substance substance);
     }
 
-    public static final class SubstanceBlock extends ASubstanceObject {
+    public static class SubstanceBlock extends ASubstanceObject {
         public SubstanceBlock(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
             super(name, self, prefix, suffix, provider, faces, model, tooltips);
         }
@@ -152,7 +158,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         }
     }
 
-    public static final class SubstanceFluid extends ASubstanceObject {
+    public static class SubstanceFluid extends ASubstanceObject {
         public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
             super(name, self, prefix, suffix, provider, faces, model, tooltips);
         }
@@ -168,9 +174,9 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         }
     }
 
-    public static final class SubstanceTool extends ASubstanceObject {
-        public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
-            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+    public static class SubstanceTool extends SubstanceItem {
+        public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, provider, faces, model, behaviours, tooltips);
         }
 
         @Override
@@ -179,9 +185,16 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         }
     }
 
-    public static final class SubstanceItem extends ASubstanceObject {
-        public SubstanceItem(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+    public static class SubstanceItem extends ASubstanceObject {
+        protected final IGetBehaviours behaviours;
+
+        public SubstanceItem(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
             super(name, self, prefix, suffix, provider, faces, model, tooltips);
+            this.behaviours = behaviours;
+        }
+
+        public final IItemBehaviour[] getBehaviours(Substance substance) {
+            return behaviours.get(this, substance);
         }
     }
 }

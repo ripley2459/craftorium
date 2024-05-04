@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.config;
+package fr.cyrilneveu.craftorium.common.config;
 
 import net.minecraftforge.common.config.Config;
 

@@ -19,6 +19,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelFluid;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -43,10 +44,10 @@ public final class ClientProxy extends ACommonProxy {
 
         ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).addTextures(sprites));
         BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).addTextures(sprites));
-        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
-            event.getMap().registerSprite(f.getStill());
-            event.getMap().registerSprite(f.getFlowing());
-        });
+        for (Fluid fluid : FLUIDS_REGISTRY.getAll().values()) {
+            event.getMap().registerSprite(fluid.getStill());
+            event.getMap().registerSprite(fluid.getFlowing());
+        }
 
         sprites.forEach(r -> event.getMap().registerSprite(r));
     }
@@ -56,11 +57,11 @@ public final class ClientProxy extends ACommonProxy {
     public static void onModelRegister(ModelRegistryEvent event) {
         ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelRegister());
         BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelRegister());
-        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
-            Block block = f.getBlock();
+        for (Fluid fluid : FLUIDS_REGISTRY.getAll().values()) {
+            Block block = fluid.getBlock();
             if (block instanceof CustomFluid.CustomFluidBlock)
                 ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
-        });
+        }
     }
 
     @SubscribeEvent
@@ -68,14 +69,14 @@ public final class ClientProxy extends ACommonProxy {
     public static void onModelBake(ModelBakeEvent event) {
         ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> ((ICustomModel) i).onModelBake(event));
         BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> ((ICustomModel) b).onModelBake(event));
-        FLUIDS_REGISTRY.getAll().values().forEach(f -> {
-            Block block = f.getBlock();
+        for (Fluid fluid : FLUIDS_REGISTRY.getAll().values()) {
+            Block block = fluid.getBlock();
             if (block instanceof CustomFluid.CustomFluidBlock) {
-                ModelFluid modelFluid = new ModelFluid(f);
+                ModelFluid modelFluid = new ModelFluid(fluid);
                 IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, Utils::getTexture);
                 event.getModelRegistry().putObject(Utils.getSimpleModelLocation(block), bakedModel);
             }
-        });
+        }
     }
 
     @SubscribeEvent

@@ -9,6 +9,7 @@ public abstract class ATierObjectBuilder<T> {
     protected ATierObject.ICreateObject provider;
     protected ATierObject.IGetFaces faces;
     protected ATierObject.IGetModelTemplate model;
+    protected ATierObject.IGetBehaviours behaviours;
     @Nullable
     protected ATierObject.IGetTooltips tooltips;
 
@@ -36,6 +37,11 @@ public abstract class ATierObjectBuilder<T> {
         return this;
     }
 
+    public ATierObjectBuilder<T> behaviours(ATierObject.IGetBehaviours behaviours) {
+        this.behaviours = behaviours;
+        return this;
+    }
+
     public abstract T build();
 
     public static final class TierItemBuilder extends ATierObjectBuilder<ATierObject.TierItem> {
@@ -45,7 +51,7 @@ public abstract class ATierObjectBuilder<T> {
 
         @Override
         public ATierObject.TierItem build() {
-            ATierObject.TierItem item = new ATierObject.TierItem(name, provider, faces, model, tooltips);
+            ATierObject.TierItem item = new ATierObject.TierItem(name, provider, faces, model, behaviours, tooltips);
             TIER_ITEMS_REGISTRY.put(name, item);
             return item;
         }

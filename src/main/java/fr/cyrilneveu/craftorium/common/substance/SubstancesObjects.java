@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
+import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,8 +18,7 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.BASE_TEMPERATURE;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
@@ -111,6 +111,7 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstancesObjects::itemFaces);
+        builder.behaviours(SubstancesObjects::noBehaviours);
 
         return builder;
     }
@@ -119,6 +120,7 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
         builder.faces(SubstancesObjects::toolFaces);
+        builder.behaviours(SubstancesObjects::noBehaviours);
 
         return builder;
     }
@@ -320,5 +322,9 @@ public final class SubstancesObjects {
         lines.add(Utils.localise("tooltip.craftorium.temperature", gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
+    }
+
+    public static IItemBehaviour[] noBehaviours(ASubstanceObject reference, Substance substance) {
+        return NO_BEHAVIOUR;
     }
 }

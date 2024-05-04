@@ -4,12 +4,14 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ATierObject implements Comparable<ATierObject> {
@@ -17,14 +19,16 @@ public abstract class ATierObject implements Comparable<ATierObject> {
     protected final ICreateObject provider;
     protected final IGetFaces faces;
     protected final IGetModelTemplate model;
+    protected final IGetBehaviours behaviours;
     @Nullable
     protected final IGetTooltips tooltips;
 
-    public ATierObject(String name, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+    public ATierObject(String name, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
         this.name = name;
         this.provider = provider;
         this.faces = faces;
         this.model = model;
+        this.behaviours = behaviours;
         this.tooltips = tooltips;
     }
 
@@ -41,15 +45,19 @@ public abstract class ATierObject implements Comparable<ATierObject> {
     }
 
     public final FaceProvider[] getFaces(Tier tier) {
-        return faces.getFaces(this, tier);
+        return faces.get(this, tier);
     }
 
     public final ModelTemplate getModelTemplate(Tier tier) {
-        return model.getModelTemplate(this, tier);
+        return model.get(this, tier);
+    }
+
+    public final IItemBehaviour[] getBehaviours(Tier tier) {
+        return behaviours.get(this, tier);
     }
 
     public final List<String> getTooltips(Tier tier) {
-        return tooltips.getTooltips(this, tier);
+        return tooltips == null ? Collections.emptyList() : tooltips.get(this, tier);
     }
 
     public Ingredient asIngredient(Tier tier) {
@@ -76,22 +84,27 @@ public abstract class ATierObject implements Comparable<ATierObject> {
 
     @FunctionalInterface
     public interface IGetFaces {
-        FaceProvider[] getFaces(ATierObject reference, Tier tier);
+        FaceProvider[] get(ATierObject reference, Tier tier);
     }
 
     @FunctionalInterface
     public interface IGetModelTemplate {
-        ModelTemplate getModelTemplate(ATierObject reference, Tier tier);
+        ModelTemplate get(ATierObject reference, Tier tier);
+    }
+
+    @FunctionalInterface
+    public interface IGetBehaviours {
+        IItemBehaviour[] get(ATierObject reference, Tier tier);
     }
 
     @FunctionalInterface
     public interface IGetTooltips {
-        List<String> getTooltips(ATierObject reference, Tier tier);
+        List<String> get(ATierObject reference, Tier tier);
     }
 
     public static final class TierItem extends ATierObject {
-        public TierItem(String name, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetTooltips tooltips) {
-            super(name, provider, faces, model, tooltips);
+        public TierItem(String name, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, IGetTooltips tooltips) {
+            super(name, provider, faces, model, behaviours, tooltips);
         }
     }
 }

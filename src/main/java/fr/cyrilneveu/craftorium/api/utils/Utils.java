@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
@@ -36,6 +37,7 @@ public final class Utils {
     public static final Function<Block, CustomStateMapper> SIMPLE_STATE_MAPPER = block -> new CustomStateMapper(getSimpleModelLocation(block));
     public static final ModelBuilder ITEM_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.ITEM);
     public static final ModelBuilder BLOCK_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.BLOCK);
+    public static final IItemBehaviour[] NO_BEHAVIOUR = new IItemBehaviour[0];
     public static final ResourceLocation BACKGROUND = new ResourceLocation(MODID, "textures/interfaces/elements/background.png");
 
     public static String localise(String localisationKey, Object... substitutions) {
@@ -62,6 +64,10 @@ public final class Utils {
         return Arrays.stream(array).filter(x -> !StringUtils.isBlank(x)).toArray(String[]::new);
     }
 
+    public static <I> boolean all(I[] iterable, Function<I, Boolean> condition) {
+        return all(Arrays.asList(iterable), condition);
+    }
+
     public static <I> boolean all(Iterable<I> iterable, Function<I, Boolean> condition) {
         for (I value : iterable) {
             if (!condition.apply(value))
@@ -71,6 +77,10 @@ public final class Utils {
         return true;
     }
 
+    public static <I> boolean atLeastOne(I[] iterable, Function<I, Boolean> condition) {
+        return atLeastOne(Arrays.asList(iterable), condition);
+    }
+
     public static <I> boolean atLeastOne(Iterable<I> iterable, Function<I, Boolean> condition) {
         for (I value : iterable) {
             if (condition.apply(value))
@@ -78,6 +88,10 @@ public final class Utils {
         }
 
         return false;
+    }
+
+    public static <I> boolean atLeastHalf(I[] iterable, Function<I, Boolean> condition) {
+        return atLeastHalf(Arrays.asList(iterable), condition);
     }
 
     public static <I> boolean atLeastHalf(Iterable<I> iterable, Function<I, Boolean> condition) {
@@ -90,6 +104,21 @@ public final class Utils {
         }
 
         return validate > size / 2;
+    }
+
+    @Nullable
+    public static <I> I first(I[] iterable, Function<I, Boolean> condition) {
+        return first(Arrays.asList(iterable), condition);
+    }
+
+    @Nullable
+    public static <I> I first(Iterable<I> iterable, Function<I, Boolean> condition) {
+        for (I value : iterable) {
+            if (condition.apply(value))
+                return value;
+        }
+
+        return null;
     }
 
     public static String numbersToDown(String input) {

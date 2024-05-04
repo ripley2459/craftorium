@@ -47,12 +47,7 @@ public final class OreStack {
     }
 
     public static boolean oresExist(String... ores) {
-        for (String ore : ores) {
-            if (!OreDictionary.doesOreNameExist(ore))
-                return false;
-        }
-
-        return true;
+        return Utils.all(ores, OreDictionary::doesOreNameExist);
     }
 
     public static ItemStack[] getStacks(String ore) {
@@ -116,15 +111,7 @@ public final class OreStack {
     public boolean isEqualWithOreDict(ItemStack other) {
         if (oreDictName == null)
             return OreDictionary.itemMatches(itemStack, other, strict);
-        else {
-            ArrayList<ItemStack> items = getStacks();
-            for (ItemStack item : items) {
-                if (OreDictionary.itemMatches(item, other, strict))
-                    return true;
-            }
-
-            return false;
-        }
+        else return Utils.atLeastOne(getStacks(), i -> OreDictionary.itemMatches(i, other, strict));
     }
 
     public ArrayList<ItemStack> getStacks() {

@@ -12,3 +12,5 @@
 ## Credits
 
 - This project is based on [GregTechCEu/BuildScript](https://github.com/GregTechCEu/Buildscripts).
+- Items behaviour architecture based on the [GregTechCEu/GregTech](https://github.com/GregTechCEu/GregTech/tree/master/src/main/java/gregtech/api/items/metaitem/stats)'s one.
+- Render system & stone variant system inspired from [LoliKingdom/Zairyou](https://github.com/LoliKingdom/Zairyou/tree/main).

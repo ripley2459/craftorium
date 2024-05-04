@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.api.item;
 
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
+import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 
@@ -19,6 +20,7 @@ public class ItemBuilder {
     private ResourceLocation registryName;
     private String translation;
     private List<FaceProvider> faceProviderList;
+    private List<IItemBehaviour> behaviours = new ArrayList<>();
     @Nullable
     private Supplier<List<String>> toolTips;
     private boolean glint;
@@ -60,6 +62,11 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder behaviour(IItemBehaviour behaviour) {
+        this.behaviours.add(behaviour);
+        return this;
+    }
+
     public ItemBuilder glint() {
         this.glint = !this.glint;
         return this;
@@ -69,7 +76,7 @@ public class ItemBuilder {
         if (faceProviderList.isEmpty())
             addTexture(name);
 
-        CustomItem item = new CustomItem(new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint));
+        CustomItem item = new CustomItem(behaviours.toArray(new IItemBehaviour[0]), new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint));
         item.setRegistryName(registryName);
         item.setTranslationKey(translation);
         item.setCreativeTab(creativeTab);
