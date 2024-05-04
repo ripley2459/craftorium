@@ -1,13 +1,13 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
 import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
-import fr.cyrilneveu.craftorium.api.utils.Registry;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collections;
@@ -15,22 +15,41 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {
-    public static final Registry<String, ATierObject.TierItem> TIER_ITEMS_REGISTRY = new Registry<>();
+    public static ATierObject.TierItem BATTERY;
+    public static ATierObject.TierItem EMITTER;
+    public static ATierObject.TierItem HEAT_EXCHANGER;
+    public static ATierObject.TierItem MOTOR;
+    public static ATierObject.TierItem PISTON;
+    public static ATierObject.TierItem PUMP;
+    public static ATierObject.TierItem ROBOT_ARM;
+    public static ATierObject.TierItem SCANNER;
+    public static ATierObject.TierItem SENSOR;
 
-    public static final ATierObject.TierItem BATTERY = createItem("battery").build();
-    public static final ATierObject.TierItem EMITTER = createItem("emitter").build();
-    public static final ATierObject.TierItem HEAT_EXCHANGER = createItem("heat_exchanger").build();
-    public static final ATierObject.TierItem LARGE_BATTERY = createItem("large_battery").build();
-    public static final ATierObject.TierItem MOTOR = createItem("motor").build();
-    public static final ATierObject.TierItem PISTON = createItem("piston").build();
-    public static final ATierObject.TierItem PUMP = createItem("pump").build();
-    public static final ATierObject.TierItem ROBOT_ARM = createItem("robot_arm").build();
-    public static final ATierObject.TierItem SCANNER = createItem("scanner").build();
-    public static final ATierObject.TierItem SENSOR = createItem("sensor").build();
+    public static void init() {
+        if (TIER_ITEMS_REGISTRY.isInitialized())
+            return;
+
+        TIER_ITEMS_REGISTRY.initialize();
+
+        BATTERY = createItem("battery").provider(TiersObjects::createBattery).build();
+        EMITTER = createItem("emitter").build();
+        HEAT_EXCHANGER = createItem("heat_exchanger").build();
+        MOTOR = createItem("motor").build();
+        PISTON = createItem("piston").build();
+        PUMP = createItem("pump").build();
+        ROBOT_ARM = createItem("robot_arm").build();
+        SCANNER = createItem("scanner").build();
+        SENSOR = createItem("sensor").build();
+    }
+
+    public static void close() {
+        TIER_ITEMS_REGISTRY.order().close();
+    }
 
     private static ATierObjectBuilder.TierItemBuilder createItem(String name) {
         ATierObjectBuilder.TierItemBuilder builder = new ATierObjectBuilder.TierItemBuilder(name);
@@ -41,8 +60,19 @@ public final class TiersObjects {
         return builder;
     }
 
+    private static void createBattery(ATierObject reference, Tier tier) {
+        TierItem item = new TierItem.Battery(reference, tier);
+
+        createItem(reference, tier, item);
+    }
+
     private static void createItem(ATierObject reference, Tier tier) {
         TierItem item = new TierItem(reference, tier);
+
+        createItem(reference, tier, item);
+    }
+
+    private static void createItem(ATierObject reference, Tier tier, Item item) {
         item.setRegistryName(reference.getName(tier));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(COMMON);

@@ -7,7 +7,6 @@
 item.craftorium.battery.name=Battery %s
 item.craftorium.emitter.name=Emitter %s
 item.craftorium.heat_exchanger.name=Heat Exchanger %s
-item.craftorium.large_battery.name=Large Battery %s
 item.craftorium.motor.name=Motor %s
 item.craftorium.piston.name=Piston %s
 item.craftorium.pump.name=Pump %s
@@ -362,6 +361,7 @@ tooltip.craftorium.state.solid=§aState: Solid§r
 tooltip.craftorium.state.liquid=§aState: Liquid§r
 tooltip.craftorium.state.gaseous=§aState: Gaseous§r
 tooltip.craftorium.state.unknown=§4State: Unknown§r
+tooltip.craftorium.battery.energy=§c%s/%sRF§r
 
 # JEI
 jei.craftorium.vein_generation.name=Ore Generation

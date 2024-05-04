@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.api.tier;
 import com.google.common.collect.ImmutableSortedSet;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
+import fr.cyrilneveu.craftorium.api.Registries;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
@@ -96,16 +97,16 @@ public final class TierBuilder {
     }
 
     @ZenMethod
-    public TierBuilder setFull() {
-        items(BATTERY, EMITTER, HEAT_EXCHANGER, LARGE_BATTERY, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
+    public TierBuilder packageFull() {
+        items(BATTERY, EMITTER, HEAT_EXCHANGER, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
         return this;
     }
 
     @ZenMethod
     public TierBuilder items(String... items) {
         for (String item : items) {
-            if (TIER_ITEMS_REGISTRY.contains(item))
-                this.items(TIER_ITEMS_REGISTRY.get(item));
+            if (Registries.TIER_ITEMS_REGISTRY.contains(item))
+                this.items(Registries.TIER_ITEMS_REGISTRY.get(item));
             else CraftTweakerAPI.logError("This type of item does not exists: " + item);
         }
 

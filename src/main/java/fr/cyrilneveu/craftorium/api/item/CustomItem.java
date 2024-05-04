@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,14 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
 
     public CustomItem(Aestheticism.ObjectAestheticism aestheticism) {
         this.aestheticism = aestheticism;
+    }
+
+    protected static int getEnergy(ItemStack itemStack) {
+        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored() : -1;
+    }
+
+    protected static int getMaxEnergy(ItemStack itemStack) {
+        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getMaxEnergyStored() : -1;
     }
 
     @Override

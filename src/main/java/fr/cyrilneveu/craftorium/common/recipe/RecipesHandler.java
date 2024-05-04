@@ -139,7 +139,6 @@ public final class RecipesHandler {
             registerEmitterRecipe(ONE, DIAMOND, "circuitTier1");
             registerSensorRecipe(ONE, ENDER, "circuitTier1");
             registerBatteryRecipe(ONE);
-            registerLargeBatteryRecipe(ONE);
             registerRobotArmRecipe(ONE, "circuitTier1");
         }
 
@@ -151,7 +150,6 @@ public final class RecipesHandler {
             registerEmitterRecipe(TWO, DIAMOND, "circuitTier2");
             registerSensorRecipe(TWO, ENDER, "circuitTier2");
             registerBatteryRecipe(TWO);
-            registerLargeBatteryRecipe(TWO);
             registerRobotArmRecipe(TWO, "circuitTier2");
         }
 
@@ -163,7 +161,6 @@ public final class RecipesHandler {
             registerEmitterRecipe(THREE, DIAMOND, "circuitTier3");
             registerSensorRecipe(THREE, ENDER, "circuitTier3");
             registerBatteryRecipe(THREE);
-            registerLargeBatteryRecipe(THREE);
             registerRobotArmRecipe(THREE, "circuitTier3");
         }
 
@@ -175,7 +172,6 @@ public final class RecipesHandler {
             registerEmitterRecipe(FOUR, DIAMOND, "circuitTier4");
             registerSensorRecipe(FOUR, ENDER, "circuitTier4");
             registerBatteryRecipe(FOUR);
-            registerLargeBatteryRecipe(FOUR);
             registerRobotArmRecipe(FOUR, "circuitTier4");
         }
 
@@ -187,7 +183,6 @@ public final class RecipesHandler {
             registerEmitterRecipe(FIVE, DIAMOND, "circuitTier5");
             registerSensorRecipe(FIVE, ENDER, "circuitTier5");
             registerBatteryRecipe(FIVE);
-            registerLargeBatteryRecipe(FIVE);
             registerRobotArmRecipe(FIVE, "circuitTier5");
         }
     }
@@ -295,18 +290,6 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(BATTERY.getName(tier), BATTERY.asItemStack(tier),
                 "C ", "FW", "F ",
-                'C', WIRE.asIngredient(tier.getPack().getEnergy()),
-                'F', PLATE.asIngredient(PLASTIC),
-                'W', WRENCH.asIngredient(null)
-        );
-    }
-
-    private static void registerLargeBatteryRecipe(Tier tier) {
-        if (!tier.getItems().contains(LARGE_BATTERY))
-            return;
-
-        RecipeManager.addShapedRecipe(LARGE_BATTERY.getName(tier), LARGE_BATTERY.asItemStack(tier),
-                "CC ", "FCW", "FF ",
                 'C', WIRE.asIngredient(tier.getPack().getEnergy()),
                 'F', PLATE.asIngredient(PLASTIC),
                 'W', WRENCH.asIngredient(null)

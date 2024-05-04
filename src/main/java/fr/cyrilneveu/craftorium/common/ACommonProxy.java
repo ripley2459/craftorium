@@ -7,11 +7,12 @@ import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
 import fr.cyrilneveu.craftorium.common.tier.Tiers;
+import fr.cyrilneveu.craftorium.common.tier.TiersObjects;
 import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +39,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.api.Registries.*;
-import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.TIER_ITEMS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
@@ -175,6 +176,7 @@ public abstract class ACommonProxy {
         SubstancesObjects.init();
         Substances.init();
         Veins.init();
+        TiersObjects.init();
         Tiers.init();
 
         if (Loader.isModLoaded("crafttweaker"))

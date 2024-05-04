@@ -32,6 +32,7 @@ public final class Utils {
     public static final int WHITE_COLOR = 0xFFffffff;
     public static final int BLACK_COLOR = 0xFF000000;
     public static final float BASE_TEMPERATURE = 273.15f;
+    public static final String ENERGY_NBT_KEY = "Energy";
     public static final Function<Block, CustomStateMapper> SIMPLE_STATE_MAPPER = block -> new CustomStateMapper(getSimpleModelLocation(block));
     public static final ModelBuilder ITEM_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.ITEM);
     public static final ModelBuilder BLOCK_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.BLOCK);
@@ -129,7 +130,11 @@ public final class Utils {
     }
 
     public static int getIntValue(String name, ItemStack itemStack) {
-        return getNBT(itemStack).getInteger(name);
+        return getIntValue(name, getNBT(itemStack));
+    }
+
+    public static int getIntValue(String name, NBTTagCompound nbt) {
+        return nbt.getInteger(name);
     }
 
     public static NBTTagCompound setValue(String name, int value, ItemStack itemStack) {

@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.tier.object;
 
 import javax.annotation.Nullable;
 
-import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.TIER_ITEMS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
 
 public abstract class ATierObjectBuilder<T> {
     protected String name;
