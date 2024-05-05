@@ -80,14 +80,6 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     @SideOnly(Side.CLIENT)
     public boolean showDurabilityBar(ItemStack stack) { // TODO
         return Utils.first(behaviours, b -> b.showDurabilityBar(stack)) != null;
-
-        /*for (IItemBehaviour behaviour : behaviours) {
-            boolean flag = behaviour.showDurabilityBar(stack);
-            if (flag)
-                return true;
-        }
-
-        return false;*/
     }
 
     @Override

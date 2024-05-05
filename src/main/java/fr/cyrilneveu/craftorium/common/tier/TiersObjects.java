@@ -102,7 +102,7 @@ public final class TiersObjects {
 
     public static IItemBehaviour[] energyStorage(ATierObject reference, Tier tier) {
         IItemBehaviour[] behaviours = new IItemBehaviour[1];
-        behaviours[0] = new ItemEnergyStorageBehaviour(() -> reference.asItemStack(tier), (int) (Settings.balancingSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.balancingSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.balancingSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.balancingSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
         return behaviours;
     }
 }

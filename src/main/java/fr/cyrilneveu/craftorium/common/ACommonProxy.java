@@ -50,13 +50,14 @@ public abstract class ACommonProxy {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
         new ItemBuilder("redstone_capacitor").addTexture("circuits/redstone_capacitor").build();
-        new ItemBuilder("redstone_chip").addTexture("circuits/redstone_chip").build();
-        new ItemBuilder("diode").addTexture("circuits/diode").build();
-        new ItemBuilder("vacuum_tube").addTexture("circuits/vacuum_tube").build();
-        new ItemBuilder("transistor").addTexture("circuits/transistor").build();
-        new ItemBuilder("resistor").addTexture("circuits/resistor").build();
         new ItemBuilder("capacitor").addTexture("circuits/capacitor").build();
+        new ItemBuilder("redstone_chip").addTexture("circuits/redstone_chip").build();
         new ItemBuilder("chip").addTexture("circuits/chip").build();
+        new ItemBuilder("redstone_diode").addTexture("circuits/redstone_diode").build();
+        new ItemBuilder("diode").addTexture("circuits/diode").build();
+        new ItemBuilder("redstone_resistor").addTexture("circuits/redstone_resistor").build();
+        new ItemBuilder("resistor").addTexture("circuits/resistor").build();
+        new ItemBuilder("transistor").addTexture("circuits/transistor").build();
         new ItemBuilder("circuit_board_redstone").addTexture("circuits/circuit_board_redstone").build();
         new ItemBuilder("circuit_board_1").addTexture("circuits/circuit_board_1").build();
         new ItemBuilder("circuit_board_2").addTexture("circuits/circuit_board_2").build();

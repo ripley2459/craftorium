@@ -29,10 +29,6 @@ public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem 
     protected final int transfer;
     protected final CustomEnergyStorage energyStorage;
 
-    public ItemEnergyStorageBehaviour(Supplier<ItemStack> stackProvider, int capacity, int transfer) {
-        this(stackProvider.get(), capacity, transfer);
-    }
-
     public ItemEnergyStorageBehaviour(ItemStack stack, int capacity, int transfer) {
         this.capacity = capacity;
         this.transfer = transfer;

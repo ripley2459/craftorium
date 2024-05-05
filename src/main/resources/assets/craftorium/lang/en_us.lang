@@ -66,9 +66,10 @@ item.craftorium.chip.name=Chip
 item.craftorium.diode.name=Diode
 item.craftorium.redstone_capacitor.name=Redstone Capacitor
 item.craftorium.redstone_chip.name=Redstone Chip
+item.craftorium.redstone_diode.name=Redstone Diode
+item.craftorium.redstone_resistor.name=Redstone Resistor
 item.craftorium.resistor.name=Resistor
 item.craftorium.transistor.name=Transistor
-item.craftorium.vacuum_tube.name=Vacuum Tube
 
 item.craftorium.circuit_board_redstone.name=Redstone Circuit Board
 item.craftorium.circuit_board_1.name=Circuit Board

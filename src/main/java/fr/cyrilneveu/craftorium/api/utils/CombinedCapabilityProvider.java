@@ -7,9 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-/**
- * <a href="https://github.com/GregTechCEu/GregTech/blob/master/src/main/java/gregtech/api/capability/impl/CombinedCapabilityProvider.java">GregTech CEu's original.</a>
- */
 public final class CombinedCapabilityProvider implements ICapabilityProvider {
     private final ICapabilityProvider[] providers;
 

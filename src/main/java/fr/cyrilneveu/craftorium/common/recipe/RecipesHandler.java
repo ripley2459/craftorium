@@ -31,22 +31,23 @@ public final class RecipesHandler {
         RecipeManager.addShapedRecipe("redstone_circuit", ACommonProxy.getItemStack("redstone_circuit"),
                 " C ",
                 "RPR",
-                "FRD",
+                "FDF",
                 'C', ACommonProxy.getItemStack("redstone_chip"),
                 'R', WIRE.asIngredient(REDSTONE_ALLOY),
                 'P', ACommonProxy.getItemStack("circuit_board_redstone"),
-                'F', ACommonProxy.getItemStack("resistor"),
+                'F', ACommonProxy.getItemStack("redstone_resistor"),
                 'D', ACommonProxy.getItemStack("redstone_capacitor")
         );
         RecipeManager.addShapedRecipe("advanced_redstone_circuit", ACommonProxy.getItemStack("advanced_redstone_circuit"),
-                "RCR",
-                "FPD",
-                "RCR",
+                "RCD",
+                "FPF",
+                "HCR",
                 'R', WIRE.asIngredient(REDSTONE_ALLOY),
                 'C', ACommonProxy.getItemStack("redstone_chip"),
-                'F', ACommonProxy.getItemStack("resistor"),
+                'F', ACommonProxy.getItemStack("redstone_resistor"),
                 'P', ACommonProxy.getItemStack("circuit_board_redstone"),
-                'D', ACommonProxy.getItemStack("redstone_capacitor")
+                'D', ACommonProxy.getItemStack("redstone_capacitor"),
+                'H', ACommonProxy.getItemStack("redstone_diode")
         );
 
         RecipeManager.addShapedRecipe("primitive_circuit", ACommonProxy.getItemStack("primitive_circuit"),
@@ -88,12 +89,12 @@ public final class RecipesHandler {
                 "WCW",
                 'F', OreStack.getIngredient("paper"),
                 'M', FOIL.asIngredient(MANGANESE),
-                'S', FOIL.asIngredient(SILVER),
+                'S', FOIL.asIngredient(REDSTONE_ALLOY),
                 'T', FOIL.asIngredient(TANTALUM),
                 'C', CUTTER.asIngredient(null),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
-        RecipeManager.addShapedRecipe("redstone_resistor", ACommonProxy.getItemStack("resistor", 4),
+        RecipeManager.addShapedRecipe("redstone_resistor", ACommonProxy.getItemStack("redstone_resistor", 3),
                 " W ",
                 "FDC",
                 " W ",
@@ -101,15 +102,6 @@ public final class RecipesHandler {
                 'D', DUST.asIngredient(COAL),
                 'C', CUTTER.asIngredient(null),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
-        );
-        RecipeManager.addShapedRecipe("resistor", ACommonProxy.getItemStack("resistor", 2),
-                " W ",
-                "FDC",
-                " W ",
-                'F', OreStack.getIngredient("paper"),
-                'D', DUST.asIngredient(COAL),
-                'C', CUTTER.asIngredient(null),
-                'W', WIRE.asIngredient(COPPER)
         );
         RecipeManager.addShapedRecipe("redstone_chip", ACommonProxy.getItemStack("redstone_chip"),
                 "PCP",
@@ -117,15 +109,17 @@ public final class RecipesHandler {
                 "PWP",
                 'P', OreStack.getIngredient("paper"),
                 'C', CUTTER.asIngredient(null),
-                'V', ACommonProxy.getItemStack("vacuum_tube"),
+                'V', ACommonProxy.getItemStack("redstone_diode"),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
-        RecipeManager.addShapedRecipe("vacuum_tube", ACommonProxy.getItemStack("vacuum_tube", 3),
-                "TRG",
-                "JWC",
+        RecipeManager.addShapedRecipe("redstone_diode", ACommonProxy.getItemStack("redstone_diode", 3),
+                " G ",
+                "TDR",
+                "JCW",
                 'T', FOIL.asIngredient(TIN),
                 'R', FOIL.asIngredient(REDSTONE_ALLOY),
                 'J', WIRE.asIngredient(TIN),
+                'D', DUST.asIngredient(QUARTZ),
                 'G', OreStack.getIngredient("blockGlass"),
                 'C', CUTTER.asIngredient(null),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
