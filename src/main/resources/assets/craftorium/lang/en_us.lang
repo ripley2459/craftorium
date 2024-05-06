@@ -1,5 +1,371 @@
+#PARSE_ESCAPES
+
+# ##################################################
+# Items
+
+# Tiered
+item.craftorium.battery.name=Battery %s
+item.craftorium.emitter.name=Emitter %s
+item.craftorium.heat_exchanger.name=Heat Exchanger %s
+item.craftorium.motor.name=Motor %s
+item.craftorium.piston.name=Piston %s
+item.craftorium.pump.name=Pump %s
+item.craftorium.robot_arm.name=Robot Arm %s
+item.craftorium.scanner.name=Scanner %s
+item.craftorium.sensor.name=Sensor %s
+
+# Tools
+item.craftorium.axe.name=%s Axe
+item.craftorium.cutter.name=%s Cutter
+item.craftorium.file.name=%s File
+item.craftorium.hammer.name=%s Hammer
+item.craftorium.hoe.name=%s Hoe
+item.craftorium.knife.name=%s Knife
+item.craftorium.mortar.name=%s Mortar
+item.craftorium.pickaxe.name=%s Pickaxe
+item.craftorium.saw.name=%s Saw
+item.craftorium.screwdriver.name=%s Screwdriver
+item.craftorium.shovel.name=%s Shovel
+item.craftorium.sword.name=%s Sword
+item.craftorium.wrench.name=%s Wrench
+
+# Components
+item.craftorium.casing.name=%s Casing
+item.craftorium.dust.name=%s Dust
+item.craftorium.foil.name=%s Foil
+item.craftorium.gear.name=%s Gear
+item.craftorium.ingot.name=%s Ingot
+item.craftorium.nugget.name=%s Nugget
+item.craftorium.plate.name=%s Plate
+item.craftorium.ring.name=%s Ring
+item.craftorium.rod.name=%s Rod
+item.craftorium.rotor.name=%s Rotor
+item.craftorium.screw.name=%s Screw
+item.craftorium.spring.name=%s Spring
+item.craftorium.wire.name=%s Wire
+
+# Circuits
+item.craftorium.redstone_circuit.name=Redstone Circuit
+item.craftorium.advanced_redstone_circuit.name=Advanced Redstone Circuit
+item.craftorium.primitive_circuit.name=Primitive Circuit
+item.craftorium.advanced_circuit.name=Advanced Circuit
+item.craftorium.maxed_circuit.name=Maxed Circuit
+item.craftorium.microprocessor.name=Microprocessor
+item.craftorium.quantum_microprocessor.name=Quantum Microprocessor
+item.craftorium.wetware_microprocessor.name=Wetware Microprocessor
+item.craftorium.processor.name=Processor
+item.craftorium.quantum_processor.name=Quantum Processor
+item.craftorium.wetware_processor.name=Wetware Processor
+item.craftorium.advanced_processor.name=Advanced Processor
+item.craftorium.mainframe.name=Mainframe
+item.craftorium.wetware_mainframe.name=Wetware Mainframe
+item.craftorium.machine_spirit_infused_processor.name=Machine Spirit Infused Processor
+
+item.craftorium.capacitor.name=Capacitor
+item.craftorium.chip.name=Chip
+item.craftorium.diode.name=Diode
+item.craftorium.redstone_capacitor.name=Redstone Capacitor
+item.craftorium.redstone_chip.name=Redstone Chip
+item.craftorium.redstone_diode.name=Redstone Diode
+item.craftorium.redstone_resistor.name=Redstone Resistor
+item.craftorium.resistor.name=Resistor
+item.craftorium.transistor.name=Transistor
+
+item.craftorium.circuit_board_redstone.name=Redstone Circuit Board
+item.craftorium.circuit_board_1.name=Circuit Board
+item.craftorium.circuit_board_2.name=Advanced Circuit Board
+item.craftorium.circuit_board_3.name=Maxed Circuit Board
+
+
+# ##################################################
+# Blocks
+
+# Substances
+tile.craftorium.block.name=Block of %s
+tile.craftorium.ore.name=%s Ore
+tile.craftorium.hull.name=%s Hull
+tile.craftorium.frame.name=%s Frame
+
+# Fluids
+fluid.craftorium.liquid.name=%s
+
+
+# ##################################################
+# Substances
+
+# Elements
+substance.craftorium.hydrogen.name=Hydrogen
+substance.craftorium.helium.name=Helium
+substance.craftorium.lithium.name=Lithium
+substance.craftorium.beryllium.name=Beryllium
+substance.craftorium.boron.name=Boron
+substance.craftorium.carbon.name=Carbon
+substance.craftorium.nitrogen.name=Nitrogen
+substance.craftorium.oxygen.name=Oxygen
+substance.craftorium.fluorine.name=Fluorine
+substance.craftorium.neon.name=Neon
+substance.craftorium.sodium.name=Sodium
+substance.craftorium.magnesium.name=Magnesium
+substance.craftorium.aluminum.name=Aluminum
+substance.craftorium.silicon.name=Silicon
+substance.craftorium.phosphorus.name=Phosphorus
+substance.craftorium.sulfur.name=Sulfur
+substance.craftorium.chlorine.name=Chlorine
+substance.craftorium.argon.name=Argon
+substance.craftorium.potassium.name=Potassium
+substance.craftorium.calcium.name=Calcium
+substance.craftorium.scandium.name=Scandium
+substance.craftorium.titanium.name=Titanium
+substance.craftorium.vanadium.name=Vanadium
+substance.craftorium.chromium.name=Chromium
+substance.craftorium.manganese.name=Manganese
+substance.craftorium.iron.name=Iron
+substance.craftorium.cobalt.name=Cobalt
+substance.craftorium.nickel.name=Nickel
+substance.craftorium.copper.name=Copper
+substance.craftorium.zinc.name=Zinc
+substance.craftorium.gallium.name=Gallium
+substance.craftorium.germanium.name=Germanium
+substance.craftorium.arsenic.name=Arsenic
+substance.craftorium.selenium.name=Selenium
+substance.craftorium.bromine.name=Bromine
+substance.craftorium.krypton.name=Krypton
+substance.craftorium.rubidium.name=Rubidium
+substance.craftorium.strontium.name=Strontium
+substance.craftorium.yttrium.name=Yttrium
+substance.craftorium.zirconium.name=Zirconium
+substance.craftorium.niobium.name=Niobium
+substance.craftorium.molybdenum.name=Molybdenum
+substance.craftorium.technetium.name=Technetium
+substance.craftorium.ruthenium.name=Ruthenium
+substance.craftorium.rhodium.name=Rhodium
+substance.craftorium.palladium.name=Palladium
+substance.craftorium.silver.name=Silver
+substance.craftorium.cadmium.name=Cadmium
+substance.craftorium.indium.name=Indium
+substance.craftorium.tin.name=Tin
+substance.craftorium.antimony.name=Antimony
+substance.craftorium.tellurium.name=Tellurium
+substance.craftorium.iodine.name=Iodine
+substance.craftorium.xenon.name=Xenon
+substance.craftorium.cesium.name=Cesium
+substance.craftorium.barium.name=Barium
+substance.craftorium.lanthanum.name=Lanthanum
+substance.craftorium.cerium.name=Cerium
+substance.craftorium.praseodymium.name=Praseodymium
+substance.craftorium.neodymium.name=Neodymium
+substance.craftorium.promethium.name=Promethium
+substance.craftorium.samarium.name=Samarium
+substance.craftorium.europium.name=Europium
+substance.craftorium.gadolinium.name=Gadolinium
+substance.craftorium.terbium.name=Terbium
+substance.craftorium.dysprosium.name=Dysprosium
+substance.craftorium.holmium.name=Holmium
+substance.craftorium.erbium.name=Erbium
+substance.craftorium.thulium.name=Thulium
+substance.craftorium.ytterbium.name=Ytterbium
+substance.craftorium.lutetium.name=Lutetium
+substance.craftorium.hafnium.name=Hafnium
+substance.craftorium.tantalum.name=Tantalum
+substance.craftorium.tungsten.name=Tungsten
+substance.craftorium.rhenium.name=Rhenium
+substance.craftorium.osmium.name=Osmium
+substance.craftorium.iridium.name=Iridium
+substance.craftorium.platinum.name=Platinum
+substance.craftorium.gold.name=Gold
+substance.craftorium.mercury.name=Mercury
+substance.craftorium.thallium.name=Thallium
+substance.craftorium.lead.name=Lead
+substance.craftorium.bismuth.name=Bismuth
+substance.craftorium.polonium.name=Polonium
+substance.craftorium.astatine.name=Astatine
+substance.craftorium.radon.name=Radon
+substance.craftorium.francium.name=Francium
+substance.craftorium.radium.name=Radium
+substance.craftorium.actinium.name=Actinium
+substance.craftorium.thorium.name=Thorium
+substance.craftorium.protactinium.name=Protactinium
+substance.craftorium.uranium.name=Uranium
+substance.craftorium.neptunium.name=Neptunium
+substance.craftorium.plutonium.name=Plutonium
+substance.craftorium.americium.name=Americium
+substance.craftorium.curium.name=Curium
+substance.craftorium.berkelium.name=Berkelium
+substance.craftorium.californium.name=Californium
+substance.craftorium.einsteinium.name=Einsteinium
+substance.craftorium.fermium.name=Fermium
+substance.craftorium.mendelevium.name=Mendelevium
+substance.craftorium.nobelium.name=Nobelium
+substance.craftorium.lawrencium.name=Lawrencium
+substance.craftorium.rutherfordium.name=Rutherfordium
+substance.craftorium.dubnium.name=Dubnium
+substance.craftorium.seaborgium.name=Seaborgium
+substance.craftorium.bohrium.name=Bohrium
+substance.craftorium.hassium.name=Hassium
+substance.craftorium.meitnerium.name=Meitnerium
+substance.craftorium.darmstadtium.name=Darmstadtium
+substance.craftorium.roentgenium.name=Roentgenium
+substance.craftorium.copernicium.name=Copernicium
+substance.craftorium.nihonium.name=Nihonium
+substance.craftorium.flerovium.name=Flerovium
+substance.craftorium.moscovium.name=Moscovium
+substance.craftorium.livermorium.name=Livermorium
+substance.craftorium.tennessine.name=Tennessine
+substance.craftorium.oganesson.name=Oganesson
+
+# Others
+substance.craftorium.argentite.name=Argentite
+substance.craftorium.azurite.name=Azurite
+substance.craftorium.barite.name=Barite
+substance.craftorium.bauxite.name=Bauxite
+substance.craftorium.beryl.name=Beryl
+substance.craftorium.bismuthinite.name=Bismuthinite
+substance.craftorium.boron_arsenide_alloy.name=Boron Arsenide Alloy
+substance.craftorium.bronze.name=Bronze
+substance.craftorium.carnotite.name=Carnotite
+substance.craftorium.carrollite.name=Carrollite
+substance.craftorium.cassiterite.name=Cassiterite
+substance.craftorium.cerussite.name=Cerussite
+substance.craftorium.chalcopyrite.name=Chalcopyrite
+substance.craftorium.charcoal.name=Charcoal
+substance.craftorium.chromite.name=Chromite
+substance.craftorium.cinnabar.name=Cinnabar
+substance.craftorium.coal.name=Coal
+substance.craftorium.cupronickel.name=Cupronickel
+substance.craftorium.diamond.name=Diamond
+substance.craftorium.electrum.name=Electrum
+substance.craftorium.emerald.name=Emerald
+substance.craftorium.ender.name=Ender
+substance.craftorium.galena.name=Galena
+substance.craftorium.garnierite.name=Garnierite
+substance.craftorium.graphene.name=Graphene
+substance.craftorium.graphite.name=Graphite
+substance.craftorium.haste_alloy.name=Haste Alloy
+substance.craftorium.hematite.name=Hematite
+substance.craftorium.hsla_steel.name=HSLA Steel
+substance.craftorium.ilmenite.name=Ilmenite
+substance.craftorium.lapis_lazuli.name=Lapis Lazuli
+substance.craftorium.lazurite.name=Lazurite
+substance.craftorium.magnesium_diboride_alloy.name=Magnesium Diboride Alloy
+substance.craftorium.magnetite.name=Magnetite
+substance.craftorium.malachite.name=Malachite
+substance.craftorium.molybdenite.name=Molybdenite
+substance.craftorium.nichrome.name=Nichrome
+substance.craftorium.obsidian.name=Obsidian
+substance.craftorium.orthoclase.name=Orthoclase
+substance.craftorium.osmiridium.name=Osmiridium
+substance.craftorium.pentlandite.name=Pentlandite
+substance.craftorium.plastic.name=Plastic
+substance.craftorium.pyrite.name=Pyrite
+substance.craftorium.pyrochlore.name=Pyrochlore
+substance.craftorium.pyrolusite.name=Pyrolusite
+substance.craftorium.quartz.name=Quartz
+substance.craftorium.redstone.name=Redstone
+substance.craftorium.redstone_alloy.name=Redstone Alloy
+substance.craftorium.rtm_alloy.name=RTM Alloy
+substance.craftorium.rubber.name=Rubber
+substance.craftorium.rutile.name=Rutile
+substance.craftorium.scheelite.name=Scheelite
+substance.craftorium.smaltite.name=Smaltite
+substance.craftorium.smithsonite.name=Smithsonite
+substance.craftorium.sodalite.name=Sodalite
+substance.craftorium.spdodumene.name=Spdodumene
+substance.craftorium.stainless_steel.name=Stainless Steel
+substance.craftorium.steel.name=Steel
+substance.craftorium.stibnite.name=Stibnite
+substance.craftorium.stone.name=Stone
+substance.craftorium.super_alloy.name=Super Alloy
+substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
+substance.craftorium.tungsten_steel.name=Tungsten Steel
+substance.craftorium.ybco.name=YBCO
+substance.craftorium.wood.name=Wood
+
+
+# ##################################################
+# Veins
+
+vein.craftorium.argentite.name=Argentite
+vein.craftorium.azurite.name=Azurite
+vein.craftorium.barite.name=Barite
+vein.craftorium.bauxite.name=Bauxite
+vein.craftorium.bauxite_end.name=Bauxite (End)
+vein.craftorium.beryl.name=Beryl
+vein.craftorium.bismuthinite.name=Bismuthinite
+vein.craftorium.carnotite.name=Carnotite
+vein.craftorium.carrollite.name=Carrollite
+vein.craftorium.carrollite_nether.name=Carrollite (Nether)
+vein.craftorium.cassiterite.name=Cassiterite
+vein.craftorium.cerussite.name=Cerussite
+vein.craftorium.chalcopyrite.name=Chalcopyrite
+vein.craftorium.chromite.name=Chromite
+vein.craftorium.cinnabar.name=Cinnabar
+vein.craftorium.coal.name=Coal
+vein.craftorium.copper.name=Copper
+vein.craftorium.copper_tin.name=Copper & Tin
+vein.craftorium.diamond.name=Diamond
+vein.craftorium.emerald.name=Emerald
+vein.craftorium.emerald_nether.name=Emerald (Nether)
+vein.craftorium.galena.name=Galena
+vein.craftorium.garnierite.name=Garnierite
+vein.craftorium.graphite.name=Graphite
+vein.craftorium.hematite.name=Hematite
+vein.craftorium.ilmenite.name=Ilmenite
+vein.craftorium.lazurite.name=Lazurite
+vein.craftorium.magnetite.name=Magnetite
+vein.craftorium.magnetite_end.name=Magnetite (End)
+vein.craftorium.malachite.name=Malachite
+vein.craftorium.molybdenite.name=Molybdenite
+vein.craftorium.native_copper.name=Copper
+vein.craftorium.native_gold.name=Gold
+vein.craftorium.native_iridium.name=Iridium
+vein.craftorium.native_osmium.name=Osmium
+vein.craftorium.native_platinum.name=Platinum
+vein.craftorium.orthoclase.name=Orthoclase
+vein.craftorium.pentlandite.name=Pentlandite
+vein.craftorium.pyrite.name=Pyrite
+vein.craftorium.pyrochlore.name=Pyrochlore
+vein.craftorium.pyrolusite.name=Pyrolusite
+vein.craftorium.quartzite.name=Quartzite
+vein.craftorium.quartzite_nether.name=Quartzite (Nether)
+vein.craftorium.redstone.name=Redstone
+vein.craftorium.rutile.name=Rutile
+vein.craftorium.scheelite.name=Scheelite
+vein.craftorium.smaltite.name=Smaltite
+vein.craftorium.smithsonite.name=Smithsonite
+vein.craftorium.sodalite.name=Sodalite
+vein.craftorium.spdodumene.name=Spdodumene
+vein.craftorium.stibnite.name=Stibnite
+vein.craftorium.stibnite_nether.name=Stibnite (Nether)
+
+
+# ##################################################
+# Others
+
 # Tabs
 itemGroup.common=Common
 itemGroup.machines=Machines
 itemGroup.substances=Substances
 itemGroup.tools=Tools
+
+# Tiers
+tier.craftorium.one.name=Tier 1
+tier.craftorium.two.name=Tier 2
+tier.craftorium.three.name=Tier 3
+tier.craftorium.four.name=Tier 4
+tier.craftorium.five.name=Tier 5
+
+# Tooltips
+tooltip.craftorium.tier.name=§eTier: %s§r
+tooltip.craftorium.formula=§3%s§r
+tooltip.craftorium.temperature=§5%s°K§r
+tooltip.craftorium.state.solid=§aState: Solid§r
+tooltip.craftorium.state.liquid=§aState: Liquid§r
+tooltip.craftorium.state.gaseous=§aState: Gaseous§r
+tooltip.craftorium.state.unknown=§4State: Unknown§r
+tooltip.craftorium.battery.energy=§c%s/%sRF§r
+
+# JEI
+jei.craftorium.vein_generation.name=Ore Generation
+jei.craftorium.vein.chance=Weight: %s
+jei.craftorium.vein.depth=Y: %s-%s
+jei.craftorium.vein.dimension=Dimension: %s

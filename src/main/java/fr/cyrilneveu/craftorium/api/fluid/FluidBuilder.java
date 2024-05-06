@@ -7,10 +7,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.BLOCKS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.FLUIDS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.BLOCKS;
-import static fr.cyrilneveu.craftorium.common.ACommonProxy.FLUIDS;
-
 
 public class FluidBuilder {
     private String name;
@@ -18,7 +17,7 @@ public class FluidBuilder {
     private String translation;
     private FaceProvider still;
     private FaceProvider flowing;
-    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.tabCommon;
+    private net.minecraft.creativetab.CreativeTabs creativeTab = CreativeTabs.COMMON;
     private boolean isGaseous = false;
     private int color = ERROR_COLOR;
     private int luminosity = 0;
@@ -105,16 +104,16 @@ public class FluidBuilder {
         fluid.setGaseous(isGaseous).setDensity(density).setViscosity(viscosity).setLuminosity(luminosity).setTemperature(temperature);
         fluid.setUnlocalizedName(String.join(".", translation, "name"));
 
-        FLUIDS.put(name, fluid);
+        FLUIDS_REGISTRY.put(name, fluid);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        CustomFluidBlock block = new CustomFluidBlock(fluid, material);
+        CustomFluid.CustomFluidBlock block = new CustomFluid.CustomFluidBlock(fluid, material);
         block.setRegistryName(registryName);
         block.setTranslationKey(translation);
         block.setCreativeTab(creativeTab);
 
-        BLOCKS.put(name, block);
+        BLOCKS_REGISTRY.put(name, block);
 
         return fluid;
     }
