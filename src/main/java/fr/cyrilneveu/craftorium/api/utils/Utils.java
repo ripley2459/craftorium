@@ -20,8 +20,11 @@ import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,6 +57,10 @@ public final class Utils {
 
     public static boolean isAdvancedTooltipsOn() {
         return Minecraft.getMinecraft().gameSettings.advancedItemTooltips;
+    }
+
+    public static Supplier<List<String>> generateTooltipProvider(String... localisationKeys) {
+        return localisationKeys.length == 0 ? Collections::emptyList : () -> Arrays.asList(localisationKeys);
     }
 
     public static String toCamelCase(String s) {

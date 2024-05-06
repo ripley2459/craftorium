@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.api.item;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 
@@ -57,8 +58,8 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder tooltips(@Nullable Supplier<List<String>> toolTips) {
-        this.toolTips = toolTips;
+    public ItemBuilder tooltips(String... toolTipLocalisationKeys) {
+        this.toolTips = Utils.generateTooltipProvider(toolTipLocalisationKeys);
         return this;
     }
 

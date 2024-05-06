@@ -67,7 +67,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
         for (IItemBehaviour behaviour : behaviours)
             behaviour.addInformation(stack, worldIn, tooltip, flagIn);
         if (aestheticism.getToolTips() != null)
-            tooltip.addAll(aestheticism.getToolTips().get());
+            aestheticism.getToolTips().get().forEach(t -> tooltip.add(Utils.localise(t)));
     }
 
     @Override

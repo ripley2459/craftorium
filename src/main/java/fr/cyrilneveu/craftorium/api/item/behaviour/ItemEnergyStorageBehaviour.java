@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.api.utils.Utils.ENERGY_NBT_KEY;
 
