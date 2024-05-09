@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.client;
 
 import fr.cyrilneveu.craftorium.api.fluid.CustomFluid;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.block.Block;
@@ -60,7 +61,7 @@ public final class ClientProxy extends ACommonProxy {
         for (Fluid fluid : FLUIDS_REGISTRY.getAll().values()) {
             Block block = fluid.getBlock();
             if (block instanceof CustomFluid.CustomFluidBlock)
-                ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
+                ModelLoader.setCustomStateMapper(block, RenderUtils.SIMPLE_STATE_MAPPER.apply(block));
         }
     }
 

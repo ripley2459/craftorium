@@ -5,20 +5,16 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -29,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-import static fr.cyrilneveu.craftorium.api.utils.Utils.BLOCK_MODEL_BUILDER;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 
-public class CustomBlock extends Block implements ICustomModel, IBlockColor, IItemColor {
+public class CustomBlock extends Block implements ICustomModel {
     protected final Aestheticism.ObjectAestheticism aestheticism;
 
     public CustomBlock(Material material, Aestheticism.ObjectAestheticism aestheticism) {
@@ -45,7 +41,7 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
         return BlockRenderLayer.CUTOUT;
     }
 
-    @Override
+    /*@Override
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
         return aestheticism.getFaceProviders()[layer].getColor();
@@ -55,7 +51,7 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(ItemStack stack, int layer) {
         return aestheticism.getFaceProviders()[layer].getColor();
-    }
+    }*/
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -67,7 +63,7 @@ public class CustomBlock extends Block implements ICustomModel, IBlockColor, IIt
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelLoader.setCustomStateMapper(this, Utils.SIMPLE_STATE_MAPPER.apply(this));
+        ModelLoader.setCustomStateMapper(this, RenderUtils.SIMPLE_STATE_MAPPER.apply(this));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, Utils.getSimpleModelLocation(this));
     }
 

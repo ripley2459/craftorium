@@ -30,10 +30,8 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
 
-import static fr.cyrilneveu.craftorium.api.utils.Utils.BLOCK_MODEL_BUILDER;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 
 public class SubstanceBlock extends CustomBlock {
@@ -124,7 +122,7 @@ public class SubstanceBlock extends CustomBlock {
                 items.add(new ItemStack(this, 1, stoneType.getMeta()));
         }
 
-        @Override
+        /*@Override
         @SideOnly(Side.CLIENT)
         public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
             return layer == 1 ? aestheticism.getFaceProviders()[0].getColor() : WHITE_COLOR;
@@ -134,7 +132,7 @@ public class SubstanceBlock extends CustomBlock {
         @SideOnly(Side.CLIENT)
         public int colorMultiplier(ItemStack stack, int layer) {
             return layer == 1 ? aestheticism.getFaceProviders()[0].getColor() : WHITE_COLOR;
-        }
+        }*/
 
         @Override
         @SideOnly(Side.CLIENT)

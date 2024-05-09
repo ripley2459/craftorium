@@ -1,14 +1,10 @@
 package fr.cyrilneveu.craftorium.api.utils;
 
 import com.google.common.base.CaseFormat;
-import fr.cyrilneveu.craftorium.api.render.ModelBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,8 +24,6 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-
 public final class Utils {
     public static final float EPSILON = 0.001f;
     public static final int ERROR_COLOR = 0xFFff00ff;
@@ -37,11 +31,7 @@ public final class Utils {
     public static final int BLACK_COLOR = 0xFF000000;
     public static final float BASE_TEMPERATURE = 273.15f;
     public static final String ENERGY_NBT_KEY = "Energy";
-    public static final Function<Block, CustomStateMapper> SIMPLE_STATE_MAPPER = block -> new CustomStateMapper(getSimpleModelLocation(block));
-    public static final ModelBuilder ITEM_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.ITEM);
-    public static final ModelBuilder BLOCK_MODEL_BUILDER = new ModelBuilder(DefaultVertexFormats.BLOCK);
     public static final IItemBehaviour[] NO_BEHAVIOUR = new IItemBehaviour[0];
-    public static final ResourceLocation BACKGROUND = new ResourceLocation(MODID, "textures/interfaces/elements/background.png");
 
     public static String localise(String localisationKey, Object... substitutions) {
         return FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? net.minecraft.util.text.translation.I18n.translateToLocalFormatted(localisationKey, substitutions) : net.minecraft.client.resources.I18n.format(localisationKey, substitutions);
@@ -184,18 +174,5 @@ public final class Utils {
     public static NBTTagCompound setValue(String name, int value, NBTTagCompound nbt) {
         nbt.setInteger(name, value);
         return nbt;
-    }
-
-    public static class CustomStateMapper extends StateMapperBase {
-        private final ModelResourceLocation location;
-
-        public CustomStateMapper(ModelResourceLocation location) {
-            this.location = location;
-        }
-
-        @Override
-        protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-            return location;
-        }
     }
 }
