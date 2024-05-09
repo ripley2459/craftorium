@@ -1,14 +1,14 @@
 package fr.cyrilneveu.craftorium.client;
 
+import fr.cyrilneveu.craftorium.api.block.CustomBlock;
 import fr.cyrilneveu.craftorium.api.fluid.CustomFluid;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
-import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
@@ -60,7 +60,7 @@ public final class ClientProxy extends ACommonProxy {
         for (Fluid fluid : FLUIDS_REGISTRY.getAll().values()) {
             Block block = fluid.getBlock();
             if (block instanceof CustomFluid.CustomFluidBlock)
-                ModelLoader.setCustomStateMapper(block, Utils.SIMPLE_STATE_MAPPER.apply(block));
+                ModelLoader.setCustomStateMapper(block, RenderUtils.SIMPLE_STATE_MAPPER.apply(block));
         }
     }
 
@@ -73,8 +73,8 @@ public final class ClientProxy extends ACommonProxy {
             Block block = fluid.getBlock();
             if (block instanceof CustomFluid.CustomFluidBlock) {
                 ModelFluid modelFluid = new ModelFluid(fluid);
-                IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, Utils::getTexture);
-                event.getModelRegistry().putObject(Utils.getSimpleModelLocation(block), bakedModel);
+                IBakedModel bakedModel = modelFluid.bake(modelFluid.getDefaultState(), DefaultVertexFormats.ITEM, RenderUtils::getTexture);
+                event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(block), bakedModel);
             }
         }
     }
@@ -82,15 +82,15 @@ public final class ClientProxy extends ACommonProxy {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onHandlingItemColors(ColorHandlerEvent.Item event) {
-        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof IItemColor).forEach(i -> event.getItemColors().registerItemColorHandler((IItemColor) i, i));
-        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof IItemColor).forEach(b -> event.getItemColors().registerItemColorHandler((IItemColor) b, b));
+        ITEMS_REGISTRY.getAll().values().stream().filter(i -> i instanceof ICustomModel).forEach(i -> event.getItemColors().registerItemColorHandler((s, l) -> ((ICustomModel) i).getItemStackColor(s, l), i));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> event.getItemColors().registerItemColorHandler((s, l) -> ((ICustomModel) b).getItemStackColor(s, l), b));
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onHandlingBlockColors(ColorHandlerEvent.Block event) {
-        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof IBlockColor).forEach(b -> event.getBlockColors().registerBlockColorHandler((IBlockColor) b, b));
-        FLUIDS_REGISTRY.getAll().values().stream().filter(f -> f instanceof IBlockColor).forEach(f -> event.getBlockColors().registerBlockColorHandler((IBlockColor) f.getBlock(), f.getBlock()));
+        BLOCKS_REGISTRY.getAll().values().stream().filter(b -> b instanceof ICustomModel).forEach(b -> event.getBlockColors().registerBlockColorHandler((s, w, p, l) -> ((CustomBlock) b).getBlockColor(s, w, p, l), b));
+        FLUIDS_REGISTRY.getAll().values().stream().filter(f -> f instanceof ICustomModel).forEach(f -> event.getBlockColors().registerBlockColorHandler((IBlockColor) f.getBlock(), f.getBlock()));
     }
 
     @Override

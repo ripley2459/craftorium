@@ -9,7 +9,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.BACKGROUND;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BACKGROUND;
 
 public final class VeinCategory extends ACategory<VeinWrapper> {
     public VeinCategory(IGuiHelper guiHelper) {

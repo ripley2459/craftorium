@@ -4,13 +4,10 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
-import fr.cyrilneveu.craftorium.api.utils.CombinedCapabilityProvider;
-import fr.cyrilneveu.craftorium.api.utils.ICapableItem;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
-import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.api.utils.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,16 +20,15 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static fr.cyrilneveu.craftorium.api.utils.Utils.ITEM_MODEL_BUILDER;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ITEM_MODEL_BUILDER;
 
-public class CustomItem extends Item implements ICustomModel, IItemColor {
+public class CustomItem extends Item implements ICustomModel {
     protected final IItemBehaviour[] behaviours;
     protected final Aestheticism.ObjectAestheticism aestheticism;
 
@@ -96,7 +92,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(@NotNull ItemStack itemStack, int layer) {
+    public int getItemStackColor(ItemStack stack, int layer) {
         return aestheticism.getFaceProviders()[layer].getColor();
     }
 
@@ -110,7 +106,7 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+        ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
         ModelBakery.registerItemVariants(this, location);
         ModelLoader.setCustomMeshDefinition(this, stack -> location);
     }
@@ -123,6 +119,6 @@ public class CustomItem extends Item implements ICustomModel, IItemColor {
         for (FaceProvider face : aestheticism.getFaceProviders())
             ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-        event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+        event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
     }
 }

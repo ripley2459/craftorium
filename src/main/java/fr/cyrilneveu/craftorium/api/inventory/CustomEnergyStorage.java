@@ -1,11 +1,11 @@
 package fr.cyrilneveu.craftorium.api.inventory;
 
-import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.IEnergyStorage;
 
-import static fr.cyrilneveu.craftorium.api.utils.Utils.ENERGY_NBT_KEY;
+import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.ENERGY_NBT_KEY;
 
 public class CustomEnergyStorage implements IEnergyStorage, INBTSerializable<NBTTagCompound> {
     protected int energy;
@@ -64,11 +64,11 @@ public class CustomEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return Utils.setValue(ENERGY_NBT_KEY, energy);
+        return NBTUtils.setValue(ENERGY_NBT_KEY, energy);
     }
 
     @Override
     public void deserializeNBT(NBTTagCompound nbt) {
-        energy = Utils.getIntValue(ENERGY_NBT_KEY, nbt);
+        energy = NBTUtils.getIntValue(ENERGY_NBT_KEY, nbt);
     }
 }
