@@ -6,6 +6,7 @@ import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -262,7 +263,7 @@ public final class SubstancesObjects {
         FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         if (substance.getAestheticism().isShiny())
-            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), WHITE_COLOR);
+            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), RenderUtils.WHITE_COLOR);
         return faces;
     }
 
@@ -290,7 +291,7 @@ public final class SubstancesObjects {
     private static FaceProvider[] toolFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[2];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
-        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_base"))), WHITE_COLOR);
+        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_base"))), RenderUtils.WHITE_COLOR);
         return faces;
     }
 
@@ -298,7 +299,7 @@ public final class SubstancesObjects {
         FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         if (substance.getAestheticism().isShiny())
-            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), WHITE_COLOR);
+            faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), RenderUtils.WHITE_COLOR);
         return faces;
     }
 

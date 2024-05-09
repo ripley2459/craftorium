@@ -28,17 +28,5 @@ public class CustomFluid extends Fluid {
         public CustomFluidBlock(Fluid fluid, Material material) {
             super(fluid, material);
         }
-
-        /*@Override
-        @SideOnly(Side.CLIENT)
-        public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-            return getFluid().getColor();
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return getFluid().getColor();
-        }*/
     }
 }

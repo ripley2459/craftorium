@@ -4,6 +4,7 @@ import fr.cyrilneveu.craftorium.api.inventory.CustomEnergyStorage;
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.utils.ICapableItem;
 import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static fr.cyrilneveu.craftorium.api.utils.Utils.ENERGY_NBT_KEY;
+import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.ENERGY_NBT_KEY;
 
 public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem {
     protected final int capacity;
@@ -37,7 +38,7 @@ public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem 
                 if (!canReceive())
                     return 0;
 
-                energy = Utils.getIntValue(ENERGY_NBT_KEY, stack);
+                energy = NBTUtils.getIntValue(ENERGY_NBT_KEY, stack);
                 int received = Math.min(capacity - energy, Math.min(transfer, amount));
                 if (!simulate)
                     energy += received;
@@ -51,7 +52,7 @@ public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem 
                 if (!canExtract())
                     return 0;
 
-                energy = Utils.getIntValue(ENERGY_NBT_KEY, stack);
+                energy = NBTUtils.getIntValue(ENERGY_NBT_KEY, stack);
                 int extracted = Math.min(energy, Math.min(amount, transfer));
                 if (!simulate)
                     energy -= extracted;
@@ -62,7 +63,7 @@ public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem 
 
             @Override
             public int getEnergyStored() {
-                return Utils.getIntValue(ENERGY_NBT_KEY, stack);
+                return NBTUtils.getIntValue(ENERGY_NBT_KEY, stack);
             }
 
             @Override
@@ -77,12 +78,12 @@ public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem 
 
             @Override
             public NBTTagCompound serializeNBT() {
-                return Utils.setValue(ENERGY_NBT_KEY, energy, stack);
+                return NBTUtils.setValue(ENERGY_NBT_KEY, energy, stack);
             }
 
             @Override
             public void deserializeNBT(NBTTagCompound nbt) {
-                energy = Utils.getIntValue(ENERGY_NBT_KEY, stack);
+                energy = NBTUtils.getIntValue(ENERGY_NBT_KEY, stack);
             }
         };
     }

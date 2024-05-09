@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.BLOCKS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
 
 public class BlockBuilder {
     private String name;

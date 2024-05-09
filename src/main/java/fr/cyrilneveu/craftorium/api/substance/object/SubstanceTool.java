@@ -6,6 +6,7 @@ import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -88,11 +89,11 @@ public class SubstanceTool extends SubstanceItem {
             return aestheticism.isGlint();
         }
 
-        /*@Override
+        @Override
         @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return aestheticism.getFaceProviders()[tintIndex].getColor();
-        }*/
+        public int getItemStackColor(ItemStack stack, int layer) {
+            return aestheticism.getFaceProviders()[layer].getColor();
+        }
 
         @Override
         public void addTextures(Set<ResourceLocation> textures) {
@@ -102,7 +103,7 @@ public class SubstanceTool extends SubstanceItem {
 
         @Override
         public void onModelRegister() {
-            ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+            ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
             ModelBakery.registerItemVariants(this, location);
             ModelLoader.setCustomMeshDefinition(this, stack -> location);
         }
@@ -114,7 +115,7 @@ public class SubstanceTool extends SubstanceItem {
             for (FaceProvider face : aestheticism.getFaceProviders())
                 ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-            event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+            event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
         }
     }
 
@@ -151,11 +152,11 @@ public class SubstanceTool extends SubstanceItem {
             return aestheticism.isGlint();
         }
 
-        /*@Override
+        @Override
         @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return aestheticism.getFaceProviders()[tintIndex].getColor();
-        }*/
+        public int getItemStackColor(ItemStack stack, int layer) {
+            return aestheticism.getFaceProviders()[layer].getColor();
+        }
 
         @Override
         public void addTextures(Set<ResourceLocation> textures) {
@@ -165,7 +166,7 @@ public class SubstanceTool extends SubstanceItem {
 
         @Override
         public void onModelRegister() {
-            ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+            ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
             ModelBakery.registerItemVariants(this, location);
             ModelLoader.setCustomMeshDefinition(this, stack -> location);
         }
@@ -177,7 +178,7 @@ public class SubstanceTool extends SubstanceItem {
             for (FaceProvider face : aestheticism.getFaceProviders())
                 ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-            event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+            event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
         }
     }
 
@@ -214,11 +215,11 @@ public class SubstanceTool extends SubstanceItem {
             return aestheticism.isGlint();
         }
 
-        /*@Override
+        @Override
         @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return aestheticism.getFaceProviders()[tintIndex].getColor();
-        }*/
+        public int getItemStackColor(ItemStack stack, int layer) {
+            return aestheticism.getFaceProviders()[layer].getColor();
+        }
 
         @Override
         public void addTextures(Set<ResourceLocation> textures) {
@@ -228,7 +229,7 @@ public class SubstanceTool extends SubstanceItem {
 
         @Override
         public void onModelRegister() {
-            ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+            ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
             ModelBakery.registerItemVariants(this, location);
             ModelLoader.setCustomMeshDefinition(this, stack -> location);
         }
@@ -240,7 +241,7 @@ public class SubstanceTool extends SubstanceItem {
             for (FaceProvider face : aestheticism.getFaceProviders())
                 ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-            event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+            event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
         }
     }
 
@@ -277,11 +278,11 @@ public class SubstanceTool extends SubstanceItem {
             return aestheticism.isGlint();
         }
 
-        /*@Override
+        @Override
         @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return aestheticism.getFaceProviders()[tintIndex].getColor();
-        }*/
+        public int getItemStackColor(ItemStack stack, int layer) {
+            return aestheticism.getFaceProviders()[layer].getColor();
+        }
 
         @Override
         public void addTextures(Set<ResourceLocation> textures) {
@@ -291,7 +292,7 @@ public class SubstanceTool extends SubstanceItem {
 
         @Override
         public void onModelRegister() {
-            ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+            ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
             ModelBakery.registerItemVariants(this, location);
             ModelLoader.setCustomMeshDefinition(this, stack -> location);
         }
@@ -303,7 +304,7 @@ public class SubstanceTool extends SubstanceItem {
             for (FaceProvider face : aestheticism.getFaceProviders())
                 ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-            event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+            event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
         }
     }
 
@@ -340,11 +341,11 @@ public class SubstanceTool extends SubstanceItem {
             return aestheticism.isGlint();
         }
 
-        /*@Override
+        @Override
         @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int tintIndex) {
-            return aestheticism.getFaceProviders()[tintIndex].getColor();
-        }*/
+        public int getItemStackColor(ItemStack stack, int layer) {
+            return aestheticism.getFaceProviders()[layer].getColor();
+        }
 
         @Override
         @SideOnly(Side.CLIENT)
@@ -356,7 +357,7 @@ public class SubstanceTool extends SubstanceItem {
         @Override
         @SideOnly(Side.CLIENT)
         public void onModelRegister() {
-            ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+            ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
             ModelBakery.registerItemVariants(this, location);
             ModelLoader.setCustomMeshDefinition(this, stack -> location);
         }
@@ -369,7 +370,7 @@ public class SubstanceTool extends SubstanceItem {
             for (FaceProvider face : aestheticism.getFaceProviders())
                 ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-            event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+            event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
         }
     }
 }

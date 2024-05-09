@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneProperty;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneType;
@@ -30,8 +31,10 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 
 public class SubstanceBlock extends CustomBlock {
@@ -56,7 +59,7 @@ public class SubstanceBlock extends CustomBlock {
         for (FaceProvider face : aestheticism.getFaceProviders())
             BLOCK_MODEL_BUILDER.addLayer(face.getTexture());
 
-        event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
+        event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
     }
 
     public static class FrameBlock extends SubstanceBlock {
@@ -122,17 +125,15 @@ public class SubstanceBlock extends CustomBlock {
                 items.add(new ItemStack(this, 1, stoneType.getMeta()));
         }
 
-        /*@Override
-        @SideOnly(Side.CLIENT)
-        public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
+        @Override
+        public int getBlockColor(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int layer) {
             return layer == 1 ? aestheticism.getFaceProviders()[0].getColor() : WHITE_COLOR;
         }
 
         @Override
-        @SideOnly(Side.CLIENT)
-        public int colorMultiplier(ItemStack stack, int layer) {
+        public int getItemStackColor(ItemStack stack, int layer) {
             return layer == 1 ? aestheticism.getFaceProviders()[0].getColor() : WHITE_COLOR;
-        }*/
+        }
 
         @Override
         @SideOnly(Side.CLIENT)

@@ -4,10 +4,8 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
-import fr.cyrilneveu.craftorium.api.utils.CombinedCapabilityProvider;
-import fr.cyrilneveu.craftorium.api.utils.ICapableItem;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
-import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.api.utils.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -92,11 +90,11 @@ public class CustomItem extends Item implements ICustomModel {
         return 0d;
     }
 
-    /*@Override
+    @Override
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(@NotNull ItemStack itemStack, int layer) {
+    public int getItemStackColor(ItemStack stack, int layer) {
         return aestheticism.getFaceProviders()[layer].getColor();
-    }*/
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -108,7 +106,7 @@ public class CustomItem extends Item implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public void onModelRegister() {
-        ModelResourceLocation location = Utils.getSimpleModelLocation(this);
+        ModelResourceLocation location = RenderUtils.getSimpleModelLocation(this);
         ModelBakery.registerItemVariants(this, location);
         ModelLoader.setCustomMeshDefinition(this, stack -> location);
     }
@@ -121,6 +119,6 @@ public class CustomItem extends Item implements ICustomModel {
         for (FaceProvider face : aestheticism.getFaceProviders())
             ITEM_MODEL_BUILDER.addLayer(face.getTexture());
 
-        event.getModelRegistry().putObject(Utils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
+        event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), ITEM_MODEL_BUILDER.build().getModel());
     }
 }

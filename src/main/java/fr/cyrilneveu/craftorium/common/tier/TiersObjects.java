@@ -19,7 +19,7 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.NO_BEHAVIOUR;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {
