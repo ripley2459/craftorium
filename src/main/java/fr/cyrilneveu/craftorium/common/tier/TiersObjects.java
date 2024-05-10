@@ -1,12 +1,12 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
 import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.config.Settings;
 import net.minecraft.item.Item;
@@ -18,8 +18,8 @@ import java.util.List;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIER_ITEMS_REGISTRY;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.NO_BEHAVIOUR;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.NO_BEHAVIOUR;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {

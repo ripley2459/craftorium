@@ -2,10 +2,10 @@ package fr.cyrilneveu.craftorium.api.substance.object;
 
 import com.google.common.base.Preconditions;
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -24,17 +24,19 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final boolean self;
     protected final String prefix;
     protected final String suffix;
+    protected final int amount;
     protected final ICreateObject provider;
     protected final IGetFaces faces;
     protected final IGetModelTemplate model;
     @Nullable
     protected final IGetTooltips tooltips;
 
-    public ASubstanceObject(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+    public ASubstanceObject(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
         this.name = name;
         this.self = self;
         this.prefix = prefix;
         this.suffix = suffix;
+        this.amount = amount;
         this.provider = provider;
         this.faces = faces;
         this.model = model;
@@ -118,6 +120,10 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         return suffix;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public int compareTo(@NotNull ASubstanceObject other) {
         return name.compareTo(other.getName(null));
@@ -149,8 +155,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public static class SubstanceBlock extends ASubstanceObject {
-        public SubstanceBlock(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
-            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public SubstanceBlock(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
         }
 
         public Block asBlock(Substance substance) {
@@ -159,8 +165,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public static class SubstanceFluid extends ASubstanceObject {
-        public SubstanceFluid(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
-            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public SubstanceFluid(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
         }
 
         @Override
@@ -175,8 +181,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     public static class SubstanceTool extends SubstanceItem {
-        public SubstanceTool(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
-            super(name, self, prefix, suffix, provider, faces, model, behaviours, tooltips);
+        public SubstanceTool(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, amount, provider, faces, model, behaviours, tooltips);
         }
 
         @Override
@@ -188,8 +194,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     public static class SubstanceItem extends ASubstanceObject {
         protected final IGetBehaviours behaviours;
 
-        public SubstanceItem(String name, boolean self, String prefix, String suffix, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
-            super(name, self, prefix, suffix, provider, faces, model, tooltips);
+        public SubstanceItem(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, IGetBehaviours behaviours, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
             this.behaviours = behaviours;
         }
 

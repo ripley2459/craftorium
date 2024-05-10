@@ -1,10 +1,10 @@
 package fr.cyrilneveu.craftorium.api.tier.object;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

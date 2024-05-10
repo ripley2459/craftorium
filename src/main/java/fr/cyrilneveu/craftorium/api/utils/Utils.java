@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.utils;
 
 import com.google.common.base.CaseFormat;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 public final class Utils {
     public static final float EPSILON = 0.001f;
     public static final float BASE_TEMPERATURE = 273.15f;
+    public static final int BASE_AMOUNT = 144;
     public static final IItemBehaviour[] NO_BEHAVIOUR = new IItemBehaviour[0];
 
     public static String localise(String localisationKey, Object... substitutions) {

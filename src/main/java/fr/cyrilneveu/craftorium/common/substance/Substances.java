@@ -147,6 +147,7 @@ public final class Substances {
                 .tools(2.0f, 0.0f, 59, 0, 15)
                 .toughness(2.0f, 5.0f, "axe", 0)
                 .overrides(ROD, "minecraft:stick", BLOCK, "ore:plankWood", HOE, "minecraft:wooden_hoe", PICKAXE, "minecraft:wooden_pickaxe", SHOVEL, "minecraft:wooden_shovel", SWORD, "minecraft:wooden_sword", AXE, "minecraft:wooden_axe")
+                .fuel(33)
                 .style("wood")
                 .color(0xFF663f16)
                 .sound(SoundType.WOOD)
@@ -186,6 +187,7 @@ public final class Substances {
                 .blocks(BLOCK, ORE)
                 .veinMember()
                 .overrides(BLOCK, "minecraft:coal_block", GEM, "minecraft:coal:0")
+                .fuel(1600)
                 .color(0xFF1a1a1a)
                 .style("wood")
                 .build();
@@ -194,6 +196,7 @@ public final class Substances {
                 .items(DUST, GEM)
                 .blocks(BLOCK)
                 .overrides(GEM, "minecraft:coal:1")
+                .fuel(1600)
                 .color(0xFF291c0b)
                 .style("wood")
                 .build();

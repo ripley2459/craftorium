@@ -2,8 +2,6 @@ package fr.cyrilneveu.craftorium.api.item.behaviour;
 
 import fr.cyrilneveu.craftorium.api.inventory.CustomEnergyStorage;
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
-import fr.cyrilneveu.craftorium.api.utils.ICapableItem;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.util.ITooltipFlag;
