@@ -1,8 +1,9 @@
 package fr.cyrilneveu.craftorium.api.item;
 
+import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -47,6 +48,10 @@ public class ItemBuilder {
     public ItemBuilder setCreativeTab(net.minecraft.creativetab.CreativeTabs creativeTab) {
         this.creativeTab = creativeTab;
         return this;
+    }
+
+    public ItemBuilder fuel(int duration) {
+        return this.behaviour(new FuelBehaviour(duration));
     }
 
     public ItemBuilder addTexture(String path) {

@@ -1,11 +1,15 @@
 package fr.cyrilneveu.craftorium.api.item;
 
+import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.ICapableItem;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ICustomModel;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
-import fr.cyrilneveu.craftorium.api.utils.*;
-import net.minecraft.client.Minecraft;
+import fr.cyrilneveu.craftorium.api.utils.CombinedCapabilityProvider;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,6 +47,16 @@ public class CustomItem extends Item implements ICustomModel {
 
     public static int getMaxEnergy(ItemStack itemStack) {
         return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getMaxEnergyStored() : -1;
+    }
+
+    @Override
+    public int getItemBurnTime(ItemStack itemStack) {
+        for (IItemBehaviour behaviour : behaviours) {
+            if (behaviour instanceof FuelBehaviour fuel && fuel.getDuration() > 0)
+                return fuel.getDuration();
+        }
+
+        return super.getItemBurnTime(itemStack);
     }
 
     @Nullable

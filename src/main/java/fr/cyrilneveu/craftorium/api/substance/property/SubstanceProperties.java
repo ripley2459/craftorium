@@ -10,7 +10,8 @@ public final class SubstanceProperties {
     public static final VeinMemberProperty VEIN_MEMBER_PROPERTY = new VeinMemberProperty();
 
     public enum KeyProperties {
-        VEIN_MEMBER
+        VEIN_MEMBER,
+        FUEL
     }
 
     public static final class EmptyProperty implements ISubstanceProperty {

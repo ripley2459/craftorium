@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneProperty;
@@ -33,8 +34,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
 
+import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.FUEL;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.BASE_AMOUNT;
 import static fr.cyrilneveu.craftorium.common.world.StoneTypes.STONES_REGISTRY;
 
 public class SubstanceBlock extends CustomBlock {
@@ -60,6 +63,16 @@ public class SubstanceBlock extends CustomBlock {
             BLOCK_MODEL_BUILDER.addLayer(face.getTexture());
 
         event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), BLOCK_MODEL_BUILDER.build().getModel());
+    }
+
+    public int getBlockBurnTime() {
+        if (substance.getProperties().containsKey(FUEL)) {
+            int duration = ((FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
+            if (duration > 0)
+                return (reference.getAmount() * duration) / BASE_AMOUNT;
+        }
+
+        return 0;
     }
 
     public static class FrameBlock extends SubstanceBlock {

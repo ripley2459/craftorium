@@ -11,6 +11,7 @@ import fr.cyrilneveu.craftorium.api.property.Toughness;
 import fr.cyrilneveu.craftorium.api.recipe.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
+import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import net.minecraft.block.SoundType;
@@ -20,6 +21,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.FUEL;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
@@ -268,6 +270,12 @@ public final class SubstanceBuilder {
         if (fluids.length == 0)
             this.fluids = new TreeSet<>();
         this.fluids.addAll(Arrays.asList(fluids));
+        return this;
+    }
+
+    public SubstanceBuilder fuel(int duration) {
+        if (duration > 0)
+            this.property(FUEL, new FuelProperty(duration));
         return this;
     }
 

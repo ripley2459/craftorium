@@ -4,6 +4,7 @@ import crafttweaker.CraftTweakerAPI;
 import fr.cyrilneveu.craftorium.CraftoriumTags;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
 import fr.cyrilneveu.craftorium.common.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
@@ -22,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -131,6 +133,17 @@ public abstract class ACommonProxy {
             substance.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(substance), i.asItemStack(substance)));
             substance.getTools().forEach(t -> OreDictionary.registerOre(t.getOre(substance), t.asItemStack(substance)));
             substance.getBlocks().forEach(b -> OreDictionary.registerOre(b.getOre(substance), b.asItemStack(substance)));
+        }
+    }
+
+    @SubscribeEvent
+    public static void modifyFuelDuration(FurnaceFuelBurnTimeEvent event) {
+        ItemStack stack = event.getItemStack();
+        Block block = Block.getBlockFromItem(stack.getItem());
+        if (block instanceof SubstanceBlock substanceBlock) {
+            int duration = substanceBlock.getBlockBurnTime();
+            if (duration > 0)
+                event.setBurnTime(duration);
         }
     }
 

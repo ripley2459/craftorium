@@ -1,11 +1,13 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
-import fr.cyrilneveu.craftorium.api.utils.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
+import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.FUEL;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
@@ -70,21 +73,21 @@ public final class SubstancesObjects {
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
 
-        CASING = createItem("casing").build();
-        DUST = createItem("dust").build();
-        FOIL = createItem("foil").build();
-        GEAR = createItem("gear").build();
-        GEM = createItem("gem").self().build();
-        INGOT = createItem("ingot").build();
-        NUGGET = createItem("nugget").build();
-        PEARL = createItem("pearl").build();
-        PLATE = createItem("plate").build();
-        RING = createItem("ring").build();
-        ROD = createItem("rod").build();
-        ROTOR = createItem("rotor").build();
-        SCREW = createItem("screw").build();
-        SPRING = createItem("spring").build();
-        WIRE = createItem("wire").build();
+        GEM = createItem("gem").self().amount(BASE_AMOUNT).build();
+        INGOT = createItem("ingot").amount(BASE_AMOUNT).build();
+        PEARL = createItem("pearl").amount(BASE_AMOUNT).build();
+        PLATE = createItem("plate").amount(INGOT.getAmount()).build();
+        CASING = createItem("casing").amount(PLATE.getAmount()).build();
+        DUST = createItem("dust").amount(INGOT.getAmount()).build();
+        FOIL = createItem("foil").amount(PLATE.getAmount() / 2).build();
+        GEAR = createItem("gear").amount(PLATE.getAmount()).build();
+        NUGGET = createItem("nugget").amount(INGOT.getAmount() / 9).build();
+        ROD = createItem("rod").amount(INGOT.getAmount() / 4).build();
+        RING = createItem("ring").amount(ROD.getAmount()).build();
+        SCREW = createItem("screw").amount(ROD.getAmount() / 2).build();
+        SPRING = createItem("spring").amount(ROD.getAmount()).build();
+        WIRE = createItem("wire").amount(FOIL.getAmount() / 4).build();
+        ROTOR = createItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
 
         AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();
@@ -96,23 +99,23 @@ public final class SubstancesObjects {
         PICKAXE = createTool("pickaxe").provider(SubstancesObjects::createPickaxe).build();
         SAW = createTool("saw").build();
         SCREWDRIVER = createTool("screwdriver").build();
-        SHOVEL = createTool("shovel").provider(SubstancesObjects::createShovel).build();
+        SHOVEL = createTool("shovel").amount(0).provider(SubstancesObjects::createShovel).build();
         SWORD = createTool("sword").provider(SubstancesObjects::createSword).build();
         WRENCH = createTool("wrench").build();
 
-        BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
-        FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
-        HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).build();
+        BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(BASE_AMOUNT * 9).build();
+        FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(ROD.getAmount() * 8).build();
+        HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(PLATE.getAmount() * 8).build();
         ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
 
-        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).build();
+        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).amount(1).build();
     }
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstancesObjects::itemFaces);
-        builder.behaviours(SubstancesObjects::noBehaviours);
+        builder.behaviours(SubstancesObjects::defaultBehaviours);
 
         return builder;
     }
@@ -121,7 +124,7 @@ public final class SubstancesObjects {
         ASubstanceObjectBuilder.SubstanceToolBuilder builder = new ASubstanceObjectBuilder.SubstanceToolBuilder(name);
         builder.provider(SubstancesObjects::createTool);
         builder.faces(SubstancesObjects::toolFaces);
-        builder.behaviours(SubstancesObjects::noBehaviours);
+        builder.behaviours(SubstancesObjects::defaultBehaviours);
 
         return builder;
     }
@@ -325,7 +328,17 @@ public final class SubstancesObjects {
         return lines;
     }
 
-    public static IItemBehaviour[] noBehaviours(ASubstanceObject reference, Substance substance) {
-        return NO_BEHAVIOUR;
+    public static IItemBehaviour[] defaultBehaviours(ASubstanceObject reference, Substance substance) {
+        List<IItemBehaviour> behaviours = new ArrayList<>();
+
+        if (substance.getProperties().containsKey(FUEL)) {
+            int duration = ((FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
+            if (duration > 0) {
+                duration = (reference.getAmount() * duration) / BASE_AMOUNT;
+                behaviours.add(new FuelBehaviour(duration));
+            }
+        }
+
+        return behaviours.isEmpty() ? NO_BEHAVIOUR : behaviours.toArray(new IItemBehaviour[0]);
     }
 }

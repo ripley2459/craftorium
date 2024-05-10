@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.utils;
+package fr.cyrilneveu.craftorium.api.item.behaviour;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

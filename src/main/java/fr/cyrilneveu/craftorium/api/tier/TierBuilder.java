@@ -21,8 +21,8 @@ import java.util.TreeSet;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
-import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
 import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 
 @ZenClass("mods." + MODID + ".tier.Builder")

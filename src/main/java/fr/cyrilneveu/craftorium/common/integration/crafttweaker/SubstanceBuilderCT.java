@@ -217,6 +217,12 @@ public final class SubstanceBuilderCT {
     }
 
     @ZenMethod
+    public SubstanceBuilderCT fuel(int duration) {
+        builder.fuel(duration);
+        return this;
+    }
+
+    @ZenMethod
     public SubstanceBuilderCT color(int color) {
         return this.color(color, color, color);
     }

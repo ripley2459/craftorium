@@ -9,6 +9,7 @@ public abstract class ASubstanceObjectBuilder<T> {
     protected boolean self;
     protected String prefix;
     protected String suffix;
+    protected int amount = 0;
     protected ASubstanceObject.ICreateObject provider;
     protected ASubstanceObject.IGetFaces faces;
     protected ASubstanceObject.IGetModelTemplate model;
@@ -32,6 +33,11 @@ public abstract class ASubstanceObjectBuilder<T> {
 
     public ASubstanceObjectBuilder<T> suffix(String suffix) {
         this.suffix = suffix;
+        return this;
+    }
+
+    public ASubstanceObjectBuilder<T> amount(int amount) {
+        this.amount = amount;
         return this;
     }
 
@@ -69,7 +75,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public ASubstanceObject.SubstanceItem build() {
-            ASubstanceObject.SubstanceItem item = new ASubstanceObject.SubstanceItem(name, self, prefix, suffix, provider, faces, model, behaviours, tooltips);
+            ASubstanceObject.SubstanceItem item = new ASubstanceObject.SubstanceItem(name, self, prefix, suffix, amount, provider, faces, model, behaviours, tooltips);
             SUBSTANCE_ITEMS_REGISTRY.put(name, item);
             return item;
         }
@@ -82,7 +88,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public ASubstanceObject.SubstanceTool build() {
-            ASubstanceObject.SubstanceTool tool = new ASubstanceObject.SubstanceTool(name, self, prefix, suffix, provider, faces, model, behaviours, tooltips);
+            ASubstanceObject.SubstanceTool tool = new ASubstanceObject.SubstanceTool(name, self, prefix, suffix, amount, provider, faces, model, behaviours, tooltips);
             SUBSTANCE_TOOLS_REGISTRY.put(name, tool);
             return tool;
         }
@@ -96,7 +102,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public ASubstanceObject.SubstanceBlock build() {
-            ASubstanceObject.SubstanceBlock block = new ASubstanceObject.SubstanceBlock(name, self, prefix, suffix, provider, faces, model, tooltips);
+            ASubstanceObject.SubstanceBlock block = new ASubstanceObject.SubstanceBlock(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
             SUBSTANCE_BLOCKS_REGISTRY.put(name, block);
             return block;
         }
@@ -110,7 +116,7 @@ public abstract class ASubstanceObjectBuilder<T> {
 
         @Override
         public ASubstanceObject.SubstanceFluid build() {
-            ASubstanceObject.SubstanceFluid fluid = new ASubstanceObject.SubstanceFluid(name, self, prefix, suffix, provider, faces, model, tooltips);
+            ASubstanceObject.SubstanceFluid fluid = new ASubstanceObject.SubstanceFluid(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
             SUBSTANCE_FLUIDS_REGISTRY.put(name, fluid);
             return fluid;
         }

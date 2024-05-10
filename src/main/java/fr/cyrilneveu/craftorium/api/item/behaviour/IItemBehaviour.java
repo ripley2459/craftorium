@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.utils;
+package fr.cyrilneveu.craftorium.api.item.behaviour;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
