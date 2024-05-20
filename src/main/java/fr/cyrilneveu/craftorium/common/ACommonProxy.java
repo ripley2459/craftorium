@@ -6,7 +6,7 @@ import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;

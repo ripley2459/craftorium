@@ -8,7 +8,7 @@ import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
 import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 

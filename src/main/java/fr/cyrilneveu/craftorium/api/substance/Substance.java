@@ -10,7 +10,7 @@ import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

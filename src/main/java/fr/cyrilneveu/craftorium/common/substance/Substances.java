@@ -130,6 +130,7 @@ public final class Substances {
     public static Substance SPDODUMENE;
     public static Substance STONE;
     public static Substance WOOD;
+    public static Substance FLINT;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -161,6 +162,18 @@ public final class Substances {
                 .overrides(BLOCK, "minecraft:cobblestone", HOE, "minecraft:stone_hoe", PICKAXE, "minecraft:stone_pickaxe", SHOVEL, "minecraft:stone_shovel", SWORD, "minecraft:stone_sword", AXE, "minecraft:stone_axe")
                 .style("mineral")
                 .color(0xFFb5b5b5)
+                .sound(SoundType.STONE)
+                .build();
+        FLINT = new SubstanceBuilder("flint")
+                .items(DUST, GEM)
+                .tools(FILE, KNIFE, SAW)
+                .blocks(BLOCK)
+                .tools(3.0f, 2.0f, 161, 1, 7)
+                .toughness(3.0f, 15.0f, "pickaxe", 1)
+                .overrides(GEM, "minecraft:flint")
+                .style("mineral")
+                .color(0xFF333333)
+                .shiny()
                 .sound(SoundType.STONE)
                 .build();
         BRONZE = new SubstanceBuilder("bronze")

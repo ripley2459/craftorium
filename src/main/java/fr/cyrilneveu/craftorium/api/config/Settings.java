@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.common.config;
+package fr.cyrilneveu.craftorium.api.config;
 
 import net.minecraftforge.common.config.Config;
 
@@ -14,10 +14,21 @@ public final class Settings {
     @Config.Comment("Settings for world generation related features.")
     @Config.RequiresMcRestart
     public static final GenerationSettings generationSettings = new GenerationSettings();
+    @Config.Name("Machines")
+    @Config.Comment("Machines settings.")
+    @Config.RequiresMcRestart
+    public static MachinesSettings machinesSettings = new MachinesSettings();
     @Config.Name("Balancing")
     @Config.Comment("Handle base values like storage or transfer here.")
     @Config.RequiresMcRestart
     public static BalancingSettings balancingSettings = new BalancingSettings();
+
+    public static class MachinesSettings {
+        @Config.Comment({"Do the machines make sounds when they work?", "Default: true"})
+        public boolean playSounds = true;
+        @Config.Comment({"Do machines emit particles when they work?", "Default: true"})
+        public boolean spawnParticles = true;
+    }
 
     public static final class SubstancesSettings {
         @Config.Comment({"Should substances that overrides objects (like items or blocks) register their own objects?", "Default: false"})

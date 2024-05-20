@@ -99,7 +99,7 @@ public final class SubstancesObjects {
         PICKAXE = createTool("pickaxe").provider(SubstancesObjects::createPickaxe).build();
         SAW = createTool("saw").build();
         SCREWDRIVER = createTool("screwdriver").build();
-        SHOVEL = createTool("shovel").amount(0).provider(SubstancesObjects::createShovel).build();
+        SHOVEL = createTool("shovel").provider(SubstancesObjects::createShovel).build();
         SWORD = createTool("sword").provider(SubstancesObjects::createSword).build();
         WRENCH = createTool("wrench").build();
 
