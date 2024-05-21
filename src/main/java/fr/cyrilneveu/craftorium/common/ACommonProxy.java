@@ -1,12 +1,12 @@
 package fr.cyrilneveu.craftorium.common;
 
 import crafttweaker.CraftTweakerAPI;
-import fr.cyrilneveu.craftorium.CraftoriumTags;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
+import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
@@ -18,7 +18,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -38,15 +40,18 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
+import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
+import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
 public abstract class ACommonProxy {
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals(CraftoriumTags.MODID))
-            ConfigManager.sync(CraftoriumTags.MODID, Config.Type.INSTANCE);
+        if (event.getModID().equals(MODID))
+            ConfigManager.sync(MODID, Config.Type.INSTANCE);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -95,9 +100,20 @@ public abstract class ACommonProxy {
         SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
+        createTile(MachineTile.class, "basic_machine");
+        ELECTROLYZER.createObject(ONE);
+        ELECTROLYZER.createObject(TWO);
+        ELECTROLYZER.createObject(THREE);
+        ELECTROLYZER.createObject(FOUR);
+        ELECTROLYZER.createObject(FIVE);
+
         FLUIDS_REGISTRY.close();
         BLOCKS_REGISTRY.close();
         BLOCKS_REGISTRY.getAll().forEach((s, b) -> event.getRegistry().register(b));
+    }
+
+    public static void createTile(Class<? extends TileEntity> clazz, String name) {
+        GameRegistry.registerTileEntity(clazz, new ResourceLocation(MODID, name));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -179,7 +195,7 @@ public abstract class ACommonProxy {
         Tiers.init();
 
         if (Loader.isModLoaded("crafttweaker"))
-            CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
+            CraftTweakerAPI.tweaker.loadScript(false, MODID);
 
         SubstancesObjects.close();
         Substances.close();

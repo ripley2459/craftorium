@@ -80,6 +80,9 @@ item.craftorium.circuit_board_3.name=Maxed Circuit Board
 # ##################################################
 # Blocks
 
+# Machines
+machine.craftorium.electrolyzer.name=Electrolyzer
+
 # Substances
 tile.craftorium.block.name=Block of %s
 tile.craftorium.ore.name=%s Ore
