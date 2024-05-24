@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
@@ -8,7 +9,6 @@ import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
 import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.api.config.Settings;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -93,7 +93,7 @@ public final class TiersObjects {
     }
 
     public static List<String> defaultTooltips(ATierObject reference, Tier tier) {
-        return Settings.substancesSettings.showAdvancedTooltips ? Collections.singletonList(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName())) : Collections.emptyList();
+        return Settings.globalSettings.showAdvancedTooltips ? Collections.singletonList(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName())) : Collections.emptyList();
     }
 
     public static IItemBehaviour[] noBehaviours(ATierObject reference, Tier tier) {
@@ -102,7 +102,7 @@ public final class TiersObjects {
 
     public static IItemBehaviour[] energyStorage(ATierObject reference, Tier tier) {
         IItemBehaviour[] behaviours = new IItemBehaviour[1];
-        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.balancingSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.balancingSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
         return behaviours;
     }
 }

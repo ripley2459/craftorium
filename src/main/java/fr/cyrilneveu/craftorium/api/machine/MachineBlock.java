@@ -8,6 +8,7 @@ import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.CustomIterable;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.common.machine.Machines;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,6 +22,7 @@ import net.minecraft.client.renderer.block.model.MultipartBakedModel;
 import net.minecraft.client.renderer.block.model.multipart.ConditionAnd;
 import net.minecraft.client.renderer.block.model.multipart.ConditionPropertyValue;
 import net.minecraft.client.renderer.block.model.multipart.ICondition;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -35,7 +37,9 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
@@ -47,7 +51,7 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
     private final Tier tier;
 
     public MachineBlock(Machine machine, Tier tier) {
-        super(Material.IRON, machine.getAestheticism(tier));
+        super(Material.IRON, Machines.getAestheticism(machine, tier));
         this.machine = machine;
         this.tier = tier;
         setSoundType(SoundType.METAL);
@@ -152,13 +156,14 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
             super(block);
             this.machine = block.machine;
             this.tier = block.tier;
-            this.aestheticism = machine.getAestheticism(tier);
+            this.aestheticism = Machines.getAestheticism(machine, tier);
         }
 
         @Override
         public String getItemStackDisplayName(ItemStack stack) {
             return machine.getDisplayName().concat(" ").concat(tier.getDisplayName());
         }
+
         @Override
         @SideOnly(Side.CLIENT)
         public int getItemStackColor(ItemStack stack, int layer) {

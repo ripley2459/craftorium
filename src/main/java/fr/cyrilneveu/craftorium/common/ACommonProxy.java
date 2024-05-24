@@ -7,6 +7,7 @@ import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
+import fr.cyrilneveu.craftorium.common.machine.Machines;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
@@ -42,8 +43,6 @@ import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
-import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
-import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 @Mod.EventBusSubscriber
@@ -86,7 +85,7 @@ public abstract class ACommonProxy {
         new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
         new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
 
-        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
+        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(t -> t.getItems().contains(v)).forEach(v::createObject));
 
         SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
@@ -101,11 +100,7 @@ public abstract class ACommonProxy {
         SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
         createTile(MachineTile.class, "basic_machine");
-        ELECTROLYZER.createObject(ONE);
-        ELECTROLYZER.createObject(TWO);
-        ELECTROLYZER.createObject(THREE);
-        ELECTROLYZER.createObject(FOUR);
-        ELECTROLYZER.createObject(FIVE);
+        MACHINES_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(t -> t.getMachines().contains(v)).forEach(t -> Machines.createMachine(v, t)));
 
         FLUIDS_REGISTRY.close();
         BLOCKS_REGISTRY.close();
@@ -192,6 +187,7 @@ public abstract class ACommonProxy {
         Substances.init();
         Veins.init();
         TiersObjects.init();
+        Machines.init();
         Tiers.init();
 
         if (Loader.isModLoaded("crafttweaker"))
@@ -200,6 +196,7 @@ public abstract class ACommonProxy {
         SubstancesObjects.close();
         Substances.close();
         Veins.close();
+        Machines.close();
         Tiers.close();
     }
 

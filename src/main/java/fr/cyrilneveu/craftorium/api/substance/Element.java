@@ -1,6 +1,6 @@
 package fr.cyrilneveu.craftorium.api.substance;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public final class Element implements Comparable<Element> {
     private final int atomicNumber;
@@ -49,7 +49,7 @@ public final class Element implements Comparable<Element> {
     }
 
     @Override
-    public int compareTo(@NotNull Element other) {
+    public int compareTo(@Nonnull Element other) {
         return name.compareTo(other.getName());
     }
 

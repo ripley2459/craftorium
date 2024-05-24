@@ -9,6 +9,10 @@ public final class Settings {
     @Config.Name("Substances settings")
     @Config.Comment("Config settings for substances related features.")
     @Config.RequiresMcRestart
+    public static final GlobalsSettings globalSettings = new GlobalsSettings();
+    @Config.Name("Substances settings")
+    @Config.Comment("Config settings for substances related features.")
+    @Config.RequiresMcRestart
     public static final SubstancesSettings substancesSettings = new SubstancesSettings();
     @Config.Name("Generation settings")
     @Config.Comment("Settings for world generation related features.")
@@ -18,12 +22,21 @@ public final class Settings {
     @Config.Comment("Machines settings.")
     @Config.RequiresMcRestart
     public static MachinesSettings machinesSettings = new MachinesSettings();
-    @Config.Name("Balancing")
-    @Config.Comment("Handle base values like storage or transfer here.")
-    @Config.RequiresMcRestart
-    public static BalancingSettings balancingSettings = new BalancingSettings();
+
+    public static class GlobalsSettings {
+        @Config.Comment({"Show tooltips on substances items? They are partially implemented.", "Default: false"})
+        public boolean showAdvancedTooltips = false;
+    }
 
     public static class MachinesSettings {
+        @Config.Comment({"Amount of energy a machine can store. Increased by tier.", "Default: 5000"})
+        public int machineBaseStorage = 50000;
+        @Config.Comment({"Amount of energy a machine can transfer (i/o). Increased by tier.", "Default: 5000"})
+        public int machineBaseTransfer = 5000;
+        @Config.Comment({"Amount of energy a battery can store. Increased by tier.", "Default: 5000"})
+        public int batteryBaseStorage = 5000;
+        @Config.Comment({"Amount of energy a battery can transfer (i/o). Increased by tier.", "Default: 5000"})
+        public int batteryBaseTransfer = 500;
         @Config.Comment({"Do the machines make sounds when they work?", "Default: true"})
         public boolean playSounds = true;
         @Config.Comment({"Do machines emit particles when they work?", "Default: true"})
@@ -33,8 +46,6 @@ public final class Settings {
     public static final class SubstancesSettings {
         @Config.Comment({"Should substances that overrides objects (like items or blocks) register their own objects?", "Default: false"})
         public boolean registerOverrides = false;
-        @Config.Comment({"Show tooltips on substances items? They are partially implemented.", "Default: false"})
-        public boolean showAdvancedTooltips = false;
     }
 
     public static final class GenerationSettings {
@@ -44,12 +55,5 @@ public final class Settings {
         public boolean enableOreGeneration = true;
         @Config.Comment({"Approximate amount of ore vein per chunk.", "Default: 8"})
         public int veinDensity = 8;
-    }
-
-    public static class BalancingSettings {
-        @Config.Comment({"Amount of energy a battery can store. Increased by tier.", "Default: 5000"})
-        public int batteryBaseStorage = 5000;
-        @Config.Comment({"Amount of energy a battery can transfer (i/o). Increased by tier.", "Default: 5000"})
-        public int batteryBaseTransfer = 500;
     }
 }

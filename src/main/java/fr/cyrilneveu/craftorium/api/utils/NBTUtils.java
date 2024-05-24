@@ -5,6 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public final class NBTUtils {
     public static final String ENERGY_NBT_KEY = "Energy";
+    public static final String FACE_FLOW_NBT_KEY = "FaceFlow";
+    public static final String MACHINE_NBT_KEY = "Machine";
+    public static final String TIER_NBT_KEY = "Tier";
 
     public static NBTTagCompound getNBT(ItemStack itemStack) {
         if (!itemStack.hasTagCompound())

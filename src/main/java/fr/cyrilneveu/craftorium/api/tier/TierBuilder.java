@@ -3,7 +3,7 @@ package fr.cyrilneveu.craftorium.api.tier;
 import com.google.common.collect.ImmutableSortedSet;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
-import fr.cyrilneveu.craftorium.api.Registries;
+import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
@@ -20,9 +20,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
+import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
 import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 
 @ZenClass("mods." + MODID + ".tier.Builder")
@@ -37,6 +38,7 @@ public final class TierBuilder {
     private float recipeSpeed = 1f;
     private Storage storage = new Storage(1f);
     private Set<ATierObject.TierItem> items = new TreeSet<>();
+    private Set<Machine> machines = new TreeSet<>();
 
     public TierBuilder(String name) {
         this.name = name;
@@ -61,14 +63,14 @@ public final class TierBuilder {
     }
 
     @ZenMethod
-    public TierBuilder fluidStorage(float tankSize, float tankIO) {
-        this.storage = new Storage(tankSize, tankIO, this.storage.getEnergyBuffer(), this.storage.getEnergyIO());
+    public TierBuilder fluidStorage(float tankSize) {
+        this.storage = new Storage(tankSize, this.storage.getEnergyBuffer(), this.storage.getEnergyIO());
         return this;
     }
 
     @ZenMethod
     public TierBuilder energyStorage(float energySize, float energyIO) {
-        this.storage = new Storage(this.storage.getTankSize(), this.storage.getTankIO(), energySize, energyIO);
+        this.storage = new Storage(this.storage.getTankSize(), energySize, energyIO);
         return this;
     }
 
@@ -99,14 +101,15 @@ public final class TierBuilder {
     @ZenMethod
     public TierBuilder packageFull() {
         items(BATTERY, EMITTER, HEAT_EXCHANGER, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
+        machines(ELECTROLYZER);
         return this;
     }
 
     @ZenMethod
     public TierBuilder items(String... items) {
         for (String item : items) {
-            if (Registries.TIER_ITEMS_REGISTRY.contains(item))
-                this.items(Registries.TIER_ITEMS_REGISTRY.get(item));
+            if (TIER_ITEMS_REGISTRY.contains(item))
+                this.items(TIER_ITEMS_REGISTRY.get(item));
             else CraftTweakerAPI.logError("This type of item does not exists: " + item);
         }
 
@@ -119,8 +122,24 @@ public final class TierBuilder {
     }
 
     @ZenMethod
+    public TierBuilder machines(String... machines) {
+        for (String machine : machines) {
+            if (MACHINES_REGISTRY.contains(machine))
+                this.machines(MACHINES_REGISTRY.get(machine));
+            else CraftTweakerAPI.logError("This type of machine does not exists: " + machine);
+        }
+
+        return this;
+    }
+
+    public TierBuilder machines(Machine... machines) {
+        this.machines.addAll(Arrays.asList(machines));
+        return this;
+    }
+
+    @ZenMethod
     public Tier build() {
-        Tier tier = new Tier(name, aestheticism, pack, new Process(simultaneousRecipe, additionalChance, recipeSpeed), storage, ImmutableSortedSet.copyOf(items));
+        Tier tier = new Tier(name, aestheticism, pack, new Process(simultaneousRecipe, additionalChance, recipeSpeed), storage, ImmutableSortedSet.copyOf(items), ImmutableSortedSet.copyOf(machines));
 
         TIERS_REGISTRY.put(name, tier);
 

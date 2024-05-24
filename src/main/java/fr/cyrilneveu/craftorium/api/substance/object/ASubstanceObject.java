@@ -12,8 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fml.common.Loader;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
@@ -125,7 +125,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     @Override
-    public int compareTo(@NotNull ASubstanceObject other) {
+    public int compareTo(@Nonnull ASubstanceObject other) {
         return name.compareTo(other.getName(null));
     }
 
