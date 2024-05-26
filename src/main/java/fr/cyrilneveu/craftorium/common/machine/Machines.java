@@ -26,12 +26,26 @@ public final class Machines {
             return;
 
         ELECTROLYZER = new MachineBuilder("electrolyzer")
-                .itemInput(0, 0)
-                .fluidInput(0, 0)
-                .itemOutput(0, 0)
-                .fluidOutput(0, 0)
-                .energy(0, 0)
+                .size(176, 200)
+                .itemInput(38, 46)
+                .fluidInput(56, 46)
+                .itemOutput(103, 17)
+                .itemOutput(121, 17)
+                .itemOutput(139, 17)
+                .itemOutput(103, 35)
+                .itemOutput(121, 35)
+                .itemOutput(139, 35)
+                .fluidOutput(103, 57)
+                .fluidOutput(121, 57)
+                .fluidOutput(139, 57)
+                .fluidOutput(103, 75)
+                .fluidOutput(121, 75)
+                .fluidOutput(139, 75)
+                .energy(153, 97)
                 .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "electrolyzer", "name"), true)
+                .text(8, 106, "container.inventory", false)
+                .playerInventory(7, 117)
                 .build();
     }
 

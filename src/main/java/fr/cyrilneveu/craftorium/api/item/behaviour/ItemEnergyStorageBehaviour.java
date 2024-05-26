@@ -21,10 +21,10 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.ENERGY_NBT_KEY;
 
-public class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem {
-    protected final int capacity;
-    protected final int transfer;
-    protected final CustomEnergyStorage energyStorage;
+public final class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapableItem {
+    private final int capacity;
+    private final int transfer;
+    private final CustomEnergyStorage energyStorage;
 
     public ItemEnergyStorageBehaviour(ItemStack stack, int capacity, int transfer) {
         this.capacity = capacity;

@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.StringUtils;
@@ -128,6 +129,10 @@ public final class Utils {
     private static String toSubscript(int digit) {
         char subscriptDigit = (char) ('\u2080' + digit);
         return Character.toString(subscriptDigit);
+    }
+
+    public static String formatFluidAmount(int amount) {
+        return amount < 1000 ? amount + "mB" : String.format("%.1fB", (double) amount / Fluid.BUCKET_VOLUME);
     }
 
     public static ModelRotation getRotationForFacing(EnumFacing facing) {

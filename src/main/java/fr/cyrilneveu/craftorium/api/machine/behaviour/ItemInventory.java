@@ -1,10 +1,15 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
 import com.google.common.base.Preconditions;
+import fr.cyrilneveu.craftorium.api.inventory.CustomSlot;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.utils.CustomOptional;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.ItemSlot;
+import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,11 +25,12 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.LinkedList;
 import java.util.List;
 
-public final class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
+public final class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, IContainable, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     private final MachineTile owner;
-    private final CustomOptional<FlowController> flowController;
+    private final CustomLazy<FlowController> flowController;
     private final List<ItemSlotData> slots;
     private NonNullList<ItemStack> stacks;
     @Nullable
@@ -32,7 +38,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
     public ItemInventory(MachineTile owner, List<ItemSlotData> slots) {
         this.owner = owner;
-        this.flowController = new CustomOptional<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController));
+        this.flowController = new CustomLazy<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController));
         this.slots = slots;
         this.stacks = NonNullList.withSize(this.slots.size(), ItemStack.EMPTY);
     }
@@ -43,7 +49,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if ((flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
             return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
         return false;
     }
@@ -51,7 +57,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if ((flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
             return hasCapability(capability, facing) ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.forSide(facing)) : null;
         return null;
     }
@@ -80,7 +86,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Override
     @Nonnull
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        return slots.get(slot).isInput() && (flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canInput(side))) ?
+        return slots.get(slot).isInput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canInput(side))) ?
                 defaultInsert(slot, stack, simulate) : stack;
     }
 
@@ -126,7 +132,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Override
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return slots.get(slot).isOutput() && (flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canOutput(side)))
+        return slots.get(slot).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side)))
                 ? defaultExtract(slot, amount, simulate) : ItemStack.EMPTY;
     }
 
@@ -207,8 +213,20 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
         Preconditions.checkArgument(slot >= 0 && slot < stacks.size());
     }
 
+    @Override
+    public void initContainer(Container container, EntityPlayer playerIn) {
+        slots.forEach(s -> container.addSlotToContainer(new CustomSlot(this, s)));
+    }
+
     public ItemInventory forSide(EnumFacing side) {
         this.side = side;
         return this;
+    }
+
+    @Override
+    public List<AWidget> getWidgets() {
+        List<AWidget> itemsSlots = new LinkedList<>();
+        slots.forEach(s -> itemsSlots.add(new ItemSlot(s)));
+        return itemsSlots;
     }
 }

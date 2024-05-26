@@ -6,8 +6,12 @@ import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.utils.Position;
+import fr.cyrilneveu.craftorium.api.utils.Size;
 
+import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +22,11 @@ public final class MachineBuilder {
     private List<ItemSlotData> items = new LinkedList<>();
     private List<FluidSlotData> fluids = new LinkedList<>();
     private EnergySlotData energy;
+    @Nullable
+    private Position playerInventoryPosition;
     private boolean flowControlled;
+    private List<AWidget> additionalWidgets = new LinkedList<>();
+    private Size screenSize = new Size(176, 166);
 
     public MachineBuilder(String name) {
         this.name = name;
@@ -49,8 +57,23 @@ public final class MachineBuilder {
         return this;
     }
 
+    public MachineBuilder playerInventory(int posX, int posY) {
+        playerInventoryPosition = new Position(posX, posY);
+        return this;
+    }
+
+    public MachineBuilder size(int sizeX, int sizeY) {
+        this.screenSize = new Size(sizeX, sizeY);
+        return this;
+    }
+
     public MachineBuilder flowControlled() {
         flowControlled = true;
+        return this;
+    }
+
+    public MachineBuilder text(int posX, int posY, String unlocalizedText, boolean centered) {
+        additionalWidgets.add(new Text(new Position(posX, posY), () -> unlocalizedText, centered, 4210752));
         return this;
     }
 
@@ -65,8 +88,10 @@ public final class MachineBuilder {
             providers.add((o, t) -> new EnergyInventory(o, energy));
         if (flowControlled)
             providers.add((o, t) -> new FlowController(o));
+        if (playerInventoryPosition != null)
+            providers.add((o, t) -> new PlayerInventory(playerInventoryPosition));
 
-        Machine m = new Machine(name, ImmutableList.copyOf(providers));
+        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, additionalWidgets);
         MACHINES_REGISTRY.put(name, m);
         return m;
     }

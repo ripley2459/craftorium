@@ -3,12 +3,12 @@ package fr.cyrilneveu.craftorium.api.inventory;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.ESlotFlow;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 
-public abstract class ASlot {
+public abstract class ASlotData {
     private final int index;
     private final Position position;
     private final ESlotFlow flow;
 
-    public ASlot(Position position, int index, ESlotFlow flow) {
+    public ASlotData(Position position, int index, ESlotFlow flow) {
         this.position = position;
         this.index = index;
         this.flow = flow;

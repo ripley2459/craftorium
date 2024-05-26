@@ -1,7 +1,9 @@
 package fr.cyrilneveu.craftorium.common;
 
 import crafttweaker.CraftTweakerAPI;
+import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.api.inventory.GuiHandler;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
@@ -35,6 +37,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -201,6 +204,8 @@ public abstract class ACommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(Craftorium.instance, new GuiHandler());
+
         if (!Settings.generationSettings.enableVanillaOreGeneration)
             MinecraftForge.ORE_GEN_BUS.register(new VeinGenerator.WorldGeneratorReplacer());
         if (Settings.generationSettings.enableOreGeneration)

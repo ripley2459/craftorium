@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.machine;
 
 import com.google.common.base.Preconditions;
+import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.block.CustomBlock;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.*;
@@ -22,11 +23,12 @@ import net.minecraft.client.renderer.block.model.MultipartBakedModel;
 import net.minecraft.client.renderer.block.model.multipart.ConditionAnd;
 import net.minecraft.client.renderer.block.model.multipart.ConditionPropertyValue;
 import net.minecraft.client.renderer.block.model.multipart.ICondition;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
@@ -37,11 +39,10 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 
+import static fr.cyrilneveu.craftorium.api.inventory.GuiHandler.MACHINE_GUI_ID;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 
 public final class MachineBlock extends CustomBlock implements ITileEntityProvider {
@@ -90,18 +91,18 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
         return state.getValue(FACING).getIndex();
     }
 
-    /*@Override
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.isRemote)
             return true;
 
         if (worldIn.getTileEntity(pos) instanceof MachineTile && !playerIn.isSneaking()) {
-            playerIn.openGui(Craftorium.instance, SCREEN_MACHINE_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(Craftorium.instance, MACHINE_GUI_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
 
         return false;
-    }*/
+    }
 
     @Override
     public boolean hasTileEntity() {

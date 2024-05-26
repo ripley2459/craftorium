@@ -1,8 +1,15 @@
 package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
+import fr.cyrilneveu.craftorium.api.mui.Screen;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -15,8 +22,7 @@ import javax.annotation.Nullable;
 
 import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
-import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.MACHINE_NBT_KEY;
-import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.TIER_NBT_KEY;
+import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.*;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
 import static fr.cyrilneveu.craftorium.common.tier.Tiers.ONE;
 
@@ -24,6 +30,8 @@ public final class MachineTile extends TileEntity implements ITickable {
     private Machine machine;
     private Tier tier;
     private IMachineBehaviour[] behaviours = new IMachineBehaviour[0];
+    private CustomLazy<Screen> screen = new CustomLazy<>(() -> machine.getScreen(this, tier), false);
+    private EMachineStates state = EMachineStates.NOPOWER;
 
     public MachineTile() {
         this(ELECTROLYZER, ONE);
@@ -45,6 +53,14 @@ public final class MachineTile extends TileEntity implements ITickable {
             if (behaviour instanceof ITickable tickable)
                 tickable.update();
         }
+    }
+
+    public Container createContainer(EntityPlayer player) {
+        return new MachineContainer(this, player);
+    }
+
+    public GuiContainer createGui(EntityPlayer player) {
+        return new MachineScreen(this, createContainer(player));
     }
 
     @Override
@@ -106,6 +122,34 @@ public final class MachineTile extends TileEntity implements ITickable {
         }
     }
 
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound nbtTagCompound = writeToNBT(super.getUpdateTag());
+        nbtTagCompound.setInteger(STATE_NBT_KEY, state.ordinal());
+        return nbtTagCompound;
+    }
+
+    @Override
+    public void handleUpdateTag(NBTTagCompound tag) {
+        this.readFromNBT(tag);
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.getNbtCompound());
+
+        int stateIndex = pkt.getNbtCompound().getInteger(STATE_NBT_KEY);
+        if (world.isRemote && stateIndex != state.ordinal()) {
+            state = EMachineStates.values()[stateIndex];
+            world.markBlockRangeForRenderUpdate(pos, pos);
+        }
+    }
+
     public Machine getMachine() {
         return machine;
     }
@@ -116,5 +160,10 @@ public final class MachineTile extends TileEntity implements ITickable {
 
     public IMachineBehaviour[] getBehaviours() {
         return behaviours;
+    }
+
+    @Nullable
+    public Screen getScreen() {
+        return screen.get();
     }
 }

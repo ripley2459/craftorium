@@ -3,8 +3,11 @@ package fr.cyrilneveu.craftorium.api.machine.behaviour;
 import fr.cyrilneveu.craftorium.api.inventory.CustomTank;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.utils.CustomOptional;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.FluidSlot;
+import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,16 +19,16 @@ import net.minecraftforge.fluids.capability.FluidTankProperties;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.templates.EmptyFluidHandler;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public final class FluidInventory implements IMachineBehaviour, IFluidHandler, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     private final MachineTile owner;
-    private final CustomOptional<FlowController> flowController;
+    private final CustomLazy<FlowController> flowController;
     private final List<FluidSlotData> slots;
     private final List<CustomTank> tanks;
     @Nullable
@@ -33,52 +36,18 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
 
     public FluidInventory(MachineTile owner, List<FluidSlotData> slots) {
         this.owner = owner;
-        this.flowController = new CustomOptional<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController));
+        this.flowController = new CustomLazy<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController), true);
         this.slots = slots;
         this.tanks = new LinkedList<>();
         for (FluidSlotData slot : slots)
-            this.tanks.add(new CustomTank((int) (slot.getCapacity() * owner.getTier().getStorage().getTankSize())));
-    }
-
-    public List<FluidStack> getStacksInInputs() {
-        List<FluidStack> fluidStacks = new ArrayList<>();
-        for (FluidSlotData slot : slots) {
-            CustomTank tank = tanks.get(slot.getIndex());
-            if (slot.isInput() && tank.hasFluid())
-                fluidStacks.add(tank.getFluid());
-        }
-
-        return fluidStacks;
-    }
-
-    public List<FluidStack> getStacksInOutput() {
-        List<FluidStack> fluidStacks = new ArrayList<>();
-        for (FluidSlotData slot : slots) {
-            CustomTank tank = tanks.get(slot.getIndex());
-            if (slot.isOutput() && tank.hasFluid())
-                fluidStacks.add(tank.getFluid());
-        }
-
-        return fluidStacks;
-    }
-
-    public int alreadyIn(FluidStack fluidStack) {
-        for (int i = 0; i < slots.size(); i++) {
-            FluidSlotData slot = slots.get(i);
-            if (!slot.isInput())
-                continue;
-
-            CustomTank tank = tanks.get(i);
-            if (fluidStack.isFluidEqual(tank.getFluid()))
-                return i;
-        }
-
-        return -1;
+            // this.tanks.add(new CustomTank((int) (slot.getCapacity() * owner.getTier().getStorage().getTankSize())));
+            this.tanks.add(new CustomTank(slot.getCapacity()));
     }
 
     @Override
     public IFluidTankProperties[] getTankProperties() {
-        if (tanks.isEmpty()) return EmptyFluidHandler.EMPTY_TANK_PROPERTIES_ARRAY;
+        if (tanks.isEmpty())
+            return EmptyFluidHandler.EMPTY_TANK_PROPERTIES_ARRAY;
 
         IFluidTankProperties[] fluidTankProperties = new IFluidTankProperties[tanks.size()];
         for (int i = 0; i < tanks.size(); i++) {
@@ -89,22 +58,12 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
         return fluidTankProperties;
     }
 
-    public int fillOutputs(FluidStack resource, boolean doFill) {
-        for (int i = 0; i < slots.size(); i++) {
-            if (slots.get(i).isOutput()) {
-                CustomTank tank = tanks.get(i);
-                if (tank.canFillFluidType(resource) && !tank.isFull() && (tank.getFluid() == null || tank.getFluid().isFluidEqual(resource)))
-                    return tank.fill(resource, doFill);
-            }
-        }
-
-        return 0;
-    }
-
     @Override
     public int fill(FluidStack resource, boolean doFill) {
+        owner.markDirty();
+
         for (int i = 0; i < slots.size(); i++) {
-            if (slots.get(i).isInput() && (flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canInput(side)))) {
+            if (slots.get(i).isInput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canInput(side)))) {
                 CustomTank tank = tanks.get(i);
                 if (tank.canFillFluidType(resource) && !tank.isFull() && (tank.getFluid() == null || tank.getFluid().isFluidEqual(resource)))
                     return tank.fill(resource, doFill);
@@ -117,8 +76,9 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Nullable
     @Override
     public FluidStack drain(FluidStack resource, boolean doDrain) {
+
         for (int i = 0; i < slots.size(); i++) {
-            if (slots.get(i).isOutput() && (flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canOutput(side)))) {
+            if (slots.get(i).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side)))) {
                 CustomTank tank = tanks.get(i);
                 if (tank.hasFluid() && resource.isFluidEqual(tank.getFluid()) && tank.drain(resource, false) != null)
                     return tank.drain(resource, doDrain);
@@ -131,8 +91,10 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Nullable
     @Override
     public FluidStack drain(int maxDrain, boolean doDrain) {
+        owner.markDirty();
+
         for (int i = 0; i < slots.size(); i++) {
-            if (slots.get(i).isOutput() && (flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canOutput(side)))) {
+            if (slots.get(i).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side)))) {
                 CustomTank tank = tanks.get(i);
                 if (tank.hasFluid() && tank.drain(maxDrain, false) != null)
                     return tank.drain(maxDrain, doDrain);
@@ -144,6 +106,8 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
 
     @Nullable
     public FluidStack takeFluid(FluidStack resource, boolean doDrain) {
+        owner.markDirty();
+
         for (int i = 0; i < slots.size(); i++) {
             CustomTank tank = tanks.get(i);
             if (tank.hasFluid() && resource.isFluidEqual(tank.getFluid()) && tank.drain(resource, false) != null)
@@ -165,7 +129,7 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if ((flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
             return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
         return false;
     }
@@ -173,7 +137,7 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if ((flowController.getValue() == null || (flowController.getValue() != null && flowController.getValue().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
             return hasCapability(capability, facing) ? CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.forSide(facing)) : null;
         return null;
     }
@@ -191,6 +155,15 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     }
 
     @Override
+    public void toBytes(ByteBuf buf) {
+        for (CustomTank tank : tanks) {
+            ByteBufUtils.writeUTF8String(buf, tank.getFluidName());
+            buf.writeInt(tank.getFluidAmount());
+            buf.writeInt(tank.getCapacity());
+        }
+    }
+
+    @Override
     public void deserializeNBT(NBTTagCompound nbt) {
         for (int i = 0; i < slots.size(); i++) {
             if (nbt.hasKey("Tank" + i)) {
@@ -198,5 +171,12 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
                 tanks.get(i).readFromNBT(tankNBT);
             }
         }
+    }
+
+    @Override
+    public List<AWidget> getWidgets() {
+        List<AWidget> fluidSlots = new LinkedList<>();
+        slots.forEach(s -> fluidSlots.add(new FluidSlot(s)));
+        return fluidSlots;
     }
 }
