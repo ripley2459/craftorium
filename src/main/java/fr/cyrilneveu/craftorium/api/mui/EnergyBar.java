@@ -37,7 +37,7 @@ public class EnergyBar extends AWidget implements ITextured {
 
     @Override
     public void drawBackground(int mouseX, int mouseY, float partialTicks) {
-        if (!isActive || !isVisible)
+        if (!isActive())
             return;
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
@@ -56,7 +56,7 @@ public class EnergyBar extends AWidget implements ITextured {
 
     @Override
     public List<String> getTooltips(int mouseX, int mouseY) {
-        if (!isActive || !isVisible || !isHovered(mouseX, mouseY))
+        if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
         return Collections.singletonList(Utils.localise("tooltip.craftorium.machine.energy", energy, capacity));

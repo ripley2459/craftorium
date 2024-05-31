@@ -6,6 +6,7 @@ import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.ItemSlot;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +26,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedList;
 import java.util.List;
 
 public final class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, IContainable, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
@@ -38,7 +38,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
     public ItemInventory(MachineTile owner, List<ItemSlotData> slots) {
         this.owner = owner;
-        this.flowController = new CustomLazy<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController));
+        this.flowController = new CustomLazy<>(() -> (FlowController) Utils.first(owner.getBehaviours(), b -> b instanceof FlowController), true);
         this.slots = slots;
         this.stacks = NonNullList.withSize(this.slots.size(), ItemStack.EMPTY);
     }
@@ -49,7 +49,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(facing))))
             return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
         return false;
     }
@@ -57,7 +57,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(facing))))
             return hasCapability(capability, facing) ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.forSide(facing)) : null;
         return null;
     }
@@ -224,9 +224,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     }
 
     @Override
-    public List<AWidget> getWidgets() {
-        List<AWidget> itemsSlots = new LinkedList<>();
-        slots.forEach(s -> itemsSlots.add(new ItemSlot(s)));
-        return itemsSlots;
+    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+        slots.forEach(s -> widgets.add(new ItemSlot(s)));
     }
 }

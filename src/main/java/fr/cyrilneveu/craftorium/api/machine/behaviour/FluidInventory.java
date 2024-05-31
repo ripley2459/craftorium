@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.FluidSlot;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
@@ -129,7 +130,7 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(facing))))
             return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
         return false;
     }
@@ -137,7 +138,7 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(side))))
+        if ((flowController.get() == null || (flowController.get() != null && flowController.get().canConnect(facing))))
             return hasCapability(capability, facing) ? CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.forSide(facing)) : null;
         return null;
     }
@@ -174,9 +175,7 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     }
 
     @Override
-    public List<AWidget> getWidgets() {
-        List<AWidget> fluidSlots = new LinkedList<>();
-        slots.forEach(s -> fluidSlots.add(new FluidSlot(s)));
-        return fluidSlots;
+    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+        slots.forEach(s -> widgets.add(new FluidSlot(s)));
     }
 }

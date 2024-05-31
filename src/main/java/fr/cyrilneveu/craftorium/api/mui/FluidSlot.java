@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.mui;
 
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
+import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
@@ -49,7 +50,7 @@ public class FluidSlot extends ASlot {
         float scale = 0.5f;
         float posX = getPosition().getPosX() + 16 - Minecraft.getMinecraft().fontRenderer.getStringWidth(l) * scale + 2;
         float posY = getPosition().getPosY() + 16 - 8 * scale + 2;
-        RenderUtils.drawStringSized(l, posX, posY, 16777215, true, scale, false);
+        RenderUtils.renderText(l, new Position((int) posX, (int) posY), 16777215, scale, true, false);
     }
 
     @Override
@@ -106,7 +107,7 @@ public class FluidSlot extends ASlot {
 
     @Override
     public List<String> getTooltips(int mouseX, int mouseY) {
-        if (!isActive || !isVisible || !isHovered(mouseX, mouseY))
+        if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
         return isFluidStackValid(fluidStack) ? Collections.singletonList(Utils.localise("tooltip.craftorium.machine.fluid", fluidStack.getLocalizedName(), fluidStack.amount, capacity)) : Collections.emptyList();

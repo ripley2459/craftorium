@@ -2,9 +2,7 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
-import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.Background;
-import fr.cyrilneveu.craftorium.api.mui.Screen;
+import fr.cyrilneveu.craftorium.api.mui.*;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
@@ -19,13 +17,17 @@ public final class Machine implements Comparable<Machine> {
     private final String name;
     private final List<IGetBehaviours> providers;
     private final Size screenSize;
-    private final List<AWidget> additionalWidgets;
+    private final List<AWidget> widgets;
+    private final List<Tab> leftTabs;
+    private final List<Tab> rightTabs;
 
-    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> additionalWidgets) {
+    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
         this.name = name;
         this.providers = providers;
         this.screenSize = screenSize;
-        this.additionalWidgets = additionalWidgets;
+        this.widgets = widgets;
+        this.leftTabs = leftTabs;
+        this.rightTabs = rightTabs;
     }
 
     public String getName() {
@@ -55,13 +57,19 @@ public final class Machine implements Comparable<Machine> {
     }
 
     public Screen getScreen(MachineTile tile, Tier tier) {
-        List<AWidget> widgets = new LinkedList<>(additionalWidgets);
+        LinkedList<AWidget> widgetsT = new LinkedList<>();
 
-        widgets.add(new Background(screenSize));
+        widgetsT.addAll(widgets);
+        List<Tab> leftTabsT = new LinkedList<>(leftTabs);
+        List<Tab> rightTabsT = new LinkedList<>(rightTabs);
         for (IMachineBehaviour behaviour : tile.getBehaviours())
-            widgets.addAll(behaviour.getWidgets());
+            behaviour.pushWidgets(widgetsT, leftTabsT, rightTabsT);
 
-        return new Screen(widgets.toArray(widgets.toArray(new AWidget[0])), screenSize);
+        widgetsT.addFirst(new ATabGroup.LeftTabGroup(leftTabsT.toArray(new Tab[0])));
+        widgetsT.addFirst(new ATabGroup.RightTabGroup(rightTabsT.toArray(new Tab[0])));
+        widgetsT.addFirst(new Background(screenSize));
+
+        return new Screen(widgetsT.toArray(widgetsT.toArray(new AWidget[0])), screenSize);
     }
 
     @FunctionalInterface

@@ -1,9 +1,9 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import io.netty.buffer.ByteBuf;
 
-import java.util.Collections;
 import java.util.List;
 
 public interface IMachineBehaviour {
@@ -19,7 +19,7 @@ public interface IMachineBehaviour {
 
     }
 
-    default List<AWidget> getWidgets() {
-        return Collections.emptyList();
+    default void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+
     }
 }

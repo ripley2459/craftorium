@@ -1,13 +1,13 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -38,8 +38,8 @@ public final class PlayerInventory implements IMachineBehaviour, IContainable {
     }
 
     @Override
-    public List<AWidget> getWidgets() {
-        return Collections.singletonList(new fr.cyrilneveu.craftorium.api.mui.PlayerInventory(position));
+    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+        widgets.add(new fr.cyrilneveu.craftorium.api.mui.PlayerInventory(position));
     }
 
     @Override

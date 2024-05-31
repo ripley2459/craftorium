@@ -12,10 +12,6 @@ public class CustomLazy<T> {
     @Nullable
     private T value;
 
-    public CustomLazy(Supplier<T> supplier) {
-        this(supplier, true);
-    }
-
     public CustomLazy(Supplier<T> supplier, boolean canBeNull) {
         this.supplier = supplier;
         this.canBeNull = canBeNull;

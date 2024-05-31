@@ -7,6 +7,7 @@ import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.TEXT_COLOR;
 
 public final class MachineBuilder {
     private String name;
@@ -25,8 +27,10 @@ public final class MachineBuilder {
     @Nullable
     private Position playerInventoryPosition;
     private boolean flowControlled;
-    private List<AWidget> additionalWidgets = new LinkedList<>();
+    private List<AWidget> widgets = new LinkedList<>();
     private Size screenSize = new Size(176, 166);
+    private List<Tab> leftTabs = new LinkedList<>();
+    private List<Tab> rightTabs = new LinkedList<>();
 
     public MachineBuilder(String name) {
         this.name = name;
@@ -73,7 +77,7 @@ public final class MachineBuilder {
     }
 
     public MachineBuilder text(int posX, int posY, String unlocalizedText, boolean centered) {
-        additionalWidgets.add(new Text(new Position(posX, posY), () -> unlocalizedText, centered, 4210752));
+        widgets.add(new Text(new Position(posX, posY), () -> unlocalizedText, centered, TEXT_COLOR));
         return this;
     }
 
@@ -81,17 +85,17 @@ public final class MachineBuilder {
         List<Machine.IGetBehaviours> providers = new LinkedList<>();
 
         if (!items.isEmpty())
-            providers.add((o, t) -> new ItemInventory(o, ImmutableList.copyOf(items)));
+            providers.add((m, t) -> new ItemInventory(m, ImmutableList.copyOf(items)));
         if (!fluids.isEmpty())
-            providers.add((o, t) -> new FluidInventory(o, ImmutableList.copyOf(fluids)));
+            providers.add((m, t) -> new FluidInventory(m, ImmutableList.copyOf(fluids)));
         if (energy != null)
-            providers.add((o, t) -> new EnergyInventory(o, energy));
+            providers.add((m, t) -> new EnergyInventory(m, energy));
         if (flowControlled)
-            providers.add((o, t) -> new FlowController(o));
+            providers.add((m, t) -> new FlowController(m));
         if (playerInventoryPosition != null)
-            providers.add((o, t) -> new PlayerInventory(playerInventoryPosition));
+            providers.add((m, t) -> new PlayerInventory(playerInventoryPosition));
 
-        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, additionalWidgets);
+        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs);
         MACHINES_REGISTRY.put(name, m);
         return m;
     }

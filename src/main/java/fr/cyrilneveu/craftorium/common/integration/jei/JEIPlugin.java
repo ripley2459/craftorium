@@ -21,6 +21,8 @@ public final class JEIPlugin implements IModPlugin {
 
     @Override
     public void register(IModRegistry registry) {
+        registry.addAdvancedGuiHandlers(new TabMover());
+
         List<VeinWrapper> veins = new ArrayList<>();
         String id = String.join(":", MODID, "vein_generation");
         TIERS_REGISTRY.getAll().values().stream().filter(tier -> tier.getItems().contains(SCANNER)).forEach(tier -> registry.addRecipeCatalyst(SCANNER.asItemStack(tier), id));

@@ -2,6 +2,8 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.Screen;
+import fr.cyrilneveu.craftorium.api.net.CPacketMachine;
+import fr.cyrilneveu.craftorium.api.net.NetManager;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -27,10 +29,8 @@ public final class MachineScreen extends GuiContainer {
         super.initGui();
 
         Position offset = new Position(getGuiLeft(), getGuiTop());
-        for (AWidget widget : screen.getWidgets()) {
-            widget.resetOffset();
-            widget.addOffset(offset);
-        }
+        for (AWidget widget : screen.getWidgets())
+            widget.init(offset, screen.getSize());
     }
 
     @Override
@@ -64,7 +64,21 @@ public final class MachineScreen extends GuiContainer {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
 
-        for (AWidget widget : screen.getWidgets())
-            widget.onMouseClicked(mouseX, mouseY, mouseButton);
+        boolean flag = false;
+        for (AWidget widget : screen.getWidgets()) {
+            if (widget.onMouseClicked(mouseX, mouseY, mouseButton))
+                flag = true;
+        }
+
+        if (flag)
+            NetManager.sendToServer(new CPacketMachine(owner));
+    }
+
+    public MachineTile getOwner() {
+        return owner;
+    }
+
+    public Screen getScreen() {
+        return screen;
     }
 }

@@ -359,6 +359,12 @@ tier.craftorium.four.name=Tier 4
 tier.craftorium.five.name=Tier 5
 
 # Tooltips
+tooltip.craftorium.machine.facing_up=Top side
+tooltip.craftorium.machine.facing_down=Bottom side
+tooltip.craftorium.machine.facing_north=Front
+tooltip.craftorium.machine.facing_south=Back
+tooltip.craftorium.machine.facing_west=Left side
+tooltip.craftorium.machine.facing_east=Right side
 tooltip.craftorium.tier.name=§eTier: %s§r
 tooltip.craftorium.formula=§3%s§r
 tooltip.craftorium.temperature=§5%s°K§r

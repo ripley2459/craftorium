@@ -4,6 +4,7 @@ import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.EnergyBar;
+import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +17,6 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.ENERGY_NBT_KEY;
@@ -112,7 +112,7 @@ public final class EnergyInventory implements IEnergyStorage, IMachineBehaviour,
     }
 
     @Override
-    public List<AWidget> getWidgets() {
-        return Collections.singletonList(new EnergyBar(slotData));
+    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+        widgets.add(new EnergyBar(slotData));
     }
 }

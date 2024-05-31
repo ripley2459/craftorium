@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.mui;
 
 import fr.cyrilneveu.craftorium.api.utils.Position;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.Minecraft;
@@ -23,7 +24,10 @@ public class Text extends AWidget {
 
     @Override
     public void drawForeground(int mouseX, int mouseY) {
-        Minecraft.getMinecraft().fontRenderer.drawString(Utils.localise(textProvider.get()), getRealPosition().getPosX(), getRealPosition().getPosY(), color);
+        if (!isActive())
+            return;
+
+        RenderUtils.renderText(Utils.localise(textProvider.get()), getRealPosition(), color);
     }
 
     @Override
@@ -35,9 +39,10 @@ public class Text extends AWidget {
     @Override
     public Position getRealPosition() {
         if (!centered)
-            return getPosition();
+            return getPosition().add(offset);//.add(parentPosition);
 
         int width = Minecraft.getMinecraft().fontRenderer.getStringWidth(Utils.localise(textProvider.get()));
-        return new Position(getPosition().getPosX() - width / 2, getPosition().getPosY());
+        Position p1 = getPosition().add(offset);//.add(parentPosition);
+        return new Position(p1.getPosX() - width / 2, p1.getPosY());
     }
 }

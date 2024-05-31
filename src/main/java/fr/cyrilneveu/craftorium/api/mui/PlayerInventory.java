@@ -16,6 +16,9 @@ public class PlayerInventory extends AWidget implements ITextured {
 
     @Override
     public void drawBackground(int mouseX, int mouseY, float partialTicks) {
+        if (!isActive())
+            return;
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
 
         Position p1 = new Position(getRealPosition().getPosX(), getRealPosition().getPosY());

@@ -6,24 +6,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
-import static fr.cyrilneveu.craftorium.api.utils.Size.ZERO;
-
-public class Button extends AWidget implements ITextured, IClickable {
+public abstract class Button extends AWidget implements ITextured {
     public static final Size TEXTURE_SIZE = new Size(32, 16);
-    private final OnMouseClicked onMouseClicked;
+    public static final Size BUTTON_SIZE = new Size(16, 16);
     private final ResourceLocation texture;
 
-    public Button(Position position, OnMouseClicked onMouseClicked, ResourceLocation texture) {
-        super(position, ZERO);
-        this.onMouseClicked = onMouseClicked;
+    public Button(Position position, ResourceLocation texture) {
+        super(position, BUTTON_SIZE);
         this.texture = texture;
     }
 
     @Override
-    public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (isActive && isVisible && isHovered(mouseX, mouseY))
-            onMouseClicked.onClick(mouseX, mouseY, mouseButton);
-    }
+    public abstract boolean onMouseClicked(int mouseX, int mouseY, int mouseButton);
 
     @Override
     public ResourceLocation getTexture() {
@@ -37,12 +31,10 @@ public class Button extends AWidget implements ITextured, IClickable {
 
     @Override
     public void drawBackground(int mouseX, int mouseY, float partialTicks) {
+        if (!isActive())
+            return;
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
         Gui.drawModalRectWithCustomSizedTexture(getRealPosition().getPosX(), getRealPosition().getPosY(), isHovered(mouseX, mouseY) ? 16 : 0, 0, getSize().getSizeX(), getSize().getSizeY(), getTextureSize().getSizeX(), getTextureSize().getSizeY());
-    }
-
-    @FunctionalInterface
-    public interface OnMouseClicked {
-        void onClick(int mouseX, int mouseY, int mouseButton);
     }
 }

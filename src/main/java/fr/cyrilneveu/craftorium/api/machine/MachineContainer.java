@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IContainable;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.net.NetManager;
 import fr.cyrilneveu.craftorium.api.net.SMachinePacket;
 import net.minecraft.entity.player.EntityPlayer;

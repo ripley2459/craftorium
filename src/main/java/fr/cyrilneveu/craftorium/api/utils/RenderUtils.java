@@ -13,8 +13,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -29,6 +27,8 @@ public final class RenderUtils {
     public static final int ERROR_COLOR = 0xFFff00ff;
     public static final int WHITE_COLOR = 0xFFffffff;
     public static final int BLACK_COLOR = 0xFF000000;
+    public static final int TEXT_COLOR = 4210752;
+    public static final int FONT_HEIGHT = 9;
 
     public static ModelResourceLocation getSimpleModelLocation(Block block) {
         return new ModelResourceLocation(Block.REGISTRY.getNameForObject(block), "");
@@ -40,17 +40,6 @@ public final class RenderUtils {
 
     public static TextureAtlasSprite getTexture(ResourceLocation location) {
         return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void drawStringSized(String text, double x, double y, int color, boolean dropShadow, float scale, boolean center) {
-        GlStateManager.pushMatrix();
-        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-        double scaledTextWidth = center ? fontRenderer.getStringWidth(text) * scale : 0.0;
-        GlStateManager.translate(x - scaledTextWidth / 2.0, y, 0.0f);
-        GlStateManager.scale(scale, scale, scale);
-        fontRenderer.drawString(text, 0, 0, color, dropShadow);
-        GlStateManager.popMatrix();
     }
 
     public static void renderNineSlicedTexture(Position position, Size size, Size rectOffset, Size textureSize, ResourceLocation texture) {
@@ -69,6 +58,32 @@ public final class RenderUtils {
         Gui.drawModalRectWithCustomSizedTexture(position.getPosX(), position.getPosY() + rectOffset.getSizeY(), 0, rectOffset.getSizeY(), rectOffset.getSizeX(), size.getSizeY() - 2 * rectOffset.getSizeY(), textureSize.getSizeX(), textureSize.getSizeY());
 
         Gui.drawModalRectWithCustomSizedTexture(position.getPosX() + rectOffset.getSizeX(), position.getPosY() + rectOffset.getSizeY(), rectOffset.getSizeX(), rectOffset.getSizeY(), size.getSizeX() - 2 * rectOffset.getSizeX(), size.getSizeY() - 2 * rectOffset.getSizeY(), textureSize.getSizeX(), textureSize.getSizeY());
+    }
+
+    public static void resetRenderColor() {
+        setRenderColor(WHITE_COLOR);
+    }
+
+    public static void setRenderColor(int color) {
+        GlStateManager.color(((color >> 16) & 0xff) / 255.0f, ((color >> 8) & 0xff) / 255.0f, (color & 0xff) / 255.0f, 1.0F);
+    }
+
+    public static void renderText(String text, Position position, int color) {
+        renderText(text, position, color, 1.0f, false, false);
+    }
+
+    public static void renderText(String text, Position position, int color, float scale, boolean dropShadow, boolean center) {
+        GlStateManager.pushMatrix();
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        double scaledTextWidth = center ? fontRenderer.getStringWidth(text) * scale : 0.0;
+        GlStateManager.translate(position.getPosX() - scaledTextWidth / 2.0, position.getPosY(), 0.0f);
+        GlStateManager.scale(scale, scale, scale);
+        fontRenderer.drawString(text, 0, 0, color, dropShadow);
+        GlStateManager.popMatrix();
+    }
+
+    public static void bindTexture(ResourceLocation texture) {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     }
 
     public static class CustomStateMapper extends StateMapperBase {

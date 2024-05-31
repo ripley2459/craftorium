@@ -18,6 +18,9 @@ public class ItemSlot extends ASlot {
 
     @Override
     public void drawBackground(int mouseX, int mouseY, float partialTicks) {
+        if (!isActive())
+            return;
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
         Gui.drawModalRectWithCustomSizedTexture(getRealPosition().getPosX(), getRealPosition().getPosY(), 0, 0, getTextureSize().getSizeX(), getTextureSize().getSizeY(), getTextureSize().getSizeX(), getTextureSize().getSizeY());
     }
