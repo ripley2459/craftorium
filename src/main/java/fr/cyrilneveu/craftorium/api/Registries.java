@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api;
 
 import fr.cyrilneveu.craftorium.api.machine.Machine;
+import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
@@ -24,4 +25,5 @@ public final class Registries {
     public static final Registry<String, Vein> VEINS_REGISTRY = new Registry<>();
     public static final Registry<String, ATierObject.TierItem> TIER_ITEMS_REGISTRY = new Registry<>();
     public static final Registry<String, Machine> MACHINES_REGISTRY = new Registry<>();
+    public static final Registry<String, RecipeMap> MACHINE_MAPS_REGISTRY = new Registry<>();
 }

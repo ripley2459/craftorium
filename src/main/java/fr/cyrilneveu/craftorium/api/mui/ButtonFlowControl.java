@@ -15,7 +15,7 @@ import java.util.List;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.machine.behaviour.FlowController.DEFAULT_SLOT_BEHAVIOUR;
 
-public final class ButtonFlowControl extends Button {
+public final class ButtonFlowControl extends AButton {
     public static final ResourceLocation FLOW_ICON = new ResourceLocation(MODID, "textures/interfaces/elements/flow_icon.png");
     private static final ResourceLocation FLOW_LOCK = new ResourceLocation(MODID, "textures/interfaces/elements/flow_lock.png");
     private static final ResourceLocation FLOW_FREE = new ResourceLocation(MODID, "textures/interfaces/elements/flow_free.png");

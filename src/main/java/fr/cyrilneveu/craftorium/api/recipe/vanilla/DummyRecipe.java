@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.recipe;
+package fr.cyrilneveu.craftorium.api.recipe.vanilla;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

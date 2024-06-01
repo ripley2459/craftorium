@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.recipe;
+package fr.cyrilneveu.craftorium.api.recipe.process;
 
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 

@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
-import fr.cyrilneveu.craftorium.api.recipe.RecipeManager;
+import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;

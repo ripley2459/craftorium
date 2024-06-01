@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.recipe;
+package fr.cyrilneveu.craftorium.api.recipe.vanilla;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.substance.Substance;

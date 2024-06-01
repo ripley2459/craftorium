@@ -5,7 +5,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
-import fr.cyrilneveu.craftorium.api.recipe.AProcess;
+import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;

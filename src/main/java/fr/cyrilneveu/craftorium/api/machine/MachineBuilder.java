@@ -9,6 +9,7 @@ import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.mui.Text;
+import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 
@@ -31,6 +32,12 @@ public final class MachineBuilder {
     private Size screenSize = new Size(176, 166);
     private List<Tab> leftTabs = new LinkedList<>();
     private List<Tab> rightTabs = new LinkedList<>();
+    @Nullable
+    private RecipeMap map;
+    @Nullable
+    private Position progressPosition;
+    @Nullable
+    private Position configurationButtonPosition;
 
     public MachineBuilder(String name) {
         this.name = name;
@@ -76,6 +83,13 @@ public final class MachineBuilder {
         return this;
     }
 
+    public MachineBuilder processor(RecipeMap map, int pPosX, int pPosY, int cPosX, int cPosY) {
+        this.map = map;
+        this.progressPosition = new Position(pPosX, pPosY);
+        this.configurationButtonPosition = new Position(cPosX, cPosY);
+        return this;
+    }
+
     public MachineBuilder text(int posX, int posY, String unlocalizedText, boolean centered) {
         widgets.add(new Text(new Position(posX, posY), () -> unlocalizedText, centered, TEXT_COLOR));
         return this;
@@ -94,6 +108,8 @@ public final class MachineBuilder {
             providers.add((m, t) -> new FlowController(m));
         if (playerInventoryPosition != null)
             providers.add((m, t) -> new PlayerInventory(playerInventoryPosition));
+        if (map != null)
+            providers.add((m, t) -> new RecipeProcessor(m, map, progressPosition, configurationButtonPosition));
 
         Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs);
         MACHINES_REGISTRY.put(name, m);

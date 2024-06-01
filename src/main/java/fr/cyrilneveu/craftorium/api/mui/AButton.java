@@ -6,12 +6,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class Button extends AWidget implements ITextured {
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+
+public abstract class AButton extends AWidget implements ITextured {
     public static final Size TEXTURE_SIZE = new Size(32, 16);
     public static final Size BUTTON_SIZE = new Size(16, 16);
+    public static final ResourceLocation DEFAULT_BUTTON = new ResourceLocation(MODID, "textures/interfaces/elements/button.png");
     private final ResourceLocation texture;
 
-    public Button(Position position, ResourceLocation texture) {
+    public AButton(Position position, ResourceLocation texture) {
         super(position, BUTTON_SIZE);
         this.texture = texture;
     }
