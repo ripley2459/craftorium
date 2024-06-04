@@ -32,7 +32,7 @@ public final class Machines {
                 .fluidInput(56, 46)
                 .itemOutput(103, 17).itemOutput(121, 17).itemOutput(139, 17).itemOutput(103, 35).itemOutput(121, 35).itemOutput(139, 35)
                 .fluidOutput(103, 57).fluidOutput(121, 57).fluidOutput(139, 57).fluidOutput(103, 75).fluidOutput(121, 75).fluidOutput(139, 75)
-                .processor(ELECTROLYZING, 0, 0, 134, 96)
+                .processor(ELECTROLYZING, 77, 47, 134, 96)
                 .energy(153, 97)
                 .flowControlled()
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "electrolyzer", "name"), true)

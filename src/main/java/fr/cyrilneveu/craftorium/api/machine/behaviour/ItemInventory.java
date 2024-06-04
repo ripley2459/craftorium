@@ -26,6 +26,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, IContainable, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
@@ -65,6 +66,30 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Override
     public int getSlots() {
         return stacks.size();
+    }
+
+    public List<ItemSlotData> getSlotsData() {
+        return slots;
+    }
+
+    public List<ItemStack> getStacksInInputs() {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (ItemSlotData slot : slots) {
+            if (slot.isInput())
+                itemStacks.add(getStackInSlot(slot.getIndex()));
+        }
+
+        return itemStacks;
+    }
+
+    public List<ItemStack> getStacksInOutput() {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (ItemSlotData slot : slots) {
+            if (slot.isOutput())
+                itemStacks.add(getStackInSlot(slot.getIndex()));
+        }
+
+        return itemStacks;
     }
 
     @Nonnull
@@ -122,6 +147,18 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
         }
 
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+    }
+
+    @Nonnull
+    public ItemStack insertInOutputs(@Nonnull ItemStack stack, boolean simulate) {
+        ItemStack remaining = ItemStack.EMPTY;
+        for (ItemSlotData slot : slots) {
+            remaining = slot.isOutput() ? defaultInsert(slot.getIndex(), stack, simulate) : stack;
+            if (remaining.isEmpty())
+                break;
+        }
+
+        return remaining;
     }
 
     @Nonnull

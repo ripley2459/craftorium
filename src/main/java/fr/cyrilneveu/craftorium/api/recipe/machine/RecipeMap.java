@@ -78,7 +78,7 @@ public final class RecipeMap {
     }
 
     @Nullable
-    public MachineRecipe getRecipe(List<ItemStack> items, List<FluidStack> fluids, @Nullable MachineRecipe cache) {
+    public MachineRecipe getRecipe(List<ItemStack> items, List<FluidStack> fluids, int configuration, @Nullable MachineRecipe cache) {
         if (cache != null && isRecipeValid(cache, items, fluids))
             return cache;
 

@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -118,9 +119,42 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
         return null;
     }
 
-    public void flush() {
-        for (CustomTank tank : tanks)
-            tank.flush();
+    public List<FluidStack> getStacksInInputs() {
+        List<FluidStack> fluidStacks = new ArrayList<>();
+        for (FluidSlotData slot : slots) {
+            CustomTank tank = tanks.get(slot.getIndex());
+            if (slot.isInput() && tank.hasFluid())
+                fluidStacks.add(tank.getFluid());
+        }
+
+        return fluidStacks;
+    }
+
+    public List<FluidStack> getStacksInOutput() {
+        List<FluidStack> fluidStacks = new ArrayList<>();
+        for (FluidSlotData slot : slots) {
+            CustomTank tank = tanks.get(slot.getIndex());
+            if (slot.isOutput() && tank.hasFluid())
+                fluidStacks.add(tank.getFluid());
+        }
+
+        return fluidStacks;
+    }
+
+    public FluidStack getStackInSlot(int slot) {
+        return this.tanks.get(slot).getFluid();
+    }
+
+    public int insertInOutputs(FluidStack resource, boolean doDrain) {
+        for (int i = 0; i < slots.size(); i++) {
+            if (slots.get(i).isOutput()) {
+                CustomTank tank = tanks.get(i);
+                if (tank.canFillFluidType(resource) && !tank.isFull() && (tank.getFluid() == null || tank.getFluid().isFluidEqual(resource)))
+                    return tank.fill(resource, doDrain);
+            }
+        }
+
+        return 0;
     }
 
     public FluidInventory forSide(EnumFacing side) {
@@ -177,5 +211,13 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Override
     public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
         slots.forEach(s -> widgets.add(new FluidSlot(s)));
+    }
+
+    public List<FluidSlotData> getSlotsData() {
+        return slots;
+    }
+
+    public List<CustomTank> getTanks() {
+        return tanks;
     }
 }

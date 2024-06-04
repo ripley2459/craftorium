@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.api.machine;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
@@ -22,54 +23,49 @@ import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.TEXT_COLOR;
 
 public final class MachineBuilder {
     private String name;
+    private List<Machine.IGetBehaviours> providers = new LinkedList<>();
     private List<ItemSlotData> items = new LinkedList<>();
     private List<FluidSlotData> fluids = new LinkedList<>();
-    private EnergySlotData energy;
-    @Nullable
-    private Position playerInventoryPosition;
-    private boolean flowControlled;
     private List<AWidget> widgets = new LinkedList<>();
     private Size screenSize = new Size(176, 166);
     private List<Tab> leftTabs = new LinkedList<>();
     private List<Tab> rightTabs = new LinkedList<>();
     @Nullable
     private RecipeMap map;
-    @Nullable
-    private Position progressPosition;
-    @Nullable
-    private Position configurationButtonPosition;
+    private boolean energy;
 
     public MachineBuilder(String name) {
         this.name = name;
     }
 
     public MachineBuilder itemInput(int posX, int posY) {
-        items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.INPUT));
+        this.items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.INPUT));
         return this;
     }
 
     public MachineBuilder itemOutput(int posX, int posY) {
-        items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.OUTPUT));
+        this.items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.OUTPUT));
         return this;
     }
 
     public MachineBuilder fluidInput(int posX, int posY) {
-        fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.INPUT, 64000));
+        this.fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.INPUT, 64000));
         return this;
     }
 
     public MachineBuilder fluidOutput(int posX, int posY) {
-        fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.OUTPUT, 64000));
+        this.fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.OUTPUT, 64000));
         return this;
     }
 
     public MachineBuilder energy(int posX, int posY) {
-        energy = new EnergySlotData(new Position(posX, posY), Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer);
+        this.energy = true;
+        this.providers.add((m, t) -> new EnergyInventory(m, new EnergySlotData(new Position(posX, posY), Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer)));
         return this;
     }
 
     public MachineBuilder playerInventory(int posX, int posY) {
-        playerInventoryPosition = new Position(posX, posY);
+        this.providers.add((m, t) -> new PlayerInventory(new Position(posX, posY)));
         return this;
     }
 
@@ -79,40 +75,59 @@ public final class MachineBuilder {
     }
 
     public MachineBuilder flowControlled() {
-        flowControlled = true;
+        this.providers.add((m, t) -> new FlowController(m));
         return this;
     }
 
-    public MachineBuilder processor(RecipeMap map, int pPosX, int pPosY, int cPosX, int cPosY) {
+    public MachineBuilder processor(RecipeMap map, int progressX, int progressY, int configurationX, int ConfigurationY) {
         this.map = map;
-        this.progressPosition = new Position(pPosX, pPosY);
-        this.configurationButtonPosition = new Position(cPosX, cPosY);
+        this.providers.add((m, t) -> new RecipeProcessor(m, map, new Position(progressX, progressY), new Position(configurationX, ConfigurationY)));
         return this;
     }
 
-    public MachineBuilder text(int posX, int posY, String unlocalizedText, boolean centered) {
-        widgets.add(new Text(new Position(posX, posY), () -> unlocalizedText, centered, TEXT_COLOR));
+    public MachineBuilder text(int posX, int posY, String text, boolean centered) {
+        this.widgets.add(new Text(new Position(posX, posY), () -> text, centered, TEXT_COLOR));
         return this;
     }
 
     public Machine build() {
-        List<Machine.IGetBehaviours> providers = new LinkedList<>();
+        verify();
 
         if (!items.isEmpty())
             providers.add((m, t) -> new ItemInventory(m, ImmutableList.copyOf(items)));
         if (!fluids.isEmpty())
             providers.add((m, t) -> new FluidInventory(m, ImmutableList.copyOf(fluids)));
-        if (energy != null)
-            providers.add((m, t) -> new EnergyInventory(m, energy));
-        if (flowControlled)
-            providers.add((m, t) -> new FlowController(m));
-        if (playerInventoryPosition != null)
-            providers.add((m, t) -> new PlayerInventory(playerInventoryPosition));
-        if (map != null)
-            providers.add((m, t) -> new RecipeProcessor(m, map, progressPosition, configurationButtonPosition));
 
         Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs);
+
         MACHINES_REGISTRY.put(name, m);
+
         return m;
+    }
+
+    private void verify() {
+        if (map != null) {
+            Preconditions.checkArgument(energy);
+
+            int input = 0;
+            int output = 0;
+            for (ItemSlotData itemSlotData : items) {
+                if (itemSlotData.isInput())
+                    input++;
+                else output++;
+            }
+
+            Preconditions.checkArgument(input >= map.getItemsIn() && output >= map.getItemsOut());
+
+            input = 0;
+            output = 0;
+            for (FluidSlotData s : fluids) {
+                if (s.isInput())
+                    input++;
+                else output++;
+            }
+
+            Preconditions.checkArgument(input >= map.getFluidsIn() && output >= map.getFluidsOut());
+        }
     }
 }

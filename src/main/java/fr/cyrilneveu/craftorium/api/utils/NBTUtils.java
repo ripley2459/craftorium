@@ -28,12 +28,17 @@ public final class NBTUtils {
         return setValue(name, value, getNBT(itemStack));
     }
 
-    public static NBTTagCompound setValue(String name, int value) {
-        return setValue(name, value, new NBTTagCompound());
-    }
-
     public static NBTTagCompound setValue(String name, int value, NBTTagCompound nbt) {
         nbt.setInteger(name, value);
+        return nbt;
+    }
+
+    public static String getStringValue(String name, NBTTagCompound nbt) {
+        return nbt.getString(name);
+    }
+
+    public static NBTTagCompound setValue(String name, String value, NBTTagCompound nbt) {
+        nbt.setString(name, value);
         return nbt;
     }
 }

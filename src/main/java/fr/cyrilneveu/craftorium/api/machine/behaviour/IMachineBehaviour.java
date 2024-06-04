@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import java.util.List;
 
 public interface IMachineBehaviour {
-    default void verify() {
+    default void init() {
 
     }
 

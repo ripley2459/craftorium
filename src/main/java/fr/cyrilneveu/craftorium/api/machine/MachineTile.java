@@ -4,6 +4,7 @@ import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
 import fr.cyrilneveu.craftorium.api.mui.Screen;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -40,11 +41,7 @@ public final class MachineTile extends TileEntity implements ITickable {
     public MachineTile(Machine machine, Tier tier) {
         this.machine = machine;
         this.tier = tier;
-        this.behaviours = machine.getBehaviours(this, tier);
-    }
-
-    public EMachineStates getState() {
-        return EMachineStates.IDLE;
+        initBehaviours();
     }
 
     @Override
@@ -61,6 +58,13 @@ public final class MachineTile extends TileEntity implements ITickable {
 
     public GuiContainer createGui(EntityPlayer player) {
         return new MachineScreen(this, createContainer(player));
+    }
+
+    private void initBehaviours() {
+        behaviours = machine.getBehaviours(this, tier);
+
+        for (IMachineBehaviour behaviour : behaviours)
+            behaviour.init();
     }
 
     @Override
@@ -111,7 +115,7 @@ public final class MachineTile extends TileEntity implements ITickable {
         if (compound.hasKey(MACHINE_NBT_KEY) && compound.hasKey(TIER_NBT_KEY)) {
             machine = MACHINES_REGISTRY.get(compound.getString(MACHINE_NBT_KEY));
             tier = TIERS_REGISTRY.get(compound.getString(TIER_NBT_KEY));
-            behaviours = machine.getBehaviours(this, tier);
+            initBehaviours();
         }
 
         for (IMachineBehaviour behaviour : behaviours) {
@@ -165,5 +169,18 @@ public final class MachineTile extends TileEntity implements ITickable {
     @Nullable
     public Screen getScreen() {
         return screen.get();
+    }
+
+    public EMachineStates getState() {
+        return state;
+    }
+
+    public void setState(EMachineStates state) {
+        if (this.state != state) {
+            this.state = state;
+            markDirty();
+            IBlockState blockState = world.getBlockState(pos);
+            getWorld().notifyBlockUpdate(pos, blockState, blockState, 3);
+        }
     }
 }

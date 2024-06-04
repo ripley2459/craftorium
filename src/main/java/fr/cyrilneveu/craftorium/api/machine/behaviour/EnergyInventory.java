@@ -96,7 +96,7 @@ public final class EnergyInventory implements IEnergyStorage, IMachineBehaviour,
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return NBTUtils.setValue(ENERGY_NBT_KEY, energy);
+        return NBTUtils.setValue(ENERGY_NBT_KEY, energy,new NBTTagCompound());
     }
 
     @Override
