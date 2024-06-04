@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 
+import static fr.cyrilneveu.craftorium.common.recipe.Maps.ELECTROLYZING;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
@@ -17,6 +19,15 @@ import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+
+        ELECTROLYZING.addRecipe(new MachineRecipeBuilder("test_recipe")
+                .consumeEnergy(5000)
+                .consumeItem(DUST.getOre(REDSTONE), 3)
+                .consumeFluid("water", 1000)
+                .produceItem(WIRE.asItemStack(REDSTONE_ALLOY, 3))
+                .produceFluid("lava", 1000)
+                .configuration(1)
+                .build());
 
         RecipeManager.addShapedRecipe("circuit_board_redstone", ACommonProxy.getItemStack("circuit_board_redstone", 6),
                 "TSR",

@@ -9,6 +9,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,7 +49,14 @@ public final class ButtonFlowControl extends AButton {
         if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
-        return Collections.singletonList(Utils.localise("tooltip.craftorium.machine.facing_".concat(facing.getName())));
+        List<String> tooltips = new ArrayList<>();
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.facing_".concat(facing.getName())));
+
+        String on = Utils.localise("tooltip.craftorium.on");
+        String off = Utils.localise("tooltip.craftorium.off");
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_input", (flow == ESlotFlow.INPUT || flow == ESlotFlow.FREE) ? on : off));
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_output", (flow == ESlotFlow.OUTPUT || flow == ESlotFlow.FREE) ? on : off));
+        return tooltips;
     }
 
     @Override

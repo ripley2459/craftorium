@@ -365,17 +365,21 @@ tooltip.craftorium.machine.facing_north=Front
 tooltip.craftorium.machine.facing_south=Back
 tooltip.craftorium.machine.facing_west=Left side
 tooltip.craftorium.machine.facing_east=Right side
-tooltip.craftorium.tier.name=§eTier: %s§r
-tooltip.craftorium.formula=§3%s§r
-tooltip.craftorium.temperature=§5%s°K§r
 tooltip.craftorium.machine.energy=%s/%sRF
 tooltip.craftorium.machine.fluid=%s (%s/%smB)
 tooltip.craftorium.machine.no_fluid=Empty (0/%smB)
+tooltip.craftorium.machine.allow_input=Insert: %s
+tooltip.craftorium.machine.allow_output=Extract/Push out: %s
 tooltip.craftorium.state.solid=§aState: Solid§r
 tooltip.craftorium.state.liquid=§aState: Liquid§r
 tooltip.craftorium.state.gaseous=§aState: Gaseous§r
 tooltip.craftorium.state.unknown=§4State: Unknown§r
 tooltip.craftorium.battery.energy=§c%s/%sRF§r
+tooltip.craftorium.tier.name=§eTier: %s§r
+tooltip.craftorium.formula=§3%s§r
+tooltip.craftorium.temperature=§5%s°K§r
+tooltip.craftorium.on=§aON§r
+tooltip.craftorium.off=§7OFF§r
 
 # JEI
 jei.craftorium.vein_generation.name=Ore Generation
