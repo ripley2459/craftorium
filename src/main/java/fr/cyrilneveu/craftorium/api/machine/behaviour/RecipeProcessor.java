@@ -28,6 +28,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -45,7 +46,9 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
     private final Position configurationButtonPosition;
     private final Random random = new Random();
     private final CustomLazy<FlowController> flowController;
+    @Nullable
     private ItemInventory itemInventory;
+    @Nullable
     private FluidInventory fluidInventory;
     private EnergyInventory energyInventory;
     private int configuration = MACHINE_CONFIGURATION_MIN;
@@ -152,7 +155,7 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
     }
 
     private boolean setRecipe() {
-        recipe = map.getRecipe(itemInventory.getStacksInInputs(), fluidInventory.getStacksInInputs(), configuration, cache);
+        recipe = map.getRecipe(itemInventory != null ? itemInventory.getStacksInInputs() : Collections.emptyList(), fluidInventory != null ? fluidInventory.getStacksInInputs() : Collections.emptyList(), configuration, cache);
         if (recipe != null) {
             progress = 0;
             progressMax = recipe.getDuration();

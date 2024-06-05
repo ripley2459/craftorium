@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FluidStackRenderer extends mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer {
+public final class FluidStackRenderer extends mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer {
     private final int chance;
 
     public FluidStackRenderer(int capacityMb, boolean showCapacity, int width, int height, @Nullable IDrawable overlay, int chance) {

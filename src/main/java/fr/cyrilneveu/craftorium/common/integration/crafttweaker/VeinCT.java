@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.crafttweaker;
+package fr.cyrilneveu.craftorium.common.integration.crafttweaker;
 
 import com.google.common.base.Preconditions;
 import crafttweaker.annotations.ZenRegister;

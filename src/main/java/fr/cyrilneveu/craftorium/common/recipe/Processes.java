@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
 import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
@@ -12,6 +13,7 @@ import net.minecraft.item.crafting.Ingredient;
 
 import java.util.Set;
 
+import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Processes {
@@ -71,6 +73,9 @@ public final class Processes {
 
             if (OreStack.oresExist(WRENCH.getOre(substance), PLATE.getOre(substance)))
                 RecipeManager.addShapedRecipe(CASING.getName(substance), CASING.asItemStack(substance), "WP", 'W', WRENCH.asIngredient(substance), 'P', PLATE.asIngredient(substance));
+
+            if (OreStack.oresExist(PLATE.getOre(substance)))
+                BENDING.addRecipe(new MachineRecipeBuilder(CASING.getName(substance).concat(PLATE.getName(substance))).consumeItem(PLATE.getOre(substance), 1).produceItem(CASING.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(2).build());
         }
 
         private void dust(Substance substance) {
@@ -85,6 +90,15 @@ public final class Processes {
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(PEARL.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), PEARL.asIngredient(substance));
             if (OreStack.oresExist(MORTAR.getOre(substance), ORE.getOre(substance)))
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
+
+            if (OreStack.oresExist(INGOT.getOre(substance)))
+                MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(INGOT.getName(substance))).consumeItem(INGOT.getOre(substance), 1).produceItem(DUST.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(1).build());
+            if (OreStack.oresExist(GEM.getOre(substance)))
+                MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(GEM.getName(substance))).consumeItem(GEM.getOre(substance), 1).produceItem(DUST.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(1).build());
+            if (OreStack.oresExist(PEARL.getOre(substance)))
+                MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(PEARL.getName(substance))).consumeItem(PEARL.getOre(substance), 1).produceItem(DUST.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(1).build());
+            if (OreStack.oresExist(ORE.getOre(substance)))
+                MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(ORE.getName(substance))).consumeItem(ORE.getOre(substance), 1).produceItem(DUST.asItemStack(substance, 2)).consumeEnergy(10000).duration(300).configuration(1).build());
 
             if (substance.getComposition().isNative())
                 return;
@@ -120,6 +134,9 @@ public final class Processes {
 
             if (OreStack.oresExist(FILE.getOre(substance), PLATE.getOre(substance)))
                 RecipeManager.addShapedRecipe(FOIL.getName(substance), FOIL.asItemStack(substance, 2), "F", "P", 'F', FILE.asIngredient(substance), 'P', PLATE.asIngredient(substance));
+
+            if (OreStack.oresExist(PLATE.getOre(substance)))
+                BENDING.addRecipe(new MachineRecipeBuilder(FOIL.getName(substance).concat(PLATE.getName(substance))).consumeItem(PLATE.getOre(substance), 1).produceItem(FOIL.asItemStack(substance, 2)).consumeEnergy(5000).duration(200).configuration(3).build());
         }
 
         private void gear(Substance substance) {
@@ -187,6 +204,9 @@ public final class Processes {
 
             if (OreStack.oresExist(CUTTER.getOre(substance), ROD.getOre(substance), WRENCH.getOre(substance)))
                 RecipeManager.addShapedRecipe(RING.getName(substance), RING.asItemStack(substance), "CRW", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
+
+            if (OreStack.oresExist(ROD.getOre(substance)))
+                BENDING.addRecipe(new MachineRecipeBuilder(RING.getName(substance).concat(ROD.getName(substance))).consumeItem(ROD.getOre(substance), 1).produceItem(RING.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(4).build());
         }
 
         private void rod(Substance substance) {
@@ -195,6 +215,9 @@ public final class Processes {
 
             if (OreStack.oresExist(FILE.getOre(substance), INGOT.getOre(substance)))
                 RecipeManager.addShapelessRecipe(ROD.getName(substance), ROD.asItemStack(substance, 2), FILE.asIngredient(substance), INGOT.asIngredient(substance));
+
+            if (OreStack.oresExist(INGOT.getOre(substance)))
+                SPINNING.addRecipe(new MachineRecipeBuilder(ROD.getName(substance).concat(INGOT.getName(substance))).consumeItem(INGOT.getOre(substance), 1).produceItem(ROD.asItemStack(substance, 4)).consumeEnergy(5000).duration(200).configuration(1).build());
         }
 
         private void rotor(Substance substance) {
@@ -211,6 +234,8 @@ public final class Processes {
 
             if (OreStack.oresExist(ROD.getOre(substance), SAW.getOre(substance), HAMMER.getOre(substance), FILE.getOre(substance)))
                 RecipeManager.addShapedRecipe(SCREW.getName(substance), SCREW.asItemStack(substance, 2), " SH", "FR ", 'S', SAW.asIngredient(substance), 'F', FILE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
+            if (OreStack.oresExist(ROD.getOre(substance)))
+                SPINNING.addRecipe(new MachineRecipeBuilder(SCREW.getName(substance).concat(ROD.getName(substance))).consumeItem(ROD.getOre(substance), 1).produceItem(SCREW.asItemStack(substance, 2)).consumeEnergy(5000).duration(200).configuration(2).build());
         }
 
         private void spring(Substance substance) {
@@ -219,6 +244,9 @@ public final class Processes {
 
             if (OreStack.oresExist(CUTTER.getOre(substance), WRENCH.getOre(substance), HAMMER.getOre(substance)))
                 RecipeManager.addShapedRecipe(SPRING.getName(substance), SPRING.asItemStack(substance), "CRW", " H ", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
+
+            if (OreStack.oresExist(ROD.getOre(substance)))
+                BENDING.addRecipe(new MachineRecipeBuilder(SPRING.getName(substance).concat(ROD.getName(substance))).consumeItem(ROD.getOre(substance), 1).produceItem(SPRING.asItemStack(substance)).consumeEnergy(5000).duration(200).configuration(5).build());
         }
 
         private void wire(Substance substance) {

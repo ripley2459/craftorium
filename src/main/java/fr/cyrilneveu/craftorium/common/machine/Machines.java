@@ -17,10 +17,13 @@ import java.util.Collections;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.MACHINES;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.ELECTROLYZING;
+import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 
 public final class Machines {
     public static Machine ELECTROLYZER;
+    public static Machine MACERATOR;
+    public static Machine BENDER;
+    public static Machine LATHE;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -38,6 +41,36 @@ public final class Machines {
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "electrolyzer", "name"), true)
                 .text(8, 106, "container.inventory", false)
                 .playerInventory(7, 117)
+                .build();
+        MACERATOR = new MachineBuilder("macerator")
+                .itemInput(55, 36)
+                .itemOutput(103, 36)
+                .processor(MACERATING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "macerator", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        BENDER = new MachineBuilder("bender")
+                .itemInput(55, 36)
+                .itemOutput(103, 36)
+                .processor(BENDING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "bender", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        LATHE = new MachineBuilder("lathe")
+                .itemInput(55, 36)
+                .itemOutput(103, 36)
+                .processor(SPINNING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "lathe", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
                 .build();
     }
 

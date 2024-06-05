@@ -23,9 +23,9 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.mui.ProgressArrow.*;
 
-public class MachineRecipeWrapper implements IRecipeWrapper {
-    protected final IDrawable arrow;
-    protected final IDrawableStatic arrowbackground;
+public final class MachineRecipeWrapper implements IRecipeWrapper {
+    private final IDrawable arrow;
+    private final IDrawableStatic arrowbackground;
     private final Machine machine;
     private final MachineRecipe recipe;
 
@@ -54,10 +54,11 @@ public class MachineRecipeWrapper implements IRecipeWrapper {
 
         if (mouseX >= p.getPosX() - o.getSizeX() && mouseX < p.getPosX() - o.getSizeX() + s.getSizeX() && mouseY >= p.getPosY() - o.getSizeY() && mouseY < p.getPosY() - o.getSizeY() + s.getSizeY()) {
             tooltips = new ArrayList<>();
-         //   tooltips.add(Utils.localise("jei.craftorium.recipe.recipe_ct", recipe.getName(), machine.getMap().getName()));
+            tooltips.add(Utils.localise("jei.craftorium.recipe.recipe_ct", recipe.getName(), machine.getJeiData().getMap()));
             tooltips.add(Utils.localise("jei.craftorium.recipe.energy", recipe.getEnergyIn()));
             tooltips.add(Utils.localise("jei.craftorium.recipe.consumption", recipe.getEnergyIn() / recipe.getDuration()));
             tooltips.add(Utils.localise("jei.craftorium.recipe.duration", recipe.getDuration() / 20));
+            tooltips.add(Utils.localise("jei.craftorium.recipe.configuration", recipe.getConfiguration()));
         } else tooltips = Collections.emptyList();
 
         return tooltips;

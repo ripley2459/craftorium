@@ -112,7 +112,7 @@ public final class FlowController implements IMachineBehaviour, INBTSerializable
     public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
         List<AWidget> buttons = new LinkedList<>();
 
-        buttons.add(new Text(new Position(6, 9), () -> "Flow controller", false, WHITE_COLOR));
+        buttons.add(new Text(new Position(6, 8), () -> "Flow controller", false, WHITE_COLOR));
         buttons.add(new ButtonFlowControl(new Position(51 - 8, 2 * 16 + 2 * 2 + 23), EnumFacing.DOWN));
         buttons.add(new ButtonFlowControl(new Position(51 - 8, 23), EnumFacing.UP));
         buttons.add(new ButtonFlowControl(new Position(51 - 8, 16 + 2 + 23), EnumFacing.NORTH));

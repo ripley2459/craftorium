@@ -82,6 +82,9 @@ item.craftorium.circuit_board_3.name=Maxed Circuit Board
 
 # Machines
 machine.craftorium.electrolyzer.name=Electrolyzer
+machine.craftorium.macerator.name=Macerator
+machine.craftorium.bender.name=Bender
+machine.craftorium.lathe.name=Lathe
 
 # Substances
 tile.craftorium.block.name=Block of %s
@@ -386,3 +389,8 @@ jei.craftorium.vein_generation.name=Ore Generation
 jei.craftorium.vein.chance=Weight: %s
 jei.craftorium.vein.depth=Y: %s-%s
 jei.craftorium.vein.dimension=Dimension: %s
+jei.craftorium.recipe.consumption=%sRF/tick
+jei.craftorium.recipe.duration=%ssecs
+jei.craftorium.recipe.energy=Total: %sRF
+jei.craftorium.recipe.recipe_ct=Recipe §o§e%s§r in map §o§e%s§r
+jei.craftorium.recipe.configuration=Configuration %s

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemStackRenderer extends mezz.jei.plugins.vanilla.ingredients.item.ItemStackRenderer {
+public final class ItemStackRenderer extends mezz.jei.plugins.vanilla.ingredients.item.ItemStackRenderer {
     private final OreStack oreStack;
     private final int amount;
     private final int chance;

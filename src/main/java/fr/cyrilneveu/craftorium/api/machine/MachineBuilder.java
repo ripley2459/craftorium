@@ -31,7 +31,7 @@ public final class MachineBuilder {
     private List<ItemSlotData> items = new LinkedList<>();
     private List<FluidSlotData> fluids = new LinkedList<>();
     private List<AWidget> widgets = new LinkedList<>();
-    private Size screenSize = new Size(176, 166);
+    private Size screenSize = new Size(176, 180);
     private List<Tab> leftTabs = new LinkedList<>();
     private List<Tab> rightTabs = new LinkedList<>();
     private List<ASlotData> slotJEI = new ArrayList<>();

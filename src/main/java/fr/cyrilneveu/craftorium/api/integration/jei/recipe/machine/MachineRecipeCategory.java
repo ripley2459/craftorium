@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.mui.ASlot.SLOT_TEXTURE_SIZE;
 
-public class MachineRecipeCategory extends ACategory<MachineRecipeWrapper> {
+public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper> {
     protected final Machine machine;
 
     public MachineRecipeCategory(Machine machine, IGuiHelper guiHelper) {
