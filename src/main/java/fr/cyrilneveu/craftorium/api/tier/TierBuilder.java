@@ -101,7 +101,7 @@ public final class TierBuilder {
     @ZenMethod
     public TierBuilder packageFull() {
         items(BATTERY, EMITTER, HEAT_EXCHANGER, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
-        machines(ELECTROLYZER, MACERATOR, BENDER, LATHE);
+        machines(ELECTROLYZER, MACERATOR, BENDER, LATHE, CUTTER, COMPRESSOR);
         return this;
     }
 

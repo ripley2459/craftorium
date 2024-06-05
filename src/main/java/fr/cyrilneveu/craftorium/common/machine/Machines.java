@@ -24,6 +24,8 @@ public final class Machines {
     public static Machine MACERATOR;
     public static Machine BENDER;
     public static Machine LATHE;
+    public static Machine CUTTER;
+    public static Machine COMPRESSOR;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -69,6 +71,26 @@ public final class Machines {
                 .energy(153, 77)
                 .flowControlled()
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "lathe", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        CUTTER = new MachineBuilder("cutter")
+                .itemInput(55, 36)
+                .itemOutput(103, 36)
+                .processor(CUTTING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "cutter", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        COMPRESSOR = new MachineBuilder("compressor")
+                .itemInput(55, 36)
+                .itemOutput(103, 36)
+                .processor(COMPRESSING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "compressor", "name"), true)
                 .text(8, 86, "container.inventory", false)
                 .playerInventory(7, 97)
                 .build();

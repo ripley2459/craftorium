@@ -85,6 +85,8 @@ machine.craftorium.electrolyzer.name=Electrolyzer
 machine.craftorium.macerator.name=Macerator
 machine.craftorium.bender.name=Bender
 machine.craftorium.lathe.name=Lathe
+machine.craftorium.cutter.name=Cutter
+machine.craftorium.compressor.name=Compressor
 
 # Substances
 tile.craftorium.block.name=Block of %s
@@ -393,4 +395,4 @@ jei.craftorium.recipe.consumption=%sRF/tick
 jei.craftorium.recipe.duration=%ssecs
 jei.craftorium.recipe.energy=Total: %sRF
 jei.craftorium.recipe.recipe_ct=Recipe §o§e%s§r in map §o§e%s§r
-jei.craftorium.recipe.configuration=Configuration %s
+jei.craftorium.recipe.configuration=Configuration: %s

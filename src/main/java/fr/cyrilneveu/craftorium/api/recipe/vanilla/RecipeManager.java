@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.recipe.vanilla;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 
 public final class RecipeManager {
     public static void removeRecipe(ResourceLocation location) {
@@ -32,6 +34,7 @@ public final class RecipeManager {
 
     public static void zip(Substance substance, ASubstanceObject input, ASubstanceObject result) {
         zip(String.join("_", result.getName(substance), "from", input.getName(substance)), input.asIngredient(substance), result.asItemStack(substance));
+        COMPRESSING.addRecipe(new MachineRecipeBuilder(result.getName(substance).concat(input.getName(substance))).consumeItem(input.getOre(substance), 9).produceItem(result.asItemStack(substance, 1)).consumeEnergy(1000).duration(100).configuration(CONFIGURATION_COMPRESSOR_ZIP).build());
     }
 
     public static void zip(String name, Ingredient input, ItemStack result) {
@@ -40,6 +43,7 @@ public final class RecipeManager {
 
     public static void unzip(Substance substance, ASubstanceObject input, ASubstanceObject result) {
         unzip(String.join("_", result.getName(substance), "from", input.getName(substance)), input.asIngredient(substance), result.asItemStack(substance, 9));
+        COMPRESSING.addRecipe(new MachineRecipeBuilder(result.getName(substance).concat(input.getName(substance))).consumeItem(input.getOre(substance), 1).produceItem(result.asItemStack(substance, 9)).consumeEnergy(1000).duration(100).configuration(CONFIGURATION_COMPRESSOR_UNZIP).build());
     }
 
     public static void unzip(String name, Ingredient input, ItemStack result) {

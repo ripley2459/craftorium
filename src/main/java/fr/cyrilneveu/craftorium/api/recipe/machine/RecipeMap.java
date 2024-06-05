@@ -70,6 +70,7 @@ public final class RecipeMap {
         Preconditions.checkArgument(recipe.getFluidsIn().size() <= fluidsIn);
         Preconditions.checkArgument(recipe.getItemsOut().size() <= itemsOut);
         Preconditions.checkArgument(recipe.getFluidsOut().size() <= fluidsOut);
+        Preconditions.checkArgument(!recipes.contains(recipe.getName()));
         recipes.put(recipe.getName(), recipe);
     }
 
