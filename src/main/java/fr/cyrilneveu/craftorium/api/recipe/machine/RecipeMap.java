@@ -59,8 +59,8 @@ public final class RecipeMap {
         return true;
     }
 
-    public static boolean isRecipeValid(MachineRecipe recipe, List<ItemStack> proposedItems, List<FluidStack> proposedFluids) {
-        if (proposedItems.size() >= recipe.getItemsIn().size() && proposedFluids.size() >= recipe.getFluidsIn().size())
+    public static boolean isRecipeValid(List<ItemStack> proposedItems, List<FluidStack> proposedFluids, int configuration, MachineRecipe recipe) {
+        if (configuration == recipe.getConfiguration() && proposedItems.size() >= recipe.getItemsIn().size() && proposedFluids.size() >= recipe.getFluidsIn().size())
             return checkItems(proposedItems, recipe.getItemsIn()) && checkFluids(proposedFluids, recipe.getFluidsIn());
         return false;
     }
@@ -79,11 +79,11 @@ public final class RecipeMap {
 
     @Nullable
     public MachineRecipe getRecipe(List<ItemStack> items, List<FluidStack> fluids, int configuration, @Nullable MachineRecipe cache) {
-        if (cache != null && isRecipeValid(cache, items, fluids))
+        if (cache != null && isRecipeValid(items, fluids, configuration, cache))
             return cache;
 
         for (MachineRecipe recipe : recipes.getAll().values()) {
-            if (isRecipeValid(recipe, items, fluids))
+            if (isRecipeValid(items, fluids, configuration, recipe))
                 return recipe;
         }
 

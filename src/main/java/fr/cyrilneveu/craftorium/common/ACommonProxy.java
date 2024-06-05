@@ -191,7 +191,6 @@ public abstract class ACommonProxy {
         Substances.init();
         Veins.init();
         TiersObjects.init();
-       // Maps.init();
         Machines.init();
         Tiers.init();
 

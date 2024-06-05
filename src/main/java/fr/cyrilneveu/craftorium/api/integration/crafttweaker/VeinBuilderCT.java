@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.common.integration.crafttweaker;
+package fr.cyrilneveu.craftorium.api.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;

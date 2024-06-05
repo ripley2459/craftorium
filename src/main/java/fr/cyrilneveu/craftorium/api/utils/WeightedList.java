@@ -1,10 +1,7 @@
 package fr.cyrilneveu.craftorium.api.utils;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public final class WeightedList<K> implements Iterable<K> {
     private final Map<K, Integer> values = new HashMap<>();
@@ -45,7 +42,15 @@ public final class WeightedList<K> implements Iterable<K> {
         return null;
     }
 
-    public Map<K, Integer> getValues() {
+    public List<K> keys() {
+        return new ArrayList<>(values.keySet());
+    }
+
+    public List<Integer> values() {
+        return new ArrayList<>(values.values());
+    }
+
+    public Map<K, Integer> map() {
         return values;
     }
 

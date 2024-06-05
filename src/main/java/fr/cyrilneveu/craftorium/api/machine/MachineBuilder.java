@@ -3,6 +3,8 @@ package fr.cyrilneveu.craftorium.api.machine;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineJeiData;
+import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
@@ -15,10 +17,12 @@ import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.utils.Position.ORIGIN;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.TEXT_COLOR;
 
 public final class MachineBuilder {
@@ -30,6 +34,8 @@ public final class MachineBuilder {
     private Size screenSize = new Size(176, 166);
     private List<Tab> leftTabs = new LinkedList<>();
     private List<Tab> rightTabs = new LinkedList<>();
+    private List<ASlotData> slotJEI = new ArrayList<>();
+    private Position arrowJEI;
     @Nullable
     private RecipeMap map;
     private boolean energy;
@@ -39,22 +45,30 @@ public final class MachineBuilder {
     }
 
     public MachineBuilder itemInput(int posX, int posY) {
-        this.items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.INPUT));
+        ItemSlotData data = new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.INPUT);
+        this.items.add(data);
+        this.slotJEI.add(data);
         return this;
     }
 
     public MachineBuilder itemOutput(int posX, int posY) {
-        this.items.add(new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.OUTPUT));
+        ItemSlotData data = new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.OUTPUT);
+        this.items.add(data);
+        this.slotJEI.add(data);
         return this;
     }
 
     public MachineBuilder fluidInput(int posX, int posY) {
-        this.fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.INPUT, 64000));
+        FluidSlotData data = new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.INPUT, 64000);
+        this.fluids.add(data);
+        this.slotJEI.add(data);
         return this;
     }
 
     public MachineBuilder fluidOutput(int posX, int posY) {
-        this.fluids.add(new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.OUTPUT, 64000));
+        FluidSlotData data = new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.OUTPUT, 64000);
+        this.fluids.add(data);
+        this.slotJEI.add(data);
         return this;
     }
 
@@ -82,6 +96,7 @@ public final class MachineBuilder {
     public MachineBuilder processor(RecipeMap map, int progressX, int progressY, int configurationX, int ConfigurationY) {
         this.map = map;
         this.providers.add((m, t) -> new RecipeProcessor(m, map, new Position(progressX, progressY), new Position(configurationX, ConfigurationY)));
+        this.arrowJEI = new Position(progressX, progressY);
         return this;
     }
 
@@ -98,7 +113,7 @@ public final class MachineBuilder {
         if (!fluids.isEmpty())
             providers.add((m, t) -> new FluidInventory(m, ImmutableList.copyOf(fluids)));
 
-        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs);
+        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs, new MachineJeiData(map.getName(), arrowJEI, slotJEI));
 
         MACHINES_REGISTRY.put(name, m);
 
@@ -108,6 +123,7 @@ public final class MachineBuilder {
     private void verify() {
         if (map != null) {
             Preconditions.checkArgument(energy);
+            Preconditions.checkArgument(arrowJEI != ORIGIN);
 
             int input = 0;
             int output = 0;

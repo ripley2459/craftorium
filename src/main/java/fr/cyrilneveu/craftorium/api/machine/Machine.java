@@ -6,6 +6,7 @@ import fr.cyrilneveu.craftorium.api.mui.*;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineJeiData;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
@@ -20,14 +21,16 @@ public final class Machine implements Comparable<Machine> {
     private final List<AWidget> widgets;
     private final List<Tab> leftTabs;
     private final List<Tab> rightTabs;
+    private final MachineJeiData jeiData;
 
-    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs, MachineJeiData jeiData) {
         this.name = name;
         this.providers = providers;
         this.screenSize = screenSize;
         this.widgets = widgets;
         this.leftTabs = leftTabs;
         this.rightTabs = rightTabs;
+        this.jeiData = jeiData;
     }
 
     public String getName() {
@@ -51,17 +54,20 @@ public final class Machine implements Comparable<Machine> {
         return behaviours;
     }
 
+    public MachineJeiData getJeiData() {
+        return jeiData;
+    }
+
     @Override
     public int compareTo(@Nonnull Machine other) {
         return name.compareTo(other.getName());
     }
 
     public Screen getScreen(MachineTile tile, Tier tier) {
-        LinkedList<AWidget> widgetsT = new LinkedList<>();
-
-        widgetsT.addAll(widgets);
+        LinkedList<AWidget> widgetsT = new LinkedList<>(widgets);
         List<Tab> leftTabsT = new LinkedList<>(leftTabs);
         List<Tab> rightTabsT = new LinkedList<>(rightTabs);
+
         for (IMachineBehaviour behaviour : tile.getBehaviours())
             behaviour.pushWidgets(widgetsT, leftTabsT, rightTabsT);
 

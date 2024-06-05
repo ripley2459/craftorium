@@ -1,5 +1,6 @@
-package fr.cyrilneveu.craftorium.common.integration.jei;
+package fr.cyrilneveu.craftorium.api.integration.jei.vein;
 
+import fr.cyrilneveu.craftorium.api.integration.jei.ACategory;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
 import mezz.jei.api.IGuiHelper;

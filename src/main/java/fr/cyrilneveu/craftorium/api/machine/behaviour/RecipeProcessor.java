@@ -177,13 +177,13 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
                 return false;
         }
 
-        for (Map.Entry<ItemStack, Integer> entry : itemStacks.getValues().entrySet()) {
+        for (Map.Entry<ItemStack, Integer> entry : itemStacks.map().entrySet()) {
             int rand = random.nextInt(101);
             if (entry.getValue() >= 100 || rand <= entry.getValue())
                 insertOutput(entry.getKey().copy(), false);
         }
 
-        for (Map.Entry<FluidStack, Integer> entry : fluidStacks.getValues().entrySet()) {
+        for (Map.Entry<FluidStack, Integer> entry : fluidStacks.map().entrySet()) {
             int rand = random.nextInt(101);
             if (entry.getValue() >= 100 || rand <= entry.getValue())
                 insertOutput(entry.getKey().copy(), false);
