@@ -15,21 +15,19 @@ import mods.craftorium.vein.Veins;
 import mods.craftorium.vein.Builder;
 ```
 
-With the `Veins` package you can list veins. But also have access to information about a particular.
-
-The `Builder` package gives you ways to create veins from scratch or modify existing ones.
+The `Builder` package gives you ways to create veins from scratch.
 
 ## Vein creation
 
 ### Initializing the process
 
-To start the process of creating a vein you have to call `createVein` from the `Builder` package.
+To start the process of creating a vein you have to call `create` from the `Builder` package.
 
 ```ZenScript
-var newVein = Builder.createVein(String id, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, [substance₁, chance₁, substance₂, chance₂, [...], substanceₙ, chanceₙ]);
+var newVein = Builder.create(String id, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, [substance₁, chance₁, substance₂, chance₂, [...], substanceₙ, chanceₙ]);
 ```
 
-The `createVein` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
+The `create` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
 
 If you use an `id` already in use, the existing vein will be overwritten.
 

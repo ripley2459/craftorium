@@ -14,6 +14,7 @@ public final class Maps {
     public static final int CONFIGURATION_CUTTER_NORMAL = 2;
     public static final int CONFIGURATION_CUTTER_LARGE = 3;
     public static final int CONFIGURATION_MACERATOR_PULVERIZING = 1;
+    public static final int CONFIGURATION_MACERATOR_BREAKING = 2;
     public static final int CONFIGURATION_LATHE_SIMPLE = 1;
     public static final int CONFIGURATION_LATHE_ADVANCED = 2;
     public static RecipeMap ELECTROLYZING;
@@ -23,13 +24,18 @@ public final class Maps {
     public static RecipeMap CUTTING;
     public static RecipeMap COMPRESSING;
 
-    static {
+    public static void init() {
+        if (MACHINE_MAPS_REGISTRY.isInitialized())
+            return;
+
+        MACHINE_MAPS_REGISTRY.initialize();
+
         ELECTROLYZING = new RecipeMapBuilder("electrolyzing", 1, 1, 6, 6).build();
         MACERATING = new RecipeMapBuilder("macerating", 1, 0, 1, 0).build();
         BENDING = new RecipeMapBuilder("bending", 1, 0, 1, 0).build();
         SPINNING = new RecipeMapBuilder("spinning", 1, 0, 1, 0).build();
         CUTTING = new RecipeMapBuilder("cutting", 1, 0, 1, 0).build();
-        COMPRESSING = new RecipeMapBuilder("cutting", 1, 0, 1, 0).build();
+        COMPRESSING = new RecipeMapBuilder("compressing", 1, 0, 1, 0).build();
     }
 
     public static void close() {

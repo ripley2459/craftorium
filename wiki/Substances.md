@@ -15,27 +15,27 @@ import mods.craftorium.substance.Substances;
 import mods.craftorium.substance.Builder;
 ```
 
-The `Substances` package you can list substances. But also have access to information about a particular.
+With the `Substances` package you can get a particular substance.
 
 The `Builder` package gives you ways to create substances from scratch.
 
 ## Get a substance
 
 ```ZenScript
-var substance = Substances.get(string substanceId);
+var substance = Substances.get(string id);
 ```
 
 ## Substance creation
 
 ### Initializing the process
 
-To start the process of creating a substance you have to call `createSubstance` from the `Builder` package.
+To start the process of creating a substance you have to call `create` from the `Builder` package.
 
 ```ZenScript
-var newSubstance = Builder.createSubstance(string id);
+var newSubstance = Builder.create(string id);
 ```
 
-The `createSubstance` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
+The `create` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
 
 If you use an `id` already in use, the existing substance will be overwritten. (**You can't override the default substances.**)
 

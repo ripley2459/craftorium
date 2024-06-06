@@ -389,6 +389,7 @@ tooltip.craftorium.off=§7OFF§r
 # JEI
 jei.craftorium.vein_generation.name=Ore Generation
 jei.craftorium.vein.chance=Weight: %s
+jei.craftorium.object.chance_b=§6Chance: %s%%§r
 jei.craftorium.vein.depth=Y: %s-%s
 jei.craftorium.vein.dimension=Dimension: %s
 jei.craftorium.recipe.consumption=%sRF/tick

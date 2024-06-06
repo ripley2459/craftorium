@@ -7,11 +7,13 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.ELECTROLYZING;
+import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
@@ -190,6 +192,149 @@ public final class RecipesHandler {
             registerBatteryRecipe(FIVE);
             registerRobotArmRecipe(FIVE, "circuitTier5");
         }
+
+        CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
+                .consumeItem(new ItemStack(Blocks.LOG))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("oak_spruce")
+                .consumeItem(new ItemStack(Blocks.LOG, 1, 1))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6, 1))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("oak_birch")
+                .consumeItem(new ItemStack(Blocks.LOG, 1, 2))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6, 2))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("oak_jungle")
+                .consumeItem(new ItemStack(Blocks.LOG, 1, 3))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6, 3))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("acacia_birch")
+                .consumeItem(new ItemStack(Blocks.LOG2))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6, 4))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("dark_oak_jungle")
+                .consumeItem(new ItemStack(Blocks.LOG2, 1, 1))
+                .produceItem(new ItemStack(Blocks.PLANKS, 6, 5))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_CUTTER_LARGE)
+                .build());
+
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("brick_block_from_brick")
+                .consumeItem("ingotBrick", 4)
+                .produceItem(new ItemStack(Blocks.BRICK_BLOCK))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("nether_brick_from_brick_nether")
+                .consumeItem("ingotBrickNether", 4)
+                .produceItem(new ItemStack(Blocks.NETHER_BRICK))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("sandstone_from_sand")
+                .consumeItem(new ItemStack(Blocks.SAND, 4))
+                .produceItem(new ItemStack(Blocks.SANDSTONE))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("red_sandstone_from_red_sand")
+                .consumeItem(new ItemStack(Blocks.SAND, 4, 1))
+                .produceItem(new ItemStack(Blocks.RED_SANDSTONE))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("white_wool_from_string")
+                .consumeItem("string", 4)
+                .produceItem(new ItemStack(Blocks.WOOL))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("snow_block_from_snowball")
+                .consumeItem(new ItemStack(Items.SNOWBALL, 4))
+                .produceItem(new ItemStack(Blocks.SNOW))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+        COMPRESSING.addRecipe(new MachineRecipeBuilder("hay_block_from_wheat")
+                .consumeItem("cropWheat", 9)
+                .produceItem(new ItemStack(Blocks.HAY_BLOCK))
+                .consumeEnergy(1000)
+                .duration(100)
+                .configuration(CONFIGURATION_COMPRESSOR_ZIP)
+                .build());
+
+        MACERATING.addRecipe(new MachineRecipeBuilder("cobblestone_from_stone")
+                .consumeItem(new ItemStack(Blocks.STONE))
+                .produceItem(new ItemStack(Blocks.COBBLESTONE))
+                .consumeEnergy(3000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_BREAKING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("gravel_from_cobblestone")
+                .consumeItem(new ItemStack(Blocks.COBBLESTONE))
+                .produceItem(new ItemStack(Blocks.GRAVEL))
+                .consumeEnergy(2000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("sand_from_gravel")
+                .consumeItem(new ItemStack(Blocks.GRAVEL))
+                .produceItem(new ItemStack(Blocks.SAND))
+                .consumeEnergy(1000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("cracked_stonebrick_from_stonebrick")
+                .consumeItem(new ItemStack(Blocks.STONEBRICK))
+                .produceItem(new ItemStack(Blocks.STONEBRICK, 1, 2))
+                .consumeEnergy(4000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_BREAKING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("sand_from_sandstone")
+                .consumeItem(new ItemStack(Blocks.SANDSTONE, 1, OreDictionary.WILDCARD_VALUE))
+                .produceItem(new ItemStack(Blocks.SAND, 4))
+                .consumeEnergy(2000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("red_sand_from_red_sandstone")
+                .consumeItem(new ItemStack(Blocks.RED_SANDSTONE, 1, OreDictionary.WILDCARD_VALUE))
+                .produceItem(new ItemStack(Blocks.SAND, 4, 1))
+                .consumeEnergy(2000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
+        MACERATING.addRecipe(new MachineRecipeBuilder("string_from_wool")
+                .consumeItem(new ItemStack(Blocks.WOOL))
+                .produceItem(new ItemStack(Items.STRING, 4))
+                .consumeEnergy(1000)
+                .duration(200)
+                .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
     }
 
     public static void unregisterRecipes(RegistryEvent.Register<IRecipe> event) {

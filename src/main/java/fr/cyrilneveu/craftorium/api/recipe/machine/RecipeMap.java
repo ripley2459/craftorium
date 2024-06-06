@@ -65,17 +65,21 @@ public final class RecipeMap {
         return false;
     }
 
-    public void addRecipe(MachineRecipe recipe) {
+    public boolean addRecipe(MachineRecipe recipe) {
         Preconditions.checkArgument(recipe.getItemsIn().size() <= itemsIn);
         Preconditions.checkArgument(recipe.getFluidsIn().size() <= fluidsIn);
         Preconditions.checkArgument(recipe.getItemsOut().size() <= itemsOut);
         Preconditions.checkArgument(recipe.getFluidsOut().size() <= fluidsOut);
         Preconditions.checkArgument(!recipes.contains(recipe.getName()));
-        recipes.put(recipe.getName(), recipe);
+        return recipes.put(recipe.getName(), recipe);
     }
 
     public MachineRecipe getRecipe(String name) {
         return recipes.get(name);
+    }
+
+    public boolean removeRecipe(String name) {
+        return recipes.remove(name);
     }
 
     @Nullable
