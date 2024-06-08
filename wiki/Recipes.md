@@ -140,6 +140,8 @@ newRecipe.duration(int duration)
 newRecipe.configuration(int configuration)
 ```
 
+- `chance` ∈ [1;9]
+
 ### Example: Create
 
 ```ZenScript

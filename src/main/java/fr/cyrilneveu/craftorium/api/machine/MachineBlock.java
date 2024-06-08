@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.block.model.multipart.ConditionAnd;
 import net.minecraft.client.renderer.block.model.multipart.ConditionPropertyValue;
 import net.minecraft.client.renderer.block.model.multipart.ICondition;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -39,8 +40,11 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import static fr.cyrilneveu.craftorium.api.inventory.GuiHandler.MACHINE_GUI_ID;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
@@ -102,6 +106,18 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
         }
 
         return false;
+    }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntity tile = world.getTileEntity(pos);
+        if (tile instanceof MachineTile) {
+            IItemHandler itemStackHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (itemStackHandler != null)
+                IntStream.range(0, itemStackHandler.getSlots()).forEach(i -> world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStackHandler.getStackInSlot(i))));
+        }
+
+        super.breakBlock(world, pos, state);
     }
 
     @Override

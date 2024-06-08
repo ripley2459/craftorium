@@ -26,6 +26,8 @@ public final class Machines {
     public static Machine LATHE;
     public static Machine CUTTER;
     public static Machine COMPRESSOR;
+    public static Machine FOUNDRY;
+    public static Machine MIXER;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -93,6 +95,33 @@ public final class Machines {
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "compressor", "name"), true)
                 .text(8, 86, "container.inventory", false)
                 .playerInventory(7, 97)
+                .build();
+        FOUNDRY = new MachineBuilder("foundry")
+                .itemInput(37, 36)
+                .fluidInput(55, 36)
+                .itemOutput(103, 36)
+                .fluidOutput(121, 36)
+                .processor(CASTING, 77, 37, 134, 76)
+                .energy(153, 77)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "foundry", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        MIXER = new MachineBuilder("mixer")
+                .itemInput(19, 18).itemInput(37, 18).itemInput(55, 18)
+                .itemInput(19, 36).itemInput(37, 36).itemInput(55, 36)
+                .fluidInput(19, 54).fluidInput(37, 54).fluidInput(55, 54)
+                .fluidInput(19, 72).fluidInput(37, 72).fluidInput(55, 72)
+                .itemOutput(103, 45)
+                .fluidOutput(121, 45)
+                .processor(MIXING, 77, 46, 134, 94)
+                .energy(153, 95)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "mixer", "name"), true)
+                .text(8, 104, "container.inventory", false)
+                .playerInventory(7, 115)
+                .size(176, 198)
                 .build();
     }
 

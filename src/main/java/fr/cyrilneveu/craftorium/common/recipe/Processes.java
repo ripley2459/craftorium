@@ -6,13 +6,18 @@ import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
 import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
+import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Registry;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.init.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.Set;
 
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCE_BLOCKS_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCE_ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
@@ -141,9 +146,11 @@ public final class Processes {
             for (SubstanceStack stack : composition)
                 amount += stack.getAmount();
 
+            boolean flag = Utils.all(composition, s -> OreStack.oresExist(DUST.getOre(s.getSubstance())));
+
             blend:
             {
-                if (amount <= 0 || amount > 9 || !Utils.all(composition, s -> OreStack.oresExist(DUST.getOre(s.getSubstance()))))
+                if (!flag || amount <= 0 || amount > 9)
                     break blend;
 
                 Ingredient[] dusts = new Ingredient[amount];
@@ -155,6 +162,19 @@ public final class Processes {
                 }
 
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("blend"), DUST.asItemStack(substance, amount), dusts);
+            }
+
+            mixing:
+            {
+                if (!flag || substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.size() > MIXING.getItemsIn())
+                    break mixing;
+
+                MachineRecipeBuilder recipeMix = new MachineRecipeBuilder("mixing_" + DUST.getName(substance));
+
+                for (SubstanceStack stack : composition)
+                    recipeMix.consumeItem(DUST.getOre(stack.getSubstance()), stack.getAmount());
+
+                MIXING.addRecipe(recipeMix.produceItem(DUST.asItemStack(substance, amount)).duration(100).consumeEnergy(20000).configuration(CONFIGURATION_MIXING_MIX).build());
             }
         }
 
@@ -172,6 +192,14 @@ public final class Processes {
                         .consumeEnergy(5000).duration(200)
                         .configuration(CONFIGURATION_CUTTER_NORMAL)
                         .build());
+
+            CASTING.addRecipe(new MachineRecipeBuilder(FOIL.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), FOIL.getAmount())
+                    .produceItem(FOIL.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_FOIL)
+                    .build());
         }
 
         private void gear(Substance substance) {
@@ -189,6 +217,14 @@ public final class Processes {
                         .duration(300)
                         .configuration(CONFIGURATION_CUTTER_LARGE)
                         .build());
+
+            CASTING.addRecipe(new MachineRecipeBuilder(GEAR.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), GEAR.getAmount())
+                    .produceItem(GEAR.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_GEAR)
+                    .build());
         }
 
         private void gem(Substance substance) {
@@ -201,6 +237,14 @@ public final class Processes {
                 RecipeManager.zip(substance, NUGGET, GEM);
             if (OreStack.oresExist(BLOCK.getOre(substance)))
                 RecipeManager.unzip(substance, BLOCK, GEM);
+
+            CASTING.addRecipe(new MachineRecipeBuilder(GEM.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), GEM.getAmount())
+                    .produceItem(GEM.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_INGOT)
+                    .build());
         }
 
         private void ingot(Substance substance) {
@@ -215,6 +259,14 @@ public final class Processes {
                 RecipeManager.zip(substance, NUGGET, INGOT);
             if (OreStack.oresExist(BLOCK.getOre(substance)))
                 RecipeManager.unzip(substance, BLOCK, INGOT);
+
+            CASTING.addRecipe(new MachineRecipeBuilder(INGOT.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), INGOT.getAmount())
+                    .produceItem(INGOT.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_INGOT)
+                    .build());
         }
 
         private void nugget(Substance substance) {
@@ -227,6 +279,14 @@ public final class Processes {
                 RecipeManager.unzip(substance, GEM, NUGGET);
             if (OreStack.oresExist(PEARL.getOre(substance)))
                 RecipeManager.unzip(substance, PEARL, NUGGET);
+
+            CASTING.addRecipe(new MachineRecipeBuilder(NUGGET.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), NUGGET.getAmount())
+                    .produceItem(NUGGET.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_NUGGET)
+                    .build());
         }
 
         private void pearl(Substance substance) {
@@ -237,6 +297,14 @@ public final class Processes {
                 RecipeManager.zip(substance, NUGGET, PEARL);
             if (OreStack.oresExist(BLOCK.getOre(substance)))
                 RecipeManager.unzip(substance, BLOCK, PEARL);
+
+            CASTING.addRecipe(new MachineRecipeBuilder(PEARL.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), PEARL.getAmount())
+                    .produceItem(PEARL.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_PEARL)
+                    .build());
         }
 
         private void plate(Substance substance) {
@@ -263,6 +331,14 @@ public final class Processes {
                         .duration(1800)
                         .configuration(CONFIGURATION_CUTTER_LARGE)
                         .build());
+
+            CASTING.addRecipe(new MachineRecipeBuilder(PLATE.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), PLATE.getAmount())
+                    .produceItem(PLATE.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_PLATE)
+                    .build());
         }
 
         private void ring(Substance substance) {
@@ -280,6 +356,14 @@ public final class Processes {
                         .duration(200)
                         .configuration(CONFIGURATION_BENDER_REFORM)
                         .build());
+
+            CASTING.addRecipe(new MachineRecipeBuilder(RING.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), RING.getAmount())
+                    .produceItem(RING.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_RING)
+                    .build());
         }
 
         private void rod(Substance substance) {
@@ -297,6 +381,14 @@ public final class Processes {
                         .duration(200)
                         .configuration(CONFIGURATION_LATHE_SIMPLE)
                         .build());
+
+            CASTING.addRecipe(new MachineRecipeBuilder(ROD.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), ROD.getAmount())
+                    .produceItem(ROD.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_ROD)
+                    .build());
         }
 
         private void rotor(Substance substance) {
@@ -471,6 +563,14 @@ public final class Processes {
                 RecipeManager.zip(substance, GEM, BLOCK);
             if (OreStack.oresExist(PEARL.getOre(substance)))
                 RecipeManager.zip(substance, PEARL, BLOCK);
+
+            CASTING.addRecipe(new MachineRecipeBuilder(BLOCK.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), BLOCK.getAmount())
+                    .produceItem(BLOCK.asItemStack(substance))
+                    .consumeEnergy(500)
+                    .duration(500)
+                    .configuration(CONFIGURATION_CASTING_FORM_BLOCK)
+                    .build());
         }
 
         private void frame(Substance substance) {
@@ -492,6 +592,57 @@ public final class Processes {
         private void liquid(Substance substance) {
             if (!substance.getFluids().contains(LIQUID))
                 return;
+
+            for (ASubstanceObject.SubstanceItem item : SUBSTANCE_ITEMS_REGISTRY.getAll().values()) {
+                if (item.getAmount() <= 0 || !OreStack.oresExist(item.getOre(substance)))
+                    continue;
+
+                CASTING.addRecipe(new MachineRecipeBuilder(LIQUID.getName(substance).concat("_from_").concat(item.getName(substance)))
+                        .consumeItem(item.getOre(substance), 1)
+                        .produceFluid(LIQUID.getName(substance), item.getAmount())
+                        .consumeEnergy(25 * item.getAmount())
+                        .duration(item.getAmount())
+                        .configuration(CONFIGURATION_CASTING_MELTING)
+                        .build());
+            }
+
+            for (ASubstanceObject.SubstanceBlock block : SUBSTANCE_BLOCKS_REGISTRY.getAll().values()) {
+                if (block.getAmount() <= 0 || !OreStack.oresExist(block.getOre(substance)))
+                    continue;
+
+                CASTING.addRecipe(new MachineRecipeBuilder(LIQUID.getName(substance).concat("_from_").concat(block.getName(substance)))
+                        .consumeItem(block.getOre(substance), 1)
+                        .produceFluid(LIQUID.getName(substance), block.getAmount())
+                        .consumeEnergy(50 * block.getAmount())
+                        .duration(block.getAmount())
+                        .configuration(CONFIGURATION_CASTING_MELTING)
+                        .build());
+            }
+
+            if (substance.getComposition().isNative())
+                return;
+
+            Set<SubstanceStack> composition = substance.getComposition().getComposition();
+            if (composition.size() < 2)
+                return;
+
+            boolean flag = Utils.all(composition, s -> FluidRegistry.isFluidRegistered(LIQUID.getName(s.getSubstance())));
+
+            mixing:
+            {
+                if (!flag || substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.size() > MIXING.getFluidsIn())
+                    break mixing;
+
+                MachineRecipeBuilder recipeMix = new MachineRecipeBuilder("mixing_" + LIQUID.getName(substance) + "_liquid");
+
+                int amount = 0;
+                for (SubstanceStack stack : composition) {
+                    amount += stack.getAmount();
+                    recipeMix.consumeFluid(LIQUID.getName(stack.getSubstance()), stack.getAmount());
+                }
+
+                MIXING.addRecipe(recipeMix.produceFluid(LIQUID.getName(substance), amount).duration(10).consumeEnergy(500).configuration(CONFIGURATION_MIXING_MIX).build());
+            }
         }
     }
 }

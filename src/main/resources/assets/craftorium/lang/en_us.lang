@@ -87,6 +87,8 @@ machine.craftorium.bender.name=Bender
 machine.craftorium.lathe.name=Lathe
 machine.craftorium.cutter.name=Cutter
 machine.craftorium.compressor.name=Compressor
+machine.craftorium.foundry.name=Foundry
+machine.craftorium.mixer.name=Mixer
 
 # Substances
 tile.craftorium.block.name=Block of %s
@@ -385,11 +387,13 @@ tooltip.craftorium.formula=§3%s§r
 tooltip.craftorium.temperature=§5%s°K§r
 tooltip.craftorium.on=§aON§r
 tooltip.craftorium.off=§7OFF§r
+tooltip.craftorium.recipe.progression=%s/%s
 
 # JEI
 jei.craftorium.vein_generation.name=Ore Generation
 jei.craftorium.vein.chance=Weight: %s
-jei.craftorium.object.chance_b=§6Chance: %s%%§r
+jei.craftorium.recipe.chance.detail=§6Chance: %s%%§r
+jei.craftorium.recipe.chance=%s%%
 jei.craftorium.vein.depth=Y: %s-%s
 jei.craftorium.vein.dimension=Dimension: %s
 jei.craftorium.recipe.consumption=%sRF/tick

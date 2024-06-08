@@ -88,7 +88,7 @@ public final class TierBuilder {
 
     @ZenMethod
     public TierBuilder recipeSpeed(float multiplier) {
-        this.recipeSpeed = Math.min(EPSILON, multiplier);
+        this.recipeSpeed = Math.max(EPSILON, multiplier);
         return this;
     }
 
@@ -101,7 +101,7 @@ public final class TierBuilder {
     @ZenMethod
     public TierBuilder packageFull() {
         items(BATTERY, EMITTER, HEAT_EXCHANGER, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
-        machines(ELECTROLYZER, MACERATOR, BENDER, LATHE, CUTTER, COMPRESSOR);
+        machines(ELECTROLYZER, MACERATOR, BENDER, LATHE, CUTTER, COMPRESSOR, FOUNDRY, MIXER);
         return this;
     }
 

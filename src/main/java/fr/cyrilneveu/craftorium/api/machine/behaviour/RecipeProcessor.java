@@ -158,7 +158,7 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
         recipe = map.getRecipe(itemInventory != null ? itemInventory.getStacksInInputs() : Collections.emptyList(), fluidInventory != null ? fluidInventory.getStacksInInputs() : Collections.emptyList(), configuration, cache);
         if (recipe != null) {
             progress = 0;
-            progressMax = recipe.getDuration();
+            progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getProcess().getSpeed()));
             owner.markDirty();
             return true;
         }
@@ -200,7 +200,8 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
     }
 
     private boolean insertOutput(FluidStack output, boolean simulate) {
-        return fluidInventory.insertInOutputs(output, simulate) == output.amount;
+        int amount = output.amount;
+        return fluidInventory.insertInOutputs(output, simulate) == amount;
     }
 
     private void pushOutputs() {
@@ -220,6 +221,7 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
                 for (ItemSlotData slot : itemInventory.getSlotsData()) {
                     if (!slot.isOutput() || itemInventory.getStackInSlot(slot.getIndex()).isEmpty())
                         continue;
+
                     ItemStack initial = itemInventory.getStackInSlot(slot.getIndex()).copy();
                     ItemStack remaining = ItemHandlerHelper.insertItemStacked(inv, initial, false);
 
@@ -292,7 +294,7 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
             recipe = map.getRecipe(NBTUtils.getStringValue(MACHINE_RECIPE_NBT, nbt));
             if (recipe != null) {
                 progress = NBTUtils.getIntValue(MACHINE_PROGRESS_NBT, nbt);
-                progressMax = recipe.getDuration();
+                progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getProcess().getSpeed()));
             }
         }
     }

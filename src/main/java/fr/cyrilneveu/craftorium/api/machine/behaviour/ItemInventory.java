@@ -111,12 +111,11 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Override
     @Nonnull
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        return slots.get(slot).isInput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canInput(side))) ?
-                defaultInsert(slot, stack, simulate) : stack;
+        return slots.get(slot).isInput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canInput(side))) ? putItem(slot, stack, simulate) : stack;
     }
 
     @Nonnull
-    private ItemStack defaultInsert(int slot, @Nonnull ItemStack stack, boolean simulate) {
+    public ItemStack putItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
         if (stack.isEmpty())
             return ItemStack.EMPTY;
 
@@ -151,9 +150,9 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
     @Nonnull
     public ItemStack insertInOutputs(@Nonnull ItemStack stack, boolean simulate) {
-        ItemStack remaining = ItemStack.EMPTY;
+        ItemStack remaining = stack;
         for (ItemSlotData slot : slots) {
-            remaining = slot.isOutput() ? defaultInsert(slot.getIndex(), stack, simulate) : stack;
+            remaining = slot.isOutput() ? putItem(slot.getIndex(), remaining, simulate) : remaining;
             if (remaining.isEmpty())
                 break;
         }
@@ -169,8 +168,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     @Override
     @Nonnull
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return slots.get(slot).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side)))
-                ? defaultExtract(slot, amount, simulate) : ItemStack.EMPTY;
+        return slots.get(slot).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side))) ? defaultExtract(slot, amount, simulate) : ItemStack.EMPTY;
     }
 
     @Nonnull
