@@ -4,7 +4,11 @@ import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
+import fr.cyrilneveu.craftorium.api.substance.property.Composition;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,6 +17,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
@@ -335,6 +340,40 @@ public final class RecipesHandler {
                 .duration(200)
                 .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
                 .build());
+
+        for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
+            Composition composition = substance.getComposition();
+
+            if (!composition.isComposite())
+                continue;
+
+            electrolyzing:
+            {
+                if (substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.getComposition().size() + composition.getPossible().size() > ELECTROLYZING.getItemsOut())
+                    break electrolyzing;
+
+                boolean flag = Utils.all(composition.getComposition(), s -> OreStack.oresExist(DUST.getOre(s.getSubstance())));
+                flag &= Utils.all(composition.getPossible(), s -> OreStack.oresExist(DUST.getOre(s.getSubstance())));
+                if (!flag)
+                    break electrolyzing;
+
+                MachineRecipeBuilder recipe = new MachineRecipeBuilder("electrolyzing_" + DUST.getName(substance));
+
+                int a = 0;
+
+                for (SubstanceStack stack : composition.getComposition()) {
+                    recipe.produceItem(DUST.asItemStack(stack.getSubstance(), stack.getAmount()));
+                    a += stack.getAmount();
+                }
+
+                for (SubstanceStack stack : composition.getPossible()) {
+                    recipe.produceItem(DUST.asItemStack(stack.getSubstance(), stack.getAmount()), stack.getChance());
+                    a += stack.getAmount();
+                }
+
+                ELECTROLYZING.addRecipe(recipe.consumeItem(DUST.asItemStack(substance, a)).duration(80 * a).consumeEnergy(10000 * a).configuration(CONFIGURATION_MIXING_MIX).build());
+            }
+        }
     }
 
     public static void unregisterRecipes(RegistryEvent.Register<IRecipe> event) {

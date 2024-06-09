@@ -37,7 +37,7 @@ public final class ProgressArrow extends AWidget implements ITextured {
 
     @Override
     public List<String> getTooltips(int mouseX, int mouseY) {
-        if (!isActive() || !isHovered(mouseX, mouseY))
+        if (!isActive() || !isHovered(mouseX, mouseY) || max == 0)
             return Collections.emptyList();
 
         return Collections.singletonList(Utils.localise("tooltip.craftorium.recipe.progression", actual, max));

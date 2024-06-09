@@ -135,7 +135,7 @@ public final class Processes {
                         .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
                         .build());
 
-            if (substance.getComposition().isNative())
+            if (!substance.getComposition().isComposite())
                 return;
 
             Set<SubstanceStack> composition = substance.getComposition().getComposition();
@@ -619,7 +619,7 @@ public final class Processes {
                         .build());
             }
 
-            if (substance.getComposition().isNative())
+            if (!substance.getComposition().isComposite())
                 return;
 
             Set<SubstanceStack> composition = substance.getComposition().getComposition();

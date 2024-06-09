@@ -163,6 +163,8 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
             return true;
         }
 
+        progress = 0;
+        progressMax = 0;
         return false;
     }
 
@@ -170,6 +172,11 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
         WeightedList<ItemStack> itemStacks = recipe.getItemsOut();
         WeightedList<FluidStack> fluidStacks = recipe.getFluidsOut();
 
+        // En gros ça return true pour le premier parcequ'il y a de la place
+        // le deuxième devrait return false parce que la place a étée prise par le premier
+        // mais comme c'était simulate la place n'a pas été réellement prise.
+        // Il faut donc simuler dans les insertions suivantes la présence des items qui seront inséré par les insersions précédantes!
+        // SOLUTION => avoir un inventaire fictif
         for (ItemStack itemStack : itemStacks) {
             if (!insertOutput(itemStack.copy(), true))
                 return false;
@@ -295,6 +302,9 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
             if (recipe != null) {
                 progress = NBTUtils.getIntValue(MACHINE_PROGRESS_NBT, nbt);
                 progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getProcess().getSpeed()));
+            } else {
+                progress = 0;
+                progressMax = 0;
             }
         }
     }

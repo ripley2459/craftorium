@@ -68,6 +68,10 @@ public final class Composition {
     }
 
     public boolean isNative() {
-        return element != null && composition.isEmpty() && possible.isEmpty();
+        return element != null;
+    }
+
+    public boolean isComposite() {
+        return !composition.isEmpty() || !possible.isEmpty();
     }
 }
