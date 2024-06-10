@@ -34,6 +34,8 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     private final CustomLazy<FlowController> flowController;
     private final List<ItemSlotData> slots;
     private NonNullList<ItemStack> stacks;
+    private NonNullList<ItemStack> mirrored;
+    private boolean mirroring;
     @Nullable
     private EnumFacing side = null;
 
@@ -121,7 +123,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
         validateSlotIndex(slot);
 
-        ItemStack existing = this.stacks.get(slot);
+        ItemStack existing = this.mirroring ? this.mirrored.get(slot) : this.stacks.get(slot);
 
         int limit = getStackLimit(slot, stack);
 
@@ -138,14 +140,28 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
         boolean reachedLimit = stack.getCount() > limit;
 
         if (!simulate) {
-            if (existing.isEmpty())
-                this.stacks.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
-            else existing.grow(reachedLimit ? limit : stack.getCount());
+            if (existing.isEmpty()) {
+                if (this.mirroring)
+                    this.mirrored.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
+                else this.stacks.set(slot, reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, limit) : stack);
+            } else existing.grow(reachedLimit ? limit : stack.getCount());
 
-            owner.markDirty();
+            if (!this.mirroring)
+                owner.markDirty();
         }
 
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
+    }
+
+    public void startSimulation() {
+        this.mirroring = true;
+        this.mirrored = NonNullList.withSize(this.slots.size(), ItemStack.EMPTY);
+        for (int i = 0; i < this.mirrored.size(); i++)
+            this.mirrored.set(i, this.getStackInSlot(i).copy());
+    }
+
+    public void stopSimulation() {
+        this.mirroring = false;
     }
 
     @Nonnull
@@ -178,7 +194,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
         validateSlotIndex(slot);
 
-        ItemStack existing = this.stacks.get(slot);
+        ItemStack existing = this.mirroring ? this.mirrored.get(slot) : this.stacks.get(slot);
 
         if (existing.isEmpty())
             return ItemStack.EMPTY;
@@ -187,14 +203,22 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
 
         if (existing.getCount() <= toExtract) {
             if (!simulate) {
-                this.stacks.set(slot, ItemStack.EMPTY);
-                owner.markDirty();
+                if (mirroring)
+                    this.mirrored.set(slot, ItemStack.EMPTY);
+                else {
+                    this.stacks.set(slot, ItemStack.EMPTY);
+                    owner.markDirty();
+                }
             }
             return existing;
         } else {
             if (!simulate) {
-                this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
-                owner.markDirty();
+                if (mirroring)
+                    this.mirrored.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
+                else {
+                    this.stacks.set(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - toExtract));
+                    owner.markDirty();
+                }
             }
 
             return ItemHandlerHelper.copyStackWithSize(existing, toExtract);

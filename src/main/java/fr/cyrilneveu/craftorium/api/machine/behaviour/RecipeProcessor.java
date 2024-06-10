@@ -172,15 +172,16 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
         WeightedList<ItemStack> itemStacks = recipe.getItemsOut();
         WeightedList<FluidStack> fluidStacks = recipe.getFluidsOut();
 
-        // En gros ça return true pour le premier parcequ'il y a de la place
-        // le deuxième devrait return false parce que la place a étée prise par le premier
-        // mais comme c'était simulate la place n'a pas été réellement prise.
-        // Il faut donc simuler dans les insertions suivantes la présence des items qui seront inséré par les insersions précédantes!
-        // SOLUTION => avoir un inventaire fictif
+        itemInventory.startSimulation(); // Used to track the items without modifying the reel inventory!
+
         for (ItemStack itemStack : itemStacks) {
-            if (!insertOutput(itemStack.copy(), true))
+            if (!insertOutput(itemStack.copy(), false)) { // False because we don't want to simulate the simulation
+                itemInventory.stopSimulation();
                 return false;
+            }
         }
+
+        itemInventory.stopSimulation();
 
         for (FluidStack fluidStack : fluidStacks) {
             if (!insertOutput(fluidStack.copy(), true))
@@ -208,7 +209,7 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
 
     private boolean insertOutput(FluidStack output, boolean simulate) {
         int amount = output.amount;
-        return fluidInventory.insertInOutputs(output, simulate) == amount;
+        return fluidInventory.insertInOutputs(output, !simulate) == amount;
     }
 
     private void pushOutputs() {

@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+// TODO Fill and drain all tanks!
+// If done check if there is the need to create a mirror.
+// See ItemInventory$startSimulating()
 public final class FluidInventory implements IMachineBehaviour, IFluidHandler, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     private final MachineTile owner;
     private final CustomLazy<FlowController> flowController;
@@ -78,7 +81,6 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     @Nullable
     @Override
     public FluidStack drain(FluidStack resource, boolean doDrain) {
-
         for (int i = 0; i < slots.size(); i++) {
             if (slots.get(i).isOutput() && (flowController.get() == null || (flowController.get() != null && flowController.get().canOutput(side)))) {
                 CustomTank tank = tanks.get(i);
