@@ -24,7 +24,9 @@ import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {
     public static ATierObject.TierItem BATTERY;
+    public static ATierObject.TierItem BUZZSAW;
     public static ATierObject.TierItem EMITTER;
+    public static ATierObject.TierItem GRINDER;
     public static ATierObject.TierItem HEAT_EXCHANGER;
     public static ATierObject.TierItem MACHINE_FRAME;
     public static ATierObject.TierItem MOTOR;
@@ -34,6 +36,7 @@ public final class TiersObjects {
     public static ATierObject.TierItem SCANNER;
     public static ATierObject.TierItem SENSOR;
 
+
     public static void init() {
         if (TIER_ITEMS_REGISTRY.isInitialized())
             return;
@@ -41,7 +44,9 @@ public final class TiersObjects {
         TIER_ITEMS_REGISTRY.initialize();
 
         BATTERY = createItem("battery").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        BUZZSAW = createItem("buzzsaw").build();
         EMITTER = createItem("emitter").build();
+        GRINDER = createItem("grinder").build();
         HEAT_EXCHANGER = createItem("heat_exchanger").build();
         MACHINE_FRAME = createItem("machine_frame").build();
         MOTOR = createItem("motor").build();

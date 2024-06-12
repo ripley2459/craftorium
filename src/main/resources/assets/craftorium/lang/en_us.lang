@@ -5,14 +5,18 @@
 
 # Tiered
 item.craftorium.battery.name=Battery
+item.craftorium.buzzsaw.name=Buzzsaw
 item.craftorium.emitter.name=Emitter
 item.craftorium.heat_exchanger.name=Heat Exchanger
+item.craftorium.grinder.name=Grinder
+item.craftorium.machine_frame.name=Machine Frame
 item.craftorium.motor.name=Motor
 item.craftorium.piston.name=Piston
 item.craftorium.pump.name=Pump
 item.craftorium.robot_arm.name=Robot Arm
 item.craftorium.scanner.name=Scanner
 item.craftorium.sensor.name=Sensor
+
 
 # Tools
 item.craftorium.axe.name=%s Axe

@@ -10,6 +10,7 @@ import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import fr.cyrilneveu.craftorium.common.machine.Machines;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -159,6 +160,11 @@ public final class RecipesHandler {
             registerMixerRecipe(ONE, "circuitTier1");
             registerFoundryRecipe(ONE, "circuitTier1");
             registerCompressorRecipe(ONE, "circuitTier1");
+            registerElectrolyzerRecipe(ONE, "circuitTier1");
+            registerMaceratorRecipe(ONE, "circuitTier1");
+            registerBenderRecipe(ONE, "circuitTier1");
+            registerCutterRecipe(ONE, "circuitTier1");
+            registerLatheRecipe(ONE, "circuitTier1");
         }
 
         if (TWO.getPack() != null) {
@@ -175,6 +181,11 @@ public final class RecipesHandler {
             registerMixerRecipe(TWO, "circuitTier2");
             registerFoundryRecipe(TWO, "circuitTier2");
             registerCompressorRecipe(TWO, "circuitTier2");
+            registerElectrolyzerRecipe(TWO, "circuitTier2");
+            registerMaceratorRecipe(TWO, "circuitTier2");
+            registerBenderRecipe(TWO, "circuitTier2");
+            registerCutterRecipe(TWO, "circuitTier2");
+            registerLatheRecipe(TWO, "circuitTier2");
         }
 
         if (THREE.getPack() != null) {
@@ -191,6 +202,11 @@ public final class RecipesHandler {
             registerMixerRecipe(THREE, "circuitTier3");
             registerFoundryRecipe(THREE, "circuitTier3");
             registerCompressorRecipe(THREE, "circuitTier3");
+            registerElectrolyzerRecipe(THREE, "circuitTier3");
+            registerMaceratorRecipe(THREE, "circuitTier3");
+            registerBenderRecipe(THREE, "circuitTier3");
+            registerCutterRecipe(THREE, "circuitTier3");
+            registerLatheRecipe(THREE, "circuitTier3");
         }
 
         if (FOUR.getPack() != null) {
@@ -207,6 +223,11 @@ public final class RecipesHandler {
             registerMixerRecipe(FOUR, "circuitTier4");
             registerFoundryRecipe(FOUR, "circuitTier5");
             registerCompressorRecipe(FOUR, "circuitTier4");
+            registerElectrolyzerRecipe(FOUR, "circuitTier4");
+            registerMaceratorRecipe(FOUR, "circuitTier4");
+            registerBenderRecipe(FOUR, "circuitTier4");
+            registerCutterRecipe(FOUR, "circuitTier4");
+            registerLatheRecipe(FOUR, "circuitTier4");
         }
 
         if (FIVE.getPack() != null) {
@@ -223,6 +244,11 @@ public final class RecipesHandler {
             registerMixerRecipe(FIVE, "circuitTier5");
             registerFoundryRecipe(FIVE, "circuitTier5");
             registerCompressorRecipe(FIVE, "circuitTier5");
+            registerElectrolyzerRecipe(FIVE, "circuitTier5");
+            registerMaceratorRecipe(FIVE, "circuitTier5");
+            registerBenderRecipe(FIVE, "circuitTier5");
+            registerCutterRecipe(FIVE, "circuitTier5");
+            registerLatheRecipe(FIVE, "circuitTier5");
         }
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
@@ -653,6 +679,76 @@ public final class RecipesHandler {
                 'P', PISTON.asIngredient(tier),
                 'A', ROBOT_ARM.asIngredient(tier),
                 'W', WIRE.getOre(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerElectrolyzerRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(ELECTROLYZER))
+            return;
+
+        RecipeManager.addShapedRecipe(ELECTROLYZER.getName(tier), ELECTROLYZER.asItemStack(tier),
+                "WGW", "WHW", "CSC",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'S', EMITTER.asIngredient(tier),
+                'G', OreStack.getIngredient("blockGlass"),
+                'W', WIRE.getOre(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerMaceratorRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(MACERATOR))
+            return;
+
+        RecipeManager.addShapedRecipe(MACERATOR.getName(tier), MACERATOR.asItemStack(tier),
+                "MGM", "WHW", "CWC",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'M', MOTOR.asIngredient(tier),
+                'G', GRINDER.asIngredient(tier),
+                'W', WIRE.getOre(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerBenderRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(BENDER))
+            return;
+
+        RecipeManager.addShapedRecipe(BENDER.getName(tier), BENDER.asItemStack(tier),
+                "CPP", "WHW", "PPC",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'P', PISTON.asIngredient(tier),
+                'W', WIRE.asIngredient(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerCutterRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(Machines.CUTTER))
+            return;
+
+        RecipeManager.addShapedRecipe(Machines.CUTTER.getName(tier), Machines.CUTTER.asItemStack(tier),
+                "MBM", "WHW", "CWC",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'M', MOTOR.asIngredient(tier),
+                'B', BUZZSAW.asIngredient(tier),
+                'W', WIRE.asIngredient(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerLatheRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(LATHE))
+            return;
+
+        RecipeManager.addShapedRecipe(LATHE.getName(tier), LATHE.asItemStack(tier),
+                "WRM", "CHC", "WBM",
+                'B', BUZZSAW.asIngredient(tier),
+                'R', ROD.asIngredient(DIAMOND),
+                'M', MOTOR.asIngredient(tier),
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'W', WIRE.asIngredient(tier.getPack().getEnergy())
         );
     }
 }
