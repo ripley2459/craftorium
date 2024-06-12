@@ -3,7 +3,7 @@ package fr.cyrilneveu.craftorium.api.machine;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
-import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineJeiData;
+import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
 import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;

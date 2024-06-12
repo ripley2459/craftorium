@@ -13,6 +13,8 @@ public final class Maps {
     public static final int CONFIGURATION_CUTTER_FINE = 1;
     public static final int CONFIGURATION_CUTTER_NORMAL = 2;
     public static final int CONFIGURATION_CUTTER_LARGE = 3;
+    public static final int CONFIGURATION_CUTTER_CIRCUIT = 4;
+    public static final int CONFIGURATION_CIRCUIT_ASSEMBLER_BASE = 1;
     public static final int CONFIGURATION_MIXING_MIX = 1;
     public static final int CONFIGURATION_MACERATOR_PULVERIZING = 1;
     public static final int CONFIGURATION_MACERATOR_BREAKING = 2;
@@ -36,6 +38,7 @@ public final class Maps {
     public static RecipeMap COMPRESSING;
     public static RecipeMap CASTING;
     public static RecipeMap MIXING;
+    public static RecipeMap CIRCUIT_ASSEMBLING;
 
     public static void init() {
         if (MACHINE_MAPS_REGISTRY.isInitialized())
@@ -51,6 +54,7 @@ public final class Maps {
         COMPRESSING = new RecipeMapBuilder("compressing", 1, 0, 1, 0).build();
         CASTING = new RecipeMapBuilder("casting", 1, 1, 1, 1).build();
         MIXING = new RecipeMapBuilder("mixing", 6, 6, 1, 1).build();
+        CIRCUIT_ASSEMBLING = new RecipeMapBuilder("circuit_assembling", 6, 1, 1, 0).build();
     }
 
     public static void close() {

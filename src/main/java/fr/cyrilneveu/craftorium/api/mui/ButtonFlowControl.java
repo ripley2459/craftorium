@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
@@ -49,13 +50,13 @@ public final class ButtonFlowControl extends AButton {
         if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
-        List<String> tooltips = new ArrayList<>();
+        List<String> tooltips = new LinkedList<>();
         tooltips.add(Utils.localise("tooltip.craftorium.machine.facing_".concat(facing.getName())));
-
         String on = Utils.localise("tooltip.craftorium.on");
         String off = Utils.localise("tooltip.craftorium.off");
         tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_input", (flow == ESlotFlow.INPUT || flow == ESlotFlow.FREE) ? on : off));
         tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_output", (flow == ESlotFlow.OUTPUT || flow == ESlotFlow.FREE) ? on : off));
+
         return tooltips;
     }
 

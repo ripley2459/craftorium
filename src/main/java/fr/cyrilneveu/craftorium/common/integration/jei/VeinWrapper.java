@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.jei;
+package fr.cyrilneveu.craftorium.common.integration.jei;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.substance.Substance;

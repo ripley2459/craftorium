@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine;
+package fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine;
 
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import mezz.jei.api.gui.IDrawable;

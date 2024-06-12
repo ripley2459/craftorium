@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.jei;
+package fr.cyrilneveu.craftorium.common.integration.jei;
 
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;

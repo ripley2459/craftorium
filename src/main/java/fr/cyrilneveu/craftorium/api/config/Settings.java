@@ -6,8 +6,8 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 @Config(modid = MODID)
 public final class Settings {
-    @Config.Name("Substances settings")
-    @Config.Comment("Config settings for substances related features.")
+    @Config.Name("Global settings")
+    @Config.Comment("Global settings.")
     @Config.RequiresMcRestart
     public static final GlobalsSettings globalSettings = new GlobalsSettings();
     @Config.Name("Substances settings")

@@ -1,10 +1,10 @@
 package fr.cyrilneveu.craftorium.api.mui;
 
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
+import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
@@ -40,17 +40,12 @@ public class EnergyBar extends AWidget implements ITextured {
         if (!isActive())
             return;
 
-        Minecraft.getMinecraft().getTextureManager().bindTexture(getTexture());
-        Gui.drawModalRectWithCustomSizedTexture(
-                getRealPosition().getPosX(), getRealPosition().getPosY(), 0, 0,
-                getSize().getSizeX(), getSize().getSizeY(),
-                getTextureSize().getSizeX(), getTextureSize().getSizeY());
+        RenderUtils.bindTexture(getTexture());
+        Gui.drawModalRectWithCustomSizedTexture(getRealPosition().getPosX(), getRealPosition().getPosY(), 0, 0, getSize().getSizeX(), getSize().getSizeY(), getTextureSize().getSizeX(), getTextureSize().getSizeY());
+
         if (capacity != 0) {
             int p = getTextureSize().getSizeY() * energy / capacity;
-            Gui.drawModalRectWithCustomSizedTexture(
-                    getRealPosition().getPosX(), getRealPosition().getPosY() + getSize().getSizeY() - p,
-                    getSize().getSizeX(), getSize().getSizeY() - p, getSize().getSizeX(), p,
-                    getTextureSize().getSizeX(), getTextureSize().getSizeY());
+            Gui.drawModalRectWithCustomSizedTexture(getRealPosition().getPosX(), getRealPosition().getPosY() + getSize().getSizeY() - p, getSize().getSizeX(), getSize().getSizeY() - p, getSize().getSizeX(), p, getTextureSize().getSizeX(), getTextureSize().getSizeY());
         }
     }
 

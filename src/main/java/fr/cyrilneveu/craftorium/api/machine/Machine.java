@@ -6,7 +6,9 @@ import fr.cyrilneveu.craftorium.api.mui.*;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineJeiData;
+import fr.cyrilneveu.craftorium.common.ACommonProxy;
+import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
@@ -37,6 +39,10 @@ public final class Machine implements Comparable<Machine> {
         return name;
     }
 
+    public String getName(Tier tier) {
+        return String.join("_", getName(), "tier", tier.getName());
+    }
+
     public String getDisplayName() {
         return Utils.localise(getTranslationKey());
     }
@@ -61,6 +67,10 @@ public final class Machine implements Comparable<Machine> {
     @Override
     public int compareTo(@Nonnull Machine other) {
         return name.compareTo(other.getName());
+    }
+
+    public ItemStack asItemStack(Tier tier) {
+        return ACommonProxy.getItemStack(getName(tier));
     }
 
     public Screen getScreen(MachineTile tile, Tier tier) {

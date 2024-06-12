@@ -1,9 +1,9 @@
-package fr.cyrilneveu.craftorium.api.integration.jei;
+package fr.cyrilneveu.craftorium.common.integration.jei;
 
-import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineRecipeCategory;
-import fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine.MachineRecipeWrapper;
-import fr.cyrilneveu.craftorium.api.integration.jei.vein.VeinCategory;
-import fr.cyrilneveu.craftorium.api.integration.jei.vein.VeinWrapper;
+import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineRecipeCategory;
+import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineRecipeWrapper;
+import fr.cyrilneveu.craftorium.common.integration.jei.vein.VeinCategory;
+import fr.cyrilneveu.craftorium.common.integration.jei.vein.VeinWrapper;
 import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;

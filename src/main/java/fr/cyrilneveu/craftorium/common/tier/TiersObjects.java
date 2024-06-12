@@ -26,6 +26,7 @@ public final class TiersObjects {
     public static ATierObject.TierItem BATTERY;
     public static ATierObject.TierItem EMITTER;
     public static ATierObject.TierItem HEAT_EXCHANGER;
+    public static ATierObject.TierItem MACHINE_FRAME;
     public static ATierObject.TierItem MOTOR;
     public static ATierObject.TierItem PISTON;
     public static ATierObject.TierItem PUMP;
@@ -42,6 +43,7 @@ public final class TiersObjects {
         BATTERY = createItem("battery").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
         EMITTER = createItem("emitter").build();
         HEAT_EXCHANGER = createItem("heat_exchanger").build();
+        MACHINE_FRAME = createItem("machine_frame").build();
         MOTOR = createItem("motor").build();
         PISTON = createItem("piston").build();
         PUMP = createItem("pump").build();

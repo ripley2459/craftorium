@@ -73,6 +73,15 @@ public abstract class ACommonProxy {
         new ItemBuilder("circuit_board_2").addTexture("circuits/circuit_board_2").build();
         new ItemBuilder("circuit_board_3").addTexture("circuits/circuit_board_3").build();
 
+        new ItemBuilder("ram_wafer").addTexture("circuits/wafer").addTexture("circuits/ram").build();
+        new ItemBuilder("power_wafer").addTexture("circuits/wafer").addTexture("circuits/power").build();
+        new ItemBuilder("calculus_wafer").addTexture("circuits/wafer").addTexture("circuits/calculus").build();
+        new ItemBuilder("quantum_calculus_wafer").addTexture("circuits/wafer").addTexture("circuits/quantum_calculus").build();
+        new ItemBuilder("ram_die").addTexture("circuits/die").addTexture("circuits/ram").build();
+        new ItemBuilder("power_die").addTexture("circuits/die").addTexture("circuits/power").build();
+        new ItemBuilder("calculus_die").addTexture("circuits/die").addTexture("circuits/calculus").build();
+        new ItemBuilder("quantum_calculus_die").addTexture("circuits/die").addTexture("circuits/quantum_calculus").build();
+
         new ItemBuilder("redstone_circuit").addTexture("circuits/redstone_circuit").build();
         new ItemBuilder("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
         new ItemBuilder("primitive_circuit").addTexture("circuits/primitive_circuit").build();

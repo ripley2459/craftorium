@@ -1,6 +1,6 @@
-package fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine;
+package fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine;
 
-import fr.cyrilneveu.craftorium.api.integration.jei.ACategory;
+import fr.cyrilneveu.craftorium.common.integration.jei.ACategory;
 import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;

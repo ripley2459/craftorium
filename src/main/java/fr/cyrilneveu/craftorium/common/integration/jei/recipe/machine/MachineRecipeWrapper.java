@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.jei.recipe.machine;
+package fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.machine.Machine;

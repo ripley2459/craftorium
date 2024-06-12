@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.integration.jei.vein;
+package fr.cyrilneveu.craftorium.common.integration.jei.vein;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.substance.Substance;

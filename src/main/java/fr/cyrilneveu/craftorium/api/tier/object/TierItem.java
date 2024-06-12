@@ -21,6 +21,6 @@ public class TierItem extends CustomItem {
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return Utils.localise(String.join(".", getTranslationKey(), "name"), tier.getDisplayName());
+        return Utils.localise(String.join(".", getTranslationKey(), "name"));
     }
 }

@@ -178,7 +178,7 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
 
         @Override
         public String getItemStackDisplayName(ItemStack stack) {
-            return machine.getDisplayName().concat(" ").concat(tier.getDisplayName());
+            return machine.getDisplayName();
         }
 
         @Override

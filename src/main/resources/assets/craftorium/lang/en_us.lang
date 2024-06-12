@@ -4,15 +4,15 @@
 # Items
 
 # Tiered
-item.craftorium.battery.name=Battery %s
-item.craftorium.emitter.name=Emitter %s
-item.craftorium.heat_exchanger.name=Heat Exchanger %s
-item.craftorium.motor.name=Motor %s
-item.craftorium.piston.name=Piston %s
-item.craftorium.pump.name=Pump %s
-item.craftorium.robot_arm.name=Robot Arm %s
-item.craftorium.scanner.name=Scanner %s
-item.craftorium.sensor.name=Sensor %s
+item.craftorium.battery.name=Battery
+item.craftorium.emitter.name=Emitter
+item.craftorium.heat_exchanger.name=Heat Exchanger
+item.craftorium.motor.name=Motor
+item.craftorium.piston.name=Piston
+item.craftorium.pump.name=Pump
+item.craftorium.robot_arm.name=Robot Arm
+item.craftorium.scanner.name=Scanner
+item.craftorium.sensor.name=Sensor
 
 # Tools
 item.craftorium.axe.name=%s Axe
@@ -76,6 +76,15 @@ item.craftorium.circuit_board_1.name=Circuit Board
 item.craftorium.circuit_board_2.name=Advanced Circuit Board
 item.craftorium.circuit_board_3.name=Maxed Circuit Board
 
+item.craftorium.ram_wafer.name=RAM Wafer
+item.craftorium.calculus_wafer.name=Calculus Wafer
+item.craftorium.power_wafer.name=Power Wafer
+item.craftorium.quantum_calculus_wafer.name=Quantum Calculus Wafer
+item.craftorium.ram_die.name=RAM Die
+item.craftorium.calculus_die.name=Calculus Die
+item.craftorium.power_die.name=Power Die
+item.craftorium.quantum_calculus_die.name=Quantum Calculus Die
+
 
 # ##################################################
 # Blocks
@@ -89,6 +98,7 @@ machine.craftorium.cutter.name=Cutter
 machine.craftorium.compressor.name=Compressor
 machine.craftorium.foundry.name=Foundry
 machine.craftorium.mixer.name=Mixer
+machine.craftorium.circuit_assembler.name=Circuit Assembler
 
 # Substances
 tile.craftorium.block.name=Block of %s
@@ -366,38 +376,45 @@ tier.craftorium.four.name=Tier 4
 tier.craftorium.five.name=Tier 5
 
 # Tooltips
-tooltip.craftorium.machine.facing_up=Top side
-tooltip.craftorium.machine.facing_down=Bottom side
+tooltip.craftorium.machine.facing_up=Top
+tooltip.craftorium.machine.facing_down=Bottom
 tooltip.craftorium.machine.facing_north=Front
 tooltip.craftorium.machine.facing_south=Back
-tooltip.craftorium.machine.facing_west=Left side
-tooltip.craftorium.machine.facing_east=Right side
-tooltip.craftorium.machine.energy=%s/%sRF
-tooltip.craftorium.machine.fluid=%s (%s/%smB)
-tooltip.craftorium.machine.no_fluid=Empty (0/%smB)
-tooltip.craftorium.machine.allow_input=Insert: %s
-tooltip.craftorium.machine.allow_output=Extract/Push out: %s
-tooltip.craftorium.state.solid=§aState: Solid§r
-tooltip.craftorium.state.liquid=§aState: Liquid§r
-tooltip.craftorium.state.gaseous=§aState: Gaseous§r
-tooltip.craftorium.state.unknown=§4State: Unknown§r
-tooltip.craftorium.battery.energy=§c%s/%sRF§r
-tooltip.craftorium.tier.name=§eTier: %s§r
-tooltip.craftorium.formula=§3%s§r
-tooltip.craftorium.temperature=§5%s°K§r
+tooltip.craftorium.machine.facing_west=Left
+tooltip.craftorium.machine.facing_east=Right
+
+tooltip.craftorium.machine.energy=§c%s/%sRF§r
+tooltip.craftorium.machine.fluid=%s (%s/%s mB)
+tooltip.craftorium.machine.no_fluid=Empty (0/%s mB)
+
 tooltip.craftorium.on=§aON§r
 tooltip.craftorium.off=§7OFF§r
+tooltip.craftorium.machine.allow_input=Insert: %s
+tooltip.craftorium.machine.allow_output=Extract/Push out: %s
+
+tooltip.craftorium.battery.energy=§c%s/%sRF§r
+tooltip.craftorium.tier.name=Tier: §b%s§r
 tooltip.craftorium.recipe.progression=%s/%s
+tooltip.craftorium.map.name=Map: §e%s§r
+
+tooltip.craftorium.formula=§e%s§r
+tooltip.craftorium.temperature=§c%s°K§r
+tooltip.craftorium.state.solid=State: §aSolid§r
+tooltip.craftorium.state.liquid=State: §aLiquid§r
+tooltip.craftorium.state.gaseous=State: §aGaseous§r
+tooltip.craftorium.state.unknown=State: §aUnknown§r
+
 
 # JEI
-jei.craftorium.vein_generation.name=Ore Generation
-jei.craftorium.vein.chance=Weight: %s
 jei.craftorium.recipe.chance.detail=§6Chance: %s%%§r
 jei.craftorium.recipe.chance=%s%%
-jei.craftorium.vein.depth=Y: %s-%s
-jei.craftorium.vein.dimension=Dimension: %s
 jei.craftorium.recipe.consumption=%sRF/tick
 jei.craftorium.recipe.duration=%ssecs
-jei.craftorium.recipe.energy=Total: %sRF
-jei.craftorium.recipe.recipe_ct=Recipe §o§e%s§r in map §o§e%s§r
-jei.craftorium.recipe.configuration=Configuration: %s
+jei.craftorium.recipe.energy=%sRF
+jei.craftorium.recipe.recipe_ct=Recipe §e%s§r
+jei.craftorium.recipe.configuration=Configuration: §d%s§r
+
+jei.craftorium.vein_generation.name=Ore Generation
+jei.craftorium.vein.chance=Weight: %s
+jei.craftorium.vein.depth=Y: %s-%s
+jei.craftorium.vein.dimension=Dimension: %s

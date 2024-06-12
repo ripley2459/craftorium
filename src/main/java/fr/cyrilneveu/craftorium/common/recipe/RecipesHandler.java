@@ -18,8 +18,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.CUTTER;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
 import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
@@ -152,6 +154,11 @@ public final class RecipesHandler {
             registerSensorRecipe(ONE, ENDER, "circuitTier1");
             registerBatteryRecipe(ONE);
             registerRobotArmRecipe(ONE, "circuitTier1");
+
+            registerCircuitAssemblerRecipe(ONE, "circuitTier1");
+            registerMixerRecipe(ONE, "circuitTier1");
+            registerFoundryRecipe(ONE, "circuitTier1");
+            registerCompressorRecipe(ONE, "circuitTier1");
         }
 
         if (TWO.getPack() != null) {
@@ -163,6 +170,11 @@ public final class RecipesHandler {
             registerSensorRecipe(TWO, ENDER, "circuitTier2");
             registerBatteryRecipe(TWO);
             registerRobotArmRecipe(TWO, "circuitTier2");
+
+            registerCircuitAssemblerRecipe(TWO, "circuitTier2");
+            registerMixerRecipe(TWO, "circuitTier2");
+            registerFoundryRecipe(TWO, "circuitTier2");
+            registerCompressorRecipe(TWO, "circuitTier2");
         }
 
         if (THREE.getPack() != null) {
@@ -174,6 +186,11 @@ public final class RecipesHandler {
             registerSensorRecipe(THREE, ENDER, "circuitTier3");
             registerBatteryRecipe(THREE);
             registerRobotArmRecipe(THREE, "circuitTier3");
+
+            registerCircuitAssemblerRecipe(THREE, "circuitTier3");
+            registerMixerRecipe(THREE, "circuitTier3");
+            registerFoundryRecipe(THREE, "circuitTier3");
+            registerCompressorRecipe(THREE, "circuitTier3");
         }
 
         if (FOUR.getPack() != null) {
@@ -185,6 +202,11 @@ public final class RecipesHandler {
             registerSensorRecipe(FOUR, ENDER, "circuitTier4");
             registerBatteryRecipe(FOUR);
             registerRobotArmRecipe(FOUR, "circuitTier4");
+
+            registerCircuitAssemblerRecipe(FOUR, "circuitTier4");
+            registerMixerRecipe(FOUR, "circuitTier4");
+            registerFoundryRecipe(FOUR, "circuitTier5");
+            registerCompressorRecipe(FOUR, "circuitTier4");
         }
 
         if (FIVE.getPack() != null) {
@@ -196,6 +218,11 @@ public final class RecipesHandler {
             registerSensorRecipe(FIVE, ENDER, "circuitTier5");
             registerBatteryRecipe(FIVE);
             registerRobotArmRecipe(FIVE, "circuitTier5");
+
+            registerCircuitAssemblerRecipe(FIVE, "circuitTier5");
+            registerMixerRecipe(FIVE, "circuitTier5");
+            registerFoundryRecipe(FIVE, "circuitTier5");
+            registerCompressorRecipe(FIVE, "circuitTier5");
         }
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
@@ -339,6 +366,78 @@ public final class RecipesHandler {
                 .consumeEnergy(1000)
                 .duration(200)
                 .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                .build());
+
+        CUTTING.addRecipe(new MachineRecipeBuilder("ram_die")
+                .consumeItem(ACommonProxy.getItemStack("ram_wafer"))
+                .produceItem(ACommonProxy.getItemStack("ram_die", 16))
+                .consumeEnergy(50000)
+                .duration(1000)
+                .configuration(CONFIGURATION_CUTTER_CIRCUIT)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("power_die")
+                .consumeItem(ACommonProxy.getItemStack("power_wafer"))
+                .produceItem(ACommonProxy.getItemStack("power_die", 16))
+                .consumeEnergy(50000)
+                .duration(1000)
+                .configuration(CONFIGURATION_CUTTER_CIRCUIT)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("calculus_die")
+                .consumeItem(ACommonProxy.getItemStack("calculus_wafer"))
+                .produceItem(ACommonProxy.getItemStack("calculus_die", 16))
+                .consumeEnergy(50000)
+                .duration(1000)
+                .configuration(CONFIGURATION_CUTTER_CIRCUIT)
+                .build());
+        CUTTING.addRecipe(new MachineRecipeBuilder("quantum_calculus_die")
+                .consumeItem(ACommonProxy.getItemStack("quantum_calculus_wafer"))
+                .produceItem(ACommonProxy.getItemStack("quantum_calculus_die", 16))
+                .consumeEnergy(50000)
+                .duration(1000)
+                .configuration(CONFIGURATION_CUTTER_CIRCUIT)
+                .build());
+
+        CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("microprocessor")
+                .consumeItem(WIRE.getOre(TWO.getPack().getEnergy()), 1)
+                .consumeItem(ACommonProxy.getItemStack("ram_die", 1))
+                .consumeItem(ACommonProxy.getItemStack("calculus_die", 1))
+                .produceItem(ACommonProxy.getItemStack("microprocessor"))
+                .consumeEnergy(100000)
+                .duration(300)
+                .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
+                .build());
+        CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("processor")
+                .consumeItem(WIRE.getOre(THREE.getPack().getEnergy()), 4)
+                .consumeItem(ACommonProxy.getItemStack("microprocessor", 4))
+                .consumeItem(ACommonProxy.getItemStack("ram_die", 4))
+                .consumeItem(ACommonProxy.getItemStack("calculus_die", 4))
+                .consumeItem(ACommonProxy.getItemStack("power_die", 1))
+                .produceItem(ACommonProxy.getItemStack("processor"))
+                .consumeEnergy(400000)
+                .duration(1200)
+                .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
+                .build());
+        CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("advanced_processor")
+                .consumeItem(WIRE.getOre(FOUR.getPack().getEnergy()), 16)
+                .consumeItem(ACommonProxy.getItemStack("processor", 4))
+                .consumeItem(ACommonProxy.getItemStack("ram_die", 16))
+                .consumeItem(ACommonProxy.getItemStack("calculus_die", 16))
+                .consumeItem(ACommonProxy.getItemStack("power_die", 4))
+                .produceItem(ACommonProxy.getItemStack("advanced_processor"))
+                .consumeEnergy(1600000)
+                .duration(4800)
+                .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
+                .build());
+        CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("mainframe")
+                .consumeItem(WIRE.getOre(FIVE.getPack().getEnergy()), 64)
+                .consumeItem(ACommonProxy.getItemStack("advanced_processor", 4))
+                .consumeItem(ACommonProxy.getItemStack("ram_die", 64))
+                .consumeItem(ACommonProxy.getItemStack("calculus_die", 64))
+                .consumeItem(ACommonProxy.getItemStack("power_die", 16))
+                .produceItem(ACommonProxy.getItemStack("mainframe"))
+                .consumeEnergy(6400000)
+                .duration(19200)
+                .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
 
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
@@ -498,6 +597,62 @@ public final class RecipesHandler {
                 'P', PLATE.asIngredient(tier.getPack().getEnergy()),
                 'W', WRENCH.asIngredient(null),
                 'C', WIRE.asIngredient(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerCircuitAssemblerRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(CIRCUIT_ASSEMBLER))
+            return;
+
+        RecipeManager.addShapedRecipe(CIRCUIT_ASSEMBLER.getName(tier), CIRCUIT_ASSEMBLER.asItemStack(tier),
+                "GEG", "SFS", "ACA",
+                'S', OreStack.getIngredient(circuit),
+                'F', MACHINE_FRAME.asIngredient(tier),
+                'E', EMITTER.asIngredient(tier),
+                'A', ROBOT_ARM.asIngredient(tier),
+                'C', SENSOR.asIngredient(tier),
+                'G', GEAR.asIngredient(tier.getPack().getMechanical())
+        );
+    }
+
+    private static void registerMixerRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(MIXER))
+            return;
+
+        RecipeManager.addShapedRecipe(MIXER.getName(tier), MIXER.asItemStack(tier),
+                "RCW", "MHM", "WCR",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'M', MOTOR.asIngredient(tier),
+                'R', ROTOR.getOre(tier.getPack().getMechanical()),
+                'W', WIRE.getOre(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerFoundryRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(FOUNDRY))
+            return;
+
+        RecipeManager.addShapedRecipe(FOUNDRY.getName(tier), FOUNDRY.asItemStack(tier),
+                "CWC", "WHW", "SWS",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'W', PLATE.getOre(tier.getPack().getHeat()),
+                'S', WIRE.getOre(tier.getPack().getEnergy())
+        );
+    }
+
+    private static void registerCompressorRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(COMPRESSOR))
+            return;
+
+        RecipeManager.addShapedRecipe(COMPRESSOR.getName(tier), COMPRESSOR.asItemStack(tier),
+                "CPC", "AHA", "WPW",
+                'H', MACHINE_FRAME.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'P', PISTON.asIngredient(tier),
+                'A', ROBOT_ARM.asIngredient(tier),
+                'W', WIRE.getOre(tier.getPack().getEnergy())
         );
     }
 }
