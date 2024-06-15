@@ -54,7 +54,7 @@ public class EnergyBar extends AWidget implements ITextured {
         if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
-        return Collections.singletonList(Utils.localise("tooltip.craftorium.machine.energy", energy, capacity));
+        return Collections.singletonList(Utils.localise("tooltip.craftorium.machine.slot.energy", energy, capacity));
     }
 
     @Override

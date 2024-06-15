@@ -4,6 +4,7 @@ import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
+import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -22,11 +23,14 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.EMPTY_FLUID_STACK;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.LIQUID;
 
 public class FluidSlot extends ASlot {
     public static final ResourceLocation INPUT = new ResourceLocation(MODID, "textures/interfaces/elements/slot_fluid_input.png");
@@ -46,11 +50,11 @@ public class FluidSlot extends ASlot {
         if (!isFluidStackValid(fluidStack))
             return;
 
-        String l = Utils.formatFluidAmount(fluidStack.amount);
+        String amount = Utils.formatFluidAmount(fluidStack.amount);
         float scale = 0.5f;
-        float posX = getPosition().getPosX() + 16 - Minecraft.getMinecraft().fontRenderer.getStringWidth(l) * scale + 2;
+        float posX = getPosition().getPosX() + 16 - Minecraft.getMinecraft().fontRenderer.getStringWidth(amount) * scale + 2;
         float posY = getPosition().getPosY() + 16 - 8 * scale + 2;
-        RenderUtils.renderText(l, new Position((int) posX, (int) posY), 16777215, scale, true, false);
+        RenderUtils.renderText(amount, new Position((int) posX, (int) posY), 16777215, scale, true, false);
     }
 
     @Override
@@ -107,10 +111,16 @@ public class FluidSlot extends ASlot {
 
     @Override
     public List<String> getTooltips(int mouseX, int mouseY) {
-        if (!isActive() || !isHovered(mouseX, mouseY))
+        if (!isActive() || !isHovered(mouseX, mouseY) || !isFluidStackValid(fluidStack))
             return Collections.emptyList();
 
-        return isFluidStackValid(fluidStack) ? Collections.singletonList(Utils.localise("tooltip.craftorium.machine.fluid", fluidStack.getLocalizedName(), fluidStack.amount, capacity)) : Collections.emptyList();
+        List<String> tooltips = new ArrayList<>();
+        tooltips.add(fluidStack.getLocalizedName());
+
+        if (SUBSTANCES_REGISTRY.getAll().containsKey(fluidStack.getFluid().getName()))
+            tooltips.addAll(SubstancesObjects.fluidTooltips(LIQUID, SUBSTANCES_REGISTRY.get(fluidStack.getFluid().getName())));
+        
+        return tooltips;
     }
 
     @Override

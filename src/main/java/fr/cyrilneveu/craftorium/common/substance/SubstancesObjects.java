@@ -323,7 +323,7 @@ public final class SubstancesObjects {
         if (!formula.isEmpty())
             lines.add(Utils.localise("tooltip.craftorium.formula", formula));
         boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
-        lines.add(Utils.localise("tooltip.craftorium.temperature", gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
+        lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
     }

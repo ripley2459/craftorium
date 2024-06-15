@@ -51,11 +51,11 @@ public final class ButtonFlowControl extends AButton {
             return Collections.emptyList();
 
         List<String> tooltips = new LinkedList<>();
-        tooltips.add(Utils.localise("tooltip.craftorium.machine.facing_".concat(facing.getName())));
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.button.facing.".concat(facing.getName())));
         String on = Utils.localise("tooltip.craftorium.on");
         String off = Utils.localise("tooltip.craftorium.off");
-        tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_input", (flow == ESlotFlow.INPUT || flow == ESlotFlow.FREE) ? on : off));
-        tooltips.add(Utils.localise("tooltip.craftorium.machine.allow_output", (flow == ESlotFlow.OUTPUT || flow == ESlotFlow.FREE) ? on : off));
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.button.input", (flow == ESlotFlow.INPUT || flow == ESlotFlow.FREE) ? on : off));
+        tooltips.add(Utils.localise("tooltip.craftorium.machine.button.output", (flow == ESlotFlow.OUTPUT || flow == ESlotFlow.FREE) ? on : off));
 
         return tooltips;
     }

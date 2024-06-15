@@ -30,6 +30,7 @@ public final class VeinWrapper implements IRecipeWrapper {
     @Override
     public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> allItemsOut = new ArrayList<>();
+
         for (Substance substance : vein.getComposition())
             allItemsOut.add(new OreStack(ORE.getOre(substance)).getStacks());
 
@@ -39,10 +40,6 @@ public final class VeinWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        // minecraft.getTextureManager().bindTexture(getBackground());
-        // Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 128, 128, 128, 128);
-        // 41
-
         minecraft.fontRenderer.drawString(vein.getDisplayName(), 1, 1, 4210752);
         minecraft.fontRenderer.drawString(Utils.localise("jei.craftorium.vein.dimension", vein.getDimension()), 1, 9 + 1, 4210752);
         minecraft.fontRenderer.drawString(Utils.localise("jei.craftorium.vein.depth", vein.getMinY(), vein.getMaxY()), 1, 9 + 9 + 1, 4210752);

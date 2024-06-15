@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.api.mui;
 import fr.cyrilneveu.craftorium.api.utils.ClientUtils;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
+import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.SoundEvents;
@@ -43,7 +44,7 @@ public final class ButtonConfiguration extends AButton {
         String l = String.valueOf(configuration);
         int posX = getPosition().getPosX() + (BUTTON_SIZE.getSizeX() / 2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(l) / 2);
         int posY = getPosition().getPosY() + (BUTTON_SIZE.getSizeY() / 2 - FONT_HEIGHT / 2);
-        RenderUtils.renderText(l, new Position(posX, posY), WHITE_COLOR, 1.0f, true, false);
+        RenderUtils.renderText(l, posX, posY, WHITE_COLOR, 1.0f, true, false);
     }
 
     @Override
@@ -51,7 +52,7 @@ public final class ButtonConfiguration extends AButton {
         if (!isActive() || !isHovered(mouseX, mouseY))
             return Collections.emptyList();
 
-        return Collections.singletonList("Configuration: " + configuration);
+        return Collections.singletonList(Utils.localise("tooltip.craftorium.machine.button.configuration", configuration));
     }
 
     @Override

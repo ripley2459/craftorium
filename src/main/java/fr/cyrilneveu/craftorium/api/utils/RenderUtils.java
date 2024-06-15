@@ -42,6 +42,10 @@ public final class RenderUtils {
         return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
     }
 
+    public static void bindTexture(ResourceLocation texture) {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+    }
+
     public static void renderNineSlicedTexture(Position position, Size size, Size rectOffset, Size textureSize, ResourceLocation texture) {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
@@ -68,22 +72,26 @@ public final class RenderUtils {
         GlStateManager.color(((color >> 16) & 0xff) / 255.0f, ((color >> 8) & 0xff) / 255.0f, (color & 0xff) / 255.0f, 1.0F);
     }
 
+    public static int getTextWidth(String text) {
+        return Minecraft.getMinecraft().fontRenderer.getStringWidth(text);
+    }
+
     public static void renderText(String text, Position position, int color) {
         renderText(text, position, color, 1.0f, false, false);
     }
 
     public static void renderText(String text, Position position, int color, float scale, boolean dropShadow, boolean center) {
+        renderText(text, position.getPosX(), position.getPosY(), color, scale, dropShadow, center);
+    }
+
+    public static void renderText(String text, int posX, int posY, int color, float scale, boolean dropShadow, boolean center) {
         GlStateManager.pushMatrix();
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
         double scaledTextWidth = center ? fontRenderer.getStringWidth(text) * scale : 0.0;
-        GlStateManager.translate(position.getPosX() - scaledTextWidth / 2.0, position.getPosY(), 0.0f);
+        GlStateManager.translate(posX - scaledTextWidth / 2.0, posY, 0.0f);
         GlStateManager.scale(scale, scale, scale);
         fontRenderer.drawString(text, 0, 0, color, dropShadow);
         GlStateManager.popMatrix();
-    }
-
-    public static void bindTexture(ResourceLocation texture) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     }
 
     public static class CustomStateMapper extends StateMapperBase {

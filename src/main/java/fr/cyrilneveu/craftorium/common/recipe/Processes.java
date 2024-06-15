@@ -647,10 +647,10 @@ public final class Processes {
                 int amount = 0;
                 for (SubstanceStack stack : composition) {
                     amount += stack.getAmount();
-                    recipeMix.consumeFluid(LIQUID.getName(stack.getSubstance()), stack.getAmount());
+                    recipeMix.consumeFluid(LIQUID.getName(stack.getSubstance()), stack.getAmount() * 144);
                 }
 
-                MIXING.addRecipe(recipeMix.produceFluid(LIQUID.getName(substance), amount).duration(10).consumeEnergy(500).configuration(CONFIGURATION_MIXING_MIX).build());
+                MIXING.addRecipe(recipeMix.produceFluid(LIQUID.getName(substance), amount * 144).duration(20).consumeEnergy(50000).configuration(CONFIGURATION_MIXING_MIX).build());
             }
         }
     }

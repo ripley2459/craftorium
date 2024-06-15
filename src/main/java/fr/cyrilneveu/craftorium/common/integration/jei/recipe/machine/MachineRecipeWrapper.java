@@ -39,26 +39,30 @@ public final class MachineRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        Position p = machine.getJeiData().getArrow();
-        Size o = machine.getJeiData().getOffset();
-        arrowbackground.draw(minecraft, p.getPosX() - o.getSizeX(), p.getPosY() - o.getSizeY());
-        arrow.draw(minecraft, p.getPosX() - o.getSizeX(), p.getPosY() - o.getSizeY());
+        Position position = machine.getJeiData().getArrow();
+        Size offset = machine.getJeiData().getOffset();
+        arrowbackground.draw(minecraft, position.getPosX() - offset.getSizeX(), position.getPosY() - offset.getSizeY());
+        arrow.draw(minecraft, position.getPosX() - offset.getSizeX(), position.getPosY() - offset.getSizeY());
     }
 
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY) {
         List<String> tooltips;
-        Position p = machine.getJeiData().getArrow();
-        Size o = machine.getJeiData().getOffset();
-        Size s = NORMAL_SIZE;
+        Position position = machine.getJeiData().getArrow();
+        Size offset = machine.getJeiData().getOffset();
+        Size size = NORMAL_SIZE;
 
-        if (mouseX >= p.getPosX() - o.getSizeX() && mouseX < p.getPosX() - o.getSizeX() + s.getSizeX() && mouseY >= p.getPosY() - o.getSizeY() && mouseY < p.getPosY() - o.getSizeY() + s.getSizeY()) {
+        if (mouseX >= position.getPosX() - offset.getSizeX() && mouseX < position.getPosX() - offset.getSizeX() + size.getSizeX() && mouseY >= position.getPosY() - offset.getSizeY() && mouseY < position.getPosY() - offset.getSizeY() + size.getSizeY()) {
             tooltips = new ArrayList<>();
-            tooltips.add(Utils.localise("jei.craftorium.recipe.recipe_ct", recipe.getName(), machine.getJeiData().getMap()));
+            tooltips.add(Utils.localise("jei.craftorium.recipe.title"));
+            if (Utils.isAdvancedTooltipsOn()) {
+                tooltips.add(Utils.localise("jei.craftorium.recipe.name", recipe.getName()));
+                tooltips.add(Utils.localise("jei.craftorium.recipe.map", machine.getJeiData().getMap()));
+            }
+            tooltips.add(Utils.localise("jei.craftorium.recipe.configuration", recipe.getConfiguration()));
             tooltips.add(Utils.localise("jei.craftorium.recipe.energy", recipe.getEnergyIn()));
             tooltips.add(Utils.localise("jei.craftorium.recipe.consumption", recipe.getEnergyIn() / recipe.getDuration()));
-            tooltips.add(Utils.localise("jei.craftorium.recipe.duration", recipe.getDuration() / 20));
-            tooltips.add(Utils.localise("jei.craftorium.recipe.configuration", recipe.getConfiguration()));
+            tooltips.add(Utils.localise("jei.craftorium.recipe.duration", recipe.getDuration()));
         } else tooltips = Collections.emptyList();
 
         return tooltips;
@@ -67,9 +71,8 @@ public final class MachineRecipeWrapper implements IRecipeWrapper {
     @Override
     public void getIngredients(IIngredients ingredients) {
         List<List<ItemStack>> allItemsIn = new ArrayList<>();
-        for (OreStack oreStack : recipe.getItemsIn()) {
+        for (OreStack oreStack : recipe.getItemsIn())
             allItemsIn.add(oreStack.getStacks());
-        }
 
         List<List<FluidStack>> allFluidsIn = new ArrayList<>();
         for (FluidStack fluidStack : recipe.getFluidsIn()) {

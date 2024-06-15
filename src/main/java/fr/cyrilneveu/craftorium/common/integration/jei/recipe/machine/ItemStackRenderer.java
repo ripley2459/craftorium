@@ -39,7 +39,7 @@ public final class ItemStackRenderer extends mezz.jei.plugins.vanilla.ingredient
             }
 
             if (chance != 100) {
-                String l = Utils.localise("jei.craftorium.recipe.chance", chance);
+                String l = Utils.localise("jei.craftorium.recipe.chance.tiny", chance);
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(0.5, 0.5, 1);
                 GlStateManager.translate(0f, 0f, 160f);
@@ -59,7 +59,7 @@ public final class ItemStackRenderer extends mezz.jei.plugins.vanilla.ingredient
             if (!consumable)
                 tooltips.add(Utils.localise("jei.craftorium.object.not_consumable"));
             if (chance != 100)
-                tooltips.add(Utils.localise("jei.craftorium.recipe.chance.detail", chance));
+                tooltips.add(Utils.localise("jei.craftorium.recipe.chance", chance));
         }
 
         return tooltips;

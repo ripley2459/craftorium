@@ -83,8 +83,8 @@ public final class Veins {
         VEIN_CHALCOPYRITE = new VeinBuilder("chalcopyrite", 80, 200, 5, 5, 80, 0, CHALCOPYRITE, 15, COPPER, 3, IRON, 1, SULFUR, 1).build();
         VEIN_NATIVE_COPPER = new VeinBuilder("native_copper", 80, 120, 5, 5, 70, 0, COPPER, 1).build();
         VEIN_MALACHITE = new VeinBuilder("malachite", 10, 40, 5, 5, 15, 0, MALACHITE, 8, IRON, 1, COPPER, 1).build();
-        VEIN_AZURITE = new VeinBuilder("azurite", 20, 50, 5, 5, 15, 0, AZURITE, 3, LAPIS_LAZULI, 1).build();
-        VEIN_LAZURITE = new VeinBuilder("lazurite", 20, 50, 5, 5, 15, 0, LAZURITE, 1, LAPIS_LAZULI, 3).build();
+        VEIN_AZURITE = new VeinBuilder("azurite", 20, 50, 5, 5, 15, 0, AZURITE, 3, LAPIS, 1).build();
+        VEIN_LAZURITE = new VeinBuilder("lazurite", 20, 50, 5, 5, 15, 0, LAZURITE, 1, LAPIS, 3).build();
         VEIN_SODALITE = new VeinBuilder("sodalite", 30, 60, 5, 5, 10, 0, SODALITE, 1).build();
         VEIN_NATIVE_GOLD = new VeinBuilder("native_gold", 15, 40, 4, 4, 30, 0, GOLD, 20, PLATINUM, 1, IRIDIUM, 1, OSMIUM, 1).build();
         VEIN_NATIVE_PLATINUM = new VeinBuilder("native_platinum", 15, 40, 2, 2, 30, 0, PLATINUM, 10, IRIDIUM, 1, OSMIUM, 1).build();

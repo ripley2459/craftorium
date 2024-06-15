@@ -1,6 +1,5 @@
 package fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine;
 
-import fr.cyrilneveu.craftorium.common.integration.jei.ACategory;
 import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
@@ -9,6 +8,7 @@ import fr.cyrilneveu.craftorium.api.mui.Background;
 import fr.cyrilneveu.craftorium.api.mui.FluidSlot;
 import fr.cyrilneveu.craftorium.api.mui.ItemSlot;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
+import fr.cyrilneveu.craftorium.common.integration.jei.ACategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -51,11 +51,7 @@ public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper>
 
     private void drawSlot(ASlotData slot) {
         RenderUtils.bindTexture(getTexture(slot));
-        Gui.drawModalRectWithCustomSizedTexture(slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX(),
-                slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY(),
-                0, 0,
-                SLOT_TEXTURE_SIZE.getSizeX(), SLOT_TEXTURE_SIZE.getSizeY(),
-                SLOT_TEXTURE_SIZE.getSizeX(), SLOT_TEXTURE_SIZE.getSizeY());
+        Gui.drawModalRectWithCustomSizedTexture(slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX(), slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY(), 0, 0, SLOT_TEXTURE_SIZE.getSizeX(), SLOT_TEXTURE_SIZE.getSizeY(), SLOT_TEXTURE_SIZE.getSizeX(), SLOT_TEXTURE_SIZE.getSizeY());
     }
 
     private ResourceLocation getTexture(ASlotData slotData) {
@@ -87,11 +83,7 @@ public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper>
         if (!itemsIn.isEmpty()) {
             for (int i = 0; i < ingredients.getInputs(VanillaTypes.ITEM).size(); i++) {
                 ASlotData s = itemsIn.get(i);
-                items.init(slotIndex++, true,
-                        new ItemStackRenderer(recipeWrapper.getRecipe().getItemsIn().get(i), 100),
-                        s.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1,
-                        s.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1,
-                        16, 16, 0, 0);
+                items.init(slotIndex++, true, new ItemStackRenderer(recipeWrapper.getRecipe().getItemsIn().get(i), 100), s.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1, s.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1, 16, 16, 0, 0);
             }
         }
 
@@ -99,40 +91,26 @@ public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper>
         if (!fluidsIn.isEmpty()) {
             for (int i = 0; i < ingredients.getInputs(VanillaTypes.FLUID).size(); i++) {
                 ASlotData slot = fluidsIn.get(i);
-                fluids.init(slotIndex++, true,
-                        new FluidStackRenderer(1, false, 16, 16, null, 100),
-                        slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1,
-                        slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1,
-                        16, 16, 0, 0);
+                fluids.init(slotIndex++, true, new FluidStackRenderer(1, false, 16, 16, null, 100), slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1, slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1, 16, 16, 0, 0);
             }
         }
 
+        List<ASlotData> itemsOut = machine.getJeiData().getSlots().stream().filter(d -> (d.isOutput() && (d instanceof ItemSlotData))).collect(Collectors.toList());
         List<ItemStack> itemStacksOut = recipeWrapper.getRecipe().getItemsOut().keys();
         List<Integer> itemStacksChances = recipeWrapper.getRecipe().getItemsOut().values();
-
-        List<ASlotData> itemsOut = machine.getJeiData().getSlots().stream().filter(d -> (d.isOutput() && (d instanceof ItemSlotData))).collect(Collectors.toList());
         if (!itemsOut.isEmpty()) {
             for (int i = 0; i < ingredients.getOutputs(VanillaTypes.ITEM).size(); i++) {
                 ASlotData slot = itemsOut.get(i);
-                items.init(slotIndex++, false,
-                        new ItemStackRenderer(itemStacksOut.get(i), itemStacksChances.get(i)),
-                        slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1,
-                        slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1,
-                        16, 16, 0, 0);
+                items.init(slotIndex++, false, new ItemStackRenderer(itemStacksOut.get(i), itemStacksChances.get(i)), slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1, slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1, 16, 16, 0, 0);
             }
         }
 
-        List<Integer> fluidStacksChances = recipeWrapper.getRecipe().getFluidsOut().values();
-
         List<ASlotData> fluidsOut = machine.getJeiData().getSlots().stream().filter(d -> (d.isOutput() && (d instanceof FluidSlotData))).collect(Collectors.toList());
+        List<Integer> fluidStacksChances = recipeWrapper.getRecipe().getFluidsOut().values();
         if (!fluidsOut.isEmpty()) {
             for (int i = 0; i < ingredients.getOutputs(VanillaTypes.FLUID).size(); i++) {
                 ASlotData slot = fluidsOut.get(i);
-                fluids.init(slotIndex++, false,
-                        new FluidStackRenderer(1, false, 16, 16, null, fluidStacksChances.get(i)),
-                        slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1,
-                        slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1,
-                        16, 16, 0, 0);
+                fluids.init(slotIndex++, false, new FluidStackRenderer(1, false, 16, 16, null, fluidStacksChances.get(i)), slot.getPosition().getPosX() - machine.getJeiData().getOffset().getSizeX() + 1, slot.getPosition().getPosY() - machine.getJeiData().getOffset().getSizeY() + 1, 16, 16, 0, 0);
             }
         }
 

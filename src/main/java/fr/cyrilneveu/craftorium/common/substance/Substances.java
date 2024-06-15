@@ -84,7 +84,7 @@ public final class Substances {
     public static Substance CARROLLITE;
     public static Substance CHLORINE;
     public static Substance SODALITE;
-    public static Substance LAPIS_LAZULI;
+    public static Substance LAPIS;
     public static Substance GALLIUM;
     public static Substance BAUXITE;
     public static Substance ANTIMONY;
@@ -344,7 +344,7 @@ public final class Substances {
                 .color(0xFFc80000)
                 .shiny()
                 .build();
-        LAPIS_LAZULI = new SubstanceBuilder("lapis_lazuli")
+        LAPIS = new SubstanceBuilder("lapis")
                 .composition(LAZURITE, 1, SODALITE, 1)
                 .packageMineral()
                 .veinMember()
