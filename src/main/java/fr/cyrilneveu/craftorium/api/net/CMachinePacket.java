@@ -10,15 +10,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class CPacketMachine extends AMessage.ClientToServerMessage<CPacketMachine> {
+public class CMachinePacket extends AMessage.ClientToServerMessage<CMachinePacket> {
     private MachineTile instigator;
     private ByteBuf data;
 
-    public CPacketMachine() {
+    public CMachinePacket() {
 
     }
 
-    public CPacketMachine(MachineTile instigator) {
+    public CMachinePacket(MachineTile instigator) {
         this.instigator = instigator;
     }
 

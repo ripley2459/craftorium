@@ -1,6 +1,5 @@
 package fr.cyrilneveu.craftorium.api.inventory;
 
-import fr.cyrilneveu.craftorium.api.machine.behaviour.ESlotFlow;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import net.minecraftforge.fluids.FluidStack;
 

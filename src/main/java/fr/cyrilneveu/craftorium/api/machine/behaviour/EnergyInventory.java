@@ -2,9 +2,9 @@ package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.EnergyBar;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -112,7 +112,7 @@ public final class EnergyInventory implements IEnergyStorage, IMachineBehaviour,
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
         widgets.add(new EnergyBar(slotData));
     }
 }

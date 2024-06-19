@@ -103,6 +103,4 @@ public abstract class AWidget {
     public Size getParentSize() {
         return parentSize;
     }
-
-
 }

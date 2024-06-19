@@ -4,9 +4,9 @@ import com.google.common.base.Preconditions;
 import fr.cyrilneveu.craftorium.api.inventory.CustomSlot;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
+import fr.cyrilneveu.craftorium.api.mui.ASlot;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.ItemSlot;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -291,7 +291,7 @@ public final class ItemInventory implements IItemHandlerModifiable, IMachineBeha
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
-        slots.forEach(s -> widgets.add(new ItemSlot(s)));
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
+        slots.forEach(s -> widgets.add(new ASlot.ItemSlot(s)));
     }
 }

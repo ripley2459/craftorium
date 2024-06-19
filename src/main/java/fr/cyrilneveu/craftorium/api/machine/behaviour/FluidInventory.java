@@ -3,9 +3,9 @@ package fr.cyrilneveu.craftorium.api.machine.behaviour;
 import fr.cyrilneveu.craftorium.api.inventory.CustomTank;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
+import fr.cyrilneveu.craftorium.api.mui.ASlot;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.FluidSlot;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
@@ -211,8 +211,8 @@ public final class FluidInventory implements IMachineBehaviour, IFluidHandler, I
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
-        slots.forEach(s -> widgets.add(new FluidSlot(s)));
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
+        slots.forEach(s -> widgets.add(new ASlot.FluidSlot(s)));
     }
 
     public List<FluidSlotData> getSlotsData() {

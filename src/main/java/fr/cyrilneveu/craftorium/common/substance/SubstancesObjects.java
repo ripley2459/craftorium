@@ -7,7 +7,7 @@ import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
-import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
@@ -332,7 +332,7 @@ public final class SubstancesObjects {
         List<IItemBehaviour> behaviours = new ArrayList<>();
 
         if (substance.getProperties().containsKey(FUEL)) {
-            int duration = ((FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
+            int duration = ((SubstanceProperties.FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
             if (duration > 0) {
                 duration = (reference.getAmount() * duration) / BASE_AMOUNT;
                 behaviours.add(new FuelBehaviour(duration));

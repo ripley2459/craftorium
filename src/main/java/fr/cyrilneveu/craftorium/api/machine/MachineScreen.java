@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.Screen;
-import fr.cyrilneveu.craftorium.api.net.CPacketMachine;
+import fr.cyrilneveu.craftorium.api.net.CMachinePacket;
 import fr.cyrilneveu.craftorium.api.net.NetManager;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -71,7 +71,7 @@ public final class MachineScreen extends GuiContainer {
         }
 
         if (flag)
-            NetManager.sendToServer(new CPacketMachine(owner));
+            NetManager.sendToServer(new CMachinePacket(owner));
     }
 
     public MachineTile getOwner() {

@@ -1,11 +1,9 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
+import fr.cyrilneveu.craftorium.api.inventory.ESlotFlow;
 import fr.cyrilneveu.craftorium.api.machine.MachineBlock;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.ButtonFlowControl;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
-import fr.cyrilneveu.craftorium.api.mui.Text;
+import fr.cyrilneveu.craftorium.api.mui.*;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
@@ -20,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static fr.cyrilneveu.craftorium.api.mui.ButtonFlowControl.FLOW_ICON;
+import static fr.cyrilneveu.craftorium.api.mui.AButton.ButtonFlowControl.FLOW_ICON;
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.FACE_FLOW_NBT_KEY;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 
@@ -109,18 +107,18 @@ public final class FlowController implements IMachineBehaviour, INBTSerializable
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
         List<AWidget> buttons = new LinkedList<>();
 
         buttons.add(new Text(new Position(6, 8), () -> "Flow controller", false, WHITE_COLOR));
-        buttons.add(new ButtonFlowControl(new Position(51 - 8, 2 * 16 + 2 * 2 + 23), EnumFacing.DOWN));
-        buttons.add(new ButtonFlowControl(new Position(51 - 8, 23), EnumFacing.UP));
-        buttons.add(new ButtonFlowControl(new Position(51 - 8, 16 + 2 + 23), EnumFacing.NORTH));
-        buttons.add(new ButtonFlowControl(new Position(51 + 8 + 2, 2 * 16 + 2 * 2 + 23), EnumFacing.SOUTH));
-        buttons.add(new ButtonFlowControl(new Position(51 + 8 + 2, 16 + 2 + 23), EnumFacing.EAST));
-        buttons.add(new ButtonFlowControl(new Position(51 - (8 + 2 + 16), 16 + 2 + 23), EnumFacing.WEST));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 - 8, 2 * 16 + 2 * 2 + 23), EnumFacing.DOWN));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 - 8, 23), EnumFacing.UP));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 - 8, 16 + 2 + 23), EnumFacing.NORTH));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 + 8 + 2, 2 * 16 + 2 * 2 + 23), EnumFacing.SOUTH));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 + 8 + 2, 16 + 2 + 23), EnumFacing.EAST));
+        buttons.add(new AButton.ButtonFlowControl(new Position(51 - (8 + 2 + 16), 16 + 2 + 23), EnumFacing.WEST));
 
         widgets.addAll(buttons);
-        leftTabs.add(new Tab(new Size(102, 81), buttons.toArray(buttons.toArray(new AWidget[0])), FLOW_ICON, 0xFF0000FF));
+        leftTabs.add(new ATabGroup.Tab(new Size(102, 81), buttons.toArray(buttons.toArray(new AWidget[0])), FLOW_ICON, 0xFF0000FF));
     }
 }

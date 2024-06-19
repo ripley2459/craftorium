@@ -14,7 +14,7 @@ public final class NetManager {
 
     public static void registerPackets() {
         // To server/On client
-        registerMessage(CPacketMachine.class);
+        registerMessage(CMachinePacket.class);
 
         // To clients/On server
         registerMessage(SMachinePacket.class);

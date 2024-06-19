@@ -3,14 +3,11 @@ package fr.cyrilneveu.craftorium.api.machine;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.api.inventory.*;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
-import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
-import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
-import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
-import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.Position;
@@ -32,8 +29,8 @@ public final class MachineBuilder {
     private List<FluidSlotData> fluids = new LinkedList<>();
     private List<AWidget> widgets = new LinkedList<>();
     private Size screenSize = new Size(176, 180);
-    private List<Tab> leftTabs = new LinkedList<>();
-    private List<Tab> rightTabs = new LinkedList<>();
+    private List<ATabGroup.Tab> leftTabs = new LinkedList<>();
+    private List<ATabGroup.Tab> rightTabs = new LinkedList<>();
     private List<ASlotData> slotJEI = new ArrayList<>();
     private Position arrowJEI;
     @Nullable

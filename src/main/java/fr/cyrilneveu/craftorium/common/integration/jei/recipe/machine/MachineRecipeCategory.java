@@ -4,9 +4,8 @@ import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.Machine;
+import fr.cyrilneveu.craftorium.api.mui.ASlot;
 import fr.cyrilneveu.craftorium.api.mui.Background;
-import fr.cyrilneveu.craftorium.api.mui.FluidSlot;
-import fr.cyrilneveu.craftorium.api.mui.ItemSlot;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.common.integration.jei.ACategory;
 import mezz.jei.api.IGuiHelper;
@@ -57,19 +56,19 @@ public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper>
     private ResourceLocation getTexture(ASlotData slotData) {
         if (slotData instanceof ItemSlotData data) {
             return switch (data.getFlow()) {
-                case INPUT -> ItemSlot.INPUT;
-                case OUTPUT -> ItemSlot.OUTPUT;
-                default -> ItemSlot.FREE;
+                case INPUT -> ASlot.ItemSlot.INPUT;
+                case OUTPUT -> ASlot.ItemSlot.OUTPUT;
+                default -> ASlot.ItemSlot.FREE;
             };
         } else if (slotData instanceof FluidSlotData data) {
             return switch (data.getFlow()) {
-                case INPUT -> FluidSlot.INPUT;
-                case OUTPUT -> FluidSlot.OUTPUT;
-                default -> FluidSlot.FREE;
+                case INPUT -> ASlot.FluidSlot.INPUT;
+                case OUTPUT -> ASlot.FluidSlot.OUTPUT;
+                default -> ASlot.FluidSlot.FREE;
             };
         }
 
-        return ItemSlot.FREE;
+        return ASlot.ItemSlot.FREE;
     }
 
     @Override

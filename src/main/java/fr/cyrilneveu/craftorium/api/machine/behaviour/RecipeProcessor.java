@@ -5,10 +5,7 @@ import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.machine.EMachineStates;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.ButtonConfiguration;
-import fr.cyrilneveu.craftorium.api.mui.ProgressArrow;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
+import fr.cyrilneveu.craftorium.api.mui.*;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipe;
 import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.*;
@@ -258,8 +255,8 @@ public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBT
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
-        widgets.add(new ButtonConfiguration(configurationButtonPosition));
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
+        widgets.add(new AButton.ButtonConfiguration(configurationButtonPosition));
         widgets.add(new ProgressArrow(progressPosition));
     }
 

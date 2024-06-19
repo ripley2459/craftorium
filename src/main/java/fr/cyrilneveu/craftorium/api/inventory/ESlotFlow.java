@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.api.machine.behaviour;
+package fr.cyrilneveu.craftorium.api.inventory;
 
 import net.minecraft.util.math.MathHelper;
 

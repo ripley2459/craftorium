@@ -21,11 +21,11 @@ public final class Machine implements Comparable<Machine> {
     private final List<IGetBehaviours> providers;
     private final Size screenSize;
     private final List<AWidget> widgets;
-    private final List<Tab> leftTabs;
-    private final List<Tab> rightTabs;
+    private final List<ATabGroup.Tab> leftTabs;
+    private final List<ATabGroup.Tab> rightTabs;
     private final MachineJeiData jeiData;
 
-    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs, MachineJeiData jeiData) {
+    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs, MachineJeiData jeiData) {
         this.name = name;
         this.providers = providers;
         this.screenSize = screenSize;
@@ -75,14 +75,14 @@ public final class Machine implements Comparable<Machine> {
 
     public Screen getScreen(MachineTile tile, Tier tier) {
         LinkedList<AWidget> widgetsT = new LinkedList<>(widgets);
-        List<Tab> leftTabsT = new LinkedList<>(leftTabs);
-        List<Tab> rightTabsT = new LinkedList<>(rightTabs);
+        List<ATabGroup.Tab> leftTabsT = new LinkedList<>(leftTabs);
+        List<ATabGroup.Tab> rightTabsT = new LinkedList<>(rightTabs);
 
         for (IMachineBehaviour behaviour : tile.getBehaviours())
             behaviour.pushWidgets(widgetsT, leftTabsT, rightTabsT);
 
-        widgetsT.addFirst(new ATabGroup.LeftTabGroup(leftTabsT.toArray(new Tab[0])));
-        widgetsT.addFirst(new ATabGroup.RightTabGroup(rightTabsT.toArray(new Tab[0])));
+        widgetsT.addFirst(new ATabGroup.LeftTabGroup(leftTabsT.toArray(new ATabGroup.Tab[0])));
+        widgetsT.addFirst(new ATabGroup.RightTabGroup(rightTabsT.toArray(new ATabGroup.Tab[0])));
         widgetsT.addFirst(new Background(screenSize));
 
         return new Screen(widgetsT.toArray(widgetsT.toArray(new AWidget[0])), screenSize);

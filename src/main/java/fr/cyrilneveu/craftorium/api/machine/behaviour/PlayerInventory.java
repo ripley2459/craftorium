@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.Tab;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +38,7 @@ public final class PlayerInventory implements IMachineBehaviour, IContainable {
     }
 
     @Override
-    public void pushWidgets(List<AWidget> widgets, List<Tab> leftTabs, List<Tab> rightTabs) {
+    public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
         widgets.add(new fr.cyrilneveu.craftorium.api.mui.PlayerInventory(position));
     }
 

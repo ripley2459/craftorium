@@ -3,9 +3,11 @@ package fr.cyrilneveu.craftorium.api.machine;
 import com.google.common.base.Preconditions;
 import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.block.CustomBlock;
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.*;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.utils.ClientUtils;
 import fr.cyrilneveu.craftorium.api.utils.CustomIterable;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
@@ -26,11 +28,10 @@ import net.minecraft.client.renderer.block.model.multipart.ICondition;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -43,6 +44,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.IntStream;
 
@@ -109,15 +111,15 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntity tile = world.getTileEntity(pos);
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileEntity tile = worldIn.getTileEntity(pos);
         if (tile instanceof MachineTile) {
             IItemHandler itemStackHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (itemStackHandler != null)
-                IntStream.range(0, itemStackHandler.getSlots()).forEach(i -> world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStackHandler.getStackInSlot(i))));
+                IntStream.range(0, itemStackHandler.getSlots()).forEach(i -> worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStackHandler.getStackInSlot(i))));
         }
 
-        super.breakBlock(world, pos, state);
+        super.breakBlock(worldIn, pos, state);
     }
 
     @Override
@@ -162,6 +164,18 @@ public final class MachineBlock extends CustomBlock implements ITileEntityProvid
         }
 
         event.getModelRegistry().putObject(RenderUtils.getSimpleModelLocation(this), builder.makeMultipartModel());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if (tile instanceof MachineTile tile1 && tile1.getState() == EMachineStates.WORKING) {
+            if (Settings.machinesSettings.spawnParticles)
+                ClientUtils.spawnParticleAt(state, worldIn, pos, rand, state.getValue(FACING), EnumParticleTypes.FLAME);
+            if (Settings.machinesSettings.playSounds)
+                ClientUtils.playSoundAt(worldIn, pos, rand, SoundCategory.BLOCKS, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE);
+        }
     }
 
     public static final class MachineItemBlock extends CustomItemBlock implements ICustomModel {
