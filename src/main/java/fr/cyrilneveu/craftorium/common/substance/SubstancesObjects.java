@@ -2,6 +2,7 @@ package fr.cyrilneveu.craftorium.common.substance;
 
 import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
@@ -323,7 +324,8 @@ public final class SubstancesObjects {
         if (!formula.isEmpty())
             lines.add(Utils.localise("tooltip.craftorium.formula", formula));
         boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
-        lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
+        if (substance.getTemperature() != Temperature.EMPTY)
+            lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
     }

@@ -317,6 +317,7 @@ public final class Substances {
         DIAMOND = new SubstanceBuilder("diamond")
                 .packageGem()
                 .veinMember()
+                .composition(CARBON, 1)
                 .tools(8.0f, 3.0f, 1561, 3, 10)
                 .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
                 .color(0xFF91f5e6)
