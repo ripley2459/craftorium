@@ -3,6 +3,7 @@ package fr.cyrilneveu.craftorium.common.substance;
 import fr.cyrilneveu.craftorium.api.substance.Element;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
+import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
@@ -17,6 +18,8 @@ public final class Substances {
     public static Substance BRONZE;
     public static Substance ALUMINUM;
     public static Substance IRON;
+    public static Substance GLOWSTONE;
+    public static Substance WITHER;
     public static Substance CARBON;
     public static Substance STEEL;
     public static Substance GRAPHITE;
@@ -26,6 +29,7 @@ public final class Substances {
     public static Substance HSLA_STEEL;
     public static Substance PYROLUSITE;
     public static Substance GOLD;
+    public static Substance GLASS;
     public static Substance MAGNETITE;
     public static Substance SILVER;
     public static Substance ELECTRUM;
@@ -140,7 +144,11 @@ public final class Substances {
 
         initElements();
         initVeinMembers();
+        initMain();
+        MoreSubstances.init();
+    }
 
+    private static void initMain() {
         WOOD = new SubstanceBuilder("wood")
                 .items(CASING, DUST, FOIL, GEAR, PLATE, ROD, ROTOR, SCREW)
                 .tools(HAMMER, MORTAR, WRENCH, PICKAXE, HOE, PICKAXE, SWORD, SHOVEL, AXE)
@@ -175,6 +183,20 @@ public final class Substances {
                 .color(0xFF333333)
                 .shiny()
                 .sound(SoundType.STONE)
+                .build();
+        GLOWSTONE = new SubstanceBuilder("glowstone")
+                .packageNonMetal()
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:glowstone", DUST, "minecraft:glowstone_dust")
+                .color(0xd9dd5a)
+                .style("mineral")
+                .shiny()
+                .sound(SoundType.STONE)
+                .build();
+        WITHER = new SubstanceBuilder("wither")
+                .packageNonMetal()
+                .color(0xFF000000)
+                .style("mineral")
                 .build();
         BRONZE = new SubstanceBuilder("bronze")
                 .packageMetalExtended()
@@ -352,6 +374,14 @@ public final class Substances {
                 .overrides(BLOCK, "minecraft:lapis_block", GEM, "minecraft:dye:4")
                 .style("mineral")
                 .color(0xFF1b0f8a)
+                .build();
+        GLASS = new SubstanceBuilder("glass")
+                .items(CASING, DUST, PLATE)
+                .blocks(BLOCK)
+                .fluids(LIQUID)
+                .overrides(BLOCK, "minecraft:glass")
+                .style("glass")
+                .color(0x33c1f6ff)
                 .build();
     }
 

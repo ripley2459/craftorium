@@ -102,6 +102,11 @@ public final class Processes {
             if (OreStack.oresExist(MORTAR.getOre(substance), ORE.getOre(substance)))
                 RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
 
+            if (OreStack.oresExist(ORE.getOre(substance), "dustPetrotheum"))
+                RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("_petro_ore"), DUST.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPetrotheum"));
+            if (OreStack.oresExist(INGOT.getOre(substance), "dustPetrotheum"))
+                RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("_petro_ingot"), DUST.asItemStack(substance, 1), INGOT.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+
             if (OreStack.oresExist(INGOT.getOre(substance)))
                 MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(INGOT.getName(substance)))
                         .consumeItem(INGOT.getOre(substance), 1)
@@ -261,6 +266,13 @@ public final class Processes {
                 RecipeManager.zip(substance, NUGGET, INGOT);
             if (OreStack.oresExist(BLOCK.getOre(substance)))
                 RecipeManager.unzip(substance, BLOCK, INGOT);
+
+            if (OreStack.oresExist(ORE.getOre(substance), "dustPyrotheum"))
+                RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_ore"), INGOT.asItemStack(substance, 1), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+            if (OreStack.oresExist(DUST.getOre(substance), "dustPyrotheum"))
+                RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_dust"), INGOT.asItemStack(substance, 1), DUST.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+            if (OreStack.oresExist(ORE.getOre(substance), "dustPyrotheum", "dustPetrotheum"))
+                RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_petro_dust"), INGOT.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"), OreStack.getIngredient("dustPetrotheum"));
 
             if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
                 CASTING.addRecipe(new MachineRecipeBuilder(INGOT.getName(substance))
@@ -436,7 +448,7 @@ public final class Processes {
                         .produceItem(SPRING.asItemStack(substance))
                         .consumeEnergy(5000)
                         .duration(200)
-                        .configuration(CONFIGURATION_BENDER_REFORM)
+                        .configuration(CONFIGURATION_BENDER_REFORM_ALT)
                         .build());
         }
 

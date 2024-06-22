@@ -313,7 +313,7 @@ public final class SubstancesObjects {
         if (!formula.isEmpty())
             lines.add(Utils.localise("tooltip.craftorium.formula", formula));
         if (Utils.isAdvancedTooltipsOn())
-            lines.add(Utils.localise("tooltip.craftorium.temperature", BASE_TEMPERATURE));
+            lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(BASE_TEMPERATURE)));
         lines.add(Utils.localise("tooltip.craftorium.state.solid"));
         return lines;
     }

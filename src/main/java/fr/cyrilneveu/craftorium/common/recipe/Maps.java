@@ -10,6 +10,7 @@ public final class Maps {
     public static final int CONFIGURATION_COMPRESSOR_UNZIP = 2;
     public static final int CONFIGURATION_COMPRESSOR_PRESSING = 3;
     public static final int CONFIGURATION_BENDER_REFORM = 1;
+    public static final int CONFIGURATION_BENDER_REFORM_ALT = 2;
     public static final int CONFIGURATION_CUTTER_FINE = 1;
     public static final int CONFIGURATION_CUTTER_NORMAL = 2;
     public static final int CONFIGURATION_CUTTER_LARGE = 3;

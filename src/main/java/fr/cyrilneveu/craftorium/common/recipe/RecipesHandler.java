@@ -664,7 +664,7 @@ public final class RecipesHandler {
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
                 'W', PLATE.getOre(tier.getPack().getHeat()),
-                'S', WIRE.getOre(tier.getPack().getEnergy())
+                'S', HEAT_EXCHANGER.asIngredient(tier)
         );
     }
 
