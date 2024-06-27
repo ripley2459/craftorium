@@ -243,6 +243,7 @@ public final class Substances {
         ELECTRUM = new SubstanceBuilder("electrum")
                 .composition(GOLD, 1, SILVER, 1)
                 .packageMetalExtended()
+                .color(0xFFfef589)
                 .shiny()
                 .build();
         CUPRONICKEL = new SubstanceBuilder("cupronickel")

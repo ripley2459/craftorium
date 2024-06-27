@@ -1,26 +1,53 @@
 package fr.cyrilneveu.craftorium.common.integration.crafttweaker;
 
-import com.google.common.base.Preconditions;
 import crafttweaker.annotations.ZenRegister;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
 
-@ZenClass("mods." + MODID + ".vein.Veins")
+@ZenClass("mods." + MODID + ".vein.Vein")
 @ZenRegister
 public final class VeinCT {
-    @ZenMethod
-    public static VeinBuilderCT create(String name, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, Object... composition) {
-        Preconditions.checkArgument(!VEINS_REGISTRY.contains(name));
+    private final Vein vein;
 
-        return new VeinBuilderCT(name, minY, maxY, sizeH, sizeV, chance, dimension, composition);
+    public VeinCT(Vein vein) {
+        this.vein = vein;
     }
 
     @ZenMethod
-    public static Vein get(String name) {
-        return VEINS_REGISTRY.get(name);
+    public String getName() {
+        return vein.getName();
+    }
+
+    @ZenMethod
+    public int getMinY() {
+        return vein.getMinY();
+    }
+
+    @ZenMethod
+    public int getMaxY() {
+        return vein.getMaxY();
+    }
+
+    @ZenMethod
+    public int getSizeH() {
+        return vein.getSizeH();
+    }
+
+    @ZenMethod
+    public int getSizeV() {
+        return vein.getSizeV();
+    }
+
+    @ZenMethod
+    public int getChance() {
+        return vein.getChance();
+    }
+
+    @ZenMethod
+    public int getDimension() {
+        return vein.getDimension();
     }
 }

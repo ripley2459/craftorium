@@ -1,7 +1,7 @@
-#norun
 #loader craftorium
 
 import mods.craftorium.vein.Veins;
+import mods.craftorium.vein.Vein;
 import mods.craftorium.substance.Substances;
 import mods.craftorium.vein.Builder;
 
@@ -12,3 +12,8 @@ var newVein = Veins.create("test", // ID
                     0, // The dimension id
                     [Substances.get("iron"), 3, "copper", 3, "lead", 3]) // The composition
                    .build(); // Finalizes the process
+
+// Looping throught the veins registry
+for v in Veins.getAll() {
+    print(" - " + v.getName());
+}

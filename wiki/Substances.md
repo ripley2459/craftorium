@@ -12,18 +12,29 @@ And import some packages:
 
 ```ZenScript
 import mods.craftorium.substance.Substances;
+import mods.craftorium.substance.Substance;
 import mods.craftorium.substance.Builder;
 ```
 
-With the `Substances` package you can get a particular substance.
+With the `Substances` package you can manipulate the substances registry, such as creating, retrieving or registering a substance.
+
+With the `Substance` package you can manipulate a particular substance.
 
 The `Builder` package gives you ways to create substances from scratch.
 
 ## Get a substance
 
 ```ZenScript
-var substance = Substances.get(string id);
+var substance as Substance = Substances.get(string id);
 ```
+
+## Get all substances
+
+```ZenScript
+var substance as Substance[] = Substances.getAll();
+```
+
+This can be a rough operation so use it with caution.
 
 ## Substance creation
 
@@ -32,7 +43,7 @@ var substance = Substances.get(string id);
 To start the process of creating a substance you have to call `create` from the `Builder` package.
 
 ```ZenScript
-var newSubstance = Builder.create(string id);
+var newSubstance as Builder = Substances.create(string id);
 ```
 
 The `create` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
@@ -44,7 +55,7 @@ The obtained `Builder` is totally empty.
 ### Ending the process
 
 ```ZenScript
-newSubstance.build();
+var mySubstance as Substance = newSubstance.build();
 ```
 
 Once you are done, you have to call `build` to "transform" the builder into a substance and register it.
@@ -386,9 +397,10 @@ You can define your substance as an element. In that case, the composition and p
 #loader craftorium
 
 import mods.craftorium.substance.Substances;
+import mods.craftorium.substance.Substance; // Not required here
 import mods.craftorium.substance.Builder;
 
-var silicon = Substances.get("silicon");
+var silicon as Substance = Substances.get("silicon");
 var copper = Substances.get("copper");
 
 var test = Substances.create("test_substance") // Starting the process

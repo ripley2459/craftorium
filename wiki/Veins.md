@@ -12,10 +12,29 @@ And import some packages:
 
 ```ZenScript
 import mods.craftorium.vein.Veins;
+import mods.craftorium.vein.Vein;
 import mods.craftorium.vein.Builder;
 ```
 
+With the `Veins` package you can manipulate the veins registry, such as creating, retrieving or registering a vein.
+
+With the `Vein` package you can manipulate a particular vein.
+
 The `Builder` package gives you ways to create veins from scratch.
+
+## Get a vein
+
+```ZenScript
+var vein as Vein = Veins.get(string id);
+```
+
+## Get all veins
+
+```ZenScript
+var vein as Veins[] = Veins.getAll();
+```
+
+This can be a rough operation so use it with caution.
 
 ## Vein creation
 
@@ -101,8 +120,8 @@ Adding a substance without calling `veinMember()` on the said substance will cra
 #loader craftorium
 
 import mods.craftorium.vein.Veins;
-import mods.craftorium.vein.Builder;
 import mods.craftorium.substance.Substances;
+import mods.craftorium.vein.Builder;
 
 var newVein = Veins.create("test", // ID
                     1, 50, // Y

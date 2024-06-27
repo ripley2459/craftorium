@@ -23,4 +23,9 @@ public final class SubstancesCT {
     public static Substance get(String name) {
         return SUBSTANCES_REGISTRY.get(name);
     }
+
+    @ZenMethod
+    public static SubstanceCT[] getAll() {
+        return SUBSTANCES_REGISTRY.getAll().values().stream().map(SubstanceCT::new).toArray(SubstanceCT[]::new);
+    }
 }
