@@ -1,9 +1,12 @@
 package fr.cyrilneveu.craftorium.common.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
+import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.Map;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
@@ -49,5 +52,18 @@ public final class VeinCT {
     @ZenMethod
     public int getDimension() {
         return vein.getDimension();
+    }
+
+    @ZenMethod
+    public int getColor() {
+        int color = 0;
+        int total = 0;
+
+        for (Map.Entry<Substance, Integer> entry : vein.getComposition().map().entrySet()) {
+            color += entry.getKey().getAestheticism().getBaseColor() * entry.getValue();
+            total += entry.getValue();
+        }
+
+        return color / total;
     }
 }

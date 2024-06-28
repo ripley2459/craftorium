@@ -33,6 +33,7 @@ import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -195,7 +196,7 @@ public abstract class ACommonProxy {
         return context.getServerHandler().player.server;
     }
 
-    public void preInit(FMLPreInitializationEvent event) {
+    public void construct(FMLConstructionEvent event) {
         SubstancesObjects.init();
         Substances.init();
         Veins.init();
@@ -203,7 +204,9 @@ public abstract class ACommonProxy {
         Maps.init();
         Machines.init();
         Tiers.init();
+    }
 
+    public void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, MODID);
 

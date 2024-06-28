@@ -236,9 +236,9 @@ public final class SubstanceBuilder {
     }
 
     public SubstanceBuilder packageGem() {
-        items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, ROD);
+        items(DUST, GEM, NUGGET, PLATE, ROD);
         tools(AXE, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }

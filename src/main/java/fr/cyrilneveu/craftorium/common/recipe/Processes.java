@@ -139,6 +139,14 @@ public final class Processes {
                         .duration(300)
                         .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
                         .build());
+            if (OreStack.oresExist(BLOCK.getOre(substance)))
+                MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(BLOCK.getName(substance)))
+                        .consumeItem(BLOCK.getOre(substance), 1)
+                        .produceItem(DUST.asItemStack(substance, 9))
+                        .consumeEnergy(5000 * 9)
+                        .duration(200)
+                        .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
+                        .build());
 
             if (!substance.getComposition().isComposite())
                 return;

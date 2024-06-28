@@ -85,7 +85,7 @@ public final class MoreSubstances {
             new SubstanceBuilder("iron_alloy")
                     .packagePostTransitionMetal()
                     .composition(IRON, 1, TIN, 1, LEAD, 1)
-                    .color(0xFF3b3742)
+                    .color(0xFF403651)
                     .style("metal")
                     .build();
             new SubstanceBuilder("conductive_iron")
@@ -102,13 +102,6 @@ public final class MoreSubstances {
                     .style("metal")
                     .shiny()
                     .build();
-            Substance energeticSilver = new SubstanceBuilder("energetic_silver")
-                    .packagePostTransitionMetal()
-                    .composition(SILVER, 1, REDSTONE, 1, GLOWSTONE, 1)
-                    .color(0xFF638f8d)
-                    .style("metal")
-                    .shiny()
-                    .build();
             Substance energeticAlloy = new SubstanceBuilder("energetic_alloy")
                     .packagePostTransitionMetal()
                     .composition(GOLD, 1, REDSTONE, 1, GLOWSTONE, 1)
@@ -119,14 +112,7 @@ public final class MoreSubstances {
             new SubstanceBuilder("pulsating_iron")
                     .packagePostTransitionMetal()
                     .composition(IRON, 1, ENDER, 1)
-                    .color(0xFF5d8756)
-                    .style("metal")
-                    .shiny()
-                    .build();
-            new SubstanceBuilder("vivid_alloy")
-                    .packagePostTransitionMetal()
-                    .composition(energeticSilver, 1, ENDER, 1)
-                    .color(0xFFbae6e4)
+                    .color(0xFF75a36d)
                     .style("metal")
                     .shiny()
                     .build();
@@ -137,11 +123,121 @@ public final class MoreSubstances {
                     .style("metal")
                     .shiny()
                     .build();
-            new SubstanceBuilder("dark_steel")
+            Substance DARK_STEEL = new SubstanceBuilder("dark_steel")
                     .packageMetalExtended()
                     .composition(STEEL, 1, WITHER, 1, OBSIDIAN, 2)
-                    .color(0xFF1a1821)
+                    .color(0xFF1f2021)
                     .style("metal")
+                    .build();
+            new SubstanceBuilder("soularium")
+                    .packageMetalloid()
+                    .composition(SOUL_SAND, 9, GOLD, 1)
+                    .color(0xFF1f2021)
+                    .style("metal")
+                    .build();
+            new SubstanceBuilder("end_steel")
+                    .packageMetalloid()
+                    .composition(END, 9, OBSIDIAN, 9, DARK_STEEL, 1)
+                    .style("metal")
+                    .color(0xFFdce0a3)
+                    .build();
+
+            if (Utils.atLeastOne(new String[]{"enderioendergy"}, Loader::isModLoaded)) {
+                new SubstanceBuilder("crude_steel")
+                        .packageMetalloid()
+                        .composition(STONE, 1, FLINT, 1, CLAY, 1)
+                        .color(0xFFa1a3a3)
+                        .style("metal")
+                        .build();
+                Substance energeticSilver = new SubstanceBuilder("energetic_silver")
+                        .packagePostTransitionMetal()
+                        .composition(SILVER, 1, REDSTONE, 1, GLOWSTONE, 1)
+                        .color(0xFF9fc6e0)
+                        .style("metal")
+                        .shiny()
+                        .build();
+                new SubstanceBuilder("vivid_alloy")
+                        .packagePostTransitionMetal()
+                        .composition(energeticSilver, 1, ENDER, 1)
+                        .color(0xFF58bcce)
+                        .style("metal")
+                        .shiny()
+                        .build();
+                // TODO: Crystalline Pink Slime, Crystalline Alloy, Mellodic Alloy & Stellar Alloy
+            }
+        }
+
+        if (Utils.atLeastOne(new String[]{"biomesoplenty"}, Loader::isModLoaded)) {
+            Substance CHROMIUM = new SubstanceBuilder("chromium")
+                    .element(24, "Cr", "chromium", Element.EGroup.TRANSITION_METAL, 51.99616)
+                    .temperature(2180f, 2944f)
+                    .color(0xFF8a99c7)
+                    .packageTransitionMetal()
+                    .build();
+            Substance FLUORINE = new SubstanceBuilder("fluorine")
+                    .element(9, "F", "fluorine", Element.EGroup.HALOGEN, 18.9984031636)
+                    .temperature(53.48f, 85.03f)
+                    .color(0xFF90e050)
+                    .packageHalogen()
+                    .build();
+            Substance STRONTIUM = new SubstanceBuilder("strontium")
+                    .element(38, "Sr", "strontium", Element.EGroup.ALKALINE_EARTH_METAL, 87.621)
+                    .temperature(1050f, 1650f)
+                    .color(0xFF00ff00)
+                    .packageAlkalineEarthMetal()
+                    .build();
+
+            new SubstanceBuilder("amethyst")
+                    .packageGem()
+                    .veinMember()
+                    .composition(SILICON, 1, OXYGEN, 2)
+                    .possible(IRON, 3, 20)
+                    .color(0xFFab24c9)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("ruby")
+                    .packageGem()
+                    .veinMember()
+                    .composition(CHROMIUM, 1, ALUMINUM, 2, OXYGEN, 3)
+                    .color(0xFF103e)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("peridot")
+                    .packageGem()
+                    .veinMember()
+                    .composition(SILICON, 1, OXYGEN, 2, MAGNESIUM, 2, IRON, 2)
+                    .color(0xFF2c6832)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("topaz")
+                    .packageMineral()
+                    .veinMember()
+                    .composition(ALUMINUM, 2, SILICON, 1, OXYGEN, 4)
+                    .possible(FLUORINE, 2, 20, HYDROGEN, 2, 30)
+                    .color(0xFFbf600d)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("tanzanite")
+                    .packageGem()
+                    .veinMember()
+                    .composition(CALCIUM, 2, ALUMINUM, 3, SILICON, 3, OXYGEN, 13, HYDROGEN, 1)
+                    .possible(CHROMIUM, 1, 15, STRONTIUM, 1, 15)
+                    .color(0xFF391447)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("malachite")
+                    .packageMineral()
+                    .veinMember()
+                    .composition(COPPER, 2, OXYGEN, 4, HYDROGEN, 1)
+                    .color(0xFF5f8465)
+                    .style("gem")
+                    .build();
+            new SubstanceBuilder("sapphire")
+                    .packageGem()
+                    .veinMember()
+                    .composition(ALUMINUM, 2, OXYGEN, 3)
+                    .color(0xFF3424c9)
+                    .style("gem")
                     .build();
         }
 

@@ -25,6 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -132,6 +133,11 @@ public final class ClientProxy extends ACommonProxy {
     @Override
     public IThreadListener getThread(MessageContext context) {
         return context.side.isClient() ? Minecraft.getMinecraft() : super.getThread(context);
+    }
+
+    @Override
+    public void construct(FMLConstructionEvent event) {
+        super.construct(event);
     }
 
     @Override

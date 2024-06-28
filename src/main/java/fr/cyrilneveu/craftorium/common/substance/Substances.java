@@ -23,6 +23,8 @@ public final class Substances {
     public static Substance CARBON;
     public static Substance STEEL;
     public static Substance GRAPHITE;
+    public static Substance CLAY;
+    public static Substance GRAVEL;
     public static Substance COAL;
     public static Substance CHARCOAL;
     public static Substance MANGANESE;
@@ -72,6 +74,8 @@ public final class Substances {
     public static Substance RUBBER;
     public static Substance PLASTIC;
     public static Substance ENDER;
+    public static Substance END;
+    public static Substance SOUL_SAND;
     public static Substance DIAMOND;
     public static Substance QUARTZ;
     public static Substance TANTALUM;
@@ -171,6 +175,20 @@ public final class Substances {
                 .style("mineral")
                 .color(0xFFb5b5b5)
                 .sound(SoundType.STONE)
+                .build();
+        SOUL_SAND = new SubstanceBuilder("soul_sand")
+                .items(DUST)
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:soul_sand")
+                .style("mineral")
+                .color(0xFF33231d)
+                .build();
+        END = new SubstanceBuilder("end")
+                .items(DUST, PLATE, ROD)
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:end_stone")
+                .style("mineral")
+                .color(0xFFd6d48b)
                 .build();
         FLINT = new SubstanceBuilder("flint")
                 .items(DUST, GEM)
@@ -383,6 +401,16 @@ public final class Substances {
                 .overrides(BLOCK, "minecraft:glass")
                 .style("glass")
                 .color(0x33c1f6ff)
+                .build();
+        CLAY = new SubstanceBuilder("clay")
+                .items(DUST, GEM)
+                .overrides(BLOCK, "minecraft:clay", GEM, "minecraft:clay_ball")
+                .style("mineral")
+                .color(0xFF7a8a8c)
+                .build();
+        GRAVEL = new SubstanceBuilder("gravel")
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:gravel")
                 .build();
     }
 
