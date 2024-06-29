@@ -139,6 +139,9 @@ public final class Substances {
     public static Substance STONE;
     public static Substance WOOD;
     public static Substance FLINT;
+    public static Substance POLYACRYLONITRILE;
+    public static Substance CARBON_FIBER;
+    public static Substance NITROGEN;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -149,6 +152,7 @@ public final class Substances {
         initElements();
         initVeinMembers();
         initMain();
+        initCarbonFiberChain();
         MoreSubstances.init();
     }
 
@@ -411,6 +415,22 @@ public final class Substances {
         GRAVEL = new SubstanceBuilder("gravel")
                 .blocks(BLOCK)
                 .overrides(BLOCK, "minecraft:gravel")
+                .build();
+    }
+
+    private static void initCarbonFiberChain() {
+        CARBON_FIBER = new SubstanceBuilder("carbon_fiber")
+                .items(FOIL, MESH, PLATE, WIRE)
+                .color(0xFF1e2123)
+                .style("fiber")
+                .build();
+        POLYACRYLONITRILE = new SubstanceBuilder("polyacrylonitrile")
+                .composition(CARBON, 3, HYDROGEN, 3, NITROGEN, 1)
+                .temperature(573, 573)
+                .items(DUST)
+                .blocks(BLOCK)
+                .fluids(LIQUID)
+                .color(0xFFe3e8d7)
                 .build();
     }
 
@@ -1011,6 +1031,12 @@ public final class Substances {
                 .element(1, "H", "hydrogen", Element.EGroup.HALOGEN, 1.008)
                 .temperature(13.99f, 20.271f)
                 .color(0xFFffffff)
+                .packageHalogen()
+                .build();
+        NITROGEN = new SubstanceBuilder("nitrogen")
+                .element(7, "N", "nitrogen", Element.EGroup.HALOGEN, 14.007)
+                .temperature(63.15f, 77.355f)
+                .color(0xFF3050f8)
                 .packageHalogen()
                 .build();
     }

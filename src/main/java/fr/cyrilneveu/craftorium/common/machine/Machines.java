@@ -30,6 +30,7 @@ public final class Machines {
     public static Machine FOUNDRY;
     public static Machine MIXER;
     public static Machine CIRCUIT_ASSEMBLER;
+    public static Machine ASSEMBLER;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -136,6 +137,19 @@ public final class Machines {
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "circuit_assembler", "name"), true)
                 .text(8, 86, "container.inventory", false)
                 .playerInventory(7, 97)
+                .build();
+        ASSEMBLER = new MachineBuilder("assembler")
+                .itemInput(19, 18).itemInput(37, 18).itemInput(55, 18)
+                .itemInput(19, 36).itemInput(37, 36).itemInput(55, 36)
+                .itemInput(19, 54).itemInput(37, 54).itemInput(55, 54)
+                .fluidInput(55, 72)
+                .itemOutput(103, 45)
+                .processor(ASSEMBLING, 77, 46, 134, 94)
+                .energy(153, 95)
+                .flowControlled()
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "assembler", "name"), true)
+                .text(8, 104, "container.inventory", false)
+                .playerInventory(7, 115)
                 .build();
     }
 

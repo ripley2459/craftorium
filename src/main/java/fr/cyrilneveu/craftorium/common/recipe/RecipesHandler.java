@@ -29,16 +29,6 @@ import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-
-        ELECTROLYZING.addRecipe(new MachineRecipeBuilder("test_recipe")
-                .consumeEnergy(5000)
-                .consumeItem(DUST.getOre(REDSTONE), 3)
-                .consumeFluid("water", 1000)
-                .produceItem(WIRE.asItemStack(REDSTONE_ALLOY, 3))
-                .produceFluid("lava", 1000)
-                .configuration(1)
-                .build());
-
         RecipeManager.addShapedRecipe("circuit_board_redstone", ACommonProxy.getItemStack("circuit_board_redstone", 6),
                 "TSR",
                 "PPP",
@@ -465,6 +455,38 @@ public final class RecipesHandler {
                 .duration(19200)
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
+
+        carbonFiber:
+        {
+            ELECTROLYZING.addRecipe(new MachineRecipeBuilder("mainframe")
+                    .consumeFluid(LIQUID.getName(POLYACRYLONITRILE), MESH.getAmount())
+                    .produceItem(MESH.asItemStack(CARBON_FIBER))
+                    .consumeEnergy(35000)
+                    .duration(200)
+                    .configuration(CONFIGURATION_ELECTROLYZING_REFORMING)
+                    .build());
+            COMPRESSING.addRecipe(new MachineRecipeBuilder("carbon_fiber_plate")
+                    .consumeItem(MESH.getOre(CARBON_FIBER), 1)
+                    .produceItem(PLATE.asItemStack(CARBON_FIBER))
+                    .consumeEnergy(60000)
+                    .duration(500)
+                    .configuration(CONFIGURATION_COMPRESSOR_PRESSING)
+                    .build());
+            COMPRESSING.addRecipe(new MachineRecipeBuilder("carbon_fiber_foil")
+                    .consumeItem(MESH.getOre(CARBON_FIBER), 1)
+                    .produceItem(FOIL.asItemStack(CARBON_FIBER))
+                    .consumeEnergy(80000)
+                    .duration(500)
+                    .configuration(CONFIGURATION_COMPRESSOR_PRESSING_ALT)
+                    .build());
+            CUTTING.addRecipe(new MachineRecipeBuilder("carbon_fiber_wire")
+                    .consumeItem(FOIL.getOre(CARBON_FIBER), 1)
+                    .produceItem(WIRE.asItemStack(CARBON_FIBER, 4))
+                    .consumeEnergy(100000)
+                    .duration(800)
+                    .configuration(CONFIGURATION_CUTTER_FINE)
+                    .build());
+        }
 
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
             Composition composition = substance.getComposition();

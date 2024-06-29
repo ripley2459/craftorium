@@ -34,6 +34,7 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItem GEAR;
     public static ASubstanceObject.SubstanceItem GEM;
     public static ASubstanceObject.SubstanceItem INGOT;
+    public static ASubstanceObject.SubstanceItem MESH;
     public static ASubstanceObject.SubstanceItem NUGGET;
     public static ASubstanceObject.SubstanceItem PEARL;
     public static ASubstanceObject.SubstanceItem PLATE;
@@ -83,6 +84,7 @@ public final class SubstancesObjects {
         FOIL = createItem("foil").amount(PLATE.getAmount() / 2).build();
         GEAR = createItem("gear").amount(PLATE.getAmount()).build();
         NUGGET = createItem("nugget").amount(INGOT.getAmount() / 9).build();
+        MESH = createItem("mesh").amount(INGOT.getAmount()).build();
         ROD = createItem("rod").amount(INGOT.getAmount() / 4).build();
         RING = createItem("ring").amount(ROD.getAmount()).build();
         SCREW = createItem("screw").amount(ROD.getAmount() / 2).build();

@@ -67,7 +67,7 @@ public final class MoreSubstances {
                     .shiny()
                     .build();
             new SubstanceBuilder("lumium")
-                    .packageLanthanide()
+                    .packageMetalExtended()
                     .composition(TIN, 3, SILVER, 1, GLOWSTONE, 5)
                     .color(0xFFdee490)
                     .style("metal")
