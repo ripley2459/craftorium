@@ -73,6 +73,7 @@ public final class Substances {
     public static Substance OBSIDIAN;
     public static Substance RUBBER;
     public static Substance PLASTIC;
+    public static Substance OIL_SAND;
     public static Substance ENDER;
     public static Substance END;
     public static Substance SOUL_SAND;
@@ -347,9 +348,17 @@ public final class Substances {
                 .build();
         RUBBER = new SubstanceBuilder("rubber")
                 .packageMetalExtended()
+                .color(0xFF685d55)
                 .build();
         PLASTIC = new SubstanceBuilder("plastic")
                 .packageMetalExtended()
+                .color(0xFFebede1)
+                .build();
+        OIL_SAND = new SubstanceBuilder("oil_sand")
+                .veinMember()
+                .fluids(LIQUID)
+                .color(0xFF160e04)
+                .style("mineral")
                 .build();
         ENDER = new SubstanceBuilder("ender")
                 .items(DUST, PEARL)

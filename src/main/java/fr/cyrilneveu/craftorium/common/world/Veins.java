@@ -59,6 +59,7 @@ public final class Veins {
     public static Vein VEIN_REDSTONE;
     public static Vein VEIN_QUARTZITE;
     public static Vein VEIN_EMERALD;
+    public static Vein VEIN_OIL_SAND;
     public static Vein VEIN_EMERALD_NETHER;
     public static Vein VEIN_CARROLLITE_NETHER;
     public static Vein VEIN_QUARTZITE_NETHER;
@@ -118,6 +119,7 @@ public final class Veins {
         VEIN_REDSTONE = new VeinBuilder("redstone", 5, 40, 5, 5, 60, 0, REDSTONE, 3, CINNABAR, 1).build();
         VEIN_QUARTZITE = new VeinBuilder("quartzite", 80, 120, 5, 5, 30, 0, QUARTZ, 1).build();
         VEIN_EMERALD = new VeinBuilder("emerald", 5, 25, 1, 1, 10, 0, EMERALD, 1, BERYLLIUM, 1, THORIUM, 1).build();
+        VEIN_OIL_SAND =  new VeinBuilder("oil_sand", 30, 80, 9, 2, 25, 0, OIL_SAND, 1).build();
 
         VEIN_EMERALD_NETHER = new VeinBuilder("emerald_nether", 5, 30, 3, 3, 10, -1, EMERALD, 1, BERYLLIUM, 1, THORIUM, 1).build();
         VEIN_CARROLLITE_NETHER = new VeinBuilder("carrollite_nether", 40, 60, 5, 5, 60, -1, CARROLLITE, 8, COPPER, 1, COBALT, 1, SULFUR, 1).build();

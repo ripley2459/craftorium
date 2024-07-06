@@ -334,6 +334,10 @@ substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
 substance.craftorium.ybco.name=YBCO
 substance.craftorium.carbon_fiber.name=Carbon Fiber
+substance.craftorium.clay.name=Clay
+substance.craftorium.end.name=End
+substance.craftorium.soul_sand.name=Soul Sand
+substance.craftorium.oil_sand.name=Oil Sand
 
 
 # ##################################################

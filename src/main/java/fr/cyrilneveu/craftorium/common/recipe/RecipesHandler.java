@@ -488,6 +488,17 @@ public final class RecipesHandler {
                     .build());
         }
 
+        plastic:
+        {
+            ELECTROLYZING.addRecipe(new MachineRecipeBuilder("plastic_distillation")
+                    .consumeFluid(OIL_SAND.getName(), 144)
+                    .produceFluid(PLASTIC.getName(),144)
+                    .consumeEnergy(3000)
+                    .duration(80)
+                    .configuration(CONFIGURATION_ELECTROLYZING_REFORMING)
+                    .build());
+        }
+
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
             Composition composition = substance.getComposition();
 
