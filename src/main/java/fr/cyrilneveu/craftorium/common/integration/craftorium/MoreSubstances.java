@@ -168,12 +168,6 @@ public final class MoreSubstances {
         }
 
         if (Utils.atLeastOne(new String[]{"biomesoplenty"}, Loader::isModLoaded)) {
-            Substance CHROMIUM = new SubstanceBuilder("chromium")
-                    .element(24, "Cr", "chromium", Element.EGroup.TRANSITION_METAL, 51.99616)
-                    .temperature(2180f, 2944f)
-                    .color(0xFF8a99c7)
-                    .packageTransitionMetal()
-                    .build();
             Substance FLUORINE = new SubstanceBuilder("fluorine")
                     .element(9, "F", "fluorine", Element.EGroup.HALOGEN, 18.9984031636)
                     .temperature(53.48f, 85.03f)

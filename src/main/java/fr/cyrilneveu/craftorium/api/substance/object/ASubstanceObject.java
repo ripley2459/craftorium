@@ -100,6 +100,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         if (stack == null) {
             String ore = getOre(substance);
             Preconditions.checkArgument(OreStack.oresExist(ore), "Can't return the asked ItemStack (" + getName(substance) + ") because because it does not exist either with this substance (" + substance.getName() + ") or in the form of oredict (" + ore + ").");
+            ItemStack[] stacks = OreStack.getStacks(ore);
+            Preconditions.checkArgument(stacks.length > 0, "Can't return the asked ItemStack (" + getName(substance) + ") because because it does not exist either with this substance (" + substance.getName() + ") or the associated oredict (" + ore + ") is empty.");
             ItemStack itemStack = OreStack.getStacks(ore)[0];
             itemStack.setCount(amount);
             return itemStack;
