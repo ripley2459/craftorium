@@ -7,6 +7,7 @@ import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.FLINT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Substances {
@@ -196,6 +197,7 @@ public final class Substances {
                 .color(0xFFd6d48b)
                 .build();
         FLINT = new SubstanceBuilder("flint")
+                .recipe(FLINT_PROCESS)
                 .items(DUST, GEM)
                 .tools(FILE, KNIFE, SAW)
                 .blocks(BLOCK)

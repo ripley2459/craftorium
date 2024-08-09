@@ -89,7 +89,7 @@ public class CustomItem extends Item implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean showDurabilityBar(ItemStack stack) { // TODO
-        return Utils.first(behaviours, b -> b.showDurabilityBar(stack)) != null;
+        return Utils.first(behaviours, b -> b.showDurabilityBar(stack)) != null || super.showDurabilityBar(stack);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class CustomItem extends Item implements ICustomModel {
                 return value;
         }
 
-        return 0d;
+        return super.getDurabilityForDisplay(stack);
     }
 
     @Override

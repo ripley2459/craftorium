@@ -112,6 +112,11 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    public SubstanceBuilder recipe(AProcess process) {
+        this.process = process;
+        return this;
+    }
+
     @Deprecated
     public SubstanceBuilder tools(float speed, float damage, int durability, int harvestLevel, int enchantability) {
         this.efficiency = new Efficiency(speed, damage, durability, harvestLevel, enchantability);

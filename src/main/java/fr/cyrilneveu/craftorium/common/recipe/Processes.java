@@ -25,6 +25,7 @@ public final class Processes {
     public static final Registry<String, AProcess> PROCESSES_REGISTRY = new Registry<>();
 
     public static final DefaultProcess DEFAULT_PROCESS = new DefaultProcess("default_process");
+    public static final DefaultProcess FLINT_PROCESS = new FlintProcess("flint_process");
 
     public static class DefaultProcess extends AProcess {
         public DefaultProcess(String name) {
@@ -72,7 +73,7 @@ public final class Processes {
             recipes.add(this::liquid);
         }
 
-        private void casing(Substance substance) {
+        protected void casing(Substance substance) {
             if (!substance.getItems().contains(CASING))
                 return;
 
@@ -89,7 +90,7 @@ public final class Processes {
                         .build());
         }
 
-        private void dust(Substance substance) {
+        protected void dust(Substance substance) {
             if (!substance.getItems().contains(DUST))
                 return;
 
@@ -191,7 +192,7 @@ public final class Processes {
             }
         }
 
-        private void foil(Substance substance) {
+        protected void foil(Substance substance) {
             if (!substance.getItems().contains(FOIL))
                 return;
 
@@ -216,7 +217,7 @@ public final class Processes {
                         .build());
         }
 
-        private void gear(Substance substance) {
+        protected void gear(Substance substance) {
             if (!substance.getItems().contains(GEAR))
                 return;
 
@@ -242,7 +243,7 @@ public final class Processes {
                         .build());
         }
 
-        private void gem(Substance substance) {
+        protected void gem(Substance substance) {
             if (!substance.getItems().contains(GEM))
                 return;
 
@@ -262,7 +263,7 @@ public final class Processes {
                     .build());
         }
 
-        private void ingot(Substance substance) {
+        protected void ingot(Substance substance) {
             if (!substance.getItems().contains(INGOT))
                 return;
 
@@ -292,7 +293,7 @@ public final class Processes {
                         .build());
         }
 
-        private void nugget(Substance substance) {
+        protected void nugget(Substance substance) {
             if (!substance.getItems().contains(NUGGET))
                 return;
 
@@ -313,7 +314,7 @@ public final class Processes {
                         .build());
         }
 
-        private void pearl(Substance substance) {
+        protected void pearl(Substance substance) {
             if (!substance.getItems().contains(PEARL))
                 return;
 
@@ -332,7 +333,7 @@ public final class Processes {
                         .build());
         }
 
-        private void plate(Substance substance) {
+        protected void plate(Substance substance) {
             if (!substance.getItems().contains(PLATE))
                 return;
 
@@ -367,7 +368,7 @@ public final class Processes {
                         .build());
         }
 
-        private void ring(Substance substance) {
+        protected void ring(Substance substance) {
             if (!substance.getItems().contains(RING))
                 return;
 
@@ -393,7 +394,7 @@ public final class Processes {
                         .build());
         }
 
-        private void rod(Substance substance) {
+        protected void rod(Substance substance) {
             if (!substance.getItems().contains(ROD))
                 return;
 
@@ -419,7 +420,7 @@ public final class Processes {
                         .build());
         }
 
-        private void rotor(Substance substance) {
+        protected void rotor(Substance substance) {
             if (!substance.getItems().contains(ROTOR))
                 return;
 
@@ -427,7 +428,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(ROTOR.getName(substance), ROTOR.asItemStack(substance), "CP ", "RDR", " PS", 'C', CUTTER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'R', SCREW.asIngredient(substance), 'D', RING.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance));
         }
 
-        private void screw(Substance substance) {
+        protected void screw(Substance substance) {
             if (!substance.getItems().contains(SCREW))
                 return;
 
@@ -443,7 +444,7 @@ public final class Processes {
                         .build());
         }
 
-        private void spring(Substance substance) {
+        protected void spring(Substance substance) {
             if (!substance.getItems().contains(SPRING))
                 return;
 
@@ -460,7 +461,7 @@ public final class Processes {
                         .build());
         }
 
-        private void wire(Substance substance) {
+        protected void wire(Substance substance) {
             if (!substance.getItems().contains(WIRE))
                 return;
 
@@ -477,7 +478,7 @@ public final class Processes {
                         .build());
         }
 
-        private void axe(Substance substance) {
+        protected void axe(Substance substance) {
             if (!substance.getTools().contains(AXE))
                 return;
 
@@ -485,7 +486,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(AXE.getName(substance), AXE.asItemStack(substance), "II", "IS", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void cutter(Substance substance) {
+        protected void cutter(Substance substance) {
             if (!substance.getTools().contains(CUTTER))
                 return;
 
@@ -493,7 +494,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(CUTTER.getName(substance), CUTTER.asItemStack(substance), "PSP", "FGW", "RCR", 'P', PLATE.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance), 'F', FILE.asIngredient(substance), 'G', GEAR.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'R', "stickWood", 'C', SCREW.asIngredient(substance));
         }
 
-        private void file(Substance substance) {
+        protected void file(Substance substance) {
             if (!substance.getTools().contains(FILE))
                 return;
 
@@ -501,7 +502,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(FILE.getName(substance), FILE.asItemStack(substance), "PH", "S ", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void hammer(Substance substance) {
+        protected void hammer(Substance substance) {
             if (!substance.getTools().contains(HAMMER))
                 return;
 
@@ -509,7 +510,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(HAMMER.getName(substance), HAMMER.asItemStack(substance), "IF", "S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
         }
 
-        private void hoe(Substance substance) {
+        protected void hoe(Substance substance) {
             if (!substance.getTools().contains(HOE))
                 return;
 
@@ -517,7 +518,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(HOE.getName(substance), HOE.asItemStack(substance), "II", " S", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void knife(Substance substance) {
+        protected void knife(Substance substance) {
             if (!substance.getTools().contains(KNIFE))
                 return;
 
@@ -525,7 +526,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(KNIFE.getName(substance), KNIFE.asItemStack(substance), "FPC", " R ", 'P', PLATE.asIngredient(substance), 'R', "stickWood", 'C', CUTTER.asIngredient(substance), 'F', FILE.asIngredient(substance));
         }
 
-        private void mortar(Substance substance) {
+        protected void mortar(Substance substance) {
             if (!substance.getTools().contains(MORTAR))
                 return;
 
@@ -533,7 +534,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(MORTAR.getName(substance), MORTAR.asItemStack(substance), "IF", "B ", 'I', INGOT.getOre(substance), 'B', Ingredient.fromItem(Items.BOWL), 'F', FILE.getOre(substance));
         }
 
-        private void pickaxe(Substance substance) {
+        protected void pickaxe(Substance substance) {
             if (!substance.getTools().contains(PICKAXE))
                 return;
 
@@ -541,7 +542,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(PICKAXE.getName(substance), PICKAXE.asItemStack(substance), "III", " S ", " S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void saw(Substance substance) {
+        protected void saw(Substance substance) {
             if (!substance.getTools().contains(SAW))
                 return;
 
@@ -549,7 +550,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(SAW.getName(substance), SAW.asItemStack(substance), "PS", "FH", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
         }
 
-        private void screwdriver(Substance substance) {
+        protected void screwdriver(Substance substance) {
             if (!substance.getTools().contains(SCREWDRIVER))
                 return;
 
@@ -557,7 +558,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(SCREWDRIVER.getName(substance), SCREWDRIVER.asItemStack(substance), "HR", "SF", 'H', HAMMER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
         }
 
-        private void shovel(Substance substance) {
+        protected void shovel(Substance substance) {
             if (!substance.getTools().contains(SHOVEL))
                 return;
 
@@ -565,7 +566,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(SHOVEL.getName(substance), SHOVEL.asItemStack(substance), "I", "S", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void sword(Substance substance) {
+        protected void sword(Substance substance) {
             if (!substance.getTools().contains(SWORD))
                 return;
 
@@ -573,7 +574,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(SWORD.getName(substance), SWORD.asItemStack(substance), "I", "I", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
         }
 
-        private void wrench(Substance substance) {
+        protected void wrench(Substance substance) {
             if (!substance.getTools().contains(WRENCH))
                 return;
 
@@ -581,7 +582,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(WRENCH.getName(substance), WRENCH.asItemStack(substance), "P P", "FPH", " R ", 'P', PLATE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance), 'F', FILE.asIngredient(substance));
         }
 
-        private void block(Substance substance) {
+        protected void block(Substance substance) {
             if (!substance.getBlocks().contains(BLOCK))
                 return;
 
@@ -602,7 +603,7 @@ public final class Processes {
                         .build());
         }
 
-        private void frame(Substance substance) {
+        protected void frame(Substance substance) {
             if (!substance.getBlocks().contains(FRAME))
                 return;
 
@@ -610,7 +611,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(FRAME.getName(substance), FRAME.asItemStack(substance), "RRR", "RWR", "RRR", 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
         }
 
-        private void hull(Substance substance) {
+        protected void hull(Substance substance) {
             if (!substance.getBlocks().contains(HULL))
                 return;
 
@@ -618,7 +619,7 @@ public final class Processes {
                 RecipeManager.addShapedRecipe(HULL.getName(substance), HULL.asItemStack(substance), "PPP", "PWP", "PPP", 'P', PLATE.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
         }
 
-        private void liquid(Substance substance) {
+        protected void liquid(Substance substance) {
             if (!substance.getFluids().contains(LIQUID))
                 return;
 
@@ -672,6 +673,36 @@ public final class Processes {
 
                 MIXING.addRecipe(recipeMix.produceFluid(LIQUID.getName(substance), amount * 144).duration(20).consumeEnergy(50000).configuration(CONFIGURATION_MIXING_MIX).build());
             }
+        }
+    }
+
+    public static class FlintProcess extends DefaultProcess {
+        public FlintProcess(String name) {
+            super(name);
+        }
+
+        protected void file(Substance substance) {
+            if (!substance.getTools().contains(FILE))
+                return;
+
+            if (OreStack.oresExist(KNIFE.getOre(substance), GEM.getOre(substance), "stickWood"))
+                RecipeManager.addShapedRecipe(FILE.getName(substance), FILE.asItemStack(substance), "GK", "S ", 'G', GEM.asIngredient(substance), 'K', KNIFE.asIngredient(substance), 'S', "stickWood");
+        }
+
+        protected void knife(Substance substance) {
+            if (!substance.getTools().contains(KNIFE))
+                return;
+
+            if (OreStack.oresExist(GEM.getOre(substance), "stickWood"))
+                RecipeManager.addShapedRecipe(KNIFE.getName(substance), KNIFE.asItemStack(substance), "G", "S", 'G', GEM.asIngredient(substance), 'S', "stickWood");
+        }
+
+        protected void saw(Substance substance) {
+            if (!substance.getTools().contains(SAW))
+                return;
+
+            if (OreStack.oresExist(KNIFE.getOre(substance), FILE.getOre(substance), GEM.getOre(substance), "stickWood"))
+                RecipeManager.addShapedRecipe(SAW.getName(substance), SAW.asItemStack(substance), "FK", "GS", 'F', FILE.asIngredient(substance), 'K', KNIFE.asIngredient(substance), 'G', GEM.asIngredient(substance), 'S', "stickWood");
         }
     }
 }

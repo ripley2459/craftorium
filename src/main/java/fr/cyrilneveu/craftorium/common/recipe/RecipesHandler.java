@@ -8,6 +8,7 @@ import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.utils.EColors;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
@@ -413,6 +414,17 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CUTTER_CIRCUIT)
                 .build());
 
+        for (EColors color : EColors.values()) {
+            MIXING.addRecipe(new MachineRecipeBuilder("solidifying_conrete_".concat(color.getName()))
+                    .consumeItem(new ItemStack(Blocks.CONCRETE_POWDER, 1, color.getMeta()))
+                    .consumeFluid("water", 1000)
+                    .produceItem(new ItemStack(Blocks.CONCRETE, 1, color.getMeta()))
+                    .consumeEnergy(3000)
+                    .duration(20)
+                    .configuration(CONFIGURATION_MIXING_MIX)
+                    .build());
+        }
+
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("microprocessor")
                 .consumeItem(WIRE.getOre(TWO.getPack().getEnergy()), 1)
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 1))
@@ -492,7 +504,7 @@ public final class RecipesHandler {
         {
             ELECTROLYZING.addRecipe(new MachineRecipeBuilder("plastic_distillation")
                     .consumeFluid(OIL_SAND.getName(), 144)
-                    .produceFluid(PLASTIC.getName(),144)
+                    .produceFluid(PLASTIC.getName(), 144)
                     .consumeEnergy(3000)
                     .duration(80)
                     .configuration(CONFIGURATION_ELECTROLYZING_REFORMING)
