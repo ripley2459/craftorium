@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
+
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     protected final String name;
     protected final boolean self;
@@ -190,6 +192,30 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         @Override
         public String getOre(Substance substance) {
             return name;
+        }
+
+        @Override
+        public ItemStack asItemStack(Substance substance) {
+            ItemStack stack = super.asItemStack(substance);
+            stack.setItemDamage(0);
+            return stack;
+        }
+
+        @Override
+        public ItemStack asItemStack(Substance substance, int amount) {
+            ItemStack stack = super.asItemStack(substance, amount);
+            stack.setItemDamage(0);
+            return stack;
+        }
+
+        @Override
+        public Ingredient asIngredient(Substance substance) {
+            Ingredient ingredient = super.asIngredient(substance);
+
+            for (ItemStack matchingStack : ingredient.getMatchingStacks())
+                matchingStack.setItemDamage(WILDCARD_VALUE);
+
+            return ingredient;
         }
     }
 
