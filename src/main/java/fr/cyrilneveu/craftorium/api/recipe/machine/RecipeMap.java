@@ -25,8 +25,6 @@ public final class RecipeMap {
         this.fluidsIn = fluidsIn;
         this.itemsOut = itemsOut;
         this.fluidsOut = fluidsOut;
-
-        MACHINE_MAPS_REGISTRY.put(name, this);
     }
 
     public static boolean checkItems(List<ItemStack> proposed, List<OreStack> required) {

@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
@@ -212,8 +213,10 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         public Ingredient asIngredient(Substance substance) {
             Ingredient ingredient = super.asIngredient(substance);
 
-            for (ItemStack matchingStack : ingredient.getMatchingStacks())
-                matchingStack.setItemDamage(WILDCARD_VALUE);
+            for (ItemStack stack : ingredient.getMatchingStacks()) {
+                if (stack.getItem().getRegistryName() != null && stack.getItem().getRegistryName().getNamespace().equals(MODID))
+                    stack.setItemDamage(WILDCARD_VALUE);
+            }
 
             return ingredient;
         }

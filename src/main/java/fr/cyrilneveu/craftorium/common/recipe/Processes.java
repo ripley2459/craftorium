@@ -149,7 +149,7 @@ public final class Processes {
                         .configuration(CONFIGURATION_MACERATOR_PULVERIZING)
                         .build());
 
-            if (!substance.getComposition().isComposite())
+            if (!substance.getComposition().isComposite() || substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER))
                 return;
 
             Set<SubstanceStack> composition = substance.getComposition().getComposition();
@@ -254,13 +254,14 @@ public final class Processes {
             if (OreStack.oresExist(BLOCK.getOre(substance)))
                 RecipeManager.unzip(substance, BLOCK, GEM);
 
-            if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance))) CASTING.addRecipe(new MachineRecipeBuilder(GEM.getName(substance))
-                    .consumeFluid(LIQUID.getName(substance), GEM.getAmount())
-                    .produceItem(GEM.asItemStack(substance))
-                    .consumeEnergy(500)
-                    .duration(500)
-                    .configuration(CONFIGURATION_CASTING_FORM_INGOT)
-                    .build());
+            if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
+                CASTING.addRecipe(new MachineRecipeBuilder(GEM.getName(substance))
+                        .consumeFluid(LIQUID.getName(substance), GEM.getAmount())
+                        .produceItem(GEM.asItemStack(substance))
+                        .consumeEnergy(500)
+                        .duration(500)
+                        .configuration(CONFIGURATION_CASTING_FORM_INGOT)
+                        .build());
         }
 
         protected void ingot(Substance substance) {
