@@ -423,6 +423,7 @@ tier.craftorium.four.name=Tier 4
 tier.craftorium.five.name=Tier 5
 
 # Tooltips
+tooltip.craftorium.tool.damage=Durability: %s/%s
 tooltip.craftorium.battery.energy=Energy: §c%s RF§r
 tooltip.craftorium.formula=§e%s§r
 tooltip.craftorium.machine.button.configuration=§7Configuration: §b%s§r

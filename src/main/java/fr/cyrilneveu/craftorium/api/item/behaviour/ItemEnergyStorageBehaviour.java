@@ -1,7 +1,6 @@
 package fr.cyrilneveu.craftorium.api.item.behaviour;
 
 import fr.cyrilneveu.craftorium.api.inventory.CustomEnergyStorage;
-import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -85,24 +84,32 @@ public final class ItemEnergyStorageBehaviour implements IItemBehaviour, ICapabl
         };
     }
 
+    public static int getEnergy(ItemStack itemStack) {
+        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored() : -1;
+    }
+
+    public static int getMaxEnergy(ItemStack itemStack) {
+        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getMaxEnergyStored() : -1;
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltips, ITooltipFlag flag) {
-        if (CustomItem.getMaxEnergy(itemStack) > 0)
-            tooltips.add(Utils.localise("tooltip.craftorium.battery.energy", CustomItem.getEnergy(itemStack), CustomItem.getMaxEnergy(itemStack)));
+        if (getMaxEnergy(itemStack) > 0)
+            tooltips.add(Utils.localise("tooltip.craftorium.battery.energy", getEnergy(itemStack), getMaxEnergy(itemStack)));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean showDurabilityBar(@Nonnull ItemStack itemStack) {
-        return CustomItem.getEnergy(itemStack) > 0;
+    public boolean showDurabilityBar(@Nonnull ItemStack stack) {
+        return getEnergy(stack) > 0;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public double getDurabilityForDisplay(@Nonnull ItemStack itemStack) {
-        double max = CustomItem.getMaxEnergy(itemStack);
-        return (max - CustomItem.getEnergy(itemStack)) / max;
+    public double getDurabilityForDisplay(@Nonnull ItemStack stack) {
+        double max = getMaxEnergy(stack);
+        return (max - getEnergy(stack)) / max;
     }
 
     @Override

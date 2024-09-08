@@ -11,7 +11,8 @@ public class SubstanceItem extends CustomItem {
     protected final Substance substance;
 
     public SubstanceItem(ASubstanceObject reference, Substance substance) {
-        super(((ASubstanceObject.SubstanceItem) reference).getBehaviours(substance), new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+        super(((ASubstanceObject.SubstanceItem) reference).getBehaviours(substance),
+                new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
         this.reference = reference;
         this.substance = substance;
     }

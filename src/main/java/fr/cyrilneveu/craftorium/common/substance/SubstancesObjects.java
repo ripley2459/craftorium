@@ -1,7 +1,10 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.item.CustomItem;
+import fr.cyrilneveu.craftorium.api.item.behaviour.DurabilityBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
@@ -184,7 +187,13 @@ public final class SubstancesObjects {
     }
 
     private static void createTool(ASubstanceObject reference, Substance substance) {
-        SubstanceTool item = new SubstanceTool(reference, substance);
+        IItemBehaviour[] behaviours = new IItemBehaviour[1];
+
+        behaviours[0] = new DurabilityBehaviour(substance);
+
+        CustomItem item = new CustomItem(behaviours,
+                new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+        item.setMaxStackSize(1);
 
         createTool(reference, substance, item);
     }
