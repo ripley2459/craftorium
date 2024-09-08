@@ -703,7 +703,7 @@ public final class Substances {
         COBALT = new SubstanceBuilder("cobalt")
                 .element(27, "Co", "cobalt", Element.EGroup.TRANSITION_METAL, 58.9331944)
                 .temperature(1768f, 3200f)
-                .color(0xFFf090a0)
+                .color(0xFF143ad1)
                 .packageTransitionMetal()
                 .veinMember()
                 .build();

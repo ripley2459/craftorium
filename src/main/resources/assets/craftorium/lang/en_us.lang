@@ -17,7 +17,6 @@ item.craftorium.robot_arm.name=Robot Arm
 item.craftorium.scanner.name=Scanner
 item.craftorium.sensor.name=Sensor
 
-
 # Tools
 item.craftorium.axe.name=%s Axe
 item.craftorium.cutter.name=%s Cutter
@@ -96,21 +95,22 @@ item.craftorium.quantum_calculus_die.name=Quantum Calculus Die
 # Blocks
 
 # Machines
-machine.craftorium.electrolyzer.name=Electrolyzer
-machine.craftorium.macerator.name=Macerator
+machine.craftorium.assembler.name=Assembler
 machine.craftorium.bender.name=Bender
-machine.craftorium.lathe.name=Lathe
-machine.craftorium.cutter.name=Cutter
-machine.craftorium.compressor.name=Compressor
-machine.craftorium.foundry.name=Foundry
-machine.craftorium.mixer.name=Mixer
 machine.craftorium.circuit_assembler.name=Circuit Assembler
+machine.craftorium.compressor.name=Compressor
+machine.craftorium.cutter.name=Cutter
+machine.craftorium.electrolyzer.name=Electrolyzer
+machine.craftorium.foundry.name=Foundry
+machine.craftorium.lathe.name=Lathe
+machine.craftorium.macerator.name=Macerator
+machine.craftorium.mixer.name=Mixer
 
 # Substances
 tile.craftorium.block.name=Block of %s
-tile.craftorium.ore.name=%s Ore
-tile.craftorium.hull.name=%s Hull
 tile.craftorium.frame.name=%s Frame
+tile.craftorium.hull.name=%s Hull
+tile.craftorium.ore.name=%s Ore
 
 # Fluids
 fluid.craftorium.liquid.name=%s
@@ -240,8 +240,10 @@ substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
 
 # Others
+substance.craftorium.aluminum_brass.name=Aluminum Brass
 substance.craftorium.amethyst.name=Amethyst
 substance.craftorium.argentite.name=Argentite
+substance.craftorium.awakened_draconium.name=Awakened Draconium
 substance.craftorium.azurite.name=Azurite
 substance.craftorium.barite.name=Barite
 substance.craftorium.bauxite.name=Bauxite
@@ -249,6 +251,7 @@ substance.craftorium.beryl.name=Beryl
 substance.craftorium.bismuthinite.name=Bismuthinite
 substance.craftorium.boron_arsenide_alloy.name=Boron Arsenide Alloy
 substance.craftorium.bronze.name=Bronze
+substance.craftorium.carbon_fiber.name=Carbon Fiber
 substance.craftorium.carnotite.name=Carnotite
 substance.craftorium.carrollite.name=Carrollite
 substance.craftorium.cassiterite.name=Cassiterite
@@ -257,6 +260,7 @@ substance.craftorium.chalcopyrite.name=Chalcopyrite
 substance.craftorium.charcoal.name=Charcoal
 substance.craftorium.chromite.name=Chromite
 substance.craftorium.cinnabar.name=Cinnabar
+substance.craftorium.clay.name=Clay
 substance.craftorium.coal.name=Coal
 substance.craftorium.conductive_iron.name=Conductive Iron
 substance.craftorium.constantan.name=Constantan
@@ -264,14 +268,18 @@ substance.craftorium.crude_steel.name=Crude Steel
 substance.craftorium.cupronickel.name=Cupronickel
 substance.craftorium.dark_steel.name=Dark Steel
 substance.craftorium.diamond.name=Diamond
+substance.craftorium.dilithium.name=Dilithium
+substance.craftorium.draconium.name=Draconium
 substance.craftorium.electrical_steel.name=Electrical Steel
 substance.craftorium.electrum.name=Electrum
 substance.craftorium.emerald.name=Emerald
+substance.craftorium.end.name=End
 substance.craftorium.end_steel.name=End Steel
 substance.craftorium.ender.name=Ender
 substance.craftorium.enderium.name=Enderium
 substance.craftorium.energetic_alloy.name=Energetic Alloy
 substance.craftorium.energetic_silver.name=Energetic Silver
+substance.craftorium.ferroboron.name=Ferroboron
 substance.craftorium.flint.name=Flint
 substance.craftorium.galena.name=Galena
 substance.craftorium.garnierite.name=Garnierite
@@ -294,6 +302,7 @@ substance.craftorium.malachite.name=Malachite
 substance.craftorium.molybdenite.name=Molybdenite
 substance.craftorium.nichrome.name=Nichrome
 substance.craftorium.obsidian.name=Obsidian
+substance.craftorium.oil_sand.name=Oil Sand
 substance.craftorium.orthoclase.name=Orthoclase
 substance.craftorium.osmiridium.name=Osmiridium
 substance.craftorium.pentlandite.name=Pentlandite
@@ -317,6 +326,7 @@ substance.craftorium.signalum.name=Signalum
 substance.craftorium.smaltite.name=Smaltite
 substance.craftorium.smithsonite.name=Smithsonite
 substance.craftorium.sodalite.name=Sodalite
+substance.craftorium.soul_sand.name=Soul Sand
 substance.craftorium.soularium.name=Soularium
 substance.craftorium.spdodumene.name=Spdodumene
 substance.craftorium.stainless_steel.name=Stainless Steel
@@ -325,7 +335,10 @@ substance.craftorium.stibnite.name=Stibnite
 substance.craftorium.stone.name=Stone
 substance.craftorium.super_alloy.name=Super Alloy
 substance.craftorium.tanzanite.name=Tanzanite
+substance.craftorium.titanium_aluminide.name=Titanium Aluminide
+substance.craftorium.titanium_iridium.name=Titanium Iridium
 substance.craftorium.topaz.name=Topaz
+substance.craftorium.tough_alloy.name=Tough Alloy
 substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
 substance.craftorium.tungsten_steel.name=Tungsten Steel
 substance.craftorium.vibrant_alloy.name=Vibrant Alloy
@@ -333,11 +346,6 @@ substance.craftorium.vivid_alloy.name=Vivid Alloy
 substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
 substance.craftorium.ybco.name=YBCO
-substance.craftorium.carbon_fiber.name=Carbon Fiber
-substance.craftorium.clay.name=Clay
-substance.craftorium.end.name=End
-substance.craftorium.soul_sand.name=Soul Sand
-substance.craftorium.oil_sand.name=Oil Sand
 
 
 # ##################################################

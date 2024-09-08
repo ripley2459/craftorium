@@ -74,10 +74,10 @@ public class CustomItem extends Item implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        for (IItemBehaviour behaviour : behaviours)
-            behaviour.addInformation(stack, worldIn, tooltip, flagIn);
         if (aestheticism.getToolTips() != null)
             aestheticism.getToolTips().get().forEach(t -> tooltip.add(Utils.localise(t)));
+        for (IItemBehaviour behaviour : behaviours)
+            behaviour.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override

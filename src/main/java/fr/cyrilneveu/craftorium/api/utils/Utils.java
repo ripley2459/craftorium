@@ -51,6 +51,10 @@ public final class Utils {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, s);
     }
 
+    public static String toUpperCamelCase(String s) {
+        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
+    }
+
     public static String[] cleanArray(String[] array) {
         return Arrays.stream(array).filter(x -> !StringUtils.isBlank(x)).toArray(String[]::new);
     }

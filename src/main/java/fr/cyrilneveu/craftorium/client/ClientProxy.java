@@ -123,8 +123,6 @@ public final class ClientProxy extends ACommonProxy {
         }
     }
 
-
-
     @Override
     public EntityPlayer getPlayer(MessageContext context) {
         return context.side.isClient() ? Minecraft.getMinecraft().player : super.getPlayer(context);

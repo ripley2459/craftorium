@@ -30,9 +30,23 @@ public final class MoreSubstances {
                     .color(0xFFd4dbe0)
                     .style("metal")
                     .build();
+            new SubstanceBuilder("dilithium")
+                    .packageGem()
+                    .color(0xFFbfbeb1)
+                    .style("gem")
+                    .build();
         }
 
         if (Utils.atLeastOne(new String[]{"draconicevolution"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("aluminum_brass")
+                    .packageMetalExtended()
+                    .composition(COPPER, 1, ALUMINUM, 3)
+                    .color(0xFFe8de78)
+                    .style("metal")
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"tconstruct"}, Loader::isModLoaded)) {
             new SubstanceBuilder("draconium")
                     .packageMetalExtended()
                     .veinMember()
@@ -241,6 +255,16 @@ public final class MoreSubstances {
                     .packageTransitionMetal()
                     .temperature(2128f, 4650f)
                     .color(0xFF94e0e0)
+                    .style("metal")
+                    .build();
+            Substance FERROBORON = new SubstanceBuilder("ferroboron")
+                    .composition(STEEL, 1, BORON, 1)
+                    .packageMetalExtended()
+                    .style("metal")
+                    .build();
+            new SubstanceBuilder("tough_alloy")
+                    .composition(FERROBORON, 1, LITHIUM, 1)
+                    .packageMetalExtended()
                     .style("metal")
                     .build();
         }
