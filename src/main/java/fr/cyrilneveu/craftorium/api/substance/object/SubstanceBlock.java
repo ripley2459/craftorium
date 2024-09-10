@@ -45,7 +45,7 @@ public class SubstanceBlock extends CustomBlock {
     protected final Substance substance;
 
     public SubstanceBlock(Material material, ASubstanceObject reference, Substance substance) {
-        super(material, new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+        super(material, new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null));
         this.reference = reference;
         this.substance = substance;
         setHardness(substance.getToughness().getHardness());

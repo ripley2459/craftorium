@@ -13,7 +13,7 @@ public class TierItem extends CustomItem {
     protected final Tier tier;
 
     public TierItem(ATierObject reference, Tier tier) {
-        super(reference.getBehaviours(tier), new Aestheticism.ObjectAestheticism(reference.getFaces(tier), () -> reference.getTooltips(tier), tier.getAestheticism().isGlint()));
+        super(reference.getBehaviours(tier), new Aestheticism.ObjectAestheticism(reference.getFaces(tier), () -> reference.getTooltips(tier), tier.getAestheticism().isGlint(),null));
         this.reference = reference;
         this.tier = tier;
     }

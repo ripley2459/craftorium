@@ -148,7 +148,7 @@ public final class SubstancesObjects {
     }
 
     private static void createItem(ASubstanceObject reference, Substance substance) {
-        SubstanceItem item = new SubstanceItem(reference, substance);
+        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
@@ -191,8 +191,7 @@ public final class SubstancesObjects {
 
         behaviours[0] = new DurabilityBehaviour(substance);
 
-        CustomItem item = new CustomItem(behaviours,
-                new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+        CustomItem item = new CustomItem(behaviours, defaultAestheticism(reference, substance));
         item.setMaxStackSize(1);
 
         createTool(reference, substance, item);
@@ -353,5 +352,13 @@ public final class SubstancesObjects {
         }
 
         return behaviours.isEmpty() ? NO_BEHAVIOUR : behaviours.toArray(new IItemBehaviour[0]);
+    }
+
+    public static Aestheticism.ObjectAestheticism defaultAestheticism(ASubstanceObject reference, Substance substance) {
+        return new Aestheticism.ObjectAestheticism(reference.getFaces(substance),
+                () -> reference.getTooltips(substance),
+                substance.getAestheticism().isGlint(),
+                s -> Utils.localise(String.join(".", s.getTranslationKey(), "name"), substance.getDisplayName())
+        );
     }
 }

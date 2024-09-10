@@ -123,6 +123,11 @@ public class CustomItem extends Item implements ICustomModel {
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return aestheticism.getDisplayName() != null ? aestheticism.getDisplayName().apply(stack) : super.getItemStackDisplayName(stack);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void addTextures(Set<ResourceLocation> textures) {
         for (FaceProvider faceProvider : aestheticism.getFaceProviders())

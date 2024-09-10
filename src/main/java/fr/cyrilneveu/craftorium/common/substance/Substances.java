@@ -4,10 +4,12 @@ import fr.cyrilneveu.craftorium.api.substance.Element;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
 import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
+import fr.cyrilneveu.craftorium.common.recipe.process.WoodProcess;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.FLINT_PROCESS;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.WOOD_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Substances {
@@ -170,6 +172,7 @@ public final class Substances {
                 .style("wood")
                 .color(0xFF663f16)
                 .sound(SoundType.WOOD)
+                .recipe(WOOD_PROCESS)
                 .build();
         STONE = new SubstanceBuilder("stone")
                 .items(DUST, PLATE, ROD)

@@ -12,13 +12,13 @@ public class SubstanceItem extends CustomItem {
 
     public SubstanceItem(ASubstanceObject reference, Substance substance) {
         super(((ASubstanceObject.SubstanceItem) reference).getBehaviours(substance),
-                new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+                new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(),null));
         this.reference = reference;
         this.substance = substance;
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return Utils.localise(String.join(".", getTranslationKey(), "name"), substance.getDisplayName());
+        return Utils.localise(String.join(".", stack.getTranslationKey(), "name"), substance.getDisplayName());
     }
 }

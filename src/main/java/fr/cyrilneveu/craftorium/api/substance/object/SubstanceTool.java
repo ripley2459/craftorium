@@ -62,7 +62,7 @@ public class SubstanceTool extends SubstanceItem {
 
         public SubstanceAxe(ASubstanceObject reference, Substance substance) {
             super(ToolMaterial.valueOf(substance.getName()), substance.getEfficiency().getDamage(), substance.getEfficiency().getSpeed());
-            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint());
+            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null);
             this.substance = substance;
         }
 
@@ -125,7 +125,7 @@ public class SubstanceTool extends SubstanceItem {
 
         public SubstanceHoe(ASubstanceObject reference, Substance substance) {
             super(ToolMaterial.valueOf(substance.getName()));
-            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint());
+            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null);
             this.substance = substance;
         }
 
@@ -188,7 +188,7 @@ public class SubstanceTool extends SubstanceItem {
 
         public SubstancePickaxe(ASubstanceObject reference, Substance substance) {
             super(ToolMaterial.valueOf(substance.getName()));
-            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint());
+            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null);
             this.substance = substance;
         }
 
@@ -251,7 +251,7 @@ public class SubstanceTool extends SubstanceItem {
 
         public SubstanceShovel(ASubstanceObject reference, Substance substance) {
             super(ToolMaterial.valueOf(substance.getName()));
-            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint());
+            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null);
             this.substance = substance;
         }
 
@@ -314,7 +314,7 @@ public class SubstanceTool extends SubstanceItem {
 
         public SubstanceSword(ASubstanceObject reference, Substance substance) {
             super(ToolMaterial.valueOf(substance.getName()));
-            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint());
+            this.aestheticism = new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null);
             this.substance = substance;
         }
 

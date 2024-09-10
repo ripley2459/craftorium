@@ -6,11 +6,13 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
@@ -20,6 +22,8 @@ import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 public class ItemBuilder {
     private String name;
     private ResourceLocation registryName;
+    @Nullable
+    private Function<ItemStack, String> displayName;
     private String translation;
     private List<FaceProvider> faceProviderList;
     private List<IItemBehaviour> behaviours = new ArrayList<>();
@@ -78,11 +82,16 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder displayName(Function<ItemStack, String> displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
     public CustomItem build() {
         if (faceProviderList.isEmpty())
             addTexture(name);
 
-        CustomItem item = new CustomItem(behaviours.toArray(new IItemBehaviour[0]), new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint));
+        CustomItem item = new CustomItem(behaviours.toArray(new IItemBehaviour[0]), new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint, displayName));
         item.setRegistryName(registryName);
         item.setTranslationKey(translation);
         item.setCreativeTab(creativeTab);
