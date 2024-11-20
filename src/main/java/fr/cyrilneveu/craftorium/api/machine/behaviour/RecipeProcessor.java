@@ -5,7 +5,10 @@ import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.machine.EMachineStates;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.mui.*;
+import fr.cyrilneveu.craftorium.api.mui.AButton;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.ProgressArrow;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipe;
 import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.*;
@@ -32,7 +35,7 @@ import java.util.Random;
 
 public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerializable<NBTTagCompound> {
     public static final int MACHINE_CONFIGURATION_MIN = 1;
-    public static final int MACHINE_CONFIGURATION_MAX = 9;
+    public static final int MACHINE_CONFIGURATION_MAX = 128;
     public static final String MACHINE_CONFIGURATION_NBT = "MachineProcessingConfiguration";
     public static final String MACHINE_PROGRESS_NBT = "MachineProcessingProgress";
     public static final String MACHINE_RECIPE_NBT = "MachineProcessingRecipe";

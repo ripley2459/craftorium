@@ -414,12 +414,30 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CUTTER_CIRCUIT)
                 .build());
 
+        MIXING.addRecipe(new MachineRecipeBuilder("mixing_dirt_and_gravel")
+                .consumeItem("dirt", 2)
+                .consumeItem("gravel", 2)
+                .produceItem(new ItemStack(Blocks.DIRT, 4, 1))
+                .consumeEnergy(1000)
+                .duration(20)
+                .configuration(CONFIGURATION_MIXING_MIX)
+                .build());
+
         for (EColors color : EColors.values()) {
             MIXING.addRecipe(new MachineRecipeBuilder("solidifying_conrete_".concat(color.getName()))
                     .consumeItem(new ItemStack(Blocks.CONCRETE_POWDER, 1, color.getMeta()))
                     .consumeFluid("water", 1000)
                     .produceItem(new ItemStack(Blocks.CONCRETE, 1, color.getMeta()))
                     .consumeEnergy(3000)
+                    .duration(10)
+                    .configuration(CONFIGURATION_MIXING_MIX)
+                    .build());
+            MIXING.addRecipe(new MachineRecipeBuilder("mixing_conrete_powder_".concat(color.getName()))
+                    .consumeItem("gravel", 4)
+                    .consumeItem("sand", 4)
+                    .consumeItem(OreStack.createOre("dye", color.getName()), 1)
+                    .produceItem(new ItemStack(Blocks.CONCRETE_POWDER, 8, color.getMeta()))
+                    .consumeEnergy(4000)
                     .duration(20)
                     .configuration(CONFIGURATION_MIXING_MIX)
                     .build());

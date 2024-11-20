@@ -67,8 +67,8 @@ public abstract class AButton extends AWidget implements ITextured {
                 return false;
 
             if (mouseButton == 1)
-                configuration--;
-            else configuration++;
+                configuration -= Utils.isCtrlDown() ? 5 : 1;
+            else configuration += Utils.isCtrlDown() ? 5 : 1;
             configuration = MathHelper.clamp(configuration, MACHINE_CONFIGURATION_MIN, MACHINE_CONFIGURATION_MAX);
 
             ClientUtils.playSound(SoundEvents.UI_BUTTON_CLICK);
