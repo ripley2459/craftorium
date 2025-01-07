@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
-public final class MachineRecipe {
+public class MachineRecipe {
     private final String name;
     private final List<OreStack> itemsIn;
     private final List<FluidStack> fluidsIn;

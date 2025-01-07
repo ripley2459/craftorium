@@ -10,7 +10,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
 
-public final class MachineContainer extends Container {
+public class MachineContainer extends Container {
     private final MachineTile owner;
 
     public MachineContainer(MachineTile owner, EntityPlayer playerIn) {

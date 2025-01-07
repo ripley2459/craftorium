@@ -19,7 +19,7 @@ import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
-public final class Substance implements Comparable<Substance> {
+public class Substance implements Comparable<Substance> {
     private final String name;
     private final Composition composition;
     @Nullable

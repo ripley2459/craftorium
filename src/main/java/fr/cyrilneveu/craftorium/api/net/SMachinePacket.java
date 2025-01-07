@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 
-public final class SMachinePacket extends AMessage.ServerToClientMessage<SMachinePacket> {
+public class SMachinePacket extends AMessage.ServerToClientMessage<SMachinePacket> {
     private MachineTile instigator;
     private ByteBuf data;
 

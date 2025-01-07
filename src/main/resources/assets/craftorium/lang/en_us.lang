@@ -451,7 +451,6 @@ tooltip.craftorium.state.unknown=§7State: §aUnknown§r
 tooltip.craftorium.temperature=§c%s°K§r
 tooltip.craftorium.tier.name=Tier: §e%s§r
 
-
 # JEI
 jei.craftorium.recipe.chance.tiny=%s%%
 jei.craftorium.recipe.chance=§7Chance: §6%s%%§r

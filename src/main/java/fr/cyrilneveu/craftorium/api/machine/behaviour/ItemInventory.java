@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, IContainable, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
+public class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour, IContainable, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     private final MachineTile owner;
     private final CustomLazy<FlowController> flowController;
     private final List<ItemSlotData> slots;

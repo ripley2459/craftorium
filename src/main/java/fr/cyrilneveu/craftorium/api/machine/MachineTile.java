@@ -27,11 +27,11 @@ import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.*;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
 import static fr.cyrilneveu.craftorium.common.tier.Tiers.ONE;
 
-public final class MachineTile extends TileEntity implements ITickable {
+public class MachineTile extends TileEntity implements ITickable {
     private Machine machine;
     private Tier tier;
     private IMachineBehaviour[] behaviours = new IMachineBehaviour[0];
-    private CustomLazy<Screen> screen = new CustomLazy<>(() -> machine.getScreen(this, tier), false);
+    private final CustomLazy<Screen> screen = new CustomLazy<>(() -> machine.getScreen(this, tier), false);
     private EMachineStates state = EMachineStates.NOPOWER;
 
     public MachineTile() {

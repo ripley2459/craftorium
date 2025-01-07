@@ -3,7 +3,10 @@ package fr.cyrilneveu.craftorium.api.machine.behaviour;
 import fr.cyrilneveu.craftorium.api.inventory.ESlotFlow;
 import fr.cyrilneveu.craftorium.api.machine.MachineBlock;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
-import fr.cyrilneveu.craftorium.api.mui.*;
+import fr.cyrilneveu.craftorium.api.mui.AButton;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
@@ -22,7 +25,7 @@ import static fr.cyrilneveu.craftorium.api.mui.AButton.ButtonFlowControl.FLOW_IC
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.FACE_FLOW_NBT_KEY;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.WHITE_COLOR;
 
-public final class FlowController implements IMachineBehaviour, INBTSerializable<NBTTagCompound> {
+public class FlowController implements IMachineBehaviour, INBTSerializable<NBTTagCompound> {
     public static final ESlotFlow DEFAULT_SLOT_BEHAVIOUR = ESlotFlow.LOCK;
     private static final byte[] LEFT = {4, 5, 5, 4, 2, 3};
     private static final byte[] RIGHT = {5, 4, 4, 5, 3, 2};

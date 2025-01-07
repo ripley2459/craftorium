@@ -6,7 +6,7 @@ import fr.cyrilneveu.craftorium.api.utils.WeightedList;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
-public final class Vein {
+public class Vein {
     private final String name;
     private final int minY;
     private final int maxY;

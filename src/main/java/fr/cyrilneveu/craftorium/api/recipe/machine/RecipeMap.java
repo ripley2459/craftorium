@@ -9,9 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static fr.cyrilneveu.craftorium.api.Registries.MACHINE_MAPS_REGISTRY;
-
-public final class RecipeMap {
+public class RecipeMap {
     private final String name;
     private final int itemsIn;
     private final int fluidsIn;

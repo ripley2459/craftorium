@@ -4,7 +4,6 @@ import fr.cyrilneveu.craftorium.api.substance.Element;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
 import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
-import fr.cyrilneveu.craftorium.common.recipe.process.WoodProcess;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;

@@ -28,7 +28,7 @@ import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
 
 @ZenClass("mods." + MODID + ".tier.Builder")
 @ZenRegister
-public final class TierBuilder {
+public class TierBuilder {
     private String name;
     private Aestheticism.SubstanceAestheticism aestheticism = new Aestheticism.SubstanceAestheticism("default", false, false, WHITE_COLOR, SoundType.METAL);
     @Nullable

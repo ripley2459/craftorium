@@ -9,7 +9,6 @@ import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.common.integration.tconstruct.TConstructPlugin;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
 import fr.cyrilneveu.craftorium.common.recipe.Maps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
@@ -213,12 +212,13 @@ public abstract class ACommonProxy {
 
         SubstancesObjects.close();
         Substances.close();
+        TiersObjects.close();
         Veins.close();
         Machines.close();
         Tiers.close();
 
         // if (Loader.isModLoaded("tconstruct"))
-            // TConstructPlugin.init();
+        // TConstructPlugin.init();
     }
 
     public void init(FMLInitializationEvent event) {

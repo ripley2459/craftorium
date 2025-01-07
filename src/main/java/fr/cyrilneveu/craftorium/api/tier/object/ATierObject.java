@@ -79,7 +79,7 @@ public abstract class ATierObject implements Comparable<ATierObject> {
 
     @FunctionalInterface
     public interface ICreateObject {
-        void createObject(ATierObject reference, Tier substance);
+        void createObject(ATierObject reference, Tier tier);
     }
 
     @FunctionalInterface

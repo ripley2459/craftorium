@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class MachineScreen extends GuiContainer {
+public class MachineScreen extends GuiContainer {
     private final MachineTile owner;
     private final Screen screen;
 

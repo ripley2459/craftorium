@@ -9,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.VEINS_REGISTRY;
 
-public final class VeinBuilder {
+public class VeinBuilder {
     private String name;
     private int minY;
     private int maxY;

@@ -14,7 +14,7 @@ import java.util.List;
 import static fr.cyrilneveu.craftorium.api.machine.behaviour.RecipeProcessor.MACHINE_CONFIGURATION_MAX;
 import static fr.cyrilneveu.craftorium.api.machine.behaviour.RecipeProcessor.MACHINE_CONFIGURATION_MIN;
 
-public final class MachineRecipeBuilder {
+public class MachineRecipeBuilder {
     private String name;
     private List<OreStack> itemsIn = new ArrayList<>();
     private List<FluidStack> fluidsIn = new ArrayList<>();

@@ -4,14 +4,14 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.inventory.*;
-import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
-import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
+import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.Position.ORIGIN;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.TEXT_COLOR;
 
-public final class MachineBuilder {
+public class MachineBuilder {
     private String name;
     private List<Machine.IGetBehaviours> providers = new LinkedList<>();
     private List<ItemSlotData> items = new LinkedList<>();

@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.mui;
 
 import fr.cyrilneveu.craftorium.api.utils.Size;
 
-public final class Screen {
+public class Screen {
     private final AWidget[] widgets;
     private final Size size;
 

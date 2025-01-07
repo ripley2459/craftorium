@@ -38,7 +38,7 @@ public final class ClientUtils {
     }
 
     public static void playSoundAt(World world, BlockPos pos, Random rand, SoundCategory soundCategory, SoundEvent sound) {
-        world.playSound(pos.getX() + 0.5D, (double) pos.getY(), pos.getZ() + 0.5D, sound, soundCategory, 1.0F, 1.0F, false);
+        world.playSound(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, sound, soundCategory, 1.0F, 1.0F, false);
     }
 
     public static void playSound(SoundEvent sound) {

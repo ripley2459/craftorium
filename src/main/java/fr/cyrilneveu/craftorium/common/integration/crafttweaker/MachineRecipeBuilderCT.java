@@ -22,7 +22,7 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 @ZenClass("mods." + MODID + ".recipe.Builder")
 @ZenRegister
 public final class MachineRecipeBuilderCT {
-    private MachineRecipeBuilder builder;
+    private final MachineRecipeBuilder builder;
 
     public MachineRecipeBuilderCT(String name) {
         this.builder = new MachineRecipeBuilder(name);

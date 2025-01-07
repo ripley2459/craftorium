@@ -2,7 +2,10 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
-import fr.cyrilneveu.craftorium.api.mui.*;
+import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
+import fr.cyrilneveu.craftorium.api.mui.AWidget;
+import fr.cyrilneveu.craftorium.api.mui.Background;
+import fr.cyrilneveu.craftorium.api.mui.Screen;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
@@ -16,7 +19,7 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
-public final class Machine implements Comparable<Machine> {
+public class Machine implements Comparable<Machine> {
     private final String name;
     private final List<IGetBehaviours> providers;
     private final Size screenSize;

@@ -8,7 +8,6 @@ import fr.cyrilneveu.craftorium.api.tier.property.Pack;
 import fr.cyrilneveu.craftorium.api.tier.property.Process;
 import fr.cyrilneveu.craftorium.api.tier.property.Storage;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.machine.Machines;
 import stanhebben.zenscript.annotations.ZenClass;
 
 import javax.annotation.Nonnull;
@@ -19,7 +18,7 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 @ZenClass("mods." + MODID + ".tier.Tier")
 @ZenRegister
-public final class Tier implements Comparable<Tier> {
+public class Tier implements Comparable<Tier> {
     private final String name;
     private final Aestheticism.SubstanceAestheticism aestheticism;
     @Nullable

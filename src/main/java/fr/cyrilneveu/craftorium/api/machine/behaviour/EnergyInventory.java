@@ -21,12 +21,12 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.ENERGY_NBT_KEY;
 
-public final class EnergyInventory implements IEnergyStorage, IMachineBehaviour, INBTSerializable<NBTTagCompound>, ICapabilityProvider {
+public class EnergyInventory implements IEnergyStorage, IMachineBehaviour, INBTSerializable<NBTTagCompound>, ICapabilityProvider {
     private final MachineTile owner;
     private final EnergySlotData slotData;
+    private final int capacity;
+    private final int transfer;
     private int energy;
-    private int capacity;
-    private int transfer;
 
     public EnergyInventory(MachineTile owner, EnergySlotData slot) {
         this.owner = owner;
@@ -96,7 +96,7 @@ public final class EnergyInventory implements IEnergyStorage, IMachineBehaviour,
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return NBTUtils.setValue(ENERGY_NBT_KEY, energy,new NBTTagCompound());
+        return NBTUtils.setValue(ENERGY_NBT_KEY, energy, new NBTTagCompound());
     }
 
     @Override

@@ -51,7 +51,7 @@ import java.util.stream.IntStream;
 import static fr.cyrilneveu.craftorium.api.inventory.GuiHandler.MACHINE_GUI_ID;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 
-public final class MachineBlock extends CustomBlock implements ITileEntityProvider {
+public class MachineBlock extends CustomBlock implements ITileEntityProvider {
     public static final PropertyEnum<EMachineStates> STATE = PropertyEnum.create("state", EMachineStates.class);
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     private final Machine machine;

@@ -1,15 +1,17 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
 import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
+import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
-import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collections;
@@ -72,14 +74,14 @@ public final class TiersObjects {
     }
 
     private static void createStandalone(ATierObject reference, Tier tier) {
-        TierItem item = new TierItem(reference, tier);
+        CustomItem item = new CustomItem(reference.getBehaviours(tier), new Aestheticism.ObjectAestheticism(reference.getFaces(tier), () -> reference.getTooltips(tier), tier.getAestheticism().isGlint(), ItemStack::getTranslationKey));
         item.setMaxStackSize(1);
 
         createItem(reference, tier, item);
     }
 
     private static void createItem(ATierObject reference, Tier tier) {
-        TierItem item = new TierItem(reference, tier);
+        CustomItem item = new CustomItem(reference.getBehaviours(tier), new Aestheticism.ObjectAestheticism(reference.getFaces(tier), () -> reference.getTooltips(tier), tier.getAestheticism().isGlint(), ItemStack::getTranslationKey));
 
         createItem(reference, tier, item);
     }

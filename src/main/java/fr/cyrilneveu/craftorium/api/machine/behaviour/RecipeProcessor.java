@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public final class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerializable<NBTTagCompound> {
+public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerializable<NBTTagCompound> {
     public static final int MACHINE_CONFIGURATION_MIN = 1;
     public static final int MACHINE_CONFIGURATION_MAX = 128;
     public static final String MACHINE_CONFIGURATION_NBT = "MachineProcessingConfiguration";

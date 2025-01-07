@@ -25,7 +25,7 @@ import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
-public final class SubstanceBuilder {
+public class SubstanceBuilder {
     private String name;
     private Set<SubstanceStack> composition = new LinkedHashSet<>();
     private Set<SubstanceStack> possible = new LinkedHashSet<>();
