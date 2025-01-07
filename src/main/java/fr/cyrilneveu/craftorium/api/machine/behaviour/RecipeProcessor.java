@@ -158,7 +158,7 @@ public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerial
         recipe = map.getRecipe(itemInventory != null ? itemInventory.getStacksInInputs() : Collections.emptyList(), fluidInventory != null ? fluidInventory.getStacksInInputs() : Collections.emptyList(), configuration, cache);
         if (recipe != null) {
             progress = 0;
-            progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getProcess().getSpeed()));
+            progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getSpeed()));
             owner.markDirty();
             return true;
         }
@@ -302,7 +302,7 @@ public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerial
             recipe = map.getRecipe(NBTUtils.getStringValue(MACHINE_RECIPE_NBT, nbt));
             if (recipe != null) {
                 progress = NBTUtils.getIntValue(MACHINE_PROGRESS_NBT, nbt);
-                progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getProcess().getSpeed()));
+                progressMax = Math.max(1, Math.round(recipe.getDuration() / owner.getTier().getSpeed()));
             } else {
                 progress = 0;
                 progressMax = 0;

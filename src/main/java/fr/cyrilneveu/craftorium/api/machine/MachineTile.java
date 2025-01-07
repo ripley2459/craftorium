@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
 import fr.cyrilneveu.craftorium.api.mui.Screen;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -25,7 +25,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.*;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
-import static fr.cyrilneveu.craftorium.common.tier.Tiers.ONE;
+import static fr.cyrilneveu.craftorium.common.substance.Tiers.ONE;
 
 public class MachineTile extends TileEntity implements ITickable {
     private Machine machine;

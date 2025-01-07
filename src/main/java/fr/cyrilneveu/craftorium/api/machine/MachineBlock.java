@@ -6,7 +6,7 @@ import fr.cyrilneveu.craftorium.api.block.CustomBlock;
 import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.*;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.ClientUtils;
 import fr.cyrilneveu.craftorium.api.utils.CustomIterable;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;

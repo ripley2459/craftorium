@@ -31,6 +31,18 @@ import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
 public final class SubstancesObjects {
+    public static ASubstanceObject.SubstanceItem BATTERY;
+    public static ASubstanceObject.SubstanceItem BUZZSAW;
+    public static ASubstanceObject.SubstanceItem EMITTER;
+    public static ASubstanceObject.SubstanceItem GRINDER;
+    public static ASubstanceObject.SubstanceItem HEAT_EXCHANGER;
+    public static ASubstanceObject.SubstanceItem MOTOR;
+    public static ASubstanceObject.SubstanceItem PISTON;
+    public static ASubstanceObject.SubstanceItem PUMP;
+    public static ASubstanceObject.SubstanceItem ROBOT_ARM;
+    public static ASubstanceObject.SubstanceItem SCANNER;
+    public static ASubstanceObject.SubstanceItem SENSOR;
+
     public static ASubstanceObject.SubstanceItem CASING;
     public static ASubstanceObject.SubstanceItem DUST;
     public static ASubstanceObject.SubstanceItem FOIL;
@@ -67,6 +79,8 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceBlock HULL;
     public static ASubstanceObject.SubstanceBlock ORE;
 
+    public static ASubstanceObject.SubstanceBlock MACHINE_FRAME;
+
     public static ASubstanceObject.SubstanceFluid LIQUID;
 
     public static void init() {
@@ -77,6 +91,18 @@ public final class SubstancesObjects {
         SUBSTANCE_TOOLS_REGISTRY.initialize();
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
+
+        BATTERY = createItem("battery").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        BUZZSAW = createItem("buzzsaw").build();
+        EMITTER = createItem("emitter").build();
+        GRINDER = createItem("grinder").build();
+        HEAT_EXCHANGER = createItem("heat_exchanger").build();
+        MOTOR = createItem("motor").build();
+        PISTON = createItem("piston").build();
+        PUMP = createItem("pump").build();
+        ROBOT_ARM = createItem("robot_arm").build();
+        SCANNER = createItem("scanner").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        SENSOR = createItem("sensor").build();
 
         GEM = createItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
         INGOT = createItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
@@ -113,6 +139,8 @@ public final class SubstancesObjects {
         FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(ROD.getAmount() * 8).build();
         HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(PLATE.getAmount() * 8).build();
         ORE = createBlock("ore", SubstancesObjects::createOre).tooltips(SubstancesObjects::baseTooltips).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
+
+        MACHINE_FRAME = createBlock("machine_frame", SubstancesObjects::createBlock).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(BASE_AMOUNT * 9).build();
 
         LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
     }

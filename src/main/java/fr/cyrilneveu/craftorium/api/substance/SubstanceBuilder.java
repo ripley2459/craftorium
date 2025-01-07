@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
+import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
@@ -20,8 +21,11 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.FUEL;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
+import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
 import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
@@ -49,6 +53,15 @@ public class SubstanceBuilder {
     private int oreColor = ERROR_COLOR;
     private int fluidColor = ERROR_COLOR;
     private SoundType soundType = SoundType.METAL;
+    private boolean isTier = false;
+    private int simultaneous = 1;
+    private int chance = 0;
+    private float recipeSpeedMultiplier = 1.0f;
+    private float tankSize = 1.0f;
+    private float energyBuffer = 1.0f;
+    private float energyIO = 1.0f;
+    private Set<Machine> machines = new TreeSet<>();
+    private Substance carcass, mechanical, energy, fluid, heat;
 
     public SubstanceBuilder(String name) {
         this.name = name;
@@ -255,6 +268,15 @@ public class SubstanceBuilder {
         return this;
     }
 
+    public SubstanceBuilder packageTier() {
+        if (isTier) {
+            items(BATTERY, BUZZSAW, EMITTER, GRINDER, HEAT_EXCHANGER, MOTOR, PISTON, PUMP, ROBOT_ARM, SCANNER, SENSOR);
+            blocks(MACHINE_FRAME);
+            machines(ELECTROLYZER, MACERATOR, BENDER, LATHE, M_CUTTER, COMPRESSOR, FOUNDRY, MIXER, CIRCUIT_ASSEMBLER, ASSEMBLER);
+        }
+        return this;
+    }
+
     public SubstanceBuilder items(ASubstanceObject.SubstanceItem... items) {
         if (items.length == 0)
             this.items = new TreeSet<>();
@@ -347,6 +369,53 @@ public class SubstanceBuilder {
         return this;
     }
 
+    public SubstanceBuilder isTier() {
+        isTier = true;
+        return this;
+    }
+
+    public SubstanceBuilder fluidStorage(float tankSize) {
+        this.tankSize = tankSize;
+        return this;
+    }
+
+    public SubstanceBuilder energyStorage(float energyBuffer, float energyIO) {
+        this.energyBuffer = energyBuffer;
+        this.energyIO = energyIO;
+        return this;
+    }
+
+    public SubstanceBuilder simultaneousRecipe(int simultaneous) {
+        this.simultaneous = Math.min(1, simultaneous);
+        return this;
+    }
+
+    public SubstanceBuilder additionalChance(int chance) {
+        this.chance = Math.min(0, chance);
+        return this;
+    }
+
+    public SubstanceBuilder recipeSpeedMultiplier(float recipeSpeedMultiplier) {
+        this.recipeSpeedMultiplier = Math.max(EPSILON, recipeSpeedMultiplier);
+        return this;
+    }
+
+    public SubstanceBuilder machines(Machine... machines) {
+        if (machines.length == 0)
+            this.machines = new TreeSet<>();
+        this.machines.addAll(Arrays.asList(machines));
+        return this;
+    }
+
+    public SubstanceBuilder pack(Substance carcass, Substance mechanical, Substance energy, Substance fluid, Substance heat) {
+        this.carcass = carcass;
+        this.mechanical = mechanical;
+        this.energy = energy;
+        this.fluid = fluid;
+        this.heat = heat;
+        return this;
+    }
+
     public Substance build() {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
 
@@ -356,16 +425,28 @@ public class SubstanceBuilder {
             colorAverage();
         if (temperature == Temperature.EMPTY)
             temperatureAverage();
-
-        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, new Aestheticism.SubstanceAestheticism(style, shiny, glint, baseColor, oreColor, fluidColor, soundType), process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        Aestheticism.SubstanceAestheticism aestheticism1 = new Aestheticism.SubstanceAestheticism(style, shiny, glint, baseColor, oreColor, fluidColor, soundType);
 
         if (efficiency != null) {
             EnumHelper.addToolMaterial(name, efficiency.getHarvestLevel(), efficiency.getDurability(), efficiency.getSpeed(), efficiency.getDamage(), efficiency.getEnchantability());
             // .setRepairItem(INGOT.asItemStack(substance)); isn't called anywhere because the ingot.getOre(sub) is used to get the repair material.
         }
 
-        SUBSTANCES_REGISTRY.put(name, substance);
+        if (isTier) {
+            Tier tier = new Tier(name, composition1, efficiency, toughness, temperature, aestheticism1, process, ImmutableMap.copyOf(properties),
+                    ImmutableSortedSet.copyOf(items),
+                    efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools),
+                    ImmutableSortedSet.copyOf(blocks),
+                    ImmutableSortedSet.copyOf(fluids),
+                    ImmutableMap.copyOf(overrides),
+                    simultaneous, chance, recipeSpeedMultiplier, tankSize, energyBuffer, energyIO, machines, carcass, mechanical, energy, fluid, heat);
+            TIERS_REGISTRY.put(name, tier);
+            SUBSTANCES_REGISTRY.put(name, tier);
+            return tier;
+        }
 
+        Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, aestheticism1, process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
+        SUBSTANCES_REGISTRY.put(name, substance);
         return substance;
     }
 }

@@ -5,9 +5,9 @@ import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.api.utils.EColors;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
@@ -23,10 +23,8 @@ import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.CUTTER;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
-import static fr.cyrilneveu.craftorium.common.tier.Tiers.*;
-import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.*;
+import static fr.cyrilneveu.craftorium.common.substance.Tiers.*;
 
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
@@ -137,110 +135,100 @@ public final class RecipesHandler {
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
 
-        if (ONE.getPack() != null) {
-            registerMotorRecipe(ONE);
-            registerPistonRecipe(ONE);
-            registerHeatExchangerRecipe(ONE, RUBBER);
-            registerPumpRecipe(ONE, RUBBER);
-            registerEmitterRecipe(ONE, DIAMOND, "circuitTier1");
-            registerSensorRecipe(ONE, ENDER, "circuitTier1");
-            registerBatteryRecipe(ONE);
-            registerRobotArmRecipe(ONE, "circuitTier1");
+        registerMotorRecipe(ONE);
+        registerPistonRecipe(ONE);
+        registerHeatExchangerRecipe(ONE, RUBBER);
+        registerPumpRecipe(ONE, RUBBER);
+        registerEmitterRecipe(ONE, DIAMOND, "circuitTier1");
+        registerSensorRecipe(ONE, ENDER, "circuitTier1");
+        registerBatteryRecipe(ONE);
+        registerRobotArmRecipe(ONE, "circuitTier1");
 
-            registerCircuitAssemblerRecipe(ONE, "circuitTier1");
-            registerMixerRecipe(ONE, "circuitTier1");
-            registerFoundryRecipe(ONE, "circuitTier1");
-            registerCompressorRecipe(ONE, "circuitTier1");
-            registerElectrolyzerRecipe(ONE, "circuitTier1");
-            registerMaceratorRecipe(ONE, "circuitTier1");
-            registerBenderRecipe(ONE, "circuitTier1");
-            registerCutterRecipe(ONE, "circuitTier1");
-            registerLatheRecipe(ONE, "circuitTier1");
-        }
+        registerCircuitAssemblerRecipe(ONE, "circuitTier1");
+        registerMixerRecipe(ONE, "circuitTier1");
+        registerFoundryRecipe(ONE, "circuitTier1");
+        registerCompressorRecipe(ONE, "circuitTier1");
+        registerElectrolyzerRecipe(ONE, "circuitTier1");
+        registerMaceratorRecipe(ONE, "circuitTier1");
+        registerBenderRecipe(ONE, "circuitTier1");
+        registerCutterRecipe(ONE, "circuitTier1");
+        registerLatheRecipe(ONE, "circuitTier1");
 
-        if (TWO.getPack() != null) {
-            registerMotorRecipe(TWO);
-            registerPistonRecipe(TWO);
-            registerHeatExchangerRecipe(TWO, RUBBER);
-            registerPumpRecipe(TWO, RUBBER);
-            registerEmitterRecipe(TWO, DIAMOND, "circuitTier2");
-            registerSensorRecipe(TWO, ENDER, "circuitTier2");
-            registerBatteryRecipe(TWO);
-            registerRobotArmRecipe(TWO, "circuitTier2");
+        registerMotorRecipe(TWO);
+        registerPistonRecipe(TWO);
+        registerHeatExchangerRecipe(TWO, RUBBER);
+        registerPumpRecipe(TWO, RUBBER);
+        registerEmitterRecipe(TWO, DIAMOND, "circuitTier2");
+        registerSensorRecipe(TWO, ENDER, "circuitTier2");
+        registerBatteryRecipe(TWO);
+        registerRobotArmRecipe(TWO, "circuitTier2");
 
-            registerCircuitAssemblerRecipe(TWO, "circuitTier2");
-            registerMixerRecipe(TWO, "circuitTier2");
-            registerFoundryRecipe(TWO, "circuitTier2");
-            registerCompressorRecipe(TWO, "circuitTier2");
-            registerElectrolyzerRecipe(TWO, "circuitTier2");
-            registerMaceratorRecipe(TWO, "circuitTier2");
-            registerBenderRecipe(TWO, "circuitTier2");
-            registerCutterRecipe(TWO, "circuitTier2");
-            registerLatheRecipe(TWO, "circuitTier2");
-        }
+        registerCircuitAssemblerRecipe(TWO, "circuitTier2");
+        registerMixerRecipe(TWO, "circuitTier2");
+        registerFoundryRecipe(TWO, "circuitTier2");
+        registerCompressorRecipe(TWO, "circuitTier2");
+        registerElectrolyzerRecipe(TWO, "circuitTier2");
+        registerMaceratorRecipe(TWO, "circuitTier2");
+        registerBenderRecipe(TWO, "circuitTier2");
+        registerCutterRecipe(TWO, "circuitTier2");
+        registerLatheRecipe(TWO, "circuitTier2");
 
-        if (THREE.getPack() != null) {
-            registerMotorRecipe(THREE);
-            registerPistonRecipe(THREE);
-            registerHeatExchangerRecipe(THREE, RUBBER);
-            registerPumpRecipe(THREE, RUBBER);
-            registerEmitterRecipe(THREE, DIAMOND, "circuitTier3");
-            registerSensorRecipe(THREE, ENDER, "circuitTier3");
-            registerBatteryRecipe(THREE);
-            registerRobotArmRecipe(THREE, "circuitTier3");
+        registerMotorRecipe(THREE);
+        registerPistonRecipe(THREE);
+        registerHeatExchangerRecipe(THREE, RUBBER);
+        registerPumpRecipe(THREE, RUBBER);
+        registerEmitterRecipe(THREE, DIAMOND, "circuitTier3");
+        registerSensorRecipe(THREE, ENDER, "circuitTier3");
+        registerBatteryRecipe(THREE);
+        registerRobotArmRecipe(THREE, "circuitTier3");
 
-            registerCircuitAssemblerRecipe(THREE, "circuitTier3");
-            registerMixerRecipe(THREE, "circuitTier3");
-            registerFoundryRecipe(THREE, "circuitTier3");
-            registerCompressorRecipe(THREE, "circuitTier3");
-            registerElectrolyzerRecipe(THREE, "circuitTier3");
-            registerMaceratorRecipe(THREE, "circuitTier3");
-            registerBenderRecipe(THREE, "circuitTier3");
-            registerCutterRecipe(THREE, "circuitTier3");
-            registerLatheRecipe(THREE, "circuitTier3");
-        }
+        registerCircuitAssemblerRecipe(THREE, "circuitTier3");
+        registerMixerRecipe(THREE, "circuitTier3");
+        registerFoundryRecipe(THREE, "circuitTier3");
+        registerCompressorRecipe(THREE, "circuitTier3");
+        registerElectrolyzerRecipe(THREE, "circuitTier3");
+        registerMaceratorRecipe(THREE, "circuitTier3");
+        registerBenderRecipe(THREE, "circuitTier3");
+        registerCutterRecipe(THREE, "circuitTier3");
+        registerLatheRecipe(THREE, "circuitTier3");
 
-        if (FOUR.getPack() != null) {
-            registerMotorRecipe(FOUR);
-            registerPistonRecipe(FOUR);
-            registerHeatExchangerRecipe(FOUR, RUBBER);
-            registerPumpRecipe(FOUR, RUBBER);
-            registerEmitterRecipe(FOUR, DIAMOND, "circuitTier4");
-            registerSensorRecipe(FOUR, ENDER, "circuitTier4");
-            registerBatteryRecipe(FOUR);
-            registerRobotArmRecipe(FOUR, "circuitTier4");
+        registerMotorRecipe(FOUR);
+        registerPistonRecipe(FOUR);
+        registerHeatExchangerRecipe(FOUR, RUBBER);
+        registerPumpRecipe(FOUR, RUBBER);
+        registerEmitterRecipe(FOUR, DIAMOND, "circuitTier4");
+        registerSensorRecipe(FOUR, ENDER, "circuitTier4");
+        registerBatteryRecipe(FOUR);
+        registerRobotArmRecipe(FOUR, "circuitTier4");
 
-            registerCircuitAssemblerRecipe(FOUR, "circuitTier4");
-            registerMixerRecipe(FOUR, "circuitTier4");
-            registerFoundryRecipe(FOUR, "circuitTier5");
-            registerCompressorRecipe(FOUR, "circuitTier4");
-            registerElectrolyzerRecipe(FOUR, "circuitTier4");
-            registerMaceratorRecipe(FOUR, "circuitTier4");
-            registerBenderRecipe(FOUR, "circuitTier4");
-            registerCutterRecipe(FOUR, "circuitTier4");
-            registerLatheRecipe(FOUR, "circuitTier4");
-        }
+        registerCircuitAssemblerRecipe(FOUR, "circuitTier4");
+        registerMixerRecipe(FOUR, "circuitTier4");
+        registerFoundryRecipe(FOUR, "circuitTier5");
+        registerCompressorRecipe(FOUR, "circuitTier4");
+        registerElectrolyzerRecipe(FOUR, "circuitTier4");
+        registerMaceratorRecipe(FOUR, "circuitTier4");
+        registerBenderRecipe(FOUR, "circuitTier4");
+        registerCutterRecipe(FOUR, "circuitTier4");
+        registerLatheRecipe(FOUR, "circuitTier4");
 
-        if (FIVE.getPack() != null) {
-            registerMotorRecipe(FIVE);
-            registerPistonRecipe(FIVE);
-            registerHeatExchangerRecipe(FIVE, RUBBER);
-            registerPumpRecipe(FIVE, RUBBER);
-            registerEmitterRecipe(FIVE, DIAMOND, "circuitTier5");
-            registerSensorRecipe(FIVE, ENDER, "circuitTier5");
-            registerBatteryRecipe(FIVE);
-            registerRobotArmRecipe(FIVE, "circuitTier5");
+        registerMotorRecipe(FIVE);
+        registerPistonRecipe(FIVE);
+        registerHeatExchangerRecipe(FIVE, RUBBER);
+        registerPumpRecipe(FIVE, RUBBER);
+        registerEmitterRecipe(FIVE, DIAMOND, "circuitTier5");
+        registerSensorRecipe(FIVE, ENDER, "circuitTier5");
+        registerBatteryRecipe(FIVE);
+        registerRobotArmRecipe(FIVE, "circuitTier5");
 
-            registerCircuitAssemblerRecipe(FIVE, "circuitTier5");
-            registerMixerRecipe(FIVE, "circuitTier5");
-            registerFoundryRecipe(FIVE, "circuitTier5");
-            registerCompressorRecipe(FIVE, "circuitTier5");
-            registerElectrolyzerRecipe(FIVE, "circuitTier5");
-            registerMaceratorRecipe(FIVE, "circuitTier5");
-            registerBenderRecipe(FIVE, "circuitTier5");
-            registerCutterRecipe(FIVE, "circuitTier5");
-            registerLatheRecipe(FIVE, "circuitTier5");
-        }
+        registerCircuitAssemblerRecipe(FIVE, "circuitTier5");
+        registerMixerRecipe(FIVE, "circuitTier5");
+        registerFoundryRecipe(FIVE, "circuitTier5");
+        registerCompressorRecipe(FIVE, "circuitTier5");
+        registerElectrolyzerRecipe(FIVE, "circuitTier5");
+        registerMaceratorRecipe(FIVE, "circuitTier5");
+        registerBenderRecipe(FIVE, "circuitTier5");
+        registerCutterRecipe(FIVE, "circuitTier5");
+        registerLatheRecipe(FIVE, "circuitTier5");
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
                 .consumeItem(new ItemStack(Blocks.LOG))
@@ -444,7 +432,7 @@ public final class RecipesHandler {
         }
 
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("microprocessor")
-                .consumeItem(WIRE.getOre(TWO.getPack().getEnergy()), 1)
+                .consumeItem(WIRE.getOre(TWO.getEnergy()), 1)
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 1))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 1))
                 .produceItem(ACommonProxy.getItemStack("microprocessor"))
@@ -453,7 +441,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("processor")
-                .consumeItem(WIRE.getOre(THREE.getPack().getEnergy()), 4)
+                .consumeItem(WIRE.getOre(THREE.getEnergy()), 4)
                 .consumeItem(ACommonProxy.getItemStack("microprocessor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 4))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 4))
@@ -464,7 +452,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("advanced_processor")
-                .consumeItem(WIRE.getOre(FOUR.getPack().getEnergy()), 16)
+                .consumeItem(WIRE.getOre(FOUR.getEnergy()), 16)
                 .consumeItem(ACommonProxy.getItemStack("processor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 16))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 16))
@@ -475,7 +463,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("mainframe")
-                .consumeItem(WIRE.getOre(FIVE.getPack().getEnergy()), 64)
+                .consumeItem(WIRE.getOre(FIVE.getEnergy()), 64)
                 .consumeItem(ACommonProxy.getItemStack("advanced_processor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 64))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 64))
@@ -575,9 +563,9 @@ public final class RecipesHandler {
         RecipeManager.addShapedRecipe(MOTOR.getName(tier), MOTOR.asItemStack(tier),
                 "WC", "FR", " C",
                 'W', WRENCH.asIngredient(null),
-                'C', WIRE.asIngredient(tier.getPack().getEnergy()),
-                'F', FOIL.asIngredient(tier.getPack().getMechanical()),
-                'R', ROD.asIngredient(tier.getPack().getMechanical())
+                'C', WIRE.asIngredient(tier.getEnergy()),
+                'F', FOIL.asIngredient(tier.getMechanical()),
+                'R', ROD.asIngredient(tier.getMechanical())
         );
     }
 
@@ -587,12 +575,12 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(PISTON.getName(tier), PISTON.asItemStack(tier),
                 "PW", "RG", "MC",
-                'P', PLATE.asIngredient(tier.getPack().getMechanical()),
+                'P', PLATE.asIngredient(tier.getMechanical()),
                 'W', WRENCH.asIngredient(null),
-                'R', ROD.asIngredient(tier.getPack().getMechanical()),
-                'G', GEAR.asIngredient(tier.getPack().getMechanical()),
+                'R', ROD.asIngredient(tier.getMechanical()),
+                'G', GEAR.asIngredient(tier.getMechanical()),
                 'M', MOTOR.asItemStack(tier),
-                'C', WIRE.asIngredient(tier.getPack().getEnergy())
+                'C', WIRE.asIngredient(tier.getEnergy())
         );
     }
 
@@ -602,11 +590,11 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(HEAT_EXCHANGER.getName(tier), HEAT_EXCHANGER.asItemStack(tier),
                 "FN", "RS", "VC",
-                'F', FOIL.asIngredient(tier.getPack().getFluid()),
+                'F', FOIL.asIngredient(tier.getFluid()),
                 'N', SCREWDRIVER.asIngredient(null),
                 'R', RING.asIngredient(fluidIsolator),
-                'S', SCREW.asIngredient(tier.getPack().getMechanical()),
-                'V', FOIL.asIngredient(tier.getPack().getHeat()),
+                'S', SCREW.asIngredient(tier.getMechanical()),
+                'V', FOIL.asIngredient(tier.getHeat()),
                 'C', WRENCH.asIngredient(null)
         );
     }
@@ -617,14 +605,14 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(PUMP.getName(tier), PUMP.asItemStack(tier),
                 "SMP", "WFL", "PKC",
-                'S', SCREW.asIngredient(tier.getPack().getMechanical()),
+                'S', SCREW.asIngredient(tier.getMechanical()),
                 'M', MOTOR.asItemStack(tier),
                 'P', RING.asIngredient(fluidIsolator),
                 'W', WRENCH.asIngredient(null),
-                'F', FOIL.asIngredient(tier.getPack().getFluid()),
+                'F', FOIL.asIngredient(tier.getFluid()),
                 'L', SCREWDRIVER.asIngredient(null),
-                'K', FOIL.asIngredient(tier.getPack().getCarcass()),
-                'C', WIRE.asIngredient(tier.getPack().getEnergy())
+                'K', FOIL.asIngredient(tier.getCarcass()),
+                'C', WIRE.asIngredient(tier.getEnergy())
         );
     }
 
@@ -635,11 +623,11 @@ public final class RecipesHandler {
         RecipeManager.addShapedRecipe(EMITTER.getName(tier), EMITTER.asItemStack(tier),
                 "NSD", "PRW", "JPC",
                 'N', SCREWDRIVER.asIngredient(null),
-                'S', SCREW.asIngredient(tier.getPack().getMechanical()),
+                'S', SCREW.asIngredient(tier.getMechanical()),
                 'D', GEM.asIngredient(emitter),
-                'P', PLATE.asIngredient(tier.getPack().getCarcass()),
-                'R', ROD.asIngredient(tier.getPack().getMechanical()),
-                'W', WIRE.asIngredient(tier.getPack().getEnergy()),
+                'P', PLATE.asIngredient(tier.getCarcass()),
+                'R', ROD.asIngredient(tier.getMechanical()),
+                'W', WIRE.asIngredient(tier.getEnergy()),
                 'J', OreStack.getIngredient(circuit),
                 'C', WRENCH.asIngredient(null)
         );
@@ -652,11 +640,11 @@ public final class RecipesHandler {
         RecipeManager.addShapedRecipe(SENSOR.getName(tier), SENSOR.asItemStack(tier),
                 "CFW", "KDS", "NFW",
                 'C', WRENCH.asIngredient(null),
-                'F', FOIL.asIngredient(tier.getPack().getCarcass()),
-                'W', WIRE.asIngredient(tier.getPack().getEnergy()),
+                'F', FOIL.asIngredient(tier.getCarcass()),
+                'W', WIRE.asIngredient(tier.getEnergy()),
                 'K', OreStack.getIngredient(circuit),
                 'D', PEARL.asIngredient(sensor),
-                'S', SCREW.asIngredient(tier.getPack().getMechanical()),
+                'S', SCREW.asIngredient(tier.getMechanical()),
                 'N', SCREWDRIVER.asIngredient(null)
         );
     }
@@ -667,7 +655,7 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(BATTERY.getName(tier), BATTERY.asItemStack(tier),
                 "C ", "FW", "F ",
-                'C', WIRE.asIngredient(tier.getPack().getEnergy()),
+                'C', WIRE.asIngredient(tier.getEnergy()),
                 'F', PLATE.asIngredient(PLASTIC),
                 'W', WRENCH.asIngredient(null)
         );
@@ -679,13 +667,13 @@ public final class RecipesHandler {
 
         RecipeManager.addShapedRecipe(ROBOT_ARM.getName(tier), ROBOT_ARM.asItemStack(tier),
                 "GWG", "RMR", "PSC",
-                'G', GEAR.asIngredient(tier.getPack().getMechanical()),
+                'G', GEAR.asIngredient(tier.getMechanical()),
                 'M', MOTOR.asItemStack(tier),
-                'R', ROD.asIngredient(tier.getPack().getMechanical()),
+                'R', ROD.asIngredient(tier.getMechanical()),
                 'S', OreStack.getIngredient(circuit),
-                'P', PLATE.asIngredient(tier.getPack().getEnergy()),
+                'P', PLATE.asIngredient(tier.getEnergy()),
                 'W', WRENCH.asIngredient(null),
-                'C', WIRE.asIngredient(tier.getPack().getEnergy())
+                'C', WIRE.asIngredient(tier.getEnergy())
         );
     }
 
@@ -700,7 +688,7 @@ public final class RecipesHandler {
                 'E', EMITTER.asIngredient(tier),
                 'A', ROBOT_ARM.asIngredient(tier),
                 'C', SENSOR.asIngredient(tier),
-                'G', GEAR.asIngredient(tier.getPack().getMechanical())
+                'G', GEAR.asIngredient(tier.getMechanical())
         );
     }
 
@@ -713,8 +701,8 @@ public final class RecipesHandler {
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
                 'M', MOTOR.asIngredient(tier),
-                'R', ROTOR.getOre(tier.getPack().getMechanical()),
-                'W', WIRE.getOre(tier.getPack().getEnergy())
+                'R', ROTOR.getOre(tier.getMechanical()),
+                'W', WIRE.getOre(tier.getEnergy())
         );
     }
 
@@ -726,7 +714,7 @@ public final class RecipesHandler {
                 "CWC", "WHW", "SWS",
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
-                'W', PLATE.getOre(tier.getPack().getHeat()),
+                'W', PLATE.getOre(tier.getHeat()),
                 'S', HEAT_EXCHANGER.asIngredient(tier)
         );
     }
@@ -741,7 +729,7 @@ public final class RecipesHandler {
                 'C', OreStack.getIngredient(circuit),
                 'P', PISTON.asIngredient(tier),
                 'A', ROBOT_ARM.asIngredient(tier),
-                'W', WIRE.getOre(tier.getPack().getEnergy())
+                'W', WIRE.getOre(tier.getEnergy())
         );
     }
 
@@ -755,7 +743,7 @@ public final class RecipesHandler {
                 'C', OreStack.getIngredient(circuit),
                 'S', EMITTER.asIngredient(tier),
                 'G', OreStack.getIngredient("blockGlass"),
-                'W', WIRE.getOre(tier.getPack().getEnergy())
+                'W', WIRE.getOre(tier.getEnergy())
         );
     }
 
@@ -769,7 +757,7 @@ public final class RecipesHandler {
                 'C', OreStack.getIngredient(circuit),
                 'M', MOTOR.asIngredient(tier),
                 'G', GRINDER.asIngredient(tier),
-                'W', WIRE.getOre(tier.getPack().getEnergy())
+                'W', WIRE.getOre(tier.getEnergy())
         );
     }
 
@@ -782,21 +770,21 @@ public final class RecipesHandler {
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
                 'P', PISTON.asIngredient(tier),
-                'W', WIRE.asIngredient(tier.getPack().getEnergy())
+                'W', WIRE.asIngredient(tier.getEnergy())
         );
     }
 
     private static void registerCutterRecipe(Tier tier, String circuit) {
-        if (!tier.getMachines().contains(Machines.CUTTER))
+        if (!tier.getMachines().contains(Machines.M_CUTTER))
             return;
 
-        RecipeManager.addShapedRecipe(Machines.CUTTER.getName(tier), Machines.CUTTER.asItemStack(tier),
+        RecipeManager.addShapedRecipe(Machines.M_CUTTER.getName(tier), Machines.M_CUTTER.asItemStack(tier),
                 "MBM", "WHW", "CWC",
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
                 'M', MOTOR.asIngredient(tier),
                 'B', BUZZSAW.asIngredient(tier),
-                'W', WIRE.asIngredient(tier.getPack().getEnergy())
+                'W', WIRE.asIngredient(tier.getEnergy())
         );
     }
 
@@ -811,7 +799,7 @@ public final class RecipesHandler {
                 'M', MOTOR.asIngredient(tier),
                 'H', MACHINE_FRAME.asIngredient(tier),
                 'C', OreStack.getIngredient(circuit),
-                'W', WIRE.asIngredient(tier.getPack().getEnergy())
+                'W', WIRE.asIngredient(tier.getEnergy())
         );
     }
 }

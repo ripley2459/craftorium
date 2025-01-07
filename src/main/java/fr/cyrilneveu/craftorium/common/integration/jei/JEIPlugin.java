@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.common.integration.jei;
 
 import fr.cyrilneveu.craftorium.api.machine.Machine;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineRecipeCategory;
 import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineRecipeWrapper;
@@ -16,7 +16,7 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
-import static fr.cyrilneveu.craftorium.common.tier.TiersObjects.SCANNER;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.SCANNER;
 
 @mezz.jei.api.JEIPlugin
 public final class JEIPlugin implements IModPlugin {

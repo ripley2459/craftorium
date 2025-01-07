@@ -31,8 +31,8 @@ public class EnergyInventory implements IEnergyStorage, IMachineBehaviour, INBTS
     public EnergyInventory(MachineTile owner, EnergySlotData slot) {
         this.owner = owner;
         this.slotData = slot;
-        this.capacity = (int) (slot.getCapacity() * owner.getTier().getStorage().getEnergyBuffer());
-        this.transfer = (int) (slot.getTransfer() * owner.getTier().getStorage().getEnergyBuffer());
+        this.capacity = (int) (slot.getCapacity() * owner.getTier().getEnergyBuffer());
+        this.transfer = (int) (slot.getTransfer() * owner.getTier().getEnergyBuffer());
     }
 
     @Override

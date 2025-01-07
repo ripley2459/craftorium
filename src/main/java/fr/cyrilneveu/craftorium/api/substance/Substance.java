@@ -20,20 +20,20 @@ import java.util.Set;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
 public class Substance implements Comparable<Substance> {
-    private final String name;
-    private final Composition composition;
+    protected final String name;
+    protected final Composition composition;
     @Nullable
-    private final Efficiency efficiency;
-    private final Toughness toughness;
-    private final Temperature temperature;
-    private final Aestheticism.SubstanceAestheticism aestheticism;
-    private final AProcess process;
-    private final Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties;
-    private final Set<ASubstanceObject.SubstanceItem> items;
-    private final Set<ASubstanceObject.SubstanceTool> tools;
-    private final Set<ASubstanceObject.SubstanceBlock> blocks;
-    private final Set<ASubstanceObject.SubstanceFluid> fluids;
-    private final Map<ASubstanceObject, String> overrides;
+    protected final Efficiency efficiency;
+    protected final Toughness toughness;
+    protected final Temperature temperature;
+    protected final Aestheticism.SubstanceAestheticism aestheticism;
+    protected final AProcess process;
+    protected final Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties;
+    protected final Set<ASubstanceObject.SubstanceItem> items;
+    protected final Set<ASubstanceObject.SubstanceTool> tools;
+    protected final Set<ASubstanceObject.SubstanceBlock> blocks;
+    protected final Set<ASubstanceObject.SubstanceFluid> fluids;
+    protected final Map<ASubstanceObject, String> overrides;
 
     public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism.SubstanceAestheticism aestheticism, AProcess process, Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties, Set<ASubstanceObject.SubstanceItem> items, Set<ASubstanceObject.SubstanceTool> tools, Set<ASubstanceObject.SubstanceBlock> blocks, Set<ASubstanceObject.SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
         this.name = name;
