@@ -1,12 +1,17 @@
 package fr.cyrilneveu.craftorium.common;
 
 import crafttweaker.CraftTweakerAPI;
-import fr.cyrilneveu.craftorium.CraftoriumTags;
+import fr.cyrilneveu.craftorium.Craftorium;
+import fr.cyrilneveu.craftorium.api.config.Settings;
+import fr.cyrilneveu.craftorium.api.inventory.GuiHandler;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
+import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.common.config.Settings;
+import fr.cyrilneveu.craftorium.common.integration.tconstruct.TConstructPlugin;
+import fr.cyrilneveu.craftorium.common.machine.Machines;
+import fr.cyrilneveu.craftorium.common.recipe.Maps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
@@ -18,7 +23,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -27,17 +34,20 @@ import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
+import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
@@ -45,8 +55,8 @@ import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 public abstract class ACommonProxy {
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals(CraftoriumTags.MODID))
-            ConfigManager.sync(CraftoriumTags.MODID, Config.Type.INSTANCE);
+        if (event.getModID().equals(MODID))
+            ConfigManager.sync(MODID, Config.Type.INSTANCE);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -65,6 +75,15 @@ public abstract class ACommonProxy {
         new ItemBuilder("circuit_board_2").addTexture("circuits/circuit_board_2").build();
         new ItemBuilder("circuit_board_3").addTexture("circuits/circuit_board_3").build();
 
+        new ItemBuilder("ram_wafer").addTexture("circuits/wafer").addTexture("circuits/ram").build();
+        new ItemBuilder("power_wafer").addTexture("circuits/wafer").addTexture("circuits/power").build();
+        new ItemBuilder("calculus_wafer").addTexture("circuits/wafer").addTexture("circuits/calculus").build();
+        new ItemBuilder("quantum_calculus_wafer").addTexture("circuits/wafer").addTexture("circuits/quantum_calculus").build();
+        new ItemBuilder("ram_die").addTexture("circuits/die").addTexture("circuits/ram").build();
+        new ItemBuilder("power_die").addTexture("circuits/die").addTexture("circuits/power").build();
+        new ItemBuilder("calculus_die").addTexture("circuits/die").addTexture("circuits/calculus").build();
+        new ItemBuilder("quantum_calculus_die").addTexture("circuits/die").addTexture("circuits/quantum_calculus").build();
+
         new ItemBuilder("redstone_circuit").addTexture("circuits/redstone_circuit").build();
         new ItemBuilder("advanced_redstone_circuit").addTexture("circuits/advanced_redstone_circuit").build();
         new ItemBuilder("primitive_circuit").addTexture("circuits/primitive_circuit").build();
@@ -81,7 +100,7 @@ public abstract class ACommonProxy {
         new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
         new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
 
-        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v)).forEach(v::createObject));
+        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(t -> t.getItems().contains(v)).forEach(v::createObject));
 
         SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
@@ -95,9 +114,16 @@ public abstract class ACommonProxy {
         SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
+        createTile(MachineTile.class, "basic_machine");
+        MACHINES_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(t -> t.getMachines().contains(v)).forEach(t -> Machines.createMachine(v, t)));
+
         FLUIDS_REGISTRY.close();
         BLOCKS_REGISTRY.close();
         BLOCKS_REGISTRY.getAll().forEach((s, b) -> event.getRegistry().register(b));
+    }
+
+    public static void createTile(Class<? extends TileEntity> clazz, String name) {
+        GameRegistry.registerTileEntity(clazz, new ResourceLocation(MODID, name));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -171,23 +197,33 @@ public abstract class ACommonProxy {
         return context.getServerHandler().player.server;
     }
 
-    public void preInit(FMLPreInitializationEvent event) {
+    public void construct(FMLConstructionEvent event) {
         SubstancesObjects.init();
         Substances.init();
         Veins.init();
         TiersObjects.init();
+        Maps.init();
+        Machines.init();
         Tiers.init();
+    }
 
+    public void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("crafttweaker"))
-            CraftTweakerAPI.tweaker.loadScript(false, CraftoriumTags.MODID);
+            CraftTweakerAPI.tweaker.loadScript(false, MODID);
 
         SubstancesObjects.close();
         Substances.close();
         Veins.close();
+        Machines.close();
         Tiers.close();
+
+        // if (Loader.isModLoaded("tconstruct"))
+            // TConstructPlugin.init();
     }
 
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(Craftorium.instance, new GuiHandler());
+
         if (!Settings.generationSettings.enableVanillaOreGeneration)
             MinecraftForge.ORE_GEN_BUS.register(new VeinGenerator.WorldGeneratorReplacer());
         if (Settings.generationSettings.enableOreGeneration)
@@ -195,6 +231,6 @@ public abstract class ACommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
-
+        Maps.close();
     }
 }

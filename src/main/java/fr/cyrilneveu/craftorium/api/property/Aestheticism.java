@@ -2,9 +2,11 @@ package fr.cyrilneveu.craftorium.api.property;
 
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import net.minecraft.block.SoundType;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class Aestheticism {
@@ -13,11 +15,14 @@ public final class Aestheticism {
         @Nullable
         private final Supplier<List<String>> toolTips;
         private final boolean glint;
+        @Nullable
+        private final Function<ItemStack, String> displayName;
 
-        public ObjectAestheticism(FaceProvider[] faceProviders, @Nullable Supplier<List<String>> toolTips, boolean glint) {
+        public ObjectAestheticism(FaceProvider[] faceProviders, @Nullable Supplier<List<String>> toolTips, boolean glint, @Nullable Function<ItemStack, String> displayName) {
             this.faceProviders = faceProviders;
             this.toolTips = toolTips;
             this.glint = glint;
+            this.displayName = displayName;
         }
 
         public FaceProvider[] getFaceProviders() {
@@ -30,6 +35,11 @@ public final class Aestheticism {
 
         public boolean isGlint() {
             return glint;
+        }
+
+        @Nullable
+        public Function<ItemStack, String> getDisplayName() {
+            return displayName;
         }
     }
 

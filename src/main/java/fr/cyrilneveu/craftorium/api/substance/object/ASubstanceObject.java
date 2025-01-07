@@ -12,8 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fml.common.Loader;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
@@ -100,6 +100,8 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
         if (stack == null) {
             String ore = getOre(substance);
             Preconditions.checkArgument(OreStack.oresExist(ore), "Can't return the asked ItemStack (" + getName(substance) + ") because because it does not exist either with this substance (" + substance.getName() + ") or in the form of oredict (" + ore + ").");
+            ItemStack[] stacks = OreStack.getStacks(ore);
+            Preconditions.checkArgument(stacks.length > 0, "Can't return the asked ItemStack (" + getName(substance) + ") because because it does not exist either with this substance (" + substance.getName() + ") or the associated oredict (" + ore + ") is empty.");
             ItemStack itemStack = OreStack.getStacks(ore)[0];
             itemStack.setCount(amount);
             return itemStack;
@@ -125,7 +127,7 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
     }
 
     @Override
-    public int compareTo(@NotNull ASubstanceObject other) {
+    public int compareTo(@Nonnull ASubstanceObject other) {
         return name.compareTo(other.getName(null));
     }
 

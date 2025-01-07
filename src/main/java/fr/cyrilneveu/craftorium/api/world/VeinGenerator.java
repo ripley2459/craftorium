@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.api.world;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.world.vein.Vein;
-import fr.cyrilneveu.craftorium.common.config.Settings;
 import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

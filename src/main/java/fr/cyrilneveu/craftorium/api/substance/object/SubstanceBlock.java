@@ -5,7 +5,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.api.world.stone.StoneProperty;
@@ -45,7 +45,7 @@ public class SubstanceBlock extends CustomBlock {
     protected final Substance substance;
 
     public SubstanceBlock(Material material, ASubstanceObject reference, Substance substance) {
-        super(material, new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint()));
+        super(material, new Aestheticism.ObjectAestheticism(reference.getFaces(substance), () -> reference.getTooltips(substance), substance.getAestheticism().isGlint(), null));
         this.reference = reference;
         this.substance = substance;
         setHardness(substance.getToughness().getHardness());
@@ -67,7 +67,7 @@ public class SubstanceBlock extends CustomBlock {
 
     public int getBlockBurnTime() {
         if (substance.getProperties().containsKey(FUEL)) {
-            int duration = ((FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
+            int duration = ((SubstanceProperties.FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
             if (duration > 0)
                 return (reference.getAmount() * duration) / BASE_AMOUNT;
         }

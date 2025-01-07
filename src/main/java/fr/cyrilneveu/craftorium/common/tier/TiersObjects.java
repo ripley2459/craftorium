@@ -1,5 +1,6 @@
 package fr.cyrilneveu.craftorium.common.tier;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
@@ -8,7 +9,6 @@ import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObjectBuilder;
 import fr.cyrilneveu.craftorium.api.tier.object.TierItem;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.config.Settings;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -24,14 +24,18 @@ import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.COMMON;
 
 public final class TiersObjects {
     public static ATierObject.TierItem BATTERY;
+    public static ATierObject.TierItem BUZZSAW;
     public static ATierObject.TierItem EMITTER;
+    public static ATierObject.TierItem GRINDER;
     public static ATierObject.TierItem HEAT_EXCHANGER;
+    public static ATierObject.TierItem MACHINE_FRAME;
     public static ATierObject.TierItem MOTOR;
     public static ATierObject.TierItem PISTON;
     public static ATierObject.TierItem PUMP;
     public static ATierObject.TierItem ROBOT_ARM;
     public static ATierObject.TierItem SCANNER;
     public static ATierObject.TierItem SENSOR;
+
 
     public static void init() {
         if (TIER_ITEMS_REGISTRY.isInitialized())
@@ -40,8 +44,11 @@ public final class TiersObjects {
         TIER_ITEMS_REGISTRY.initialize();
 
         BATTERY = createItem("battery").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        BUZZSAW = createItem("buzzsaw").build();
         EMITTER = createItem("emitter").build();
+        GRINDER = createItem("grinder").build();
         HEAT_EXCHANGER = createItem("heat_exchanger").build();
+        MACHINE_FRAME = createItem("machine_frame").build();
         MOTOR = createItem("motor").build();
         PISTON = createItem("piston").build();
         PUMP = createItem("pump").build();
@@ -93,7 +100,7 @@ public final class TiersObjects {
     }
 
     public static List<String> defaultTooltips(ATierObject reference, Tier tier) {
-        return Settings.substancesSettings.showAdvancedTooltips ? Collections.singletonList(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName())) : Collections.emptyList();
+        return Settings.globalSettings.showAdvancedTooltips ? Collections.singletonList(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName())) : Collections.emptyList();
     }
 
     public static IItemBehaviour[] noBehaviours(ATierObject reference, Tier tier) {
@@ -102,7 +109,7 @@ public final class TiersObjects {
 
     public static IItemBehaviour[] energyStorage(ATierObject reference, Tier tier) {
         IItemBehaviour[] behaviours = new IItemBehaviour[1];
-        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.balancingSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.balancingSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getStorage().getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getStorage().getEnergyIO()));
         return behaviours;
     }
 }

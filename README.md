@@ -17,4 +17,5 @@
 - The rendering system and stone variation system are based on [LoliKingdom/Zairyou](https://github.com/LoliKingdom/Zairyou/tree/main).
 - Networking skeleton from [coolAlias/Tutorial-Demo](https://github.com/coolAlias/Tutorial-Demo).
 - Original "OreStack" from [pWn3d1337/Techguns2](https://github.com/pWn3d1337/Techguns2/blob/master/src/main/java/techguns/util/ItemStackOreDict.java).
+- "FlowController" facing alignment inspired by [CoFH/CoFHCore-1.12-Legacy](https://github.com/CoFH/CoFHCore-1.12-Legacy/blob/1.12/src/main/java/cofh/core/util/helpers/BlockHelper.java).
 - The Minecraft modding community for artistic and technical inspirations/guides. Special mention for [Team CoFH](https://github.com/CoFH), [McJty](https://github.com/McJty), [TheGreyGhost](https://github.com/TheGreyGhost) and [Tom Dodd](https://github.com/tomdodd4598).

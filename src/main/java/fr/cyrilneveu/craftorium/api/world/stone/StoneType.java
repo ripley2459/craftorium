@@ -2,7 +2,8 @@ package fr.cyrilneveu.craftorium.api.world.stone;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public final class StoneType implements Comparable<StoneType> {
     private final String name;
@@ -40,7 +41,7 @@ public final class StoneType implements Comparable<StoneType> {
     }
 
     @Override
-    public int compareTo(@NotNull StoneType other) {
+    public int compareTo(@Nonnull StoneType other) {
         return name.compareTo(other.getName());
     }
 }

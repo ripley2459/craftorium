@@ -4,15 +4,18 @@
 # Items
 
 # Tiered
-item.craftorium.battery.name=Battery %s
-item.craftorium.emitter.name=Emitter %s
-item.craftorium.heat_exchanger.name=Heat Exchanger %s
-item.craftorium.motor.name=Motor %s
-item.craftorium.piston.name=Piston %s
-item.craftorium.pump.name=Pump %s
-item.craftorium.robot_arm.name=Robot Arm %s
-item.craftorium.scanner.name=Scanner %s
-item.craftorium.sensor.name=Sensor %s
+item.craftorium.battery.name=Battery
+item.craftorium.buzzsaw.name=Buzzsaw
+item.craftorium.emitter.name=Emitter
+item.craftorium.heat_exchanger.name=Heat Exchanger
+item.craftorium.grinder.name=Grinder
+item.craftorium.machine_frame.name=Machine Frame
+item.craftorium.motor.name=Motor
+item.craftorium.piston.name=Piston
+item.craftorium.pump.name=Pump
+item.craftorium.robot_arm.name=Robot Arm
+item.craftorium.scanner.name=Scanner
+item.craftorium.sensor.name=Sensor
 
 # Tools
 item.craftorium.axe.name=%s Axe
@@ -34,7 +37,9 @@ item.craftorium.casing.name=%s Casing
 item.craftorium.dust.name=%s Dust
 item.craftorium.foil.name=%s Foil
 item.craftorium.gear.name=%s Gear
+item.craftorium.gem.name=%s
 item.craftorium.ingot.name=%s Ingot
+item.craftorium.mesh.name=%s Mesh
 item.craftorium.nugget.name=%s Nugget
 item.craftorium.plate.name=%s Plate
 item.craftorium.ring.name=%s Ring
@@ -76,15 +81,36 @@ item.craftorium.circuit_board_1.name=Circuit Board
 item.craftorium.circuit_board_2.name=Advanced Circuit Board
 item.craftorium.circuit_board_3.name=Maxed Circuit Board
 
+item.craftorium.ram_wafer.name=RAM Wafer
+item.craftorium.calculus_wafer.name=Calculus Wafer
+item.craftorium.power_wafer.name=Power Wafer
+item.craftorium.quantum_calculus_wafer.name=Quantum Calculus Wafer
+item.craftorium.ram_die.name=RAM Die
+item.craftorium.calculus_die.name=Calculus Die
+item.craftorium.power_die.name=Power Die
+item.craftorium.quantum_calculus_die.name=Quantum Calculus Die
+
 
 # ##################################################
 # Blocks
 
+# Machines
+machine.craftorium.assembler.name=Assembler
+machine.craftorium.bender.name=Bender
+machine.craftorium.circuit_assembler.name=Circuit Assembler
+machine.craftorium.compressor.name=Compressor
+machine.craftorium.cutter.name=Cutter
+machine.craftorium.electrolyzer.name=Electrolyzer
+machine.craftorium.foundry.name=Foundry
+machine.craftorium.lathe.name=Lathe
+machine.craftorium.macerator.name=Macerator
+machine.craftorium.mixer.name=Mixer
+
 # Substances
 tile.craftorium.block.name=Block of %s
-tile.craftorium.ore.name=%s Ore
-tile.craftorium.hull.name=%s Hull
 tile.craftorium.frame.name=%s Frame
+tile.craftorium.hull.name=%s Hull
+tile.craftorium.ore.name=%s Ore
 
 # Fluids
 fluid.craftorium.liquid.name=%s
@@ -214,7 +240,10 @@ substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
 
 # Others
+substance.craftorium.aluminum_brass.name=Aluminum Brass
+substance.craftorium.amethyst.name=Amethyst
 substance.craftorium.argentite.name=Argentite
+substance.craftorium.awakened_draconium.name=Awakened Draconium
 substance.craftorium.azurite.name=Azurite
 substance.craftorium.barite.name=Barite
 substance.craftorium.bauxite.name=Bauxite
@@ -222,6 +251,7 @@ substance.craftorium.beryl.name=Beryl
 substance.craftorium.bismuthinite.name=Bismuthinite
 substance.craftorium.boron_arsenide_alloy.name=Boron Arsenide Alloy
 substance.craftorium.bronze.name=Bronze
+substance.craftorium.carbon_fiber.name=Carbon Fiber
 substance.craftorium.carnotite.name=Carnotite
 substance.craftorium.carrollite.name=Carrollite
 substance.craftorium.cassiterite.name=Cassiterite
@@ -230,32 +260,56 @@ substance.craftorium.chalcopyrite.name=Chalcopyrite
 substance.craftorium.charcoal.name=Charcoal
 substance.craftorium.chromite.name=Chromite
 substance.craftorium.cinnabar.name=Cinnabar
+substance.craftorium.clay.name=Clay
 substance.craftorium.coal.name=Coal
+substance.craftorium.conductive_iron.name=Conductive Iron
+substance.craftorium.constantan.name=Constantan
+substance.craftorium.crude_steel.name=Crude Steel
 substance.craftorium.cupronickel.name=Cupronickel
+substance.craftorium.dark_steel.name=Dark Steel
 substance.craftorium.diamond.name=Diamond
+substance.craftorium.dilithium.name=Dilithium
+substance.craftorium.draconium.name=Draconium
+substance.craftorium.electrical_steel.name=Electrical Steel
 substance.craftorium.electrum.name=Electrum
 substance.craftorium.emerald.name=Emerald
+substance.craftorium.end.name=End
+substance.craftorium.end_steel.name=End Steel
 substance.craftorium.ender.name=Ender
+substance.craftorium.enderium.name=Enderium
+substance.craftorium.energetic_alloy.name=Energetic Alloy
+substance.craftorium.energetic_silver.name=Energetic Silver
+substance.craftorium.ferroboron.name=Ferroboron
+substance.craftorium.flint.name=Flint
 substance.craftorium.galena.name=Galena
 substance.craftorium.garnierite.name=Garnierite
+substance.craftorium.glass.name=Glass
+substance.craftorium.glowstone.name=Glowstone
 substance.craftorium.graphene.name=Graphene
 substance.craftorium.graphite.name=Graphite
 substance.craftorium.haste_alloy.name=Haste Alloy
 substance.craftorium.hematite.name=Hematite
 substance.craftorium.hsla_steel.name=HSLA Steel
 substance.craftorium.ilmenite.name=Ilmenite
-substance.craftorium.lapis_lazuli.name=Lapis Lazuli
+substance.craftorium.invar.name=Invar
+substance.craftorium.iron_alloy.name=Iron Alloy
+substance.craftorium.lapis.name=Lapis
 substance.craftorium.lazurite.name=Lazurite
+substance.craftorium.lumium.name=Lumium
 substance.craftorium.magnesium_diboride_alloy.name=Magnesium Diboride Alloy
 substance.craftorium.magnetite.name=Magnetite
 substance.craftorium.malachite.name=Malachite
 substance.craftorium.molybdenite.name=Molybdenite
 substance.craftorium.nichrome.name=Nichrome
 substance.craftorium.obsidian.name=Obsidian
+substance.craftorium.oil_sand.name=Oil Sand
 substance.craftorium.orthoclase.name=Orthoclase
 substance.craftorium.osmiridium.name=Osmiridium
 substance.craftorium.pentlandite.name=Pentlandite
+substance.craftorium.peridot.name=Peridot
 substance.craftorium.plastic.name=Plastic
+substance.craftorium.polyacrylonitrile.name=Polyacrylonitrile (PAN)
+substance.craftorium.pulsating_iron.name=Pulsating Iron
 substance.craftorium.pyrite.name=Pyrite
 substance.craftorium.pyrochlore.name=Pyrochlore
 substance.craftorium.pyrolusite.name=Pyrolusite
@@ -264,21 +318,34 @@ substance.craftorium.redstone.name=Redstone
 substance.craftorium.redstone_alloy.name=Redstone Alloy
 substance.craftorium.rtm_alloy.name=RTM Alloy
 substance.craftorium.rubber.name=Rubber
+substance.craftorium.ruby.name=Ruby
 substance.craftorium.rutile.name=Rutile
+substance.craftorium.sapphire.name=Sapphire
 substance.craftorium.scheelite.name=Scheelite
+substance.craftorium.signalum.name=Signalum
 substance.craftorium.smaltite.name=Smaltite
 substance.craftorium.smithsonite.name=Smithsonite
 substance.craftorium.sodalite.name=Sodalite
+substance.craftorium.soul_sand.name=Soul Sand
+substance.craftorium.soularium.name=Soularium
 substance.craftorium.spdodumene.name=Spdodumene
 substance.craftorium.stainless_steel.name=Stainless Steel
 substance.craftorium.steel.name=Steel
 substance.craftorium.stibnite.name=Stibnite
 substance.craftorium.stone.name=Stone
 substance.craftorium.super_alloy.name=Super Alloy
+substance.craftorium.tanzanite.name=Tanzanite
+substance.craftorium.titanium_aluminide.name=Titanium Aluminide
+substance.craftorium.titanium_iridium.name=Titanium Iridium
+substance.craftorium.topaz.name=Topaz
+substance.craftorium.tough_alloy.name=Tough Alloy
 substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
 substance.craftorium.tungsten_steel.name=Tungsten Steel
-substance.craftorium.ybco.name=YBCO
+substance.craftorium.vibrant_alloy.name=Vibrant Alloy
+substance.craftorium.vivid_alloy.name=Vivid Alloy
+substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
+substance.craftorium.ybco.name=YBCO
 
 
 # ##################################################
@@ -320,6 +387,7 @@ vein.craftorium.native_gold.name=Gold
 vein.craftorium.native_iridium.name=Iridium
 vein.craftorium.native_osmium.name=Osmium
 vein.craftorium.native_platinum.name=Platinum
+vein.craftorium.oil_sand.name=Oil Sand
 vein.craftorium.orthoclase.name=Orthoclase
 vein.craftorium.pentlandite.name=Pentlandite
 vein.craftorium.pyrite.name=Pyrite
@@ -355,17 +423,46 @@ tier.craftorium.four.name=Tier 4
 tier.craftorium.five.name=Tier 5
 
 # Tooltips
-tooltip.craftorium.tier.name=§eTier: %s§r
-tooltip.craftorium.formula=§3%s§r
-tooltip.craftorium.temperature=§5%s°K§r
-tooltip.craftorium.state.solid=§aState: Solid§r
-tooltip.craftorium.state.liquid=§aState: Liquid§r
-tooltip.craftorium.state.gaseous=§aState: Gaseous§r
-tooltip.craftorium.state.unknown=§4State: Unknown§r
-tooltip.craftorium.battery.energy=§c%s/%sRF§r
+tooltip.craftorium.tool.damage=Durability: %s/%s
+tooltip.craftorium.battery.energy=Energy: §c%s RF§r
+tooltip.craftorium.formula=§e%s§r
+tooltip.craftorium.machine.button.configuration=§7Configuration: §b%s§r
+tooltip.craftorium.machine.button.facing.down=§nBottom§r
+tooltip.craftorium.machine.button.facing.east=§nRight§r
+tooltip.craftorium.machine.button.facing.north=§nFront§r
+tooltip.craftorium.machine.button.facing.south=§nBack§r
+tooltip.craftorium.machine.button.facing.up=§nTop§r
+tooltip.craftorium.machine.button.facing.west=§nLeft§r
+tooltip.craftorium.machine.button.input=Insert: %s
+tooltip.craftorium.machine.button.output=Extract/Push out: %s
+tooltip.craftorium.machine.slot.energy=§7Energy: §c%s RF§r
+tooltip.craftorium.machine.slot.fluid.formula=§e%s§r
+tooltip.craftorium.machine.slot.fluid.state=§7State: §aLiquid§r
+tooltip.craftorium.machine.slot.fluid.temperature=§c%s°K§r
+tooltip.craftorium.machine.slot.fluid=§7%s/%s mB§r
+tooltip.craftorium.map.name=Map: §e%s§r
+tooltip.craftorium.off=§7OFF§r
+tooltip.craftorium.on=§aON§r
+tooltip.craftorium.recipe.progression=%s/%s
+tooltip.craftorium.state.gaseous=§7State: §aGaseous§r
+tooltip.craftorium.state.liquid=§7State: §aLiquid§r
+tooltip.craftorium.state.solid=§7State: §aSolid§r
+tooltip.craftorium.state.unknown=§7State: §aUnknown§r
+tooltip.craftorium.temperature=§c%s°K§r
+tooltip.craftorium.tier.name=Tier: §e%s§r
+
 
 # JEI
-jei.craftorium.vein_generation.name=Ore Generation
+jei.craftorium.recipe.chance.tiny=%s%%
+jei.craftorium.recipe.chance=§7Chance: §6%s%%§r
+jei.craftorium.recipe.configuration=§7Configuration: §b%s§r
+jei.craftorium.recipe.consumption=§7Consumption: §5%s RF/tick§r
+jei.craftorium.recipe.duration=§7Duration: §a%s ticks§r
+jei.craftorium.recipe.energy=§7Total energy: §c%s RF§r
+jei.craftorium.recipe.map=§7Map: §e%s§r
+jei.craftorium.recipe.name=§7Name: §e%s§r
+jei.craftorium.recipe.title=Process
 jei.craftorium.vein.chance=Weight: %s
 jei.craftorium.vein.depth=Y: %s-%s
 jei.craftorium.vein.dimension=Dimension: %s
+jei.craftorium.vein_generation.name=Ore Generation

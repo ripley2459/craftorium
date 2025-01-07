@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,6 +23,11 @@ public final class Craftorium {
     public Craftorium() {
         instance = this;
         FluidRegistry.enableUniversalBucket();
+    }
+
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        proxy.construct(event);
     }
 
     @Mod.EventHandler

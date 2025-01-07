@@ -1,13 +1,17 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.item.CustomItem;
+import fr.cyrilneveu.craftorium.api.item.behaviour.DurabilityBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.property.Aestheticism;
+import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
-import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.block.Block;
@@ -33,6 +37,7 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItem GEAR;
     public static ASubstanceObject.SubstanceItem GEM;
     public static ASubstanceObject.SubstanceItem INGOT;
+    public static ASubstanceObject.SubstanceItem MESH;
     public static ASubstanceObject.SubstanceItem NUGGET;
     public static ASubstanceObject.SubstanceItem PEARL;
     public static ASubstanceObject.SubstanceItem PLATE;
@@ -73,15 +78,16 @@ public final class SubstancesObjects {
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
 
-        GEM = createItem("gem").self().amount(BASE_AMOUNT).build();
-        INGOT = createItem("ingot").amount(BASE_AMOUNT).build();
-        PEARL = createItem("pearl").amount(BASE_AMOUNT).build();
+        GEM = createItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        INGOT = createItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        PEARL = createItem("pearl").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
         PLATE = createItem("plate").amount(INGOT.getAmount()).build();
         CASING = createItem("casing").amount(PLATE.getAmount()).build();
-        DUST = createItem("dust").amount(INGOT.getAmount()).build();
+        DUST = createItem("dust").amount(INGOT.getAmount()).tooltips(SubstancesObjects::baseTooltips).build();
         FOIL = createItem("foil").amount(PLATE.getAmount() / 2).build();
         GEAR = createItem("gear").amount(PLATE.getAmount()).build();
         NUGGET = createItem("nugget").amount(INGOT.getAmount() / 9).build();
+        MESH = createItem("mesh").amount(INGOT.getAmount()).build();
         ROD = createItem("rod").amount(INGOT.getAmount() / 4).build();
         RING = createItem("ring").amount(ROD.getAmount()).build();
         SCREW = createItem("screw").amount(ROD.getAmount() / 2).build();
@@ -99,16 +105,16 @@ public final class SubstancesObjects {
         PICKAXE = createTool("pickaxe").provider(SubstancesObjects::createPickaxe).build();
         SAW = createTool("saw").build();
         SCREWDRIVER = createTool("screwdriver").build();
-        SHOVEL = createTool("shovel").amount(0).provider(SubstancesObjects::createShovel).build();
+        SHOVEL = createTool("shovel").provider(SubstancesObjects::createShovel).build();
         SWORD = createTool("sword").provider(SubstancesObjects::createSword).build();
         WRENCH = createTool("wrench").build();
 
         BLOCK = createBlock("block", SubstancesObjects::createBlock).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(BASE_AMOUNT * 9).build();
         FRAME = createBlock("frame", SubstancesObjects::createFrame).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(ROD.getAmount() * 8).build();
         HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(PLATE.getAmount() * 8).build();
-        ORE = createBlock("ore", SubstancesObjects::createOre).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
+        ORE = createBlock("ore", SubstancesObjects::createOre).tooltips(SubstancesObjects::baseTooltips).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
 
-        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).amount(1).build();
+        LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
     }
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
@@ -142,7 +148,7 @@ public final class SubstancesObjects {
     }
 
     private static void createItem(ASubstanceObject reference, Substance substance) {
-        SubstanceItem item = new SubstanceItem(reference, substance);
+        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
@@ -181,7 +187,12 @@ public final class SubstancesObjects {
     }
 
     private static void createTool(ASubstanceObject reference, Substance substance) {
-        SubstanceTool item = new SubstanceTool(reference, substance);
+        IItemBehaviour[] behaviours = new IItemBehaviour[1];
+
+        behaviours[0] = new DurabilityBehaviour(substance);
+
+        CustomItem item = new CustomItem(behaviours, defaultAestheticism(reference, substance));
+        item.setMaxStackSize(1);
 
         createTool(reference, substance, item);
     }
@@ -262,7 +273,7 @@ public final class SubstancesObjects {
         SUBSTANCE_FLUIDS_REGISTRY.order().close();
     }
 
-    private static FaceProvider[] blockFaces(ASubstanceObject reference, Substance substance) {
+    public static FaceProvider[] blockFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         if (substance.getAestheticism().isShiny())
@@ -270,35 +281,35 @@ public final class SubstancesObjects {
         return faces;
     }
 
-    private static FaceProvider[] oreFaces(ASubstanceObject reference, Substance substance) {
+    public static FaceProvider[] oreFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[1];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getOreColor());
         return faces;
     }
 
-    private static ModelTemplate blockModel(ASubstanceObject reference, Substance substance) {
+    public static ModelTemplate blockModel(ASubstanceObject reference, Substance substance) {
         return substance.getAestheticism().isShiny() ? ModelTemplates.BLOCK_TINTED_OVERLAY : ModelTemplates.BLOCK_TINTED;
     }
 
-    private static ModelTemplate oreModel(ASubstanceObject reference, Substance substance) {
+    public static ModelTemplate oreModel(ASubstanceObject reference, Substance substance) {
         return ModelTemplates.BLOCK_OVERLAY_TINTED;
     }
 
-    private static FaceProvider[] fluidFaces(ASubstanceObject reference, Substance substance) {
+    public static FaceProvider[] fluidFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[2];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "still")), substance.getAestheticism().getFluidColor());
         faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "fluids", "substances", "fluids", substance.getAestheticism().getStyle(), "flow")), substance.getAestheticism().getFluidColor());
         return faces;
     }
 
-    private static FaceProvider[] toolFaces(ASubstanceObject reference, Substance substance) {
+    public static FaceProvider[] toolFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[2];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "tools", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_base"))), RenderUtils.WHITE_COLOR);
         return faces;
     }
 
-    private static FaceProvider[] itemFaces(ASubstanceObject reference, Substance substance) {
+    public static FaceProvider[] itemFaces(ASubstanceObject reference, Substance substance) {
         FaceProvider[] faces = new FaceProvider[substance.getAestheticism().isShiny() ? 2 : 1];
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "substances", "items", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         if (substance.getAestheticism().isShiny())
@@ -306,24 +317,25 @@ public final class SubstancesObjects {
         return faces;
     }
 
-    private static List<String> baseTooltips(ASubstanceObject reference, Substance substance) {
+    public static List<String> baseTooltips(ASubstanceObject reference, Substance substance) {
         List<String> lines = new ArrayList<>();
         String formula = substance.getComposition().getFormula();
         if (!formula.isEmpty())
             lines.add(Utils.localise("tooltip.craftorium.formula", formula));
         if (Utils.isAdvancedTooltipsOn())
-            lines.add(Utils.localise("tooltip.craftorium.temperature", BASE_TEMPERATURE));
+            lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(BASE_TEMPERATURE)));
         lines.add(Utils.localise("tooltip.craftorium.state.solid"));
         return lines;
     }
 
-    private static List<String> fluidTooltips(ASubstanceObject reference, Substance substance) {
+    public static List<String> fluidTooltips(ASubstanceObject reference, Substance substance) {
         List<String> lines = new ArrayList<>();
         String formula = substance.getComposition().getFormula();
         if (!formula.isEmpty())
             lines.add(Utils.localise("tooltip.craftorium.formula", formula));
         boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
-        lines.add(Utils.localise("tooltip.craftorium.temperature", gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
+        if (substance.getTemperature() != Temperature.EMPTY)
+            lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
     }
@@ -332,7 +344,7 @@ public final class SubstancesObjects {
         List<IItemBehaviour> behaviours = new ArrayList<>();
 
         if (substance.getProperties().containsKey(FUEL)) {
-            int duration = ((FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
+            int duration = ((SubstanceProperties.FuelProperty) substance.getProperties().get(FUEL)).getBurnDuration();
             if (duration > 0) {
                 duration = (reference.getAmount() * duration) / BASE_AMOUNT;
                 behaviours.add(new FuelBehaviour(duration));
@@ -340,5 +352,13 @@ public final class SubstancesObjects {
         }
 
         return behaviours.isEmpty() ? NO_BEHAVIOUR : behaviours.toArray(new IItemBehaviour[0]);
+    }
+
+    public static Aestheticism.ObjectAestheticism defaultAestheticism(ASubstanceObject reference, Substance substance) {
+        return new Aestheticism.ObjectAestheticism(reference.getFaces(substance),
+                () -> reference.getTooltips(substance),
+                substance.getAestheticism().isGlint(),
+                s -> Utils.localise(String.join(".", s.getTranslationKey(), "name"), substance.getDisplayName())
+        );
     }
 }

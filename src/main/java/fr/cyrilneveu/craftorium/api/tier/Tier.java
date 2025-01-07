@@ -1,15 +1,17 @@
 package fr.cyrilneveu.craftorium.api.tier;
 
 import crafttweaker.annotations.ZenRegister;
+import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.tier.object.ATierObject;
 import fr.cyrilneveu.craftorium.api.tier.property.Pack;
 import fr.cyrilneveu.craftorium.api.tier.property.Process;
 import fr.cyrilneveu.craftorium.api.tier.property.Storage;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import org.jetbrains.annotations.NotNull;
+import fr.cyrilneveu.craftorium.common.machine.Machines;
 import stanhebben.zenscript.annotations.ZenClass;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 
@@ -25,14 +27,16 @@ public final class Tier implements Comparable<Tier> {
     private final Process process;
     private final Storage storage;
     private final Set<ATierObject.TierItem> items;
+    private final Set<Machine> machines;
 
-    public Tier(String name, Aestheticism.SubstanceAestheticism aestheticism, Pack substances, Process process, Storage storage, Set<ATierObject.TierItem> items) {
+    public Tier(String name, Aestheticism.SubstanceAestheticism aestheticism, @Nullable Pack substances, Process process, Storage storage, Set<ATierObject.TierItem> items, Set<Machine> machines) {
         this.name = name;
         this.aestheticism = aestheticism;
         this.substances = substances;
         this.process = process;
         this.storage = storage;
         this.items = items;
+        this.machines = machines;
     }
 
     public String getName() {
@@ -60,6 +64,10 @@ public final class Tier implements Comparable<Tier> {
         return items;
     }
 
+    public Set<Machine> getMachines() {
+        return machines;
+    }
+
     public String getDisplayName() {
         return Utils.localise(getTranslationKey());
     }
@@ -69,7 +77,7 @@ public final class Tier implements Comparable<Tier> {
     }
 
     @Override
-    public int compareTo(@NotNull Tier other) {
+    public int compareTo(@Nonnull Tier other) {
         return name.compareTo(other.getName());
     }
 }

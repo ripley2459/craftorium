@@ -13,7 +13,11 @@ public final class NetManager {
     private static int ID = 0;
 
     public static void registerPackets() {
+        // To server/On client
+        registerMessage(CMachinePacket.class);
 
+        // To clients/On server
+        registerMessage(SMachinePacket.class);
     }
 
     private static <T extends AMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {

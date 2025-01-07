@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
@@ -39,14 +38,6 @@ public class CustomItem extends Item implements ICustomModel {
     public CustomItem(IItemBehaviour[] behaviours, Aestheticism.ObjectAestheticism aestheticism) {
         this.behaviours = behaviours;
         this.aestheticism = aestheticism;
-    }
-
-    public static int getEnergy(ItemStack itemStack) {
-        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored() : -1;
-    }
-
-    public static int getMaxEnergy(ItemStack itemStack) {
-        return itemStack.hasCapability(CapabilityEnergy.ENERGY, null) ? itemStack.getCapability(CapabilityEnergy.ENERGY, null).getMaxEnergyStored() : -1;
     }
 
     @Override
@@ -74,10 +65,10 @@ public class CustomItem extends Item implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        for (IItemBehaviour behaviour : behaviours)
-            behaviour.addInformation(stack, worldIn, tooltip, flagIn);
         if (aestheticism.getToolTips() != null)
             aestheticism.getToolTips().get().forEach(t -> tooltip.add(Utils.localise(t)));
+        for (IItemBehaviour behaviour : behaviours)
+            behaviour.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -89,7 +80,7 @@ public class CustomItem extends Item implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean showDurabilityBar(ItemStack stack) { // TODO
-        return Utils.first(behaviours, b -> b.showDurabilityBar(stack)) != null;
+        return Utils.atLeastOne(behaviours, b -> b.showDurabilityBar(stack)) || super.showDurabilityBar(stack);
     }
 
     @Override
@@ -101,13 +92,39 @@ public class CustomItem extends Item implements ICustomModel {
                 return value;
         }
 
-        return 0d;
+        return super.getDurabilityForDisplay(stack);
+    }
+
+    @Override
+    public boolean isDamageable() {
+        return Utils.atLeastOne(behaviours, IItemBehaviour::isDamageable) || super.isDamageable();
+    }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return Utils.atLeastOne(behaviours, b -> b.hasContainerItem(stack)) || super.hasContainerItem(stack);
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack stack) {
+        IItemBehaviour behaviour = Utils.first(behaviours, b -> b.hasContainerItem(stack));
+        return behaviour != null ? behaviour.getContainerItem(stack) : super.getContainerItem(stack);
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return super.getIsRepairable(toRepair, repair);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public int getItemStackColor(ItemStack stack, int layer) {
         return aestheticism.getFaceProviders()[layer].getColor();
+    }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return aestheticism.getDisplayName() != null ? aestheticism.getDisplayName().apply(stack) : super.getItemStackDisplayName(stack);
     }
 
     @Override

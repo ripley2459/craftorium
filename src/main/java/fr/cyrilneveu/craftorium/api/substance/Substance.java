@@ -1,18 +1,18 @@
 package fr.cyrilneveu.craftorium.api.substance;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
-import fr.cyrilneveu.craftorium.api.recipe.AProcess;
+import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.config.Settings;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
@@ -121,7 +121,7 @@ public final class Substance implements Comparable<Substance> {
     }
 
     @Override
-    public int compareTo(@NotNull Substance other) {
+    public int compareTo(@Nonnull Substance other) {
         return name.compareTo(other.getName());
     }
 }

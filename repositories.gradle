@@ -1,5 +1,8 @@
 // Add any additional repositories for your dependencies here
 
 repositories {
-
+    maven {
+        name 'DVS1 Maven FS' // Tinkers' Construct
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
 }

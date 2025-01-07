@@ -64,7 +64,7 @@ public class CustomEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
     @Override
     public NBTTagCompound serializeNBT() {
-        return NBTUtils.setValue(ENERGY_NBT_KEY, energy);
+        return NBTUtils.setValue(ENERGY_NBT_KEY, energy,new NBTTagCompound());
     }
 
     @Override

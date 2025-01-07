@@ -3,9 +3,13 @@ package fr.cyrilneveu.craftorium.common.substance;
 import fr.cyrilneveu.craftorium.api.substance.Element;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
+import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
+import fr.cyrilneveu.craftorium.common.recipe.process.WoodProcess;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.FLINT_PROCESS;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.WOOD_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Substances {
@@ -17,15 +21,20 @@ public final class Substances {
     public static Substance BRONZE;
     public static Substance ALUMINUM;
     public static Substance IRON;
+    public static Substance GLOWSTONE;
+    public static Substance WITHER;
     public static Substance CARBON;
     public static Substance STEEL;
     public static Substance GRAPHITE;
+    public static Substance CLAY;
+    public static Substance GRAVEL;
     public static Substance COAL;
     public static Substance CHARCOAL;
     public static Substance MANGANESE;
     public static Substance HSLA_STEEL;
     public static Substance PYROLUSITE;
     public static Substance GOLD;
+    public static Substance GLASS;
     public static Substance MAGNETITE;
     public static Substance SILVER;
     public static Substance ELECTRUM;
@@ -67,7 +76,10 @@ public final class Substances {
     public static Substance OBSIDIAN;
     public static Substance RUBBER;
     public static Substance PLASTIC;
+    public static Substance OIL_SAND;
     public static Substance ENDER;
+    public static Substance END;
+    public static Substance SOUL_SAND;
     public static Substance DIAMOND;
     public static Substance QUARTZ;
     public static Substance TANTALUM;
@@ -84,7 +96,7 @@ public final class Substances {
     public static Substance CARROLLITE;
     public static Substance CHLORINE;
     public static Substance SODALITE;
-    public static Substance LAPIS_LAZULI;
+    public static Substance LAPIS;
     public static Substance GALLIUM;
     public static Substance BAUXITE;
     public static Substance ANTIMONY;
@@ -130,6 +142,10 @@ public final class Substances {
     public static Substance SPDODUMENE;
     public static Substance STONE;
     public static Substance WOOD;
+    public static Substance FLINT;
+    public static Substance POLYACRYLONITRILE;
+    public static Substance CARBON_FIBER;
+    public static Substance NITROGEN;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -139,7 +155,12 @@ public final class Substances {
 
         initElements();
         initVeinMembers();
+        initMain();
+        initCarbonFiberChain();
+        MoreSubstances.init();
+    }
 
+    private static void initMain() {
         WOOD = new SubstanceBuilder("wood")
                 .items(CASING, DUST, FOIL, GEAR, PLATE, ROD, ROTOR, SCREW)
                 .tools(HAMMER, MORTAR, WRENCH, PICKAXE, HOE, PICKAXE, SWORD, SHOVEL, AXE)
@@ -151,6 +172,7 @@ public final class Substances {
                 .style("wood")
                 .color(0xFF663f16)
                 .sound(SoundType.WOOD)
+                .recipe(WOOD_PROCESS)
                 .build();
         STONE = new SubstanceBuilder("stone")
                 .items(DUST, PLATE, ROD)
@@ -162,6 +184,47 @@ public final class Substances {
                 .style("mineral")
                 .color(0xFFb5b5b5)
                 .sound(SoundType.STONE)
+                .build();
+        SOUL_SAND = new SubstanceBuilder("soul_sand")
+                .items(DUST)
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:soul_sand")
+                .style("mineral")
+                .color(0xFF33231d)
+                .build();
+        END = new SubstanceBuilder("end")
+                .items(DUST, PLATE, ROD)
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:end_stone")
+                .style("mineral")
+                .color(0xFFd6d48b)
+                .build();
+        FLINT = new SubstanceBuilder("flint")
+                .recipe(FLINT_PROCESS)
+                .items(DUST, GEM)
+                .tools(FILE, KNIFE, SAW)
+                .blocks(BLOCK)
+                .tools(3.0f, 2.0f, 161, 1, 7)
+                .toughness(3.0f, 15.0f, "pickaxe", 1)
+                .overrides(GEM, "minecraft:flint")
+                .style("mineral")
+                .color(0xFF333333)
+                .shiny()
+                .sound(SoundType.STONE)
+                .build();
+        GLOWSTONE = new SubstanceBuilder("glowstone")
+                .packageNonMetal()
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:glowstone", DUST, "minecraft:glowstone_dust")
+                .color(0xd9dd5a)
+                .style("mineral")
+                .shiny()
+                .sound(SoundType.STONE)
+                .build();
+        WITHER = new SubstanceBuilder("wither")
+                .packageNonMetal()
+                .color(0xFF000000)
+                .style("mineral")
                 .build();
         BRONZE = new SubstanceBuilder("bronze")
                 .packageMetalExtended()
@@ -208,6 +271,7 @@ public final class Substances {
         ELECTRUM = new SubstanceBuilder("electrum")
                 .composition(GOLD, 1, SILVER, 1)
                 .packageMetalExtended()
+                .color(0xFFfef589)
                 .shiny()
                 .build();
         CUPRONICKEL = new SubstanceBuilder("cupronickel")
@@ -289,9 +353,17 @@ public final class Substances {
                 .build();
         RUBBER = new SubstanceBuilder("rubber")
                 .packageMetalExtended()
+                .color(0xFF685d55)
                 .build();
         PLASTIC = new SubstanceBuilder("plastic")
                 .packageMetalExtended()
+                .color(0xFFebede1)
+                .build();
+        OIL_SAND = new SubstanceBuilder("oil_sand")
+                .veinMember()
+                .fluids(LIQUID)
+                .color(0xFF160e04)
+                .style("mineral")
                 .build();
         ENDER = new SubstanceBuilder("ender")
                 .items(DUST, PEARL)
@@ -304,6 +376,7 @@ public final class Substances {
         DIAMOND = new SubstanceBuilder("diamond")
                 .packageGem()
                 .veinMember()
+                .composition(CARBON, 1)
                 .tools(8.0f, 3.0f, 1561, 3, 10)
                 .overrides(BLOCK, "minecraft:diamond_block", GEM, "minecraft:diamond", HOE, "minecraft:diamond_hoe", PICKAXE, "minecraft:diamond_pickaxe", SHOVEL, "minecraft:diamond_shovel", SWORD, "minecraft:diamond_sword", AXE, "minecraft:diamond_axe")
                 .color(0xFF91f5e6)
@@ -331,13 +404,47 @@ public final class Substances {
                 .color(0xFFc80000)
                 .shiny()
                 .build();
-        LAPIS_LAZULI = new SubstanceBuilder("lapis_lazuli")
+        LAPIS = new SubstanceBuilder("lapis")
                 .composition(LAZURITE, 1, SODALITE, 1)
                 .packageMineral()
                 .veinMember()
                 .overrides(BLOCK, "minecraft:lapis_block", GEM, "minecraft:dye:4")
                 .style("mineral")
                 .color(0xFF1b0f8a)
+                .build();
+        GLASS = new SubstanceBuilder("glass")
+                .items(CASING, DUST, PLATE)
+                .blocks(BLOCK)
+                .fluids(LIQUID)
+                .overrides(BLOCK, "minecraft:glass")
+                .style("glass")
+                .color(0x33c1f6ff)
+                .build();
+        CLAY = new SubstanceBuilder("clay")
+                .items(DUST, GEM)
+                .overrides(BLOCK, "minecraft:clay", GEM, "minecraft:clay_ball")
+                .style("mineral")
+                .color(0xFF7a8a8c)
+                .build();
+        GRAVEL = new SubstanceBuilder("gravel")
+                .blocks(BLOCK)
+                .overrides(BLOCK, "minecraft:gravel")
+                .build();
+    }
+
+    private static void initCarbonFiberChain() {
+        CARBON_FIBER = new SubstanceBuilder("carbon_fiber")
+                .items(FOIL, MESH, PLATE, WIRE)
+                .color(0xFF1e2123)
+                .style("fiber")
+                .build();
+        POLYACRYLONITRILE = new SubstanceBuilder("polyacrylonitrile")
+                .composition(CARBON, 3, HYDROGEN, 3, NITROGEN, 1)
+                .temperature(573, 573)
+                .items(DUST)
+                .blocks(BLOCK)
+                .fluids(LIQUID)
+                .color(0xFFe3e8d7)
                 .build();
     }
 
@@ -599,7 +706,7 @@ public final class Substances {
         COBALT = new SubstanceBuilder("cobalt")
                 .element(27, "Co", "cobalt", Element.EGroup.TRANSITION_METAL, 58.9331944)
                 .temperature(1768f, 3200f)
-                .color(0xFFf090a0)
+                .color(0xFF143ad1)
                 .packageTransitionMetal()
                 .veinMember()
                 .build();
@@ -938,6 +1045,12 @@ public final class Substances {
                 .element(1, "H", "hydrogen", Element.EGroup.HALOGEN, 1.008)
                 .temperature(13.99f, 20.271f)
                 .color(0xFFffffff)
+                .packageHalogen()
+                .build();
+        NITROGEN = new SubstanceBuilder("nitrogen")
+                .element(7, "N", "nitrogen", Element.EGroup.HALOGEN, 14.007)
+                .temperature(63.15f, 77.355f)
+                .color(0xFF3050f8)
                 .packageHalogen()
                 .build();
     }

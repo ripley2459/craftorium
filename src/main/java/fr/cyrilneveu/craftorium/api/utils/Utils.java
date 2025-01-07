@@ -3,6 +3,9 @@ package fr.cyrilneveu.craftorium.api.utils;
 import com.google.common.base.CaseFormat;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelRotation;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +24,7 @@ public final class Utils {
     public static final float EPSILON = 0.001f;
     public static final float BASE_TEMPERATURE = 273.15f;
     public static final int BASE_AMOUNT = 144;
+    public static final String EMPTY_FLUID_STACK = "Empty";
     public static final IItemBehaviour[] NO_BEHAVIOUR = new IItemBehaviour[0];
 
     public static String localise(String localisationKey, Object... substitutions) {
@@ -45,6 +49,10 @@ public final class Utils {
 
     public static String toCamelCase(String s) {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, s);
+    }
+
+    public static String toUpperCamelCase(String s) {
+        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
     }
 
     public static String[] cleanArray(String[] array) {
@@ -125,5 +133,20 @@ public final class Utils {
     private static String toSubscript(int digit) {
         char subscriptDigit = (char) ('\u2080' + digit);
         return Character.toString(subscriptDigit);
+    }
+
+    public static String formatFluidAmount(int amount) {
+        return amount < 1000 ? amount + "mB" : String.format("%.1fB", (double) amount / Fluid.BUCKET_VOLUME);
+    }
+
+    public static ModelRotation getRotationForFacing(EnumFacing facing) {
+        return switch (facing) {
+            case DOWN -> ModelRotation.X90_Y0;
+            case UP -> ModelRotation.X270_Y0;
+            case NORTH -> ModelRotation.X0_Y0;
+            case SOUTH -> ModelRotation.X0_Y180;
+            case WEST -> ModelRotation.X0_Y270;
+            case EAST -> ModelRotation.X0_Y90;
+        };
     }
 }

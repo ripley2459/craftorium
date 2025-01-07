@@ -8,10 +8,9 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
-import fr.cyrilneveu.craftorium.api.recipe.AProcess;
+import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
-import fr.cyrilneveu.craftorium.api.substance.property.FuelProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import net.minecraft.block.SoundType;
@@ -113,8 +112,19 @@ public final class SubstanceBuilder {
         return this;
     }
 
+    public SubstanceBuilder recipe(AProcess process) {
+        this.process = process;
+        return this;
+    }
+
+    @Deprecated
     public SubstanceBuilder tools(float speed, float damage, int durability, int harvestLevel, int enchantability) {
         this.efficiency = new Efficiency(speed, damage, durability, harvestLevel, enchantability);
+        return this;
+    }
+
+    public SubstanceBuilder tools(int harvestLevel, int durability, float speed, float damage, int enchantability) {
+        this.efficiency = new Efficiency(harvestLevel, durability, speed, damage, enchantability);
         return this;
     }
 
@@ -231,9 +241,9 @@ public final class SubstanceBuilder {
     }
 
     public SubstanceBuilder packageGem() {
-        items(CASING, DUST, FOIL, GEAR, GEM, NUGGET, PLATE, ROD);
+        items(DUST, GEM, NUGGET, PLATE, ROD);
         tools(AXE, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SHOVEL, SWORD, WRENCH);
-        blocks(BLOCK, FRAME, HULL);
+        blocks(BLOCK);
         fluids(LIQUID);
         return this;
     }
@@ -275,7 +285,7 @@ public final class SubstanceBuilder {
 
     public SubstanceBuilder fuel(int duration) {
         if (duration > 0)
-            this.property(FUEL, new FuelProperty(duration));
+            this.property(FUEL, new SubstanceProperties.FuelProperty(duration));
         return this;
     }
 

@@ -8,8 +8,8 @@ import fr.cyrilneveu.craftorium.api.tier.Tier;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
@@ -73,7 +73,7 @@ public abstract class ATierObject implements Comparable<ATierObject> {
     }
 
     @Override
-    public int compareTo(@NotNull ATierObject other) {
+    public int compareTo(@Nonnull ATierObject other) {
         return name.compareTo(other.getName(null));
     }
 

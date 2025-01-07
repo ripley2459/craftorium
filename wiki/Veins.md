@@ -12,24 +12,41 @@ And import some packages:
 
 ```ZenScript
 import mods.craftorium.vein.Veins;
+import mods.craftorium.vein.Vein;
 import mods.craftorium.vein.Builder;
 ```
 
-With the `Veins` package you can list veins. But also have access to information about a particular.
+With the `Veins` package you can manipulate the veins registry, such as creating, retrieving or registering a vein.
 
-The `Builder` package gives you ways to create veins from scratch or modify existing ones.
+With the `Vein` package you can manipulate a particular vein.
+
+The `Builder` package gives you ways to create veins from scratch.
+
+## Get a vein
+
+```ZenScript
+var vein as Vein = Veins.get(string id);
+```
+
+## Get all veins
+
+```ZenScript
+var vein as Veins[] = Veins.getAll();
+```
+
+This can be a rough operation so use it with caution.
 
 ## Vein creation
 
 ### Initializing the process
 
-To start the process of creating a vein you have to call `createVein` from the `Builder` package.
+To start the process of creating a vein you have to call `create` from the `Builder` package.
 
 ```ZenScript
-var newVein = Builder.createVein(String id, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, [substance₁, chance₁, substance₂, chance₂, [...], substanceₙ, chanceₙ]);
+var newVein = Builder.create(String id, int minY, int maxY, int sizeH, int sizeV, int chance, int dimension, [substance₁, chance₁, substance₂, chance₂, [...], substanceₙ, chanceₙ]);
 ```
 
-The `createVein` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
+The `create` method returns a `Builder` which follow the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern). So you can store it or chain methods.
 
 If you use an `id` already in use, the existing vein will be overwritten.
 
@@ -103,8 +120,8 @@ Adding a substance without calling `veinMember()` on the said substance will cra
 #loader craftorium
 
 import mods.craftorium.vein.Veins;
-import mods.craftorium.vein.Builder;
 import mods.craftorium.substance.Substances;
+import mods.craftorium.vein.Builder;
 
 var newVein = Veins.create("test", // ID
                     1, 50, // Y
