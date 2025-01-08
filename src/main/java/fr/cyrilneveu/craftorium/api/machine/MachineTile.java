@@ -25,7 +25,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.*;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
-import static fr.cyrilneveu.craftorium.common.substance.Tiers.ONE;
+import static fr.cyrilneveu.craftorium.common.substance.Substances.ONE;
 
 public class MachineTile extends TileEntity implements ITickable {
     private Machine machine;

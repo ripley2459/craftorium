@@ -14,8 +14,6 @@ import fr.cyrilneveu.craftorium.common.recipe.Maps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
-import fr.cyrilneveu.craftorium.common.substance.Tiers;
-import fr.cyrilneveu.craftorium.common.tier.TiersObjects;
 import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -195,25 +193,21 @@ public abstract class ACommonProxy {
     }
 
     public void construct(FMLConstructionEvent event) {
+        Maps.init();
+        Machines.init();
         SubstancesObjects.init();
         Substances.init();
         Veins.init();
-        TiersObjects.init();
-        Maps.init();
-        Machines.init();
-        Tiers.init();
     }
 
     public void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, MODID);
 
+        Machines.close();
         SubstancesObjects.close();
         Substances.close();
-        TiersObjects.close();
         Veins.close();
-        Machines.close();
-        Tiers.close();
     }
 
     public void init(FMLInitializationEvent event) {

@@ -24,7 +24,6 @@ import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
-import static fr.cyrilneveu.craftorium.common.substance.Tiers.*;
 
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {

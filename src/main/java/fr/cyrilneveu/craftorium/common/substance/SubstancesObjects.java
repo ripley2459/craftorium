@@ -1,15 +1,18 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.item.behaviour.DurabilityBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
@@ -92,7 +95,7 @@ public final class SubstancesObjects {
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
 
-        BATTERY = createItem("battery").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        BATTERY = createItem("battery").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
         BUZZSAW = createItem("buzzsaw").build();
         EMITTER = createItem("emitter").build();
         GRINDER = createItem("grinder").build();
@@ -101,7 +104,7 @@ public final class SubstancesObjects {
         PISTON = createItem("piston").build();
         PUMP = createItem("pump").build();
         ROBOT_ARM = createItem("robot_arm").build();
-        SCANNER = createItem("scanner").provider(TiersObjects::createStandalone).behaviours(TiersObjects::energyStorage).build();
+        SCANNER = createItem("scanner").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
         SENSOR = createItem("sensor").build();
 
         GEM = createItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
@@ -152,6 +155,16 @@ public final class SubstancesObjects {
         builder.behaviours(SubstancesObjects::defaultBehaviours);
 
         return builder;
+    }
+
+    private static void createStandalone(ASubstanceObject reference, Substance substance) {
+        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
+        item.setRegistryName(reference.getName(substance));
+        item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
+        item.setMaxStackSize(1);
+        item.setCreativeTab(SUBSTANCES);
+
+        ITEMS_REGISTRY.put(reference.getName(substance), item);
     }
 
     private static ASubstanceObjectBuilder.SubstanceToolBuilder createTool(String name) {
@@ -366,6 +379,13 @@ public final class SubstancesObjects {
             lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
+    }
+
+    public static IItemBehaviour[] energyStorage(ASubstanceObject reference, Substance substance) {
+        Tier tier = (Tier) substance;
+        IItemBehaviour[] behaviours = new IItemBehaviour[1];
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getEnergyIO()));
+        return behaviours;
     }
 
     public static IItemBehaviour[] defaultBehaviours(ASubstanceObject reference, Substance substance) {
