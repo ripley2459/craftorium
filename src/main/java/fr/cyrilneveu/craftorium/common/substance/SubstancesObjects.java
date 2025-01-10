@@ -95,34 +95,34 @@ public final class SubstancesObjects {
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
 
-        BATTERY = createItem("battery").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
-        BUZZSAW = createItem("buzzsaw").build();
-        EMITTER = createItem("emitter").build();
-        GRINDER = createItem("grinder").build();
-        HEAT_EXCHANGER = createItem("heat_exchanger").build();
-        MOTOR = createItem("motor").build();
-        PISTON = createItem("piston").build();
-        PUMP = createItem("pump").build();
-        ROBOT_ARM = createItem("robot_arm").build();
-        SCANNER = createItem("scanner").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
-        SENSOR = createItem("sensor").build();
+        BATTERY = createTierItem("battery").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
+        BUZZSAW = createTierItem("buzzsaw").build();
+        EMITTER = createTierItem("emitter").build();
+        GRINDER = createTierItem("grinder").build();
+        HEAT_EXCHANGER = createTierItem("heat_exchanger").build();
+        MOTOR = createTierItem("motor").build();
+        PISTON = createTierItem("piston").build();
+        PUMP = createTierItem("pump").build();
+        ROBOT_ARM = createTierItem("robot_arm").build();
+        SCANNER = createTierItem("scanner").provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
+        SENSOR = createTierItem("sensor").build();
 
-        GEM = createItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        INGOT = createItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        PEARL = createItem("pearl").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        PLATE = createItem("plate").amount(INGOT.getAmount()).build();
-        CASING = createItem("casing").amount(PLATE.getAmount()).build();
-        DUST = createItem("dust").amount(INGOT.getAmount()).tooltips(SubstancesObjects::baseTooltips).build();
-        FOIL = createItem("foil").amount(PLATE.getAmount() / 2).build();
-        GEAR = createItem("gear").amount(PLATE.getAmount()).build();
-        NUGGET = createItem("nugget").amount(INGOT.getAmount() / 9).build();
-        MESH = createItem("mesh").amount(INGOT.getAmount()).build();
-        ROD = createItem("rod").amount(INGOT.getAmount() / 4).build();
-        RING = createItem("ring").amount(ROD.getAmount()).build();
-        SCREW = createItem("screw").amount(ROD.getAmount() / 2).build();
-        SPRING = createItem("spring").amount(ROD.getAmount()).build();
-        WIRE = createItem("wire").amount(FOIL.getAmount() / 4).build();
-        ROTOR = createItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
+        GEM = createSubstanceItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        INGOT = createSubstanceItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        PEARL = createSubstanceItem("pearl").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        PLATE = createSubstanceItem("plate").amount(INGOT.getAmount()).build();
+        CASING = createSubstanceItem("casing").amount(PLATE.getAmount()).build();
+        DUST = createSubstanceItem("dust").amount(INGOT.getAmount()).tooltips(SubstancesObjects::baseTooltips).build();
+        FOIL = createSubstanceItem("foil").amount(PLATE.getAmount() / 2).build();
+        GEAR = createSubstanceItem("gear").amount(PLATE.getAmount()).build();
+        NUGGET = createSubstanceItem("nugget").amount(INGOT.getAmount() / 9).build();
+        MESH = createSubstanceItem("mesh").amount(INGOT.getAmount()).build();
+        ROD = createSubstanceItem("rod").amount(INGOT.getAmount() / 4).build();
+        RING = createSubstanceItem("ring").amount(ROD.getAmount()).build();
+        SCREW = createSubstanceItem("screw").amount(ROD.getAmount() / 2).build();
+        SPRING = createSubstanceItem("spring").amount(ROD.getAmount()).build();
+        WIRE = createSubstanceItem("wire").amount(FOIL.getAmount() / 4).build();
+        ROTOR = createSubstanceItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
 
         AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();
@@ -148,7 +148,16 @@ public final class SubstancesObjects {
         LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
     }
 
-    private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
+    private static ASubstanceObjectBuilder.SubstanceItemBuilder createSubstanceItem(String name) {
+        ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
+        builder.provider(SubstancesObjects::createItem);
+        builder.faces(SubstancesObjects::itemFaces);
+        builder.behaviours(SubstancesObjects::defaultBehaviours);
+
+        return builder;
+    }
+
+    private static ASubstanceObjectBuilder.SubstanceItemBuilder createTierItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstancesObjects::itemFaces);
@@ -308,10 +317,10 @@ public final class SubstancesObjects {
     }
 
     public static void close() {
-        SUBSTANCE_ITEMS_REGISTRY.order().close();
-        SUBSTANCE_TOOLS_REGISTRY.order().close();
-        SUBSTANCE_BLOCKS_REGISTRY.order().close();
-        SUBSTANCE_FLUIDS_REGISTRY.order().close();
+        SUBSTANCE_ITEMS_REGISTRY.close();
+        SUBSTANCE_TOOLS_REGISTRY.close();
+        SUBSTANCE_BLOCKS_REGISTRY.close();
+        SUBSTANCE_FLUIDS_REGISTRY.close();
     }
 
     public static FaceProvider[] blockFaces(ASubstanceObject reference, Substance substance) {
