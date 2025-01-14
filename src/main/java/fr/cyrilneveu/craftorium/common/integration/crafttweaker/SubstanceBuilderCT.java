@@ -158,14 +158,14 @@ public final class SubstanceBuilderCT {
 
     @ZenMethod
     public SubstanceBuilderCT items(String... items) {
-        ASubstanceObject.SubstanceItem[] items1;
+        ASubstanceObject.SubstanceItemDefinition[] items1;
         if (items.length != 0) {
-            items1 = new ASubstanceObject.SubstanceItem[items.length];
+            items1 = new ASubstanceObject.SubstanceItemDefinition[items.length];
             for (int i = 0; i < items.length; i++) {
                 Preconditions.checkArgument(SUBSTANCE_ITEMS_REGISTRY.contains(items[i]));
                 items1[i] = SUBSTANCE_ITEMS_REGISTRY.get(items[i]);
             }
-        } else items1 = new ASubstanceObject.SubstanceItem[0];
+        } else items1 = new ASubstanceObject.SubstanceItemDefinition[0];
 
         builder.items(items1);
         return this;
@@ -173,14 +173,14 @@ public final class SubstanceBuilderCT {
 
     @ZenMethod
     public SubstanceBuilderCT tools(String... tools) {
-        ASubstanceObject.SubstanceTool[] tools1;
+        ASubstanceObject.SubstanceToolDefinition[] tools1;
         if (tools.length != 0) {
-            tools1 = new ASubstanceObject.SubstanceTool[tools.length];
+            tools1 = new ASubstanceObject.SubstanceToolDefinition[tools.length];
             for (int i = 0; i < tools.length; i++) {
                 Preconditions.checkArgument(SUBSTANCE_TOOLS_REGISTRY.contains(tools[i]));
                 tools1[i] = SUBSTANCE_TOOLS_REGISTRY.get(tools[i]);
             }
-        } else tools1 = new ASubstanceObject.SubstanceTool[0];
+        } else tools1 = new ASubstanceObject.SubstanceToolDefinition[0];
 
         builder.tools(tools1);
         return this;
@@ -188,14 +188,14 @@ public final class SubstanceBuilderCT {
 
     @ZenMethod
     public SubstanceBuilderCT blocks(String... blocks) {
-        ASubstanceObject.SubstanceBlock[] blocks1;
+        ASubstanceObject.SubstanceBlockDefinition[] blocks1;
         if (blocks.length != 0) {
-            blocks1 = new ASubstanceObject.SubstanceBlock[blocks.length];
+            blocks1 = new ASubstanceObject.SubstanceBlockDefinition[blocks.length];
             for (int i = 0; i < blocks.length; i++) {
                 Preconditions.checkArgument(SUBSTANCE_BLOCKS_REGISTRY.contains(blocks[i]));
                 blocks1[i] = SUBSTANCE_BLOCKS_REGISTRY.get(blocks[i]);
             }
-        } else blocks1 = new ASubstanceObject.SubstanceBlock[0];
+        } else blocks1 = new ASubstanceObject.SubstanceBlockDefinition[0];
 
         builder.blocks(blocks1);
         return this;
@@ -203,14 +203,14 @@ public final class SubstanceBuilderCT {
 
     @ZenMethod
     public SubstanceBuilderCT fluids(String... fluids) {
-        ASubstanceObject.SubstanceFluid[] fluids1;
+        ASubstanceObject.SubstanceFluidDefinition[] fluids1;
         if (fluids.length != 0) {
-            fluids1 = new ASubstanceObject.SubstanceFluid[fluids.length];
+            fluids1 = new ASubstanceObject.SubstanceFluidDefinition[fluids.length];
             for (int i = 0; i < fluids.length; i++) {
                 Preconditions.checkArgument(SUBSTANCE_FLUIDS_REGISTRY.contains(fluids[i]));
                 fluids1[i] = SUBSTANCE_FLUIDS_REGISTRY.get(fluids[i]);
             }
-        } else fluids1 = new ASubstanceObject.SubstanceFluid[0];
+        } else fluids1 = new ASubstanceObject.SubstanceFluidDefinition[0];
 
         builder.fluids(fluids1);
         return this;

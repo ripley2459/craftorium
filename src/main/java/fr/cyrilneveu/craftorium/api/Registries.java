@@ -15,10 +15,10 @@ public final class Registries {
     public static final Registry<String, Item> ITEMS_REGISTRY = new Registry<>();
     public static final Registry<String, Block> BLOCKS_REGISTRY = new Registry<>();
     public static final Registry<String, Fluid> FLUIDS_REGISTRY = new Registry<>();
-    public static final Registry<String, ASubstanceObject.SubstanceItem> SUBSTANCE_ITEMS_REGISTRY = new Registry<>();
-    public static final Registry<String, ASubstanceObject.SubstanceTool> SUBSTANCE_TOOLS_REGISTRY = new Registry<>();
-    public static final Registry<String, ASubstanceObject.SubstanceBlock> SUBSTANCE_BLOCKS_REGISTRY = new Registry<>();
-    public static final Registry<String, ASubstanceObject.SubstanceFluid> SUBSTANCE_FLUIDS_REGISTRY = new Registry<>();
+    public static final Registry<String, ASubstanceObject.SubstanceItemDefinition> SUBSTANCE_ITEMS_REGISTRY = new Registry<>();
+    public static final Registry<String, ASubstanceObject.SubstanceToolDefinition> SUBSTANCE_TOOLS_REGISTRY = new Registry<>();
+    public static final Registry<String, ASubstanceObject.SubstanceBlockDefinition> SUBSTANCE_BLOCKS_REGISTRY = new Registry<>();
+    public static final Registry<String, ASubstanceObject.SubstanceFluidDefinition> SUBSTANCE_FLUIDS_REGISTRY = new Registry<>();
     public static final Registry<String, Substance> SUBSTANCES_REGISTRY = new Registry<>();
     public static final Registry<String, Tier> TIERS_REGISTRY = new Registry<>();
     public static final Registry<String, Vein> VEINS_REGISTRY = new Registry<>();

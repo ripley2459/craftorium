@@ -41,10 +41,10 @@ public class SubstanceBuilder {
     private Temperature temperature = Temperature.EMPTY;
     private AProcess process = DEFAULT_PROCESS;
     private Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties = new HashMap<>();
-    private Set<ASubstanceObject.SubstanceItem> items = new TreeSet<>();
-    private Set<ASubstanceObject.SubstanceTool> tools = new TreeSet<>();
-    private Set<ASubstanceObject.SubstanceBlock> blocks = new TreeSet<>();
-    private Set<ASubstanceObject.SubstanceFluid> fluids = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceItemDefinition> items = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceToolDefinition> tools = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceBlockDefinition> blocks = new TreeSet<>();
+    private Set<ASubstanceObject.SubstanceFluidDefinition> fluids = new TreeSet<>();
     private Map<ASubstanceObject, String> overrides = new HashMap<>();
     private String style = "metal";
     private boolean shiny = false;
@@ -277,28 +277,28 @@ public class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder items(ASubstanceObject.SubstanceItem... items) {
+    public SubstanceBuilder items(ASubstanceObject.SubstanceItemDefinition... items) {
         if (items.length == 0)
             this.items = new TreeSet<>();
         this.items.addAll(Arrays.asList(items));
         return this;
     }
 
-    public SubstanceBuilder tools(ASubstanceObject.SubstanceTool... tools) {
+    public SubstanceBuilder tools(ASubstanceObject.SubstanceToolDefinition... tools) {
         if (tools.length == 0)
             this.tools = new TreeSet<>();
         this.tools.addAll(Arrays.asList(tools));
         return this;
     }
 
-    public SubstanceBuilder blocks(ASubstanceObject.SubstanceBlock... blocks) {
+    public SubstanceBuilder blocks(ASubstanceObject.SubstanceBlockDefinition... blocks) {
         if (blocks.length == 0)
             this.blocks = new TreeSet<>();
         this.blocks.addAll(Arrays.asList(blocks));
         return this;
     }
 
-    public SubstanceBuilder fluids(ASubstanceObject.SubstanceFluid... fluids) {
+    public SubstanceBuilder fluids(ASubstanceObject.SubstanceFluidDefinition... fluids) {
         if (fluids.length == 0)
             this.fluids = new TreeSet<>();
         this.fluids.addAll(Arrays.asList(fluids));

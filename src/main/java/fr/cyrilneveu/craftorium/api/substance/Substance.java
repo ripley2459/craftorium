@@ -29,13 +29,13 @@ public class Substance implements Comparable<Substance> {
     protected final Aestheticism.SubstanceAestheticism aestheticism;
     protected final AProcess process;
     protected final Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties;
-    protected final Set<ASubstanceObject.SubstanceItem> items;
-    protected final Set<ASubstanceObject.SubstanceTool> tools;
-    protected final Set<ASubstanceObject.SubstanceBlock> blocks;
-    protected final Set<ASubstanceObject.SubstanceFluid> fluids;
+    protected final Set<ASubstanceObject.SubstanceItemDefinition> items;
+    protected final Set<ASubstanceObject.SubstanceToolDefinition> tools;
+    protected final Set<ASubstanceObject.SubstanceBlockDefinition> blocks;
+    protected final Set<ASubstanceObject.SubstanceFluidDefinition> fluids;
     protected final Map<ASubstanceObject, String> overrides;
 
-    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism.SubstanceAestheticism aestheticism, AProcess process, Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties, Set<ASubstanceObject.SubstanceItem> items, Set<ASubstanceObject.SubstanceTool> tools, Set<ASubstanceObject.SubstanceBlock> blocks, Set<ASubstanceObject.SubstanceFluid> fluids, Map<ASubstanceObject, String> overrides) {
+    public Substance(String name, Composition composition, Efficiency efficiency, Toughness toughness, Temperature temperature, Aestheticism.SubstanceAestheticism aestheticism, AProcess process, Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties, Set<ASubstanceObject.SubstanceItemDefinition> items, Set<ASubstanceObject.SubstanceToolDefinition> tools, Set<ASubstanceObject.SubstanceBlockDefinition> blocks, Set<ASubstanceObject.SubstanceFluidDefinition> fluids, Map<ASubstanceObject, String> overrides) {
         this.name = name;
         this.composition = composition;
         this.efficiency = efficiency;
@@ -84,19 +84,19 @@ public class Substance implements Comparable<Substance> {
         return properties;
     }
 
-    public Set<ASubstanceObject.SubstanceItem> getItems() {
+    public Set<ASubstanceObject.SubstanceItemDefinition> getItems() {
         return items;
     }
 
-    public Set<ASubstanceObject.SubstanceTool> getTools() {
+    public Set<ASubstanceObject.SubstanceToolDefinition> getTools() {
         return tools;
     }
 
-    public Set<ASubstanceObject.SubstanceBlock> getBlocks() {
+    public Set<ASubstanceObject.SubstanceBlockDefinition> getBlocks() {
         return blocks;
     }
 
-    public Set<ASubstanceObject.SubstanceFluid> getFluids() {
+    public Set<ASubstanceObject.SubstanceFluidDefinition> getFluids() {
         return fluids;
     }
 

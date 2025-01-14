@@ -1079,18 +1079,18 @@ public final class Substances {
                 .build();
         TWO = (Tier) new SubstanceBuilder("two")
                 .isTier()
-                .fluidStorage(8.0f)
-                .energyStorage(8.0f, 8.0f)
-                .recipeSpeedMultiplier(12.0f)
+                .fluidStorage(2.0f)
+                .energyStorage(2.0f, 2.0f)
+                .recipeSpeedMultiplier(3.0f)
                 .pack(ALUMINUM, HSLA_STEEL, ELECTRUM, BRONZE, CUPRONICKEL)
                 .packageTier()
                 .color(0xFFff6400)
                 .build();
         THREE = (Tier) new SubstanceBuilder("three")
                 .isTier()
-                .fluidStorage(8.0f)
-                .energyStorage(8.0f, 8.0f)
-                .recipeSpeedMultiplier(12.0f)
+                .fluidStorage(4.0f)
+                .energyStorage(4.0f, 4.0f)
+                .recipeSpeedMultiplier(6.0f)
                 .pack(TUNGSTEN_STEEL, STAINLESS_STEEL, NICHROME, STAINLESS_STEEL, RTM_ALLOY)
                 .packageTier()
                 .color(0xFFffff1e)
@@ -1116,7 +1116,7 @@ public final class Substances {
     }
 
     public static void close() {
-        SUBSTANCES_REGISTRY.order().close();
+        SUBSTANCES_REGISTRY.close();
         TIERS_REGISTRY.close();
     }
 }
