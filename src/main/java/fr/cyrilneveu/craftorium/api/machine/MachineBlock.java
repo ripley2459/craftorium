@@ -6,7 +6,7 @@ import fr.cyrilneveu.craftorium.api.block.CustomBlock;
 import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.*;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.ClientUtils;
 import fr.cyrilneveu.craftorium.api.utils.CustomIterable;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
@@ -51,7 +51,7 @@ import java.util.stream.IntStream;
 import static fr.cyrilneveu.craftorium.api.inventory.GuiHandler.MACHINE_GUI_ID;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.BLOCK_MODEL_BUILDER;
 
-public final class MachineBlock extends CustomBlock implements ITileEntityProvider {
+public class MachineBlock extends CustomBlock implements ITileEntityProvider {
     public static final PropertyEnum<EMachineStates> STATE = PropertyEnum.create("state", EMachineStates.class);
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     private final Machine machine;

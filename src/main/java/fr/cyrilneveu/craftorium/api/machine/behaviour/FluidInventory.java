@@ -31,7 +31,7 @@ import java.util.List;
 // TODO Fill and drain all tanks!
 // If done check if there is the need to create a mirror.
 // See ItemInventory$startSimulating()
-public final class FluidInventory implements IMachineBehaviour, IFluidHandler, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
+public class FluidInventory implements IMachineBehaviour, IFluidHandler, ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     private final MachineTile owner;
     private final CustomLazy<FlowController> flowController;
     private final List<FluidSlotData> slots;

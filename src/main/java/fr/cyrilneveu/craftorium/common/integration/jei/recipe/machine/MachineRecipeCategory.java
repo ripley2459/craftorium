@@ -26,7 +26,7 @@ import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.mui.ASlot.SLOT_TEXTURE_SIZE;
 
 public final class MachineRecipeCategory extends ACategory<MachineRecipeWrapper> {
-    protected final Machine machine;
+    private final Machine machine;
 
     public MachineRecipeCategory(Machine machine, IGuiHelper guiHelper) {
         super(guiHelper.drawableBuilder(Background.BACKGROUND, 4, 4, machine.getJeiData().getMinimalSize().getSizeX() - machine.getJeiData().getOffset().getSizeX(), machine.getJeiData().getMinimalSize().getSizeY() - machine.getJeiData().getOffset().getSizeY()).build());

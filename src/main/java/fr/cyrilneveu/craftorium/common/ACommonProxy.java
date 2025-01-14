@@ -9,14 +9,11 @@ import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
-import fr.cyrilneveu.craftorium.common.integration.tconstruct.TConstructPlugin;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
 import fr.cyrilneveu.craftorium.common.recipe.Maps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
-import fr.cyrilneveu.craftorium.common.tier.Tiers;
-import fr.cyrilneveu.craftorium.common.tier.TiersObjects;
 import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -99,8 +96,6 @@ public abstract class ACommonProxy {
         new ItemBuilder("wetware_processor").addTexture("circuits/wetware_processor").build();
         new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
         new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
-
-        TIER_ITEMS_REGISTRY.getAll().forEach((k, v) -> TIERS_REGISTRY.getAll().values().stream().filter(t -> t.getItems().contains(v)).forEach(v::createObject));
 
         SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
@@ -198,27 +193,21 @@ public abstract class ACommonProxy {
     }
 
     public void construct(FMLConstructionEvent event) {
+        Maps.init();
+        Machines.init();
         SubstancesObjects.init();
         Substances.init();
         Veins.init();
-        TiersObjects.init();
-        Maps.init();
-        Machines.init();
-        Tiers.init();
     }
 
     public void preInit(FMLPreInitializationEvent event) {
         if (Loader.isModLoaded("crafttweaker"))
             CraftTweakerAPI.tweaker.loadScript(false, MODID);
 
+        Machines.close();
         SubstancesObjects.close();
         Substances.close();
         Veins.close();
-        Machines.close();
-        Tiers.close();
-
-        // if (Loader.isModLoaded("tconstruct"))
-            // TConstructPlugin.init();
     }
 
     public void init(FMLInitializationEvent event) {

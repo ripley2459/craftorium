@@ -77,7 +77,7 @@ public class BlockBuilder {
         if (faceProviderList.isEmpty())
             addTexture(name);
 
-        CustomBlock block = new CustomBlock(material, new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint,null));
+        CustomBlock block = new CustomBlock(material, new Aestheticism.ObjectAestheticism(faceProviderList.toArray(new FaceProvider[0]), toolTips, glint, null));
         block.setRegistryName(registryName);
         block.setTranslationKey(translation);
         block.setCreativeTab(creativeTab);

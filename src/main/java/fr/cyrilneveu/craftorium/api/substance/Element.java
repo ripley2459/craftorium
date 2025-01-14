@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.substance;
 
 import javax.annotation.Nonnull;
 
-public final class Element implements Comparable<Element> {
+public class Element implements Comparable<Element> {
     private final int atomicNumber;
     private final String symbol, name;
     private final EGroup group;

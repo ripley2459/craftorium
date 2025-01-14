@@ -6,7 +6,6 @@ import fr.cyrilneveu.craftorium.api.utils.Size;
 
 import java.util.List;
 
-import static fr.cyrilneveu.craftorium.api.mui.ASlot.SLOT_SIZE;
 import static fr.cyrilneveu.craftorium.api.mui.ASlot.SLOT_TEXTURE_SIZE;
 import static fr.cyrilneveu.craftorium.api.utils.Size.ZERO;
 

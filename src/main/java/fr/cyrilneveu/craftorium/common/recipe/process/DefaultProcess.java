@@ -618,7 +618,7 @@ public class DefaultProcess extends AProcess {
         if (!substance.getFluids().contains(LIQUID))
             return;
 
-        for (ASubstanceObject.SubstanceItem item : SUBSTANCE_ITEMS_REGISTRY.getAll().values()) {
+        for (ASubstanceObject.SubstanceItemDefinition item : SUBSTANCE_ITEMS_REGISTRY.getAll().values()) {
             if (item.getAmount() <= 0 || !OreStack.oresExist(item.getOre(substance)))
                 continue;
 
@@ -631,7 +631,7 @@ public class DefaultProcess extends AProcess {
                     .build());
         }
 
-        for (ASubstanceObject.SubstanceBlock block : SUBSTANCE_BLOCKS_REGISTRY.getAll().values()) {
+        for (ASubstanceObject.SubstanceBlockDefinition block : SUBSTANCE_BLOCKS_REGISTRY.getAll().values()) {
             if (block.getAmount() <= 0 || !OreStack.oresExist(block.getOre(substance)))
                 continue;
 

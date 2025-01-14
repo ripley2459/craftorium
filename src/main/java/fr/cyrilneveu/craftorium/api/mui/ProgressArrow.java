@@ -13,7 +13,7 @@ import java.util.List;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 
-public final class ProgressArrow extends AWidget implements ITextured {
+public class ProgressArrow extends AWidget implements ITextured {
     public static final ResourceLocation ARROW = new ResourceLocation(MODID, "textures/interfaces/elements/arrow.png");
     public static final Size TEXTURE_SIZE = new Size(44, 16);
     public static final Size NORMAL_SIZE = new Size(22, 16);

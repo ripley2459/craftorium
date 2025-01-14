@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public final class PlayerInventory implements IMachineBehaviour, IContainable {
+public class PlayerInventory implements IMachineBehaviour, IContainable {
     public static final Size SIZE = new Size(162, 76);
     public static final int BR = 4;
     public final Position position;

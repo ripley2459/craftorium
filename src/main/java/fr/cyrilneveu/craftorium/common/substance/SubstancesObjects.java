@@ -1,15 +1,18 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
+import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
 import fr.cyrilneveu.craftorium.api.item.behaviour.DurabilityBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
 import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplate;
 import fr.cyrilneveu.craftorium.api.render.ModelTemplates;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.substance.object.*;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
@@ -31,43 +34,57 @@ import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
 public final class SubstancesObjects {
-    public static ASubstanceObject.SubstanceItem CASING;
-    public static ASubstanceObject.SubstanceItem DUST;
-    public static ASubstanceObject.SubstanceItem FOIL;
-    public static ASubstanceObject.SubstanceItem GEAR;
-    public static ASubstanceObject.SubstanceItem GEM;
-    public static ASubstanceObject.SubstanceItem INGOT;
-    public static ASubstanceObject.SubstanceItem MESH;
-    public static ASubstanceObject.SubstanceItem NUGGET;
-    public static ASubstanceObject.SubstanceItem PEARL;
-    public static ASubstanceObject.SubstanceItem PLATE;
-    public static ASubstanceObject.SubstanceItem RING;
-    public static ASubstanceObject.SubstanceItem ROD;
-    public static ASubstanceObject.SubstanceItem ROTOR;
-    public static ASubstanceObject.SubstanceItem SCREW;
-    public static ASubstanceObject.SubstanceItem SPRING;
-    public static ASubstanceObject.SubstanceItem WIRE;
+    public static ASubstanceObject.SubstanceItemDefinition BATTERY;
+    public static ASubstanceObject.SubstanceItemDefinition BUZZSAW;
+    public static ASubstanceObject.SubstanceItemDefinition EMITTER;
+    public static ASubstanceObject.SubstanceItemDefinition GRINDER;
+    public static ASubstanceObject.SubstanceItemDefinition HEAT_EXCHANGER;
+    public static ASubstanceObject.SubstanceItemDefinition MOTOR;
+    public static ASubstanceObject.SubstanceItemDefinition PISTON;
+    public static ASubstanceObject.SubstanceItemDefinition PUMP;
+    public static ASubstanceObject.SubstanceItemDefinition ROBOT_ARM;
+    public static ASubstanceObject.SubstanceItemDefinition SCANNER;
+    public static ASubstanceObject.SubstanceItemDefinition SENSOR;
 
-    public static ASubstanceObject.SubstanceTool AXE;
-    public static ASubstanceObject.SubstanceTool CUTTER;
-    public static ASubstanceObject.SubstanceTool FILE;
-    public static ASubstanceObject.SubstanceTool HAMMER;
-    public static ASubstanceObject.SubstanceTool HOE;
-    public static ASubstanceObject.SubstanceTool KNIFE;
-    public static ASubstanceObject.SubstanceTool MORTAR;
-    public static ASubstanceObject.SubstanceTool PICKAXE;
-    public static ASubstanceObject.SubstanceTool SAW;
-    public static ASubstanceObject.SubstanceTool SCREWDRIVER;
-    public static ASubstanceObject.SubstanceTool SHOVEL;
-    public static ASubstanceObject.SubstanceTool SWORD;
-    public static ASubstanceObject.SubstanceTool WRENCH;
+    public static ASubstanceObject.SubstanceItemDefinition CASING;
+    public static ASubstanceObject.SubstanceItemDefinition DUST;
+    public static ASubstanceObject.SubstanceItemDefinition FOIL;
+    public static ASubstanceObject.SubstanceItemDefinition GEAR;
+    public static ASubstanceObject.SubstanceItemDefinition GEM;
+    public static ASubstanceObject.SubstanceItemDefinition INGOT;
+    public static ASubstanceObject.SubstanceItemDefinition MESH;
+    public static ASubstanceObject.SubstanceItemDefinition NUGGET;
+    public static ASubstanceObject.SubstanceItemDefinition PEARL;
+    public static ASubstanceObject.SubstanceItemDefinition PLATE;
+    public static ASubstanceObject.SubstanceItemDefinition RING;
+    public static ASubstanceObject.SubstanceItemDefinition ROD;
+    public static ASubstanceObject.SubstanceItemDefinition ROTOR;
+    public static ASubstanceObject.SubstanceItemDefinition SCREW;
+    public static ASubstanceObject.SubstanceItemDefinition SPRING;
+    public static ASubstanceObject.SubstanceItemDefinition WIRE;
 
-    public static ASubstanceObject.SubstanceBlock BLOCK;
-    public static ASubstanceObject.SubstanceBlock FRAME;
-    public static ASubstanceObject.SubstanceBlock HULL;
-    public static ASubstanceObject.SubstanceBlock ORE;
+    public static ASubstanceObject.SubstanceToolDefinition AXE;
+    public static ASubstanceObject.SubstanceToolDefinition CUTTER;
+    public static ASubstanceObject.SubstanceToolDefinition FILE;
+    public static ASubstanceObject.SubstanceToolDefinition HAMMER;
+    public static ASubstanceObject.SubstanceToolDefinition HOE;
+    public static ASubstanceObject.SubstanceToolDefinition KNIFE;
+    public static ASubstanceObject.SubstanceToolDefinition MORTAR;
+    public static ASubstanceObject.SubstanceToolDefinition PICKAXE;
+    public static ASubstanceObject.SubstanceToolDefinition SAW;
+    public static ASubstanceObject.SubstanceToolDefinition SCREWDRIVER;
+    public static ASubstanceObject.SubstanceToolDefinition SHOVEL;
+    public static ASubstanceObject.SubstanceToolDefinition SWORD;
+    public static ASubstanceObject.SubstanceToolDefinition WRENCH;
 
-    public static ASubstanceObject.SubstanceFluid LIQUID;
+    public static ASubstanceObject.SubstanceBlockDefinition BLOCK;
+    public static ASubstanceObject.SubstanceBlockDefinition FRAME;
+    public static ASubstanceObject.SubstanceBlockDefinition HULL;
+    public static ASubstanceObject.SubstanceBlockDefinition ORE;
+
+    public static ASubstanceObject.SubstanceBlockDefinition MACHINE_FRAME;
+
+    public static ASubstanceObject.SubstanceFluidDefinition LIQUID;
 
     public static void init() {
         if (SUBSTANCE_ITEMS_REGISTRY.isInitialized() || SUBSTANCE_TOOLS_REGISTRY.isInitialized() || SUBSTANCE_BLOCKS_REGISTRY.isInitialized() || SUBSTANCE_FLUIDS_REGISTRY.isInitialized())
@@ -78,22 +95,34 @@ public final class SubstancesObjects {
         SUBSTANCE_BLOCKS_REGISTRY.initialize();
         SUBSTANCE_FLUIDS_REGISTRY.initialize();
 
-        GEM = createItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        INGOT = createItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        PEARL = createItem("pearl").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
-        PLATE = createItem("plate").amount(INGOT.getAmount()).build();
-        CASING = createItem("casing").amount(PLATE.getAmount()).build();
-        DUST = createItem("dust").amount(INGOT.getAmount()).tooltips(SubstancesObjects::baseTooltips).build();
-        FOIL = createItem("foil").amount(PLATE.getAmount() / 2).build();
-        GEAR = createItem("gear").amount(PLATE.getAmount()).build();
-        NUGGET = createItem("nugget").amount(INGOT.getAmount() / 9).build();
-        MESH = createItem("mesh").amount(INGOT.getAmount()).build();
-        ROD = createItem("rod").amount(INGOT.getAmount() / 4).build();
-        RING = createItem("ring").amount(ROD.getAmount()).build();
-        SCREW = createItem("screw").amount(ROD.getAmount() / 2).build();
-        SPRING = createItem("spring").amount(ROD.getAmount()).build();
-        WIRE = createItem("wire").amount(FOIL.getAmount() / 4).build();
-        ROTOR = createItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
+        BATTERY = createTierItem("battery").provider(SubstancesObjects::createStandalone).tooltips(SubstancesObjects::tierTooltips).behaviours(SubstancesObjects::energyStorage).faces(SubstancesObjects::tierItemFaces).build();
+        BUZZSAW = createTierItem("buzzsaw").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        EMITTER = createTierItem("emitter").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        GRINDER = createTierItem("grinder").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        HEAT_EXCHANGER = createTierItem("heat_exchanger").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        MOTOR = createTierItem("motor").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        PISTON = createTierItem("piston").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        PUMP = createTierItem("pump").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        ROBOT_ARM = createTierItem("robot_arm").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+        SCANNER = createTierItem("scanner").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
+        SENSOR = createTierItem("sensor").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
+
+        GEM = createSubstanceItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        INGOT = createSubstanceItem("ingot").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        PEARL = createSubstanceItem("pearl").amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
+        PLATE = createSubstanceItem("plate").amount(INGOT.getAmount()).build();
+        CASING = createSubstanceItem("casing").amount(PLATE.getAmount()).build();
+        DUST = createSubstanceItem("dust").amount(INGOT.getAmount()).tooltips(SubstancesObjects::baseTooltips).build();
+        FOIL = createSubstanceItem("foil").amount(PLATE.getAmount() / 2).build();
+        GEAR = createSubstanceItem("gear").amount(PLATE.getAmount()).build();
+        NUGGET = createSubstanceItem("nugget").amount(INGOT.getAmount() / 9).build();
+        MESH = createSubstanceItem("mesh").amount(INGOT.getAmount()).build();
+        ROD = createSubstanceItem("rod").amount(INGOT.getAmount() / 4).build();
+        RING = createSubstanceItem("ring").amount(ROD.getAmount()).build();
+        SCREW = createSubstanceItem("screw").amount(ROD.getAmount() / 2).build();
+        SPRING = createSubstanceItem("spring").amount(ROD.getAmount()).build();
+        WIRE = createSubstanceItem("wire").amount(FOIL.getAmount() / 4).build();
+        ROTOR = createSubstanceItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
 
         AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();
@@ -114,16 +143,37 @@ public final class SubstancesObjects {
         HULL = createBlock("hull", SubstancesObjects::createHull).model(SubstancesObjects::blockModel).faces(SubstancesObjects::blockFaces).amount(PLATE.getAmount() * 8).build();
         ORE = createBlock("ore", SubstancesObjects::createOre).tooltips(SubstancesObjects::baseTooltips).model(SubstancesObjects::oreModel).faces(SubstancesObjects::oreFaces).build();
 
+        MACHINE_FRAME = createBlock("machine_frame", SubstancesObjects::createBlock).tooltips(SubstancesObjects::tierTooltips).model(SubstancesObjects::blockModel).faces(SubstancesObjects::tierBlockFaces).amount(BASE_AMOUNT * 9).build();
+
         LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
     }
 
-    private static ASubstanceObjectBuilder.SubstanceItemBuilder createItem(String name) {
+    private static ASubstanceObjectBuilder.SubstanceItemBuilder createSubstanceItem(String name) {
         ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
         builder.provider(SubstancesObjects::createItem);
         builder.faces(SubstancesObjects::itemFaces);
         builder.behaviours(SubstancesObjects::defaultBehaviours);
 
         return builder;
+    }
+
+    private static ASubstanceObjectBuilder.SubstanceItemBuilder createTierItem(String name) {
+        ASubstanceObjectBuilder.SubstanceItemBuilder builder = new ASubstanceObjectBuilder.SubstanceItemBuilder(name);
+        builder.provider(SubstancesObjects::createItem);
+        builder.faces(SubstancesObjects::itemFaces);
+        builder.behaviours(SubstancesObjects::defaultBehaviours);
+
+        return builder;
+    }
+
+    private static void createStandalone(ASubstanceObject reference, Substance substance) {
+        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
+        item.setRegistryName(reference.getName(substance));
+        item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
+        item.setMaxStackSize(1);
+        item.setCreativeTab(SUBSTANCES);
+
+        ITEMS_REGISTRY.put(reference.getName(substance), item);
     }
 
     private static ASubstanceObjectBuilder.SubstanceToolBuilder createTool(String name) {
@@ -267,10 +317,10 @@ public final class SubstancesObjects {
     }
 
     public static void close() {
-        SUBSTANCE_ITEMS_REGISTRY.order().close();
-        SUBSTANCE_TOOLS_REGISTRY.order().close();
-        SUBSTANCE_BLOCKS_REGISTRY.order().close();
-        SUBSTANCE_FLUIDS_REGISTRY.order().close();
+        SUBSTANCE_ITEMS_REGISTRY.close();
+        SUBSTANCE_TOOLS_REGISTRY.close();
+        SUBSTANCE_BLOCKS_REGISTRY.close();
+        SUBSTANCE_FLUIDS_REGISTRY.close();
     }
 
     public static FaceProvider[] blockFaces(ASubstanceObject reference, Substance substance) {
@@ -278,6 +328,13 @@ public final class SubstancesObjects {
         faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
         if (substance.getAestheticism().isShiny())
             faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "substances", "blocks", substance.getAestheticism().getStyle(), (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), RenderUtils.WHITE_COLOR);
+        return faces;
+    }
+
+    public static FaceProvider[] tierBlockFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[2];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "tiers", reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
+        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "blocks", "tiers", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), RenderUtils.WHITE_COLOR);
         return faces;
     }
 
@@ -317,6 +374,19 @@ public final class SubstancesObjects {
         return faces;
     }
 
+    public static FaceProvider[] tierItemFaces(ASubstanceObject reference, Substance substance) {
+        FaceProvider[] faces = new FaceProvider[2];
+        faces[0] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "tiers", reference.getSelf() ? substance.getName() : reference.getName(null))), substance.getAestheticism().getBaseColor());
+        faces[1] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "tiers", (reference.getSelf() ? substance.getName() : reference.getName(null)).concat("_overlay"))), RenderUtils.WHITE_COLOR);
+        return faces;
+    }
+
+    public static List<String> tierTooltips(ASubstanceObject reference, Substance substance) {
+        List<String> lines = new ArrayList<>();
+        lines.add(Utils.localise("tooltip.craftorium.tier.name", substance.getDisplayName()));
+        return lines;
+    }
+
     public static List<String> baseTooltips(ASubstanceObject reference, Substance substance) {
         List<String> lines = new ArrayList<>();
         String formula = substance.getComposition().getFormula();
@@ -338,6 +408,13 @@ public final class SubstancesObjects {
             lines.add(Utils.localise("tooltip.craftorium.temperature", Math.round(gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint())));
         lines.add(Utils.localise(gaseous ? "tooltip.craftorium.state.gaseous" : "tooltip.craftorium.state.liquid"));
         return lines;
+    }
+
+    public static IItemBehaviour[] energyStorage(ASubstanceObject reference, Substance substance) {
+        Tier tier = (Tier) substance;
+        IItemBehaviour[] behaviours = new IItemBehaviour[1];
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getEnergyIO()));
+        return behaviours;
     }
 
     public static IItemBehaviour[] defaultBehaviours(ASubstanceObject reference, Substance substance) {

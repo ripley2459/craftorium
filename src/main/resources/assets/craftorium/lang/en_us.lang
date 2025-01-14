@@ -9,7 +9,6 @@ item.craftorium.buzzsaw.name=Buzzsaw
 item.craftorium.emitter.name=Emitter
 item.craftorium.heat_exchanger.name=Heat Exchanger
 item.craftorium.grinder.name=Grinder
-item.craftorium.machine_frame.name=Machine Frame
 item.craftorium.motor.name=Motor
 item.craftorium.piston.name=Piston
 item.craftorium.pump.name=Pump
@@ -93,6 +92,9 @@ item.craftorium.quantum_calculus_die.name=Quantum Calculus Die
 
 # ##################################################
 # Blocks
+
+# Tiered
+tile.craftorium.machine_frame.name=Machine Frame
 
 # Machines
 machine.craftorium.assembler.name=Assembler
@@ -238,6 +240,13 @@ substance.craftorium.moscovium.name=Moscovium
 substance.craftorium.livermorium.name=Livermorium
 substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
+
+# Tiers
+substance.craftorium.one.name=Tier 1
+substance.craftorium.two.name=Tier 2
+substance.craftorium.three.name=Tier 3
+substance.craftorium.four.name=Tier 4
+substance.craftorium.five.name=Tier 5
 
 # Others
 substance.craftorium.aluminum_brass.name=Aluminum Brass
@@ -415,13 +424,6 @@ itemGroup.machines=Machines
 itemGroup.substances=Substances
 itemGroup.tools=Tools
 
-# Tiers
-tier.craftorium.one.name=Tier 1
-tier.craftorium.two.name=Tier 2
-tier.craftorium.three.name=Tier 3
-tier.craftorium.four.name=Tier 4
-tier.craftorium.five.name=Tier 5
-
 # Tooltips
 tooltip.craftorium.tool.damage=Durability: %s/%s
 tooltip.craftorium.battery.energy=Energy: §c%s RF§r
@@ -450,7 +452,6 @@ tooltip.craftorium.state.solid=§7State: §aSolid§r
 tooltip.craftorium.state.unknown=§7State: §aUnknown§r
 tooltip.craftorium.temperature=§c%s°K§r
 tooltip.craftorium.tier.name=Tier: §e%s§r
-
 
 # JEI
 jei.craftorium.recipe.chance.tiny=%s%%

@@ -26,36 +26,7 @@ import java.util.Set;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ITEM_MODEL_BUILDER;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.INGOT;
 
-public class SubstanceTool extends SubstanceItem {
-    public SubstanceTool(ASubstanceObject reference, Substance substance) {
-        super(reference, substance);
-        this.maxStackSize = 1;
-        if (substance.getEfficiency() != null)
-            this.setMaxDamage(substance.getEfficiency().getDurability());
-    }
-
-    @Override
-    public boolean isDamageable() {
-        return true;
-    }
-
-    @Override
-    public ItemStack getContainerItem(ItemStack stack) {
-        ItemStack container = stack.copy();
-        container.setItemDamage(container.getItemDamage() + 1);
-        return container;
-    }
-
-    @Override
-    public boolean hasContainerItem(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return new OreStack(INGOT.getOre(substance)).matches(repair);
-    }
-
+public class SubstanceTool {
     public static final class SubstanceAxe extends ItemAxe implements ICustomModel {
         private final Substance substance;
         private final Aestheticism.ObjectAestheticism aestheticism;

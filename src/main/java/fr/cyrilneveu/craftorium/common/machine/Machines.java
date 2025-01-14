@@ -7,7 +7,7 @@ import fr.cyrilneveu.craftorium.api.machine.MachineBlock;
 import fr.cyrilneveu.craftorium.api.machine.MachineBuilder;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
-import fr.cyrilneveu.craftorium.api.tier.Tier;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.RenderUtils;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraft.util.ResourceLocation;
@@ -25,7 +25,7 @@ public final class Machines {
     public static Machine MACERATOR;
     public static Machine BENDER;
     public static Machine LATHE;
-    public static Machine CUTTER;
+    public static Machine M_CUTTER;
     public static Machine COMPRESSOR;
     public static Machine FOUNDRY;
     public static Machine MIXER;
@@ -79,7 +79,7 @@ public final class Machines {
                 .text(8, 86, "container.inventory", false)
                 .playerInventory(7, 97)
                 .build();
-        CUTTER = new MachineBuilder("cutter")
+        M_CUTTER = new MachineBuilder("cutter")
                 .itemInput(55, 36)
                 .itemOutput(103, 36)
                 .processor(CUTTING, 77, 37, 134, 76)

@@ -2,7 +2,7 @@ package fr.cyrilneveu.craftorium.api.recipe.machine;
 
 import static fr.cyrilneveu.craftorium.api.Registries.MACHINE_MAPS_REGISTRY;
 
-public final class RecipeMapBuilder {
+public class RecipeMapBuilder {
     private String name;
     private int itemsIn = 0;
     private int fluidsIn = 0;
