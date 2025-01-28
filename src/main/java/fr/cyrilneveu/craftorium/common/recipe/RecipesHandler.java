@@ -134,100 +134,100 @@ public final class RecipesHandler {
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
 
-        registerMotorRecipe(ONE);
-        registerPistonRecipe(ONE);
-        registerHeatExchangerRecipe(ONE, RUBBER);
-        registerPumpRecipe(ONE, RUBBER);
-        registerEmitterRecipe(ONE, DIAMOND, "circuitTier1");
-        registerSensorRecipe(ONE, ENDER, "circuitTier1");
-        registerBatteryRecipe(ONE);
-        registerRobotArmRecipe(ONE, "circuitTier1");
+        registerMotorRecipe(TIER_ONE);
+        registerPistonRecipe(TIER_ONE);
+        registerHeatExchangerRecipe(TIER_ONE, RUBBER);
+        registerPumpRecipe(TIER_ONE, RUBBER);
+        registerEmitterRecipe(TIER_ONE, DIAMOND, "circuitTier1");
+        registerSensorRecipe(TIER_ONE, ENDER, "circuitTier1");
+        registerBatteryRecipe(TIER_ONE);
+        registerRobotArmRecipe(TIER_ONE, "circuitTier1");
 
-        registerCircuitAssemblerRecipe(ONE, "circuitTier1");
-        registerMixerRecipe(ONE, "circuitTier1");
-        registerFoundryRecipe(ONE, "circuitTier1");
-        registerCompressorRecipe(ONE, "circuitTier1");
-        registerElectrolyzerRecipe(ONE, "circuitTier1");
-        registerMaceratorRecipe(ONE, "circuitTier1");
-        registerBenderRecipe(ONE, "circuitTier1");
-        registerCutterRecipe(ONE, "circuitTier1");
-        registerLatheRecipe(ONE, "circuitTier1");
+        registerCircuitAssemblerRecipe(TIER_ONE, "circuitTier1");
+        registerMixerRecipe(TIER_ONE, "circuitTier1");
+        registerFoundryRecipe(TIER_ONE, "circuitTier1");
+        registerCompressorRecipe(TIER_ONE, "circuitTier1");
+        registerElectrolyzerRecipe(TIER_ONE, "circuitTier1");
+        registerMaceratorRecipe(TIER_ONE, "circuitTier1");
+        registerBenderRecipe(TIER_ONE, "circuitTier1");
+        registerCutterRecipe(TIER_ONE, "circuitTier1");
+        registerLatheRecipe(TIER_ONE, "circuitTier1");
 
-        registerMotorRecipe(TWO);
-        registerPistonRecipe(TWO);
-        registerHeatExchangerRecipe(TWO, RUBBER);
-        registerPumpRecipe(TWO, RUBBER);
-        registerEmitterRecipe(TWO, DIAMOND, "circuitTier2");
-        registerSensorRecipe(TWO, ENDER, "circuitTier2");
-        registerBatteryRecipe(TWO);
-        registerRobotArmRecipe(TWO, "circuitTier2");
+        registerMotorRecipe(TIER_TWO);
+        registerPistonRecipe(TIER_TWO);
+        registerHeatExchangerRecipe(TIER_TWO, RUBBER);
+        registerPumpRecipe(TIER_TWO, RUBBER);
+        registerEmitterRecipe(TIER_TWO, DIAMOND, "circuitTier2");
+        registerSensorRecipe(TIER_TWO, ENDER, "circuitTier2");
+        registerBatteryRecipe(TIER_TWO);
+        registerRobotArmRecipe(TIER_TWO, "circuitTier2");
 
-        registerCircuitAssemblerRecipe(TWO, "circuitTier2");
-        registerMixerRecipe(TWO, "circuitTier2");
-        registerFoundryRecipe(TWO, "circuitTier2");
-        registerCompressorRecipe(TWO, "circuitTier2");
-        registerElectrolyzerRecipe(TWO, "circuitTier2");
-        registerMaceratorRecipe(TWO, "circuitTier2");
-        registerBenderRecipe(TWO, "circuitTier2");
-        registerCutterRecipe(TWO, "circuitTier2");
-        registerLatheRecipe(TWO, "circuitTier2");
+        registerCircuitAssemblerRecipe(TIER_TWO, "circuitTier2");
+        registerMixerRecipe(TIER_TWO, "circuitTier2");
+        registerFoundryRecipe(TIER_TWO, "circuitTier2");
+        registerCompressorRecipe(TIER_TWO, "circuitTier2");
+        registerElectrolyzerRecipe(TIER_TWO, "circuitTier2");
+        registerMaceratorRecipe(TIER_TWO, "circuitTier2");
+        registerBenderRecipe(TIER_TWO, "circuitTier2");
+        registerCutterRecipe(TIER_TWO, "circuitTier2");
+        registerLatheRecipe(TIER_TWO, "circuitTier2");
 
-        registerMotorRecipe(THREE);
-        registerPistonRecipe(THREE);
-        registerHeatExchangerRecipe(THREE, RUBBER);
-        registerPumpRecipe(THREE, RUBBER);
-        registerEmitterRecipe(THREE, DIAMOND, "circuitTier3");
-        registerSensorRecipe(THREE, ENDER, "circuitTier3");
-        registerBatteryRecipe(THREE);
-        registerRobotArmRecipe(THREE, "circuitTier3");
+        registerMotorRecipe(TIER_THREE);
+        registerPistonRecipe(TIER_THREE);
+        registerHeatExchangerRecipe(TIER_THREE, RUBBER);
+        registerPumpRecipe(TIER_THREE, RUBBER);
+        registerEmitterRecipe(TIER_THREE, DIAMOND, "circuitTier3");
+        registerSensorRecipe(TIER_THREE, ENDER, "circuitTier3");
+        registerBatteryRecipe(TIER_THREE);
+        registerRobotArmRecipe(TIER_THREE, "circuitTier3");
 
-        registerCircuitAssemblerRecipe(THREE, "circuitTier3");
-        registerMixerRecipe(THREE, "circuitTier3");
-        registerFoundryRecipe(THREE, "circuitTier3");
-        registerCompressorRecipe(THREE, "circuitTier3");
-        registerElectrolyzerRecipe(THREE, "circuitTier3");
-        registerMaceratorRecipe(THREE, "circuitTier3");
-        registerBenderRecipe(THREE, "circuitTier3");
-        registerCutterRecipe(THREE, "circuitTier3");
-        registerLatheRecipe(THREE, "circuitTier3");
+        registerCircuitAssemblerRecipe(TIER_THREE, "circuitTier3");
+        registerMixerRecipe(TIER_THREE, "circuitTier3");
+        registerFoundryRecipe(TIER_THREE, "circuitTier3");
+        registerCompressorRecipe(TIER_THREE, "circuitTier3");
+        registerElectrolyzerRecipe(TIER_THREE, "circuitTier3");
+        registerMaceratorRecipe(TIER_THREE, "circuitTier3");
+        registerBenderRecipe(TIER_THREE, "circuitTier3");
+        registerCutterRecipe(TIER_THREE, "circuitTier3");
+        registerLatheRecipe(TIER_THREE, "circuitTier3");
 
-        registerMotorRecipe(FOUR);
-        registerPistonRecipe(FOUR);
-        registerHeatExchangerRecipe(FOUR, RUBBER);
-        registerPumpRecipe(FOUR, RUBBER);
-        registerEmitterRecipe(FOUR, DIAMOND, "circuitTier4");
-        registerSensorRecipe(FOUR, ENDER, "circuitTier4");
-        registerBatteryRecipe(FOUR);
-        registerRobotArmRecipe(FOUR, "circuitTier4");
+        registerMotorRecipe(TIER_FOUR);
+        registerPistonRecipe(TIER_FOUR);
+        registerHeatExchangerRecipe(TIER_FOUR, RUBBER);
+        registerPumpRecipe(TIER_FOUR, RUBBER);
+        registerEmitterRecipe(TIER_FOUR, DIAMOND, "circuitTier4");
+        registerSensorRecipe(TIER_FOUR, ENDER, "circuitTier4");
+        registerBatteryRecipe(TIER_FOUR);
+        registerRobotArmRecipe(TIER_FOUR, "circuitTier4");
 
-        registerCircuitAssemblerRecipe(FOUR, "circuitTier4");
-        registerMixerRecipe(FOUR, "circuitTier4");
-        registerFoundryRecipe(FOUR, "circuitTier5");
-        registerCompressorRecipe(FOUR, "circuitTier4");
-        registerElectrolyzerRecipe(FOUR, "circuitTier4");
-        registerMaceratorRecipe(FOUR, "circuitTier4");
-        registerBenderRecipe(FOUR, "circuitTier4");
-        registerCutterRecipe(FOUR, "circuitTier4");
-        registerLatheRecipe(FOUR, "circuitTier4");
+        registerCircuitAssemblerRecipe(TIER_FOUR, "circuitTier4");
+        registerMixerRecipe(TIER_FOUR, "circuitTier4");
+        registerFoundryRecipe(TIER_FOUR, "circuitTier5");
+        registerCompressorRecipe(TIER_FOUR, "circuitTier4");
+        registerElectrolyzerRecipe(TIER_FOUR, "circuitTier4");
+        registerMaceratorRecipe(TIER_FOUR, "circuitTier4");
+        registerBenderRecipe(TIER_FOUR, "circuitTier4");
+        registerCutterRecipe(TIER_FOUR, "circuitTier4");
+        registerLatheRecipe(TIER_FOUR, "circuitTier4");
 
-        registerMotorRecipe(FIVE);
-        registerPistonRecipe(FIVE);
-        registerHeatExchangerRecipe(FIVE, RUBBER);
-        registerPumpRecipe(FIVE, RUBBER);
-        registerEmitterRecipe(FIVE, DIAMOND, "circuitTier5");
-        registerSensorRecipe(FIVE, ENDER, "circuitTier5");
-        registerBatteryRecipe(FIVE);
-        registerRobotArmRecipe(FIVE, "circuitTier5");
+        registerMotorRecipe(TIER_FIVE);
+        registerPistonRecipe(TIER_FIVE);
+        registerHeatExchangerRecipe(TIER_FIVE, RUBBER);
+        registerPumpRecipe(TIER_FIVE, RUBBER);
+        registerEmitterRecipe(TIER_FIVE, DIAMOND, "circuitTier5");
+        registerSensorRecipe(TIER_FIVE, ENDER, "circuitTier5");
+        registerBatteryRecipe(TIER_FIVE);
+        registerRobotArmRecipe(TIER_FIVE, "circuitTier5");
 
-        registerCircuitAssemblerRecipe(FIVE, "circuitTier5");
-        registerMixerRecipe(FIVE, "circuitTier5");
-        registerFoundryRecipe(FIVE, "circuitTier5");
-        registerCompressorRecipe(FIVE, "circuitTier5");
-        registerElectrolyzerRecipe(FIVE, "circuitTier5");
-        registerMaceratorRecipe(FIVE, "circuitTier5");
-        registerBenderRecipe(FIVE, "circuitTier5");
-        registerCutterRecipe(FIVE, "circuitTier5");
-        registerLatheRecipe(FIVE, "circuitTier5");
+        registerCircuitAssemblerRecipe(TIER_FIVE, "circuitTier5");
+        registerMixerRecipe(TIER_FIVE, "circuitTier5");
+        registerFoundryRecipe(TIER_FIVE, "circuitTier5");
+        registerCompressorRecipe(TIER_FIVE, "circuitTier5");
+        registerElectrolyzerRecipe(TIER_FIVE, "circuitTier5");
+        registerMaceratorRecipe(TIER_FIVE, "circuitTier5");
+        registerBenderRecipe(TIER_FIVE, "circuitTier5");
+        registerCutterRecipe(TIER_FIVE, "circuitTier5");
+        registerLatheRecipe(TIER_FIVE, "circuitTier5");
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
                 .consumeItem(new ItemStack(Blocks.LOG))
@@ -431,7 +431,7 @@ public final class RecipesHandler {
         }
 
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("microprocessor")
-                .consumeItem(WIRE.getOre(TWO.getEnergy()), 1)
+                .consumeItem(WIRE.getOre(TIER_TWO.getEnergy()), 1)
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 1))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 1))
                 .produceItem(ACommonProxy.getItemStack("microprocessor"))
@@ -440,7 +440,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("processor")
-                .consumeItem(WIRE.getOre(THREE.getEnergy()), 4)
+                .consumeItem(WIRE.getOre(TIER_THREE.getEnergy()), 4)
                 .consumeItem(ACommonProxy.getItemStack("microprocessor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 4))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 4))
@@ -451,7 +451,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("advanced_processor")
-                .consumeItem(WIRE.getOre(FOUR.getEnergy()), 16)
+                .consumeItem(WIRE.getOre(TIER_FOUR.getEnergy()), 16)
                 .consumeItem(ACommonProxy.getItemStack("processor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 16))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 16))
@@ -462,7 +462,7 @@ public final class RecipesHandler {
                 .configuration(CONFIGURATION_CIRCUIT_ASSEMBLER_BASE)
                 .build());
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("mainframe")
-                .consumeItem(WIRE.getOre(FIVE.getEnergy()), 64)
+                .consumeItem(WIRE.getOre(TIER_FIVE.getEnergy()), 64)
                 .consumeItem(ACommonProxy.getItemStack("advanced_processor", 4))
                 .consumeItem(ACommonProxy.getItemStack("ram_die", 64))
                 .consumeItem(ACommonProxy.getItemStack("calculus_die", 64))

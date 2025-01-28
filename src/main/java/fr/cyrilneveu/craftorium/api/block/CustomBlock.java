@@ -51,7 +51,8 @@ public class CustomBlock extends Block implements ICustomModel {
     @Override
     @SideOnly(Side.CLIENT)
     public int getItemStackColor(ItemStack stack, int layer) {
-        return aestheticism.getFaceProviders()[layer].getColor();
+        FaceProvider[] faces = aestheticism.getFaceProviders();
+        return layer >= faces.length ? RenderUtils.WHITE_COLOR : faces[layer].getColor();
     }
 
     @Override

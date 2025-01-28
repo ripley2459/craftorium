@@ -25,7 +25,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.MACHINES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.utils.NBTUtils.*;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.ELECTROLYZER;
-import static fr.cyrilneveu.craftorium.common.substance.Substances.ONE;
+import static fr.cyrilneveu.craftorium.common.substance.Substances.TIER_ONE;
 
 public class MachineTile extends TileEntity implements ITickable {
     private Machine machine;
@@ -35,7 +35,7 @@ public class MachineTile extends TileEntity implements ITickable {
     private EMachineStates state = EMachineStates.NOPOWER;
 
     public MachineTile() {
-        this(ELECTROLYZER, ONE);
+        this(ELECTROLYZER, TIER_ONE);
     }
 
     public MachineTile(Machine machine, Tier tier) {

@@ -9,8 +9,7 @@ import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.recipe.Processes.FLINT_PROCESS;
-import static fr.cyrilneveu.craftorium.common.recipe.Processes.WOOD_PROCESS;
+import static fr.cyrilneveu.craftorium.common.recipe.Processes.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Substances {
@@ -147,11 +146,11 @@ public final class Substances {
     public static Substance POLYACRYLONITRILE;
     public static Substance CARBON_FIBER;
     public static Substance NITROGEN;
-    public static Tier ONE;
-    public static Tier TWO;
-    public static Tier THREE;
-    public static Tier FOUR;
-    public static Tier FIVE;
+    public static Tier TIER_ONE;
+    public static Tier TIER_TWO;
+    public static Tier TIER_THREE;
+    public static Tier TIER_FOUR;
+    public static Tier TIER_FIVE;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -191,6 +190,7 @@ public final class Substances {
                 .style("mineral")
                 .color(0xFFb5b5b5)
                 .sound(SoundType.STONE)
+                .recipe(STONE_PROCESS)
                 .build();
         SOUL_SAND = new SubstanceBuilder("soul_sand")
                 .items(DUST)
@@ -1068,7 +1068,7 @@ public final class Substances {
 
         TIERS_REGISTRY.initialize();
 
-        ONE = (Tier) new SubstanceBuilder("one")
+        TIER_ONE = (Tier) new SubstanceBuilder("tier_one")
                 .isTier()
                 .fluidStorage(8.0f)
                 .energyStorage(8.0f, 8.0f)
@@ -1077,7 +1077,7 @@ public final class Substances {
                 .packageTier()
                 .color(0xFFdcdcdc)
                 .build();
-        TWO = (Tier) new SubstanceBuilder("two")
+        TIER_TWO = (Tier) new SubstanceBuilder("tier_two")
                 .isTier()
                 .fluidStorage(2.0f)
                 .energyStorage(2.0f, 2.0f)
@@ -1086,7 +1086,7 @@ public final class Substances {
                 .packageTier()
                 .color(0xFFff6400)
                 .build();
-        THREE = (Tier) new SubstanceBuilder("three")
+        TIER_THREE = (Tier) new SubstanceBuilder("tier_three")
                 .isTier()
                 .fluidStorage(4.0f)
                 .energyStorage(4.0f, 4.0f)
@@ -1095,7 +1095,7 @@ public final class Substances {
                 .packageTier()
                 .color(0xFFffff1e)
                 .build();
-        FOUR = (Tier) new SubstanceBuilder("four")
+        TIER_FOUR = (Tier) new SubstanceBuilder("tier_four")
                 .isTier()
                 .fluidStorage(8.0f)
                 .energyStorage(8.0f, 8.0f)
@@ -1104,7 +1104,7 @@ public final class Substances {
                 .packageTier()
                 .color(0xFF155f91)
                 .build();
-        FIVE = (Tier) new SubstanceBuilder("five")
+        TIER_FIVE = (Tier) new SubstanceBuilder("tier_five")
                 .isTier()
                 .fluidStorage(16.0f)
                 .energyStorage(16.0f, 16.0f)

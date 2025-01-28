@@ -43,7 +43,7 @@ public class Machine implements Comparable<Machine> {
     }
 
     public String getName(Tier tier) {
-        return String.join("_", getName(), "tier", tier.getName());
+        return String.join("_", getName(), tier.getName());
     }
 
     public String getDisplayName() {

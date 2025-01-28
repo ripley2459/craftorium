@@ -19,8 +19,8 @@ public class WoodProcess extends DefaultProcess {
         if (!substance.getItems().contains(PLATE))
             return;
 
-        if (OreStack.oresExist(HAMMER.getOre(substance), INGOT.getOre(substance)))
-            RecipeManager.addShapedRecipe(PLATE.getName(substance), PLATE.asItemStack(substance), "H", "I", "I", 'H', HAMMER.asIngredient(substance), 'I', INGOT.asIngredient(substance));
+        if (OreStack.oresExist(BLOCK.getOre(substance), SAW.getOre(substance)))
+            RecipeManager.addShapelessRecipe(PLATE.getName(substance), PLATE.asItemStack(substance, 9), SAW.asIngredient(substance), BLOCK.asIngredient(substance));
 
         if (OreStack.oresExist(BLOCK.getOre(substance)))
             CUTTING.addRecipe(new MachineRecipeBuilder(PLATE.getName(substance).concat(BLOCK.getName(substance)))
@@ -30,6 +30,15 @@ public class WoodProcess extends DefaultProcess {
                     .duration(1800)
                     .configuration(CONFIGURATION_CUTTER_LARGE)
                     .build());
+    }
+
+    @Override
+    protected void rotor(Substance substance) {
+        if (!substance.getItems().contains(ROTOR))
+            return;
+
+        if (OreStack.oresExist(SAW.getOre(substance), SCREWDRIVER.getOre(substance), PLATE.getOre(substance), SCREW.getOre(substance), CASING.getOre(substance)))
+            RecipeManager.addShapedRecipe(ROTOR.getName(substance), ROTOR.asItemStack(substance), "CP ", "RDR", " PS", 'C', SAW.asIngredient(substance), 'P', CASING.asIngredient(substance), 'R', SCREW.asIngredient(substance), 'D', PLATE.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance));
     }
 
     @Override

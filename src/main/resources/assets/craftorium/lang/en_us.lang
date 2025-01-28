@@ -242,11 +242,11 @@ substance.craftorium.tennessine.name=Tennessine
 substance.craftorium.oganesson.name=Oganesson
 
 # Tiers
-substance.craftorium.one.name=Tier 1
-substance.craftorium.two.name=Tier 2
-substance.craftorium.three.name=Tier 3
-substance.craftorium.four.name=Tier 4
-substance.craftorium.five.name=Tier 5
+substance.craftorium.tier_one.name=Tier 1
+substance.craftorium.tier_two.name=Tier 2
+substance.craftorium.tier_three.name=Tier 3
+substance.craftorium.tier_four.name=Tier 4
+substance.craftorium.tier_five.name=Tier 5
 
 # Others
 substance.craftorium.aluminum_brass.name=Aluminum Brass

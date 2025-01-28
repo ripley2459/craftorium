@@ -36,7 +36,7 @@ public final class JEIPlugin implements IModPlugin {
 
             for (Tier tier : TIERS_REGISTRY.getAll().values()) {
                 if (tier.getMachines().contains(machine)) {
-                    String name = String.join("_", machine.getName(), "tier", tier.getName());
+                    String name = String.join("_", machine.getName(), tier.getName());
                     registry.addRecipeCatalyst(ACommonProxy.getItemStack(name), id);
                 }
             }
