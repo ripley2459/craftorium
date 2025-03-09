@@ -94,12 +94,12 @@ public abstract class AButton extends AWidget implements ITextured {
 
         @Override
         public void fromBytes(ByteBuf buf) {
-            configuration = buf.readByte();
+            configuration = buf.readInt();
         }
 
         @Override
         public void toBytes(ByteBuf buf) {
-            buf.writeByte(configuration);
+            buf.writeInt(configuration);
         }
     }
 

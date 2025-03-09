@@ -14,7 +14,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 public final class SubstancesCT {
     @ZenMethod
     public static SubstanceBuilderCT create(String name) {
-        Preconditions.checkArgument(!SUBSTANCES_REGISTRY.contains(name));
+        Preconditions.checkArgument(!SUBSTANCES_REGISTRY.contains(name), "A substance with this id already exists.");
 
         return new SubstanceBuilderCT(name);
     }

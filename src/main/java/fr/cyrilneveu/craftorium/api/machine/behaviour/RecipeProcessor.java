@@ -265,12 +265,12 @@ public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerial
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        configuration = buf.readByte();
+        configuration = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeByte(configuration);
+        buf.writeInt(configuration);
         buf.writeInt(progress);
         buf.writeInt(progressMax);
     }
@@ -292,7 +292,7 @@ public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerial
     @Override
     public void deserializeNBT(NBTTagCompound nbt) {
         if (nbt.hasKey(MACHINE_CONFIGURATION_NBT))
-            configuration = nbt.getByte(MACHINE_CONFIGURATION_NBT);
+            configuration = nbt.getInteger(MACHINE_CONFIGURATION_NBT);
         else configuration = MACHINE_CONFIGURATION_MIN;
 
         if (nbt.hasKey(MACHINE_RECIPE_CACHE_NBT))

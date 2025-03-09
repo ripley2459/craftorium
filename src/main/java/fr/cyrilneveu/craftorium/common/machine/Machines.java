@@ -150,6 +150,7 @@ public final class Machines {
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "assembler", "name"), true)
                 .text(8, 104, "container.inventory", false)
                 .playerInventory(7, 115)
+                .size(176, 198)
                 .build();
     }
 

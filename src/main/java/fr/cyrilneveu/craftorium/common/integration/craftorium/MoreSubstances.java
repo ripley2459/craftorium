@@ -37,7 +37,19 @@ public final class MoreSubstances {
                     .build();
         }
 
-        if (Utils.atLeastOne(new String[]{"draconicevolution"}, Loader::isModLoaded)) {
+        if (Utils.atLeastOne(new String[]{"tconstruct"}, Loader::isModLoaded)) {
+            Substance ardite = new SubstanceBuilder("ardite")
+                    .packagePostTransitionMetal()
+                    .color(0xFFda5b17)
+                    .style("metal")
+                    .build();
+            new SubstanceBuilder("manyullyn")
+                    .packagePostTransitionMetal()
+                    .composition(ardite, 3, COBALT, 1)
+                    .color(0xFFa97de0)
+                    .style("metal")
+                    .shiny()
+                    .build();
             new SubstanceBuilder("aluminum_brass")
                     .packageMetalExtended()
                     .composition(COPPER, 1, ALUMINUM, 3)
@@ -46,7 +58,7 @@ public final class MoreSubstances {
                     .build();
         }
 
-        if (Utils.atLeastOne(new String[]{"tconstruct"}, Loader::isModLoaded)) {
+        if (Utils.atLeastOne(new String[]{"draconicevolution"}, Loader::isModLoaded)) {
             new SubstanceBuilder("draconium")
                     .packageMetalExtended()
                     .veinMember()
