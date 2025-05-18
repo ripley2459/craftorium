@@ -167,7 +167,7 @@ public final class SubstancesObjects {
     }
 
     private static void createStandalone(ASubstanceObject reference, Substance substance) {
-        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
+        CustomItem item = new CustomItem(getBehaviours(reference, substance), defaultAestheticism(reference, substance));
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setMaxStackSize(1);
@@ -198,7 +198,7 @@ public final class SubstancesObjects {
     }
 
     private static void createItem(ASubstanceObject reference, Substance substance) {
-        CustomItem item = new CustomItem(defaultBehaviours(reference, substance), defaultAestheticism(reference, substance));
+        CustomItem item = new CustomItem(getBehaviours(reference, substance), defaultAestheticism(reference, substance));
         item.setRegistryName(reference.getName(substance));
         item.setTranslationKey(String.join(".", MODID, reference.getName(null)));
         item.setCreativeTab(SUBSTANCES);
@@ -415,6 +415,10 @@ public final class SubstancesObjects {
         IItemBehaviour[] behaviours = new IItemBehaviour[1];
         behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getEnergyIO()));
         return behaviours;
+    }
+
+    public static IItemBehaviour[] getBehaviours(ASubstanceObject reference, Substance substance) {
+        return reference instanceof ASubstanceObject.SubstanceItemDefinition itemDefinition ? itemDefinition.getBehaviours(substance) : defaultBehaviours(reference, substance);
     }
 
     public static IItemBehaviour[] defaultBehaviours(ASubstanceObject reference, Substance substance) {
