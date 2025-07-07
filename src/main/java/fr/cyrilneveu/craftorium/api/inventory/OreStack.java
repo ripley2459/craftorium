@@ -5,9 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class OreStack {
+    @Nullable
     private final String oreDictName;
     private final ItemStack itemStack;
     private final int amount;
@@ -24,22 +27,19 @@ public final class OreStack {
         this.amount = amount;
     }
 
-    public OreStack(ItemStack itemStack, int amount) {
-        this.oreDictName = null;
-        this.itemStack = itemStack;
-        this.amount = amount;
+    public OreStack(ItemStack itemStack) {
+        this(itemStack, itemStack.getCount());
     }
 
-    public OreStack(ItemStack itemStack) {
+    public OreStack(ItemStack itemStack, int amount) {
+        this.oreDictName = null;
         if (itemStack != null) {
             this.itemStack = itemStack;
-            this.amount = itemStack.getCount();
+            this.amount = amount;
         } else {
             this.itemStack = ItemStack.EMPTY;
             this.amount = 0;
         }
-
-        this.oreDictName = null;
     }
 
     public static String createOre(String... parts) {
@@ -52,7 +52,7 @@ public final class OreStack {
 
     public static ItemStack[] getStacks(String ore) {
         // TODO : Order by ore priority
-        ArrayList<ItemStack> itemStacks = new OreStack(ore).getStacks();
+        List<ItemStack> itemStacks = new OreStack(ore).getStacks();
         return itemStacks.toArray(new ItemStack[0]);
     }
 
@@ -114,8 +114,8 @@ public final class OreStack {
         else return Utils.atLeastOne(getStacks(), i -> OreDictionary.itemMatches(i, other, strict));
     }
 
-    public ArrayList<ItemStack> getStacks() {
-        ArrayList<ItemStack> list = new ArrayList<>();
+    public List<ItemStack> getStacks() {
+        List<ItemStack> list = new ArrayList<>();
         if (oreDictName == null) {
             if (!itemStack.isEmpty())
                 list.add(new ItemStack(itemStack.getItem(), amount, itemStack.getItemDamage()));
@@ -130,8 +130,8 @@ public final class OreStack {
         return list;
     }
 
-    public ArrayList<ItemStack> getStacks(int amountOverride) {
-        ArrayList<ItemStack> list = getStacks();
+    public List<ItemStack> getStacks(int amountOverride) {
+        List<ItemStack> list = getStacks();
         list.forEach(s -> s.setCount(amountOverride));
         return list;
     }
@@ -158,5 +158,10 @@ public final class OreStack {
 
     public boolean isConsumable() {
         return consumable;
+    }
+
+    @Override
+    public String toString() {
+        return isOreDict() ? String.join("", "" + amount, "x", Utils.toSnakeCase(oreDictName)) : itemStack.toString();
     }
 }

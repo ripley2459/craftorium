@@ -130,6 +130,10 @@ public final class Utils {
         return buffer.toString();
     }
 
+    public static String toSnakeCase(String input) {
+        return input.replaceAll("[-\\s]+", "_").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+    }
+
     private static String toSubscript(int digit) {
         char subscriptDigit = (char) ('\u2080' + digit);
         return Character.toString(subscriptDigit);

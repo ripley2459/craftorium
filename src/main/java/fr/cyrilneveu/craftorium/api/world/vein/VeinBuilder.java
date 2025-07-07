@@ -74,6 +74,7 @@ public class VeinBuilder {
     public Vein build() {
         for (Substance substance : composition) {
             Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains(substance.getName()));
+            Preconditions.checkArgument(substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER));
             substance.getProperties().get(SubstanceProperties.KeyProperties.VEIN_MEMBER).verify(substance);
         }
 

@@ -2,10 +2,7 @@ package fr.cyrilneveu.craftorium.common.substance;
 
 import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.item.CustomItem;
-import fr.cyrilneveu.craftorium.api.item.behaviour.DurabilityBehaviour;
-import fr.cyrilneveu.craftorium.api.item.behaviour.FuelBehaviour;
-import fr.cyrilneveu.craftorium.api.item.behaviour.IItemBehaviour;
-import fr.cyrilneveu.craftorium.api.item.behaviour.ItemEnergyStorageBehaviour;
+import fr.cyrilneveu.craftorium.api.item.behaviour.*;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
@@ -104,7 +101,7 @@ public final class SubstancesObjects {
         PISTON = createTierItem("piston").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
         PUMP = createTierItem("pump").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
         ROBOT_ARM = createTierItem("robot_arm").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
-        SCANNER = createTierItem("scanner").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::energyStorage).build();
+        SCANNER = createTierItem("scanner").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).provider(SubstancesObjects::createStandalone).behaviours(SubstancesObjects::scannerBehaviour).build();
         SENSOR = createTierItem("sensor").faces(SubstancesObjects::tierItemFaces).tooltips(SubstancesObjects::tierTooltips).build();
 
         GEM = createSubstanceItem("gem").self().amount(BASE_AMOUNT).tooltips(SubstancesObjects::baseTooltips).build();
@@ -433,6 +430,14 @@ public final class SubstancesObjects {
         }
 
         return behaviours.isEmpty() ? NO_BEHAVIOUR : behaviours.toArray(new IItemBehaviour[0]);
+    }
+
+    public static IItemBehaviour[] scannerBehaviour(ASubstanceObject reference, Substance substance) {
+        Tier tier = (Tier) substance;
+        IItemBehaviour[] behaviours = new IItemBehaviour[2];
+        behaviours[0] = new ItemEnergyStorageBehaviour(null, (int) (Settings.machinesSettings.batteryBaseStorage * tier.getEnergyBuffer()), (int) (Settings.machinesSettings.batteryBaseTransfer * tier.getEnergyIO()));
+        behaviours[1] = new ScannerBehaviour();
+        return behaviours;
     }
 
     public static Aestheticism.ObjectAestheticism defaultAestheticism(ASubstanceObject reference, Substance substance) {

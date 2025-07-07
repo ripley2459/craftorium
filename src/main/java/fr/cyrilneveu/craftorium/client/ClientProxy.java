@@ -132,24 +132,4 @@ public final class ClientProxy extends ACommonProxy {
     public IThreadListener getThread(MessageContext context) {
         return context.side.isClient() ? Minecraft.getMinecraft() : super.getThread(context);
     }
-
-    @Override
-    public void construct(FMLConstructionEvent event) {
-        super.construct(event);
-    }
-
-    @Override
-    public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-    }
-
-    @Override
-    public void init(FMLInitializationEvent event) {
-        super.init(event);
-    }
-
-    @Override
-    public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
-    }
 }

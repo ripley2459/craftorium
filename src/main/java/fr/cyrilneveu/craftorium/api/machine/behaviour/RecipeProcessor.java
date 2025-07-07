@@ -208,8 +208,7 @@ public class RecipeProcessor implements IMachineBehaviour, ITickable, INBTSerial
     }
 
     private boolean insertOutput(FluidStack output, boolean simulate) {
-        int amount = output.amount;
-        return fluidInventory.insertInOutputs(output, !simulate) == amount;
+        return fluidInventory.insertInOutputs(output, !simulate) == output.amount;
     }
 
     private void pushOutputs() {

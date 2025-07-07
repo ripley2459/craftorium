@@ -356,6 +356,24 @@ substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
 substance.craftorium.ybco.name=YBCO
 
+substance.craftorium.ardite.name=Ardite
+substance.craftorium.manyullyn.name=Manyullyn
+substance.craftorium.alumite.name=Alumite
+substance.craftorium.stibiopalladinite.name=Stibiopalladinite
+substance.craftorium.cooperite.name=Cooperite
+substance.craftorium.zircaloy.name=Zircaloy
+substance.craftorium.hard_carbon.name=Hard Carbon
+substance.craftorium.magnesium_diboride.name=Magnesium Diboride
+substance.craftorium.extreme_alloy.name=Extreme Alloy
+substance.craftorium.niter.name=Niter
+substance.craftorium.charged_certus_quatz.name=Charged Certus Quarts
+substance.craftorium.rhodochrosite.name=Rhodochrosite
+substance.craftorium.fluorite.name=Fluorite
+substance.craftorium.villiaumite.name=Villiaumite
+substance.craftorium.carobbiite.name=Aarobbiite
+substance.craftorium.certus_quartz.name=Certus Quartz
+substance.craftorium.charged_certus_quartz.name=Charged Certus Quartz
+substance.craftorium.fluix.name=Fluix
 
 # ##################################################
 # Veins

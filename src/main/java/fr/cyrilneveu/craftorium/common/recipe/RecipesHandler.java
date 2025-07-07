@@ -524,6 +524,9 @@ public final class RecipesHandler {
 
             electrolyzing:
             {
+                if (!OreStack.oresExist(DUST.getOre(substance)))
+                    break electrolyzing;
+
                 if (substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.getComposition().size() + composition.getPossible().size() > ELECTROLYZING.getItemsOut())
                     break electrolyzing;
 

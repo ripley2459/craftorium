@@ -60,6 +60,8 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     protected static void registerItems(RegistryEvent.Register<Item> event) {
+        new ItemBuilder("glue").build();
+
         new ItemBuilder("redstone_capacitor").addTexture("circuits/redstone_capacitor").build();
         new ItemBuilder("capacitor").addTexture("circuits/capacitor").build();
         new ItemBuilder("redstone_chip").addTexture("circuits/redstone_chip").build();

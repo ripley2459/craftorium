@@ -5,6 +5,7 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
+import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreVeins;
 import net.minecraft.block.SoundType;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
@@ -41,6 +42,8 @@ public final class Substances {
     public static Substance NICKEL;
     public static Substance CUPRONICKEL;
     public static Substance TUNGSTEN;
+    public static Substance ZIRCONIUM;
+    public static Substance PALLADIUM;
     public static Substance TUNGSTEN_STEEL;
     public static Substance TUNGSTEN_CARBIDE_ALLOY;
     public static Substance MAGNESIUM;
@@ -111,8 +114,11 @@ public final class Substances {
     public static Substance CERUSSITE;
     public static Substance SELENIUM;
     public static Substance ARGENTITE;
+    public static Substance EUROPIUM;
+    public static Substance SAMARIUM;
     public static Substance RHODIUM;
     public static Substance MOLYBDENITE;
+    public static Substance STIBIOPALLADINITE;
     public static Substance URANIUM;
     public static Substance CESIUM;
     public static Substance BERYL;
@@ -140,6 +146,7 @@ public final class Substances {
     public static Substance SMITHSONITE;
     public static Substance LITHIUM;
     public static Substance SPDODUMENE;
+    public static Substance COOPERITE;
     public static Substance STONE;
     public static Substance WOOD;
     public static Substance FLINT;
@@ -163,6 +170,7 @@ public final class Substances {
         initMain();
         initCarbonFiberChain();
         MoreSubstances.init();
+        MoreVeins.init();
         initTiers();
     }
 
@@ -674,6 +682,16 @@ public final class Substances {
                 .color(0xFFbdacb0)
                 .style("mineral")
                 .build();
+        COOPERITE = new SubstanceBuilder("cooperite")
+                .composition(PLATINUM, 1, SULFUR, 1)
+                .possible(PALLADIUM, 1, 25, NICKEL, 1, 25)
+                .veinMember()
+                .color(0xFF784008)
+                .build();
+        STIBIOPALLADINITE = new SubstanceBuilder("stibiopalladinite")
+                .composition(PALLADIUM, 5, ANTIMONY, 2)
+                .veinMember()
+                .build();
     }
 
     private static void initElements() {
@@ -689,6 +707,7 @@ public final class Substances {
                 .temperature(1728f, 3003f)
                 .color(0xFF50d050)
                 .packageTransitionMetal()
+                .veinMember()
                 .build();
         MAGNESIUM = new SubstanceBuilder("magnesium")
                 .element(12, "Mg", "magnesium", Element.EGroup.ALKALINE_EARTH_METAL, 24.305)
@@ -783,6 +802,7 @@ public final class Substances {
                 .temperature(53.48f, 85.03f)
                 .color(0xFF90e050)
                 .packageHalogen()
+                .veinMember()
                 .build();
         INDIUM = new SubstanceBuilder("indium")
                 .element(49, "In", "indium", Element.EGroup.POST_TRANSITION_METAL, 114.8181)
@@ -1059,6 +1079,31 @@ public final class Substances {
                 .temperature(63.15f, 77.355f)
                 .color(0xFF3050f8)
                 .packageHalogen()
+                .build();
+        ZIRCONIUM = new SubstanceBuilder("zirconium")
+                .element(40, "Zr", "zirconium", Element.EGroup.TRANSITION_METAL, 91.2242)
+                .temperature(2128f, 4650f)
+                .color(0xFF94e0e0)
+                .packageTransitionMetal()
+                .build();
+        PALLADIUM = new SubstanceBuilder("palladium")
+                .element(46, "Pd", "palladium", Element.EGroup.TRANSITION_METAL, 106.421)
+                .temperature(1828.05f, 3236f)
+                .color(0xFF006985)
+                .packageTransitionMetal()
+                .veinMember()
+                .build();
+        EUROPIUM = new SubstanceBuilder("europium")
+                .element(63, "Eu", "europium", Element.EGroup.LANTHANIDE, 151.9641)
+                .temperature(1099f, 1802f)
+                .color(0xFF61ffc7)
+                .packageLanthanide()
+                .build();
+        SAMARIUM = new SubstanceBuilder("samarium")
+                .element(62, "Sm", "samarium", Element.EGroup.LANTHANIDE, 150.362)
+                .temperature(1345f, 2173f)
+                .color(0xFF8fffc7)
+                .packageLanthanide()
                 .build();
     }
 

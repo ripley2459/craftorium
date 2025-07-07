@@ -1,3 +1,4 @@
+#norun
 #loader craftorium
 
 import mods.craftorium.vein.Veins;
