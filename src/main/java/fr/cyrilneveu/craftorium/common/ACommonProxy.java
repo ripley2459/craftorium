@@ -3,7 +3,6 @@ package fr.cyrilneveu.craftorium.common;
 import crafttweaker.CraftTweakerAPI;
 import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.config.Settings;
-import fr.cyrilneveu.craftorium.api.fluid.FluidBuilder;
 import fr.cyrilneveu.craftorium.api.inventory.GuiHandler;
 import fr.cyrilneveu.craftorium.api.item.ItemBuilder;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
@@ -17,7 +16,6 @@ import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
 import fr.cyrilneveu.craftorium.common.world.Veins;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -110,8 +108,6 @@ public abstract class ACommonProxy {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     protected static void registerBlocks(RegistryEvent.Register<Block> event) {
-        // new FluidBuilder("biomass").setMaterial(Material.WATER).build();
-
         SUBSTANCE_BLOCKS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getBlocks().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_FLUIDS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getFluids().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 

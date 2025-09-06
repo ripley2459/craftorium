@@ -174,7 +174,7 @@ public class DefaultProcess extends AProcess {
 
         mixing:
         {
-            if (!flag || substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.size() > MIXING.getItemsIn())
+            if (!flag || composition.size() > MIXING.getItemsIn())
                 break mixing;
 
             MachineRecipeBuilder recipeMix = new MachineRecipeBuilder("mixing_" + DUST.getName(substance));

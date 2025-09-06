@@ -82,6 +82,7 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceBlockDefinition MACHINE_FRAME;
 
     public static ASubstanceObject.SubstanceFluidDefinition LIQUID;
+    public static ASubstanceObject.SubstanceGasDefinition GAS;
 
     public static void init() {
         if (SUBSTANCE_ITEMS_REGISTRY.isInitialized() || SUBSTANCE_TOOLS_REGISTRY.isInitialized() || SUBSTANCE_BLOCKS_REGISTRY.isInitialized() || SUBSTANCE_FLUIDS_REGISTRY.isInitialized())
@@ -143,6 +144,7 @@ public final class SubstancesObjects {
         MACHINE_FRAME = createBlock("machine_frame", SubstancesObjects::createBlock).tooltips(SubstancesObjects::tierTooltips).model(SubstancesObjects::blockModel).faces(SubstancesObjects::tierBlockFaces).amount(BASE_AMOUNT * 9).build();
 
         LIQUID = createFluid("liquid", SubstancesObjects::createLiquid).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
+        GAS = createGas("gas", SubstancesObjects::createGas).faces(SubstancesObjects::fluidFaces).tooltips(SubstancesObjects::fluidTooltips).amount(1).build();
     }
 
     private static ASubstanceObjectBuilder.SubstanceItemBuilder createSubstanceItem(String name) {
@@ -190,6 +192,12 @@ public final class SubstancesObjects {
 
     private static ASubstanceObjectBuilder.SubstanceFluidBuilder createFluid(String name, ASubstanceObject.ICreateObject provider) {
         ASubstanceObjectBuilder.SubstanceFluidBuilder builder = new ASubstanceObjectBuilder.SubstanceFluidBuilder(name, provider);
+
+        return builder;
+    }
+
+    private static ASubstanceObjectBuilder.SubstanceGasBuilder createGas(String name, ASubstanceObject.ICreateObject provider) {
+        ASubstanceObjectBuilder.SubstanceGasBuilder builder = new ASubstanceObjectBuilder.SubstanceGasBuilder(name, provider);
 
         return builder;
     }
@@ -293,13 +301,11 @@ public final class SubstancesObjects {
     private static void createLiquid(ASubstanceObject reference, Substance substance) {
         SubstanceFluid fluid = new SubstanceFluid(reference, substance);
 
-        boolean gaseous = substance.getTemperature().getBoilingPoint() <= BASE_TEMPERATURE;
-
-        fluid.setGaseous(gaseous);
+        fluid.setGaseous(false);
         fluid.setLuminosity(15);
-        fluid.setTemperature((int) (gaseous ? substance.getTemperature().getBoilingPoint() : substance.getTemperature().getMeltingPoint()));
-        fluid.setDensity(gaseous ? -100 : 3000);
-        fluid.setViscosity(gaseous ? 200 : 1000);
+        fluid.setTemperature((int) substance.getTemperature().getMeltingPoint());
+        fluid.setDensity(3000);
+        fluid.setViscosity(1000);
         fluid.setUnlocalizedName(String.join(".", MODID, reference.getName(null), "name"));
 
         FLUIDS_REGISTRY.put(reference.getName(substance), fluid);
@@ -307,6 +313,27 @@ public final class SubstancesObjects {
         FluidRegistry.addBucketForFluid(fluid);
 
         SubstanceFluid.SubstanceFluidBlock block = new SubstanceFluid.SubstanceFluidBlock(fluid, Material.LAVA);
+        block.setTranslationKey(String.join(".", MODID, reference.getName(null), "name"));
+        block.setRegistryName(reference.getName(substance));
+
+        BLOCKS_REGISTRY.put(reference.getName(substance), block);
+    }
+
+    private static void createGas(ASubstanceObject reference, Substance substance) {
+        SubstanceFluid fluid = new SubstanceFluid(reference, substance);
+
+        fluid.setGaseous(true);
+        fluid.setLuminosity(0);
+        fluid.setTemperature((int) substance.getTemperature().getBoilingPoint());
+        fluid.setDensity(-100);
+        fluid.setViscosity(200);
+        fluid.setUnlocalizedName(String.join(".", MODID, reference.getName(null), "name"));
+
+        FLUIDS_REGISTRY.put(reference.getName(substance), fluid);
+        FluidRegistry.registerFluid(fluid);
+        FluidRegistry.addBucketForFluid(fluid);
+
+        SubstanceFluid.SubstanceFluidBlock block = new SubstanceFluid.SubstanceFluidBlock(fluid, Material.AIR);
         block.setTranslationKey(String.join(".", MODID, reference.getName(null), "name"));
         block.setRegistryName(reference.getName(substance));
 

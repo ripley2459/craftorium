@@ -115,7 +115,8 @@ tile.craftorium.hull.name=%s Hull
 tile.craftorium.ore.name=%s Ore
 
 # Fluids
-fluid.craftorium.liquid.name=%s
+fluid.craftorium.liquid.name=Liquid %s
+fluid.craftorium.gas.name=Gaseous %s
 
 
 # ##################################################

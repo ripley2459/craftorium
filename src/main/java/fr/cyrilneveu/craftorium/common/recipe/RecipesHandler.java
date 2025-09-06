@@ -7,7 +7,6 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
-import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.EColors;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
@@ -519,7 +518,7 @@ public final class RecipesHandler {
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
             Composition composition = substance.getComposition();
 
-            if (!composition.isComposite())
+            if (!composition.isComposite() && composition.getComposition().size() > 1)
                 continue;
 
             electrolyzing:
@@ -527,7 +526,7 @@ public final class RecipesHandler {
                 if (!OreStack.oresExist(DUST.getOre(substance)))
                     break electrolyzing;
 
-                if (substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) || composition.getComposition().size() + composition.getPossible().size() > ELECTROLYZING.getItemsOut())
+                if (/*substance.getProperties().containsKey(SubstanceProperties.KeyProperties.VEIN_MEMBER) ||*/ composition.getComposition().size() + composition.getPossible().size() > ELECTROLYZING.getItemsOut())
                     break electrolyzing;
 
                 boolean flag = Utils.all(composition.getComposition(), s -> OreStack.oresExist(DUST.getOre(s.getSubstance())));

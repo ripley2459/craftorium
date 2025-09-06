@@ -178,7 +178,24 @@ public abstract class ASubstanceObject implements Comparable<ASubstanceObject> {
 
         @Override
         public String getName(@Nullable Substance substance) {
-            return substance == null ? name : substance.getName();
+            if (substance == null)
+                return name;
+
+            return substance.isGaseous() ? "liquid_" + substance.getName() : substance.getName();
+        }
+    }
+
+    public static class SubstanceGasDefinition extends SubstanceFluidDefinition {
+        public SubstanceGasDefinition(String name, boolean self, String prefix, String suffix, int amount, ICreateObject provider, IGetFaces faces, IGetModelTemplate model, @Nullable IGetTooltips tooltips) {
+            super(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
+        }
+
+        @Override
+        public String getName(@Nullable Substance substance) {
+            if (substance == null)
+                return name;
+
+            return substance.isGaseous() ? substance.getName() : "gaseous_" + substance.getName();
         }
     }
 

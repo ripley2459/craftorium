@@ -50,14 +50,14 @@ public final class Maps {
 
         MACHINE_MAPS_REGISTRY.initialize();
 
-        ELECTROLYZING = new RecipeMapBuilder("electrolyzing", 1, 1, 6, 6).build();
+        ELECTROLYZING = new RecipeMapBuilder("electrolyzing", 1, 1, 9, 9).build();
         MACERATING = new RecipeMapBuilder("macerating", 1, 0, 1, 0).build();
         BENDING = new RecipeMapBuilder("bending", 1, 0, 1, 0).build();
         SPINNING = new RecipeMapBuilder("spinning", 1, 0, 1, 0).build();
         CUTTING = new RecipeMapBuilder("cutting", 1, 0, 1, 0).build();
         COMPRESSING = new RecipeMapBuilder("compressing", 1, 0, 1, 0).build();
         CASTING = new RecipeMapBuilder("casting", 1, 1, 1, 1).build();
-        MIXING = new RecipeMapBuilder("mixing", 6, 6, 1, 1).build();
+        MIXING = new RecipeMapBuilder("mixing", 9, 9, 1, 1).build();
         CIRCUIT_ASSEMBLING = new RecipeMapBuilder("circuit_assembling", 6, 1, 1, 0).build();
         ASSEMBLING = new RecipeMapBuilder("assembling", 9, 1, 1, 0).build();
     }

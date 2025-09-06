@@ -179,47 +179,47 @@ public class SubstanceBuilder {
 
     public SubstanceBuilder packageHalogen() {
         items(DUST);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageNobleGas() {
         items(DUST);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageAlkaliMetal() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageAlkalineEarthMetal() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageMetalloid() {
         items(DUST, INGOT, NUGGET);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageNonMetal() {
         items(DUST);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packagePostTransitionMetal() {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         blocks(BLOCK, FRAME, HULL);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
@@ -227,21 +227,21 @@ public class SubstanceBuilder {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageLanthanide() {
         items(DUST, INGOT, NUGGET, PLATE, ROD);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageActinide() {
         items(DUST, INGOT, NUGGET, PLATE, ROD);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
@@ -249,7 +249,7 @@ public class SubstanceBuilder {
         items(CASING, DUST, FOIL, GEAR, INGOT, NUGGET, PLATE, RING, ROD, ROTOR, SCREW, SPRING, WIRE);
         tools(AXE, CUTTER, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SCREWDRIVER, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK, FRAME, HULL);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
@@ -257,14 +257,14 @@ public class SubstanceBuilder {
         items(DUST, GEM, NUGGET, PLATE, ROD);
         tools(AXE, FILE, HAMMER, HOE, KNIFE, MORTAR, PICKAXE, SAW, SHOVEL, SWORD, WRENCH);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 
     public SubstanceBuilder packageMineral() {
         items(DUST, PLATE, ROD);
         blocks(BLOCK);
-        fluids(LIQUID);
+        fluids(LIQUID, GAS);
         return this;
     }
 

@@ -85,3 +85,4 @@ run/*
 
 # Keep CraftTweaker scripts
 !run/scripts/
+run/scripts/nc_script_addons/DONT_PUT_YOUR_SCRIPTS_IN_HERE

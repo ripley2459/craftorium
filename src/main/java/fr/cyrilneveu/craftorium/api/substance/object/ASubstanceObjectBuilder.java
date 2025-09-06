@@ -121,4 +121,18 @@ public abstract class ASubstanceObjectBuilder<T> {
             return fluid;
         }
     }
+
+    public static final class SubstanceGasBuilder extends ASubstanceObjectBuilder<ASubstanceObject.SubstanceGasDefinition> {
+        public SubstanceGasBuilder(String name, ASubstanceObject.ICreateObject provider) {
+            super(name);
+            this.provider = provider;
+        }
+
+        @Override
+        public ASubstanceObject.SubstanceGasDefinition build() {
+            ASubstanceObject.SubstanceGasDefinition gas = new ASubstanceObject.SubstanceGasDefinition(name, self, prefix, suffix, amount, provider, faces, model, tooltips);
+            SUBSTANCE_FLUIDS_REGISTRY.put(name, gas);
+            return gas;
+        }
+    }
 }

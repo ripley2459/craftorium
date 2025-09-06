@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.api.utils.Utils.BASE_TEMPERATURE;
 
 public class Substance implements Comparable<Substance> {
     protected final String name;
@@ -123,5 +124,9 @@ public class Substance implements Comparable<Substance> {
     @Override
     public int compareTo(@Nonnull Substance other) {
         return name.compareTo(other.getName());
+    }
+
+    public boolean isGaseous() {
+        return temperature.getBoilingPoint() <= BASE_TEMPERATURE;
     }
 }
