@@ -32,6 +32,7 @@ item.craftorium.sword.name=%s Sword
 item.craftorium.wrench.name=%s Wrench
 
 # Components
+item.craftorium.boule.name=%s Boule
 item.craftorium.casing.name=%s Casing
 item.craftorium.dust.name=%s Dust
 item.craftorium.foil.name=%s Foil

@@ -38,7 +38,7 @@ public class MachineRecipeBuilder {
     }
 
     private static int validateDuration(int duration) {
-        return Math.max(0, duration);
+        return Math.max(1, duration);
     }
 
     private static int validateConfiguration(int configuration) {

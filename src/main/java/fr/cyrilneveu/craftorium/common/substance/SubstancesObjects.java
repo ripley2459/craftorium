@@ -59,6 +59,7 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItemDefinition SCREW;
     public static ASubstanceObject.SubstanceItemDefinition SPRING;
     public static ASubstanceObject.SubstanceItemDefinition WIRE;
+    public static ASubstanceObject.SubstanceItemDefinition BOULE;
 
     public static ASubstanceObject.SubstanceToolDefinition AXE;
     public static ASubstanceObject.SubstanceToolDefinition CUTTER;
@@ -121,6 +122,7 @@ public final class SubstancesObjects {
         SPRING = createSubstanceItem("spring").amount(ROD.getAmount()).build();
         WIRE = createSubstanceItem("wire").amount(FOIL.getAmount() / 4).build();
         ROTOR = createSubstanceItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
+        BOULE = createSubstanceItem("boule").amount(INGOT.getAmount() * 9).build();
 
         AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();
