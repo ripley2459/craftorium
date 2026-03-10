@@ -4,13 +4,21 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.CraftoriumTags.*;
 
 @ZenClass("mods." + MODID + ".recipe.Recipes")
 @ZenRegister
-public final class RecipeCT {
+public final class RecipeCT
+{
     @ZenMethod
-    public static MachineRecipeBuilderCT create(String name) {
+    public static MachineRecipeBuilderCT create(String name)
+    {
         return new MachineRecipeBuilderCT(name);
+    }
+
+    @ZenMethod
+    public static MachineRecipeBuilderCT create()
+    {
+        return new MachineRecipeBuilderCT();
     }
 }

@@ -17,123 +17,158 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 import javax.annotation.Nullable;
 
-import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
+import static fr.cyrilneveu.craftorium.CraftoriumTags.*;
 
 @ZenClass("mods." + MODID + ".recipe.Builder")
 @ZenRegister
-public final class MachineRecipeBuilderCT {
+public final class MachineRecipeBuilderCT
+{
     private final MachineRecipeBuilder builder;
 
-    public MachineRecipeBuilderCT(String name) {
+    public MachineRecipeBuilderCT(String name)
+    {
         this.builder = new MachineRecipeBuilder(name);
     }
 
+    public MachineRecipeBuilderCT()
+    {
+        this.builder = new MachineRecipeBuilder();
+    }
+
     @Nullable
-    private static OreStack fromIIngredient(IIngredient input) {
+    private static OreStack fromIIngredient(IIngredient input)
+    {
         Preconditions.checkArgument(input != null);
         if (input instanceof IItemStack)
+        {
             return new OreStack(CraftTweakerMC.getItemStack((IItemStack) input));
+        }
         if (input instanceof IOreDictEntry)
+        {
             return new OreStack(((IOreDictEntry) input).getName(), 1);
+        }
         if (input instanceof IngredientStack && input.getInternal() instanceof IOreDictEntry)
+        {
             return new OreStack(((IOreDictEntry) input.getInternal()).getName(), input.getAmount());
+        }
         return null;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT consumeItem(IIngredient ingredient) {
+    public MachineRecipeBuilderCT consumeItem(IIngredient ingredient)
+    {
         OreStack input = fromIIngredient(ingredient);
 
         if (input == null)
+        {
             CraftTweakerAPI.logError("Unknown ingredient: " + ingredient);
-        else builder.consumeItem(input);
+        }
+        else
+        {
+            builder.consumeItem(input);
+        }
 
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT consumeItem(String ore, int amount) {
+    public MachineRecipeBuilderCT consumeItem(String ore, int amount)
+    {
         this.builder.consumeItem(new OreStack(ore, amount));
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT itemNotConsumed(IItemStack itemStack) {
+    public MachineRecipeBuilderCT itemNotConsumed(IItemStack itemStack)
+    {
         this.builder.itemNotConsumed(CraftTweakerMC.getItemStack(itemStack));
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT consumeFluid(ILiquidStack liquidStack) {
+    public MachineRecipeBuilderCT consumeFluid(ILiquidStack liquidStack)
+    {
         this.builder.consumeFluid(CraftTweakerMC.getLiquidStack(liquidStack));
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT consumeFluid(String fluid, int amount) {
+    public MachineRecipeBuilderCT consumeFluid(String fluid, int amount)
+    {
         this.builder.consumeFluid(fluid, amount);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceItem(IItemStack itemStack) {
+    public MachineRecipeBuilderCT produceItem(IItemStack itemStack)
+    {
         return produceItem(itemStack, 100);
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceItem(IItemStack itemStack, int chance) {
+    public MachineRecipeBuilderCT produceItem(IItemStack itemStack, int chance)
+    {
         this.builder.produceItem(CraftTweakerMC.getItemStack(itemStack), chance);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceFluid(ILiquidStack liquidStack) {
+    public MachineRecipeBuilderCT produceFluid(ILiquidStack liquidStack)
+    {
         return produceFluid(liquidStack, 100);
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceFluid(ILiquidStack liquidStack, int chance) {
+    public MachineRecipeBuilderCT produceFluid(ILiquidStack liquidStack, int chance)
+    {
         this.builder.produceFluid(CraftTweakerMC.getLiquidStack(liquidStack), chance);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceFluid(String fluid, int amount) {
+    public MachineRecipeBuilderCT produceFluid(String fluid, int amount)
+    {
         return produceFluid(fluid, amount, 100);
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceFluid(String fluid, int amount, int chance) {
+    public MachineRecipeBuilderCT produceFluid(String fluid, int amount, int chance)
+    {
         this.builder.produceFluid(fluid, amount, chance);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT consumeEnergy(int amount) {
+    public MachineRecipeBuilderCT consumeEnergy(int amount)
+    {
         this.builder.consumeEnergy(amount);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT produceEnergy(int amount) {
+    public MachineRecipeBuilderCT produceEnergy(int amount)
+    {
         this.builder.produceEnergy(amount);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT duration(int duration) {
+    public MachineRecipeBuilderCT duration(int duration)
+    {
         this.builder.duration(duration);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipeBuilderCT configuration(int configuration) {
+    public MachineRecipeBuilderCT configuration(int configuration)
+    {
         this.builder.configuration(configuration);
         return this;
     }
 
     @ZenMethod
-    public MachineRecipe build() {
+    public MachineRecipe build()
+    {
         return builder.build();
     }
 }

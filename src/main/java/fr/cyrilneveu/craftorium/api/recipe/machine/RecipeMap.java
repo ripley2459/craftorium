@@ -9,7 +9,8 @@ import net.minecraftforge.fluids.FluidStack;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class RecipeMap {
+public class RecipeMap
+{
     private final String name;
     private final int itemsIn;
     private final int fluidsIn;
@@ -17,7 +18,8 @@ public class RecipeMap {
     private final int fluidsOut;
     private final Registry<String, MachineRecipe> recipes = new Registry<>();
 
-    public RecipeMap(String name, int itemsIn, int fluidsIn, int itemsOut, int fluidsOut) {
+    public RecipeMap(String name, int itemsIn, int fluidsIn, int itemsOut, int fluidsOut)
+    {
         this.name = name;
         this.itemsIn = itemsIn;
         this.fluidsIn = fluidsIn;
@@ -25,97 +27,130 @@ public class RecipeMap {
         this.fluidsOut = fluidsOut;
     }
 
-    public static boolean checkItems(List<ItemStack> proposed, List<OreStack> required) {
-        for (OreStack asked : required) {
+    public static boolean checkItems(List<ItemStack> proposed, List<OreStack> required)
+    {
+        for (OreStack asked : required)
+        {
             int amount = asked.getAmount();
-            for (ItemStack given : proposed) {
+            for (ItemStack given : proposed)
+            {
                 if (asked.matches(given))
+                {
                     amount -= given.getCount();
+                }
             }
 
             if (amount > 0)
+            {
                 return false;
+            }
         }
 
         return true;
     }
 
-    public static boolean checkFluids(List<FluidStack> proposed, List<FluidStack> required) {
-        for (FluidStack asked : required) {
+    public static boolean checkFluids(List<FluidStack> proposed, List<FluidStack> required)
+    {
+        for (FluidStack asked : required)
+        {
             int amount = asked.amount;
-            for (FluidStack given : proposed) {
+            for (FluidStack given : proposed)
+            {
                 if (given.isFluidEqual(asked))
+                {
                     amount -= given.amount;
+                }
             }
 
             if (amount > 0)
+            {
                 return false;
+            }
         }
 
         return true;
     }
 
-    public static boolean isRecipeValid(List<ItemStack> proposedItems, List<FluidStack> proposedFluids, int configuration, MachineRecipe recipe) {
+    public static boolean isRecipeValid(List<ItemStack> proposedItems, List<FluidStack> proposedFluids, int configuration, MachineRecipe recipe)
+    {
         if (configuration == recipe.getConfiguration() && proposedItems.size() >= recipe.getItemsIn().size() && proposedFluids.size() >= recipe.getFluidsIn().size())
+        {
             return checkItems(proposedItems, recipe.getItemsIn()) && checkFluids(proposedFluids, recipe.getFluidsIn());
+        }
         return false;
     }
 
-    public boolean addRecipe(MachineRecipe recipe) {
+    public boolean addRecipe(MachineRecipe recipe)
+    {
         Preconditions.checkArgument(recipe.getItemsIn().size() <= itemsIn);
         Preconditions.checkArgument(recipe.getFluidsIn().size() <= fluidsIn);
         Preconditions.checkArgument(recipe.getItemsOut().size() <= itemsOut);
         Preconditions.checkArgument(recipe.getFluidsOut().size() <= fluidsOut);
-        Preconditions.checkArgument(!recipes.contains(recipe.getName()));
+        // Preconditions.checkArgument(!recipes.contains(recipe.getName()));
         return recipes.put(recipe.getName(), recipe);
     }
 
-    public MachineRecipe getRecipe(String name) {
+    public MachineRecipe getRecipe(String name)
+    {
         return recipes.get(name);
     }
 
-    public boolean removeRecipe(String name) {
+    public boolean removeRecipe(String name)
+    {
         return recipes.remove(name);
     }
 
     @Nullable
-    public MachineRecipe getRecipe(List<ItemStack> items, List<FluidStack> fluids, int configuration, @Nullable MachineRecipe cache) {
+    public MachineRecipe getRecipe(List<ItemStack> items, List<FluidStack> fluids, int configuration, @Nullable MachineRecipe cache)
+    {
         if (cache != null && isRecipeValid(items, fluids, configuration, cache))
+        {
             return cache;
+        }
 
-        for (MachineRecipe recipe : recipes.getAll().values()) {
+        for (MachineRecipe recipe : recipes.getAll().values())
+        {
             if (isRecipeValid(items, fluids, configuration, recipe))
+            {
                 return recipe;
+            }
         }
 
         return null;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public int getItemsIn() {
+    public int getItemsIn()
+    {
         return itemsIn;
     }
 
-    public int getFluidsIn() {
+    public int getFluidsIn()
+    {
         return fluidsIn;
     }
 
-    public int getItemsOut() {
+    public int getItemsOut()
+    {
         return itemsOut;
     }
 
-    public int getFluidsOut() {
+    public int getFluidsOut()
+    {
         return fluidsOut;
     }
 
-    public Registry<String, MachineRecipe> getRecipes() {
+    public Registry<String, MachineRecipe> getRecipes()
+    {
         return recipes;
     }
 
-    public void close() {
+    public void close()
+    {
         recipes.close();
     }
 }
