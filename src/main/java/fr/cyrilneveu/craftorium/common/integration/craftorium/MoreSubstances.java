@@ -6,8 +6,7 @@ import fr.cyrilneveu.craftorium.api.utils.Utils;
 import net.minecraftforge.fml.common.Loader;
 
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.GEM;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.LIQUID;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class MoreSubstances {
     private static boolean INITIALIZED = false;
@@ -135,7 +134,7 @@ public final class MoreSubstances {
                     .style("metal")
                     .build();
             new SubstanceBuilder("alumite")
-                    .packageMineral()
+                    .packageTransitionMetal()
                     .composition(ALUMINUM, 1, IRON, 1, OBSIDIAN, 3)
                     .color(0xFFf9ecf7)
                     .style("metal")
@@ -197,6 +196,14 @@ public final class MoreSubstances {
                     .build();
         }
 
+        if (Utils.atLeastOne(new String[]{"railcraft"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("brass")
+                    .packageMetalExtended()
+                    .composition(COPPER, 2, ZINC, 1)
+                    .style("metal")
+                    .build();
+        }
+
         if (Utils.atLeastOne(new String[]{"appliedenergistics2"}, Loader::isModLoaded)) {
             new SubstanceBuilder("certus_quartz")
                     .packageGem()
@@ -219,6 +226,111 @@ public final class MoreSubstances {
                     .overrides(GEM, "appliedenergistics2:material:7")
                     .color(0xFF614eab)
                     .style("gem")
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"techguns"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("obsidian_steel")
+                    .packageTransitionMetal()
+                    .composition(OBSIDIAN, 1, STEEL, 1)
+                    .style("metal")
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"biomesoplenty", "projectred-core"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("ruby")
+                    .packageGem()
+                    .veinMember()
+                    .composition(ALUMINUM, 2, CHROMIUM, 1, OXYGEN, 3)
+                    .color(0xFFe00700)
+                    .style("gem")
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("peridot")
+                    .packageGem()
+                    .veinMember()
+                    .composition(MAGNESIUM, 2, IRON, 2, SILICON, 1, OXYGEN, 4)
+                    .color(0xFF1bd61b)
+                    .style("gem")
+                    .shiny()
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"biomesoplenty", "projectred-core", "iceandfire"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("sapphire")
+                    .packageGem()
+                    .veinMember()
+                    .composition(ALUMINUM, 2, OXYGEN, 3, TITANIUM, 1, IRON, 1)
+                    .color(0xFF252ed1)
+                    .style("gem")
+                    .shiny()
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"biomesoplenty", "iceandfire"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("amethyst")
+                    .packageGem()
+                    .veinMember()
+                    .composition(SILICON, 1, OXYGEN, 2, IRON, 1)
+                    .color(0xFFe24dc9)
+                    .style("gem")
+                    .shiny()
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"iceandfire"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("ice_dragonsteel")
+                    .packageTransitionMetal()
+                    .overrides(INGOT, "iceandfire:dragonsteel_ice_ingot") // Dragon Forge result
+                    .color(0xFF64acc1)
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("fire_dragonsteel")
+                    .packageTransitionMetal()
+                    .color(0xFF5e1718)
+                    .overrides(INGOT, "iceandfire:dragonsteel_fire_ingot") // Dragon Forge result
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("lightning_dragonsteel")
+                    .packageTransitionMetal()
+                    .color(0xFF3a1338)
+                    .overrides(INGOT, "iceandfire:dragonsteel_lightning_ingot") // Dragon Forge result
+                    .shiny()
+                    .build();
+        }
+
+        if (Utils.atLeastOne(new String[]{"biomesoplenty"}, Loader::isModLoaded)) {
+            new SubstanceBuilder("topaz")
+                    .packageGem()
+                    .veinMember()
+                    .composition(ALUMINUM, 2, SILICON, 1, OXYGEN, 6, IRON, 2, HYDROGEN, 2)
+                    .color(0xFF1bd61b)
+                    .style("gem")
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("tanzanite")
+                    .packageGem()
+                    .veinMember()
+                    .composition(CALCIUM, 2, ALUMINUM, 3, OXYGEN, 13, SILICON, 3, HYDROGEN, 1, VANADIUM, 3)
+                    .color(0xFF560c6b)
+                    .style("gem")
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("malachite")
+                    .packageGem()
+                    .veinMember()
+                    .composition(COPPER, 2, CARBON, 1, OXYGEN, 5, HYDROGEN, 2)
+                    .color(0xFF4f9e7e)
+                    .style("gem")
+                    .shiny()
+                    .build();
+            new SubstanceBuilder("amber")
+                    .packageGem()
+                    .veinMember()
+                    .composition()
+                    .color(0xFFe2bd4d)
+                    .style("gem")
+                    .shiny()
                     .build();
         }
     }
