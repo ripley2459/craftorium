@@ -12,10 +12,28 @@ public final class SubstanceProperties {
     public enum KeyProperties {
         EMPTY,
         VEIN_MEMBER,
+        OXIDE,
         FUEL
     }
 
     public static final class EmptyProperty implements ISubstanceProperty {
+        @Override
+        public void verify(Substance substance) {
+
+        }
+    }
+
+    public static final class OxideProperty implements ISubstanceProperty {
+        private final Substance of;
+
+        public OxideProperty(Substance of) {
+            this.of = of;
+        }
+
+        public Substance getOf() {
+            return of;
+        }
+
         @Override
         public void verify(Substance substance) {
 

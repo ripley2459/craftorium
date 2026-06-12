@@ -7,6 +7,7 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
+import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.EColors;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
@@ -549,6 +550,27 @@ public final class RecipesHandler {
                 }
 
                 ELECTROLYZING.addRecipe(recipe.consumeItem(DUST.asItemStack(substance, a)).duration(80 * a).consumeEnergy(10000 * a).configuration(CONFIGURATION_MIXING_MIX).build());
+            }
+
+            oxide:
+            {
+                if (!substance.getProperties().containsKey(SubstanceProperties.KeyProperties.OXIDE)) {
+                    break oxide;
+                }
+
+                SubstanceProperties.OxideProperty oxideProperty = (SubstanceProperties.OxideProperty) substance.getProperties().get(SubstanceProperties.KeyProperties.OXIDE);
+                if (!OreStack.oresExist(INGOT.getOre(oxideProperty.getOf()))) {
+                    break oxide;
+                }
+
+                MIXING.addRecipe(new MachineRecipeBuilder("oxiding_" + INGOT.getOre(oxideProperty.getOf()))
+                        .consumeItem(INGOT.getOre(oxideProperty.getOf()), 1)
+                        .consumeFluid(GAS.getOre(OXYGEN), BLOCK.getAmount())
+                        .produceItem(INGOT.asItemStack(substance))
+                        .consumeEnergy(30000)
+                        .duration(300)
+                        .configuration(CONFIGURATION_MIXING_CHEM)
+                        .build());
             }
         }
     }

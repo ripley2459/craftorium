@@ -18,6 +18,7 @@ public final class Maps {
     public static final int CONFIGURATION_CUTTER_CIRCUIT = 4;
     public static final int CONFIGURATION_CIRCUIT_ASSEMBLER_BASE = 1;
     public static final int CONFIGURATION_MIXING_MIX = 1;
+    public static final int CONFIGURATION_MIXING_CHEM = 2;
     public static final int CONFIGURATION_MACERATOR_PULVERIZING = 1;
     public static final int CONFIGURATION_MACERATOR_BREAKING = 2;
     public static final int CONFIGURATION_LATHE_SIMPLE = 1;

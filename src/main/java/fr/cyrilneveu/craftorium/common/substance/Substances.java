@@ -1,12 +1,9 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
-import fr.cyrilneveu.craftorium.api.substance.Element;
-import fr.cyrilneveu.craftorium.api.substance.Substance;
-import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
-import fr.cyrilneveu.craftorium.api.substance.Tier;
-import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreSubstances;
-import fr.cyrilneveu.craftorium.common.integration.craftorium.MoreVeins;
+import fr.cyrilneveu.craftorium.api.substance.*;
+import fr.cyrilneveu.craftorium.common.integration.MoreVeins;
 import net.minecraft.block.SoundType;
+import net.minecraftforge.common.MinecraftForge;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
@@ -169,7 +166,9 @@ public final class Substances {
         initVeinMembers();
         initMain();
         initCarbonFiberChain();
-        MoreSubstances.init();
+
+        MinecraftForge.EVENT_BUS.post(new RegisterSubstancesEvent());
+
         MoreVeins.init();
         initTiers();
     }

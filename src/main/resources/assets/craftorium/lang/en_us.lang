@@ -288,7 +288,6 @@ substance.craftorium.end_steel.name=End Steel
 substance.craftorium.ender.name=Ender
 substance.craftorium.enderium.name=Enderium
 substance.craftorium.energetic_alloy.name=Energetic Alloy
-substance.craftorium.energetic_silver.name=Energetic Silver
 substance.craftorium.ferroboron.name=Ferroboron
 substance.craftorium.flint.name=Flint
 substance.craftorium.galena.name=Galena
@@ -345,12 +344,20 @@ substance.craftorium.titanium_iridium.name=Titanium Iridium
 substance.craftorium.tough_alloy.name=Tough Alloy
 substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
 substance.craftorium.tungsten_steel.name=Tungsten Steel
-substance.craftorium.vibrant_alloy.name=Vibrant Alloy
-substance.craftorium.vivid_alloy.name=Vivid Alloy
 substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
 substance.craftorium.ybco.name=YBCO
 
+substance.craftorium.manganese_dioxide.name=Manganese Dioxide
+substance.craftorium.zirconia.name=Zirconia
+substance.craftorium.tin_oxide.name=Tin Oxide
+substance.craftorium.nickel_oxide.name=Nickel Oxide
+substance.craftorium.cobalt_oxide.name=Cobalt Oxide
+substance.craftorium.manganese_oxide.name=Manganese Oxide
+substance.craftorium.ruthenium_oxide.name=Ruthenium Oxide
+substance.craftorium.iridium_oxide.name=Iridium Oxide
+substance.craftorium.zinc_sulfide.name=Zinc Sulfide
+substance.craftorium.bscco.name=BSCCO
 substance.craftorium.ardite.name=Ardite
 substance.craftorium.manyullyn.name=Manyullyn
 substance.craftorium.alumite.name=Alumite
@@ -382,6 +389,18 @@ substance.craftorium.brass.name=Brass
 substance.craftorium.ice_dragonsteel.name=Ice Dragonsteel
 substance.craftorium.fire_dragonsteel.name=Fire Dragonsteel
 substance.craftorium.lightning_dragonsteel.name=Lightning Dragonsteel
+substance.craftorium.tungsten_oxide.name=Tungsten Oxide
+substance.craftorium.hafnium_oxide.name=Hafnium Oxide
+substance.craftorium.copper_oxide.name=Copper Oxide
+
+substance.craftorium.crystalline_alloy.name=Crystalline Alloy
+substance.craftorium.melodic_alloy.name=Melodic Alloy
+substance.craftorium.stellar_alloy.name=Stellar Alloy
+substance.craftorium.crystalline_pink_slime.name=Crystalline Pink Slime
+substance.craftorium.energetic_silver.name=Energetic Silver
+substance.craftorium.vivid_alloy.name=Vivid Alloy
+substance.craftorium.energetic_blend.name=Energetic Blend
+substance.craftorium.dimensional_blend.name=Dimensional Blend
 
 # ##################################################
 # Veins

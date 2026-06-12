@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
+import fr.cyrilneveu.craftorium.Craftorium;
 import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
@@ -23,6 +24,7 @@ import java.util.*;
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.FUEL;
+import static fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties.KeyProperties.OXIDE;
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
@@ -80,7 +82,9 @@ public class SubstanceBuilder {
                 Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains((String) composition[i]));
 
                 substance = SUBSTANCES_REGISTRY.get((String) composition[i]);
-            } else substance = (Substance) composition[i];
+            } else {
+                substance = (Substance) composition[i];
+            }
 
             composition1.add(new SubstanceStack(substance, (Integer) composition[i + 1]));
         }
@@ -103,7 +107,9 @@ public class SubstanceBuilder {
                 Preconditions.checkArgument(SUBSTANCES_REGISTRY.contains((String) chanced[i]));
 
                 substance = SUBSTANCES_REGISTRY.get((String) chanced[i]);
-            } else substance = (Substance) chanced[i];
+            } else {
+                substance = (Substance) chanced[i];
+            }
 
             possible1.add(new SubstanceStack(substance, (Integer) chanced[i + 1], (Integer) chanced[i + 2]));
         }
@@ -152,16 +158,18 @@ public class SubstanceBuilder {
     }
 
     public SubstanceBuilder temperatureAverage() {
-        if (composition.isEmpty())
+        if (composition.isEmpty()) {
             return this;
+        }
 
         float melt = 0;
         float boil = 0;
         int total = 0;
         for (SubstanceStack stack : composition) {
             Temperature temperature = stack.getSubstance().getTemperature();
-            if (temperature == Temperature.EMPTY)
+            if (temperature == Temperature.EMPTY) {
                 return this;
+            }
 
             melt += temperature.getMeltingPoint() * stack.getAmount();
             boil += temperature.getBoilingPoint() * stack.getAmount();
@@ -283,51 +291,63 @@ public class SubstanceBuilder {
     }
 
     public SubstanceBuilder items(ASubstanceObject.SubstanceItemDefinition... items) {
-        if (items.length == 0)
+        if (items.length == 0) {
             this.items = new TreeSet<>();
+        }
         this.items.addAll(Arrays.asList(items));
         return this;
     }
 
     public SubstanceBuilder tools(ASubstanceObject.SubstanceToolDefinition... tools) {
-        if (tools.length == 0)
+        if (tools.length == 0) {
             this.tools = new TreeSet<>();
+        }
         this.tools.addAll(Arrays.asList(tools));
         return this;
     }
 
     public SubstanceBuilder blocks(ASubstanceObject.SubstanceBlockDefinition... blocks) {
-        if (blocks.length == 0)
+        if (blocks.length == 0) {
             this.blocks = new TreeSet<>();
+        }
         this.blocks.addAll(Arrays.asList(blocks));
         return this;
     }
 
     public SubstanceBuilder fluids(ASubstanceObject.SubstanceFluidDefinition... fluids) {
-        if (fluids.length == 0)
+        if (fluids.length == 0) {
             this.fluids = new TreeSet<>();
+        }
         this.fluids.addAll(Arrays.asList(fluids));
         return this;
     }
 
     public SubstanceBuilder fuel(int duration) {
-        if (duration > 0)
+        if (duration > 0) {
             this.property(FUEL, new SubstanceProperties.FuelProperty(duration));
+        }
         return this;
     }
 
     public SubstanceBuilder colorAverage() {
-        if (composition == null || composition.isEmpty())
+        if (composition == null || composition.isEmpty()) {
             return this.color(ERROR_COLOR);
-
-        int color = 0;
-        int total = 0;
-        for (SubstanceStack stack : composition) {
-            color += stack.getSubstance().getAestheticism().getBaseColor() * stack.getAmount();
-            total += stack.getAmount();
         }
 
-        return this.color(color / total);
+        long a = 0, r = 0, g = 0, b = 0;
+        int total = 0;
+        for (SubstanceStack stack : composition) {
+            int color = stack.getSubstance().getAestheticism().getBaseColor();
+            int amount = stack.getAmount();
+            a += (long) ((color >> 24) & 0xFF) * amount;
+            r += (long) ((color >> 16) & 0xFF) * amount;
+            g += (long) ((color >> 8) & 0xFF) * amount;
+            b += (long) (color & 0xFF) * amount;
+            total += amount;
+        }
+
+        int averaged = ((int) (a / total) << 24) | ((int) (r / total) << 16) | ((int) (g / total) << 8) | (int) (b / total);
+        return this.color(averaged);
     }
 
     public SubstanceBuilder color(int color) {
@@ -406,8 +426,9 @@ public class SubstanceBuilder {
     }
 
     public SubstanceBuilder machines(Machine... machines) {
-        if (machines.length == 0)
+        if (machines.length == 0) {
             this.machines = new TreeSet<>();
+        }
         this.machines.addAll(Arrays.asList(machines));
         return this;
     }
@@ -421,15 +442,23 @@ public class SubstanceBuilder {
         return this;
     }
 
+    public SubstanceBuilder packageOxide(Substance of) {
+        packageMetalloid();
+        property(OXIDE, new SubstanceProperties.OxideProperty(of));
+        return this;
+    }
+
     public Substance build() {
         Preconditions.checkArgument((composition != null && element == null) || (composition == null && possible == null && element != null));
 
         Composition composition1 = element != null ? new Composition(element) : new Composition(composition, possible != null ? possible : ImmutableSet.of());
 
-        if (baseColor == ERROR_COLOR)
+        if (baseColor == ERROR_COLOR) {
             colorAverage();
-        if (temperature == Temperature.EMPTY)
+        }
+        if (temperature == Temperature.EMPTY) {
             temperatureAverage();
+        }
         Aestheticism.SubstanceAestheticism aestheticism1 = new Aestheticism.SubstanceAestheticism(style, shiny, glint, baseColor, oreColor, fluidColor, soundType);
 
         if (efficiency != null) {
@@ -452,6 +481,7 @@ public class SubstanceBuilder {
 
         Substance substance = new Substance(name, composition1, efficiency, toughness, temperature, aestheticism1, process, ImmutableMap.copyOf(properties), ImmutableSortedSet.copyOf(items), efficiency == null ? ImmutableSet.of() : ImmutableSortedSet.copyOf(tools), ImmutableSortedSet.copyOf(blocks), ImmutableSortedSet.copyOf(fluids), ImmutableMap.copyOf(overrides));
         SUBSTANCES_REGISTRY.put(name, substance);
+        Craftorium.LOGGER.info("New substance: " + name);
         return substance;
     }
 }
