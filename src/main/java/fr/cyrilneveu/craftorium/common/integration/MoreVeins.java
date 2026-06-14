@@ -16,10 +16,10 @@ public final class MoreVeins {
         INITIALIZED = true;
 
         if (Utils.atLeastOne(new String[]{"nuclearcraft"}, Loader::isModLoaded)) {
-            new VeinBuilder("rhodochrosite", 5, 255, 6, 6, 20, 0, "rhodochrosite", 9, MANGANESE, 1).build();
-            new VeinBuilder("fluorite", 5, 255, 6, 6, 20, 0, "fluorite", 9, CALCIUM, 1).build();
-            new VeinBuilder("villiaumite", 5, 255, 6, 6, 20, 0, "villiaumite", 8, SODIUM, 1, FLUORINE, 1).build();
-            new VeinBuilder("carobbiite", 0, 255, 3, 3, 5, -1, "carobbiite", 8, POTASSIUM, 1, FLUORINE, 1).build();
+            // new VeinBuilder("rhodochrosite", 5, 255, 6, 6, 20, 0, "rhodochrosite", 9, MANGANESE, 1).build();
+            // new VeinBuilder("fluorite", 5, 255, 6, 6, 20, 0, "fluorite", 9, CALCIUM, 1).build();
+            // new VeinBuilder("villiaumite", 5, 255, 6, 6, 20, 0, "villiaumite", 8, SODIUM, 1, FLUORINE, 1).build();
+            // new VeinBuilder("carobbiite", 0, 255, 3, 3, 5, -1, "carobbiite", 8, POTASSIUM, 1, FLUORINE, 1).build();
         }
     }
 }

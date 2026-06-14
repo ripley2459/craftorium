@@ -27,7 +27,6 @@ public final class MoreSubstances {
                     .packageGem()
                     .veinMember()
                     .composition(ALUMINUM, 2, CHROMIUM, 1, OXYGEN, 3)
-                    .color(0xFFe00700)
                     .style("gem")
                     .shiny()
                     .build();
@@ -35,7 +34,6 @@ public final class MoreSubstances {
                     .packageGem()
                     .veinMember()
                     .composition(MAGNESIUM, 2, IRON, 2, SILICON, 1, OXYGEN, 4)
-                    .color(0xFF1bd61b)
                     .style("gem")
                     .shiny()
                     .build();
@@ -46,7 +44,6 @@ public final class MoreSubstances {
                     .packageGem()
                     .veinMember()
                     .composition(ALUMINUM, 2, OXYGEN, 3, TITANIUM, 1, IRON, 1)
-                    .color(0xFF252ed1)
                     .style("gem")
                     .shiny()
                     .build();
@@ -57,13 +54,12 @@ public final class MoreSubstances {
                     .packageGem()
                     .veinMember()
                     .composition(SILICON, 1, OXYGEN, 2, IRON, 1)
-                    .color(0xFFe24dc9)
                     .style("gem")
                     .shiny()
                     .build();
         }
 
-        if (shouldRegister("nuclearcraft", "endergy")) {
+        if (shouldRegister("nuclearcraft", "enderioendergy")) {
             ENERGETIC_BLEND = new SubstanceBuilder("energetic_blend")
                     .packageMineral()
                     .composition(REDSTONE, 1, GLOWSTONE, 1)
@@ -73,6 +69,13 @@ public final class MoreSubstances {
                     .packageMineral()
                     .composition(END, 1, OBSIDIAN, 4)
                     .shiny()
+                    .build();
+        }
+
+        if (shouldRegister("nuclearcraft", "thermalfoundation")) {
+            new SubstanceBuilder("enderium")
+                    .packageMetalExtended()
+                    .composition(LEAD, 3, PLATINUM, 1, ENDER, 4)
                     .build();
         }
     }

@@ -5,10 +5,13 @@ import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceBuilder;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static fr.cyrilneveu.craftorium.common.integration.transverse.MoreSubstances.ENERGETIC_BLEND;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.DUST;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.GEM;
 
 @Mod.EventBusSubscriber
 public class Enderio {
@@ -21,8 +24,9 @@ public class Enderio {
     public static Substance SOULARIUM;
     public static Substance END_STEEL;
     public static Substance IRON_ALLOY;
+    public static Substance PIEZALLITY;
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void register(RegisterSubstancesEvent event) {
         if (!Loader.isModLoaded("enderio")) return;
 
@@ -61,6 +65,12 @@ public class Enderio {
         IRON_ALLOY = new SubstanceBuilder("iron_alloy")
                 .packageMetalExtended()
                 .composition(LEAD, 2, IRON, 1)
+                .build();
+
+        PIEZALLITY = new SubstanceBuilder("piezallity")
+                .packageGem()
+                .composition(DIAMOND, 1, PULSATING_IRON, 1)
+                .overrides(GEM, "enderio:item_material:14", DUST, "enderio:item_material:36")
                 .build();
     }
 }

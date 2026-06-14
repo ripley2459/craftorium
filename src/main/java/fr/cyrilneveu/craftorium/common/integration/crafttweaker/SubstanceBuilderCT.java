@@ -19,7 +19,7 @@ import static fr.cyrilneveu.craftorium.api.Registries.*;
 @ZenClass("mods." + MODID + ".substance.Builder")
 @ZenRegister
 public final class SubstanceBuilderCT {
-    SubstanceBuilder builder;
+    private SubstanceBuilder builder;
 
     public SubstanceBuilderCT(String name) {
         this.builder = new SubstanceBuilder(name);

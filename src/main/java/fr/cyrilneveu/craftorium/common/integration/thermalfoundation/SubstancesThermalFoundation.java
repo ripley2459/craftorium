@@ -39,12 +39,6 @@ public final class SubstancesThermalFoundation {
                 .style("metal")
                 .shiny()
                 .build();
-        new SubstanceBuilder("enderium")
-                .packageMetalExtended()
-                .composition(LEAD, 3, PLATINUM, 1, ENDER, 4)
-                .color(0xFF0e5c5c)
-                .style("metal")
-                .build();
         new SubstanceBuilder("niter")
                 .packageMineral()
                 .composition(POTASSIUM, 1, NITROGEN, 1, OXYGEN, 3)

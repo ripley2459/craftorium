@@ -21,6 +21,8 @@ public final class Substances {
     public static Substance IRON;
     public static Substance GLOWSTONE;
     public static Substance WITHER;
+    public static Substance POPPED_CHORUS;
+    public static Substance NETHER_STAR;
     public static Substance CARBON;
     public static Substance STEEL;
     public static Substance GRAPHITE;
@@ -240,6 +242,17 @@ public final class Substances {
                 .color(0xFF000000)
                 .style("mineral")
                 .build();
+//        POPPED_CHORUS = new SubstanceBuilder("popped_chorus")
+//                .items(GEM)
+//                .overrides(GEM, "minecraft:popped_chorus_fruit")
+//                .build();
+        NETHER_STAR = new SubstanceBuilder("nether_star")
+                .items(GEM, DUST)
+                .blocks(BLOCK)
+                .color(0xFFf8fce8)
+                .glint()
+                .overrides(GEM, "minecraft:nether_star")
+                .build();
         BRONZE = new SubstanceBuilder("bronze")
                 .packageMetalExtended()
                 .composition(COPPER, 3, TIN, 1)
@@ -441,7 +454,9 @@ public final class Substances {
                 .color(0xFF7a8a8c)
                 .build();
         GRAVEL = new SubstanceBuilder("gravel")
+                .items(DUST)
                 .blocks(BLOCK)
+                .color(0xFF515151)
                 .overrides(BLOCK, "minecraft:gravel")
                 .build();
     }

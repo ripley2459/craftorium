@@ -334,20 +334,25 @@ public class SubstanceBuilder {
             return this.color(ERROR_COLOR);
         }
 
-        long a = 0, r = 0, g = 0, b = 0;
-        int total = 0;
-        for (SubstanceStack stack : composition) {
-            int color = stack.getSubstance().getAestheticism().getBaseColor();
-            int amount = stack.getAmount();
-            a += (long) ((color >> 24) & 0xFF) * amount;
-            r += (long) ((color >> 16) & 0xFF) * amount;
-            g += (long) ((color >> 8) & 0xFF) * amount;
-            b += (long) (color & 0xFF) * amount;
-            total += amount;
+        if (properties.containsKey(OXIDE)) {
+            // TODO
+        } else {
+            long a = 0, r = 0, g = 0, b = 0;
+            int total = 0;
+            for (SubstanceStack stack : composition) {
+                int color = stack.getSubstance().getAestheticism().getBaseColor();
+                int amount = stack.getAmount();
+                a += (long) ((color >> 24) & 0xFF) * amount;
+                r += (long) ((color >> 16) & 0xFF) * amount;
+                g += (long) ((color >> 8) & 0xFF) * amount;
+                b += (long) (color & 0xFF) * amount;
+                total += amount;
+            }
+            int averaged = ((int) (a / total) << 24) | ((int) (r / total) << 16) | ((int) (g / total) << 8) | (int) (b / total);
+            this.color(averaged);
         }
 
-        int averaged = ((int) (a / total) << 24) | ((int) (r / total) << 16) | ((int) (g / total) << 8) | (int) (b / total);
-        return this.color(averaged);
+        return this;
     }
 
     public SubstanceBuilder color(int color) {
