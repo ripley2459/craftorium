@@ -388,6 +388,10 @@ public class SubstanceBuilder {
     }
 
     public SubstanceBuilder overrides(Object... overrides) {
+        if (overrides.length == 0) {
+            this.overrides = new HashMap<>();
+        }
+
         Preconditions.checkArgument(overrides.length % 2 == 0);
 
         for (int i = 0; i < overrides.length; i += 2) {

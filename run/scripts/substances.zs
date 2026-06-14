@@ -4,9 +4,11 @@
 import mods.craftorium.substance.Substances;
 import mods.craftorium.substance.Substance; // Not required here
 import mods.craftorium.substance.Builder;
+import mods.craftorium.substance.SubstanceObjects;
 
 var silicon as Substance = Substances.get("silicon");
 var copper = Substances.get("copper");
+var ingot = SubstanceObjects.getItem("ingot");
 
 var test = Substances.create("test_substance") // Starting the process
                      .composition([silicon, 3, "electrum", 1]) // Defining a composition
@@ -17,6 +19,7 @@ var test = Substances.create("test_substance") // Starting the process
                      .tools(5.0f, 2.0f, 500, 3, 5) // Defines the tools properties
                      .style("metal") // Gives the substance a style
                      .shiny() // Makes it shiny (white layer over the texture)
+                     .overrides(ingot, "minecraft:dye:11", "block", "minecraft:wool:4")
                      .build(); // And finalizes the process
 
 // Looping throught the substances registry

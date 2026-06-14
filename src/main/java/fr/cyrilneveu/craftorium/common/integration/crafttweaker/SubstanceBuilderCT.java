@@ -157,6 +157,36 @@ public final class SubstanceBuilderCT {
     }
 
     @ZenMethod
+    public SubstanceBuilderCT overrides(Object... overrides) {
+        Object[] overrides1;
+        if (overrides.length > 0) {
+            Preconditions.checkArgument(overrides.length % 2 == 0);
+            overrides1 = new Object[overrides.length];
+
+            for (int i = 0; i < overrides.length; i += 2) {
+                Preconditions.checkArgument(overrides[i] instanceof String || overrides[i] instanceof ASubstanceObject);
+                Preconditions.checkArgument(overrides[i + 1] instanceof String);
+
+                ASubstanceObject substanceObject;
+                if (overrides[i] instanceof String id) {
+                    substanceObject = SUBSTANCE_ITEMS_REGISTRY.get(id);
+                    if (substanceObject == null) substanceObject = SUBSTANCE_BLOCKS_REGISTRY.get(id);
+                    if (substanceObject == null) substanceObject = SUBSTANCE_TOOLS_REGISTRY.get(id);
+                    if (substanceObject == null) substanceObject = SUBSTANCE_FLUIDS_REGISTRY.get(id);
+                } else substanceObject = (ASubstanceObject) overrides[i];
+
+                Preconditions.checkArgument(substanceObject != null);
+
+                overrides1[i] = substanceObject;
+                overrides1[i + 1] = overrides[i + 1];
+            }
+        } else overrides1 = new Object[0];
+
+        builder.overrides(overrides1);
+        return this;
+    }
+
+    @ZenMethod
     public SubstanceBuilderCT items(String... items) {
         ASubstanceObject.SubstanceItemDefinition[] items1;
         if (items.length != 0) {
