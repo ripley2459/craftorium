@@ -28,6 +28,7 @@ public final class Substances {
     public static Substance GRAPHITE;
     public static Substance CLAY;
     public static Substance GRAVEL;
+    public static Substance SAND;
     public static Substance COAL;
     public static Substance CHARCOAL;
     public static Substance MANGANESE;
@@ -247,7 +248,7 @@ public final class Substances {
 //                .overrides(GEM, "minecraft:popped_chorus_fruit")
 //                .build();
         NETHER_STAR = new SubstanceBuilder("nether_star")
-                .items(GEM, DUST)
+                .items(GEM, DUST, NUGGET)
                 .blocks(BLOCK)
                 .color(0xFFf8fce8)
                 .glint()
@@ -458,6 +459,12 @@ public final class Substances {
                 .blocks(BLOCK)
                 .color(0xFF515151)
                 .overrides(BLOCK, "minecraft:gravel")
+                .build();
+        SAND = new SubstanceBuilder("sand")
+                .items(DUST)
+                .blocks(BLOCK)
+                .color(0xFFc5c995)
+                .overrides(BLOCK, "minecraft:sand")
                 .build();
     }
 

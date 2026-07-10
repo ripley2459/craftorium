@@ -7,10 +7,11 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import static fr.cyrilneveu.craftorium.common.integration.enderio.Enderio.END_STEEL;
+import static fr.cyrilneveu.craftorium.common.integration.enderio.Enderio.BEDROCK_PARTICLE;
 import static fr.cyrilneveu.craftorium.common.integration.enderio.Enderio.PIEZALLITY;
 import static fr.cyrilneveu.craftorium.common.integration.transverse.MoreSubstances.ENERGETIC_BLEND;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.DUST;
 
 @Mod.EventBusSubscriber
 public class EnderioEndergy {
@@ -21,6 +22,7 @@ public class EnderioEndergy {
     public static Substance CRYSTALLINE_PINK_SLIME;
     public static Substance ENERGETIC_SILVER;
     public static Substance VIVID_ALLOY;
+    public static Substance BEDROCK_REAGENT;
 
     @SubscribeEvent
     public static void register(RegisterSubstancesEvent event) {
@@ -54,6 +56,13 @@ public class EnderioEndergy {
         VIVID_ALLOY = new SubstanceBuilder("vivid_alloy")
                 .packageMetalloid()
                 .composition(ENERGETIC_SILVER, 1, ENDER, 1)
+                .build();
+
+        BEDROCK_REAGENT = new SubstanceBuilder("bedrock_reagent")
+                .packageMineral()
+                .composition(BEDROCK_PARTICLE, 1, COAL, 1)
+                .overrides(DUST, "enderio:item_material:75")
+                .shiny()
                 .build();
     }
 }

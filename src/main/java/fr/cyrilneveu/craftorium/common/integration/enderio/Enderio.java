@@ -10,8 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static fr.cyrilneveu.craftorium.common.integration.transverse.MoreSubstances.ENERGETIC_BLEND;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.DUST;
-import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.GEM;
+import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 @Mod.EventBusSubscriber
 public class Enderio {
@@ -25,6 +24,7 @@ public class Enderio {
     public static Substance END_STEEL;
     public static Substance IRON_ALLOY;
     public static Substance PIEZALLITY;
+    public static Substance BEDROCK_PARTICLE;
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void register(RegisterSubstancesEvent event) {
@@ -71,6 +71,13 @@ public class Enderio {
                 .packageGem()
                 .composition(DIAMOND, 1, PULSATING_IRON, 1)
                 .overrides(GEM, "enderio:item_material:14", DUST, "enderio:item_material:36")
+                .build();
+
+        BEDROCK_PARTICLE = new SubstanceBuilder("bedrock_particle")
+                .packageMineral()
+                .overrides(DUST, "enderio:item_material:20", BLOCK, "enderio:block_infinity", ROD, "enderio:item_material:71")
+                .color(0xFF161616)
+                .shiny()
                 .build();
     }
 }

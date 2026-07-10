@@ -67,7 +67,7 @@ public final class MoreSubstances {
                     .build();
             DIMENSIONAL_BLEND = new SubstanceBuilder("dimensional_blend")
                     .packageMineral()
-                    .composition(END, 1, OBSIDIAN, 4)
+                    .composition(END, 1, ENDER, 2, OBSIDIAN, 2)
                     .shiny()
                     .build();
         }

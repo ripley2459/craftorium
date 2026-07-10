@@ -35,5 +35,24 @@ public final class SubstancesAppliedEnergistics2 {
                 .color(0xFF614eab)
                 .style("gem")
                 .build();
+
+        new SubstanceBuilder("pure_certus_quartz")
+                .packageGem()
+                .overrides(GEM, "appliedenergistics2:material:10")
+                .color(0xFFa5cce2)
+                .style("gem")
+                .build();
+        new SubstanceBuilder("pure_quartz")
+                .packageGem()
+                .overrides(GEM, "appliedenergistics2:material:11")
+                .color(0xFFc9c5b9)
+                .style("gem")
+                .build();
+        new SubstanceBuilder("pure_fluix")
+                .packageGem()
+                .overrides(GEM, "appliedenergistics2:material:12")
+                .color(0xFFa5cce2)
+                .style("gem")
+                .build();
     }
 }

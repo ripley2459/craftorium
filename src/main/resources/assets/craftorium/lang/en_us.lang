@@ -408,6 +408,8 @@ substance.craftorium.piezallity.name=Piezallity
 substance.craftorium.thermoconducting_alloy.name=Thermoconducting Alloy
 substance.craftorium.lithium_manganese_dioxide_alloy.name=Lithium Manganese Dioxide Alloy
 substance.craftorium.silicon_carbide.name=Silicon Carbide
+substance.craftorium.niobium_titanium_alloy.name=Niobium Titanium Alloy
+substance.craftorium.niobium_tin_alloy.name=Niobium Tin Alloy
 
 # ##################################################
 # Veins

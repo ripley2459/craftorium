@@ -15,7 +15,6 @@ public final class SubstancesQMD {
     public static Substance HAFNIUM;
     public static Substance STRONTIUM;
     public static Substance NEODYMIUM;
-    public static Substance NIOBIUM;
     public static Substance IODINE;
     public static Substance TERBIUM;
     public static Substance YTTERBIUM;
@@ -51,12 +50,6 @@ public final class SubstancesQMD {
                 .temperature(1050f, 1650f)
                 .color(0xFF00ff00)
                 .packageAlkalineEarthMetal()
-                .build();
-        NIOBIUM = new SubstanceBuilder("niobium")
-                .element(41, "Nb", "niobium", Element.EGroup.TRANSITION_METAL, 92.906372)
-                .temperature(2750f, 5017f)
-                .color(0xFF73c2c9)
-                .packageTransitionMetal()
                 .build();
         IODINE = new SubstanceBuilder("iodine")
                 .element(53, "I", "iodine", Element.EGroup.HALOGEN, 126.904473)
