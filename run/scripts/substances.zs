@@ -1,4 +1,3 @@
-#norun
 #loader craftorium
 
 import mods.craftorium.substance.Substances;

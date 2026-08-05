@@ -350,6 +350,23 @@ substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
 substance.craftorium.ybco.name=YBCO
 
+substance.craftorium.white.name=White
+substance.craftorium.orange.name=Orange
+substance.craftorium.magenta.name=Magenta
+substance.craftorium.light_blue.name=Light Blue
+substance.craftorium.yellow.name=Yellow
+substance.craftorium.lime.name=Lime
+substance.craftorium.pink.name=Pink
+substance.craftorium.gray.name=Gray
+substance.craftorium.light_gray.name=Light Gray
+substance.craftorium.cyan.name=Cyan
+substance.craftorium.purple.name=Purple
+substance.craftorium.blue.name=Blue
+substance.craftorium.brown.name=Brown
+substance.craftorium.green.name=Green
+substance.craftorium.red.name=Red
+substance.craftorium.black.name=Black
+
 substance.craftorium.manganese_dioxide.name=Manganese Dioxide
 substance.craftorium.zirconia.name=Zirconia
 substance.craftorium.tin_oxide.name=Tin Oxide
@@ -410,6 +427,8 @@ substance.craftorium.lithium_manganese_dioxide_alloy.name=Lithium Manganese Diox
 substance.craftorium.silicon_carbide.name=Silicon Carbide
 substance.craftorium.niobium_titanium_alloy.name=Niobium Titanium Alloy
 substance.craftorium.niobium_tin_alloy.name=Niobium Tin Alloy
+substance.craftorium.neutronium.name=Neutronium
+substance.craftorium.infinity.name=Infinity
 
 # ##################################################
 # Veins

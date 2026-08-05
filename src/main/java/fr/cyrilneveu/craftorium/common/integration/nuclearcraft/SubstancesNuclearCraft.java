@@ -96,25 +96,27 @@ public final class SubstancesNuclearCraft {
                 .composition(STEEL, 1, BORON, 1)
                 .build();
         HARD_CARBON = new SubstanceBuilder("hard_carbon")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(DIAMOND, 1, CARBON, 2)
                 .build();
         TOUGH_ALLOY = new SubstanceBuilder("tough_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(FERROBORON, 1, LITHIUM, 1)
                 .build();
         EXTREME_ALLOY = new SubstanceBuilder("extreme_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(TOUGH_ALLOY, 1, HARD_CARBON, 1)
                 .build();
         THERMOCONDUCTING_ALLOY = new SubstanceBuilder("thermoconducting_alloy")
                 .packageMetalExtended()
                 .composition(EXTREME_ALLOY, 7, BORON_ARSENIDE_ALLOY, 1)
                 .build();
+
         LITHIUM_MANGANESE_DIOXIDE_ALLOY = new SubstanceBuilder("lithium_manganese_dioxide_alloy")
                 .packageMetalloid()
                 .composition(LITHIUM, 1, MANGANESE_DIOXIDE, 1)
                 .build();
+
         SILICON_CARBIDE = new SubstanceBuilder("silicon_carbide")
                 .packageMetalloid()
                 .composition(SILICON, 1, GRAPHITE, 1)

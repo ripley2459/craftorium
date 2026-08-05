@@ -428,6 +428,13 @@ public final class RecipesHandler {
                     .duration(20)
                     .configuration(CONFIGURATION_MIXING_MIX)
                     .build());
+            CASTING.addRecipe(new MachineRecipeBuilder("casting_dye_to_liquid_".concat(color.getName()))
+                    .consumeItem(OreStack.createOre("dye", color.getName()), 1)
+                    .produceFluid(COLORS[color.ordinal()].getName(), 144)
+                    .consumeEnergy(8000)
+                    .duration(30)
+                    .configuration(CONFIGURATION_CASTING_MELTING)
+                    .build());
         }
 
         CIRCUIT_ASSEMBLING.addRecipe(new MachineRecipeBuilder("microprocessor")

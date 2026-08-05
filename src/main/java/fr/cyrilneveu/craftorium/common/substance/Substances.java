@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.common.substance;
 
 import fr.cyrilneveu.craftorium.api.substance.*;
+import fr.cyrilneveu.craftorium.api.utils.EColors;
 import fr.cyrilneveu.craftorium.common.integration.MoreVeins;
 import net.minecraft.block.SoundType;
 import net.minecraftforge.common.MinecraftForge;
@@ -158,6 +159,7 @@ public final class Substances {
     public static Tier TIER_THREE;
     public static Tier TIER_FOUR;
     public static Tier TIER_FIVE;
+    public static Substance[] COLORS;
 
     public static void init() {
         if (SUBSTANCES_REGISTRY.isInitialized())
@@ -466,6 +468,14 @@ public final class Substances {
                 .color(0xFFc5c995)
                 .overrides(BLOCK, "minecraft:sand")
                 .build();
+
+        COLORS = new Substance[EColors.values().length];
+        for (EColors value : EColors.values()) {
+            COLORS[value.getMeta()] = new SubstanceBuilder(String.join("_", value.name().toLowerCase()))
+                    .fluids(LIQUID)
+                    .color(value.getColor())
+                    .build();
+        }
     }
 
     private static void initCarbonFiberChain() {
