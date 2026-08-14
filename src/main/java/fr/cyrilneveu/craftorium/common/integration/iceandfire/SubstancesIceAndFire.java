@@ -16,20 +16,20 @@ public final class SubstancesIceAndFire {
 
         new SubstanceBuilder("ice_dragonsteel")
                 .packageTransitionMetal()
-                .overrides(INGOT, "iceandfire:dragonsteel_ice_ingot")
+                //.overrides(INGOT, "iceandfire:dragonsteel_ice_ingot")
                 .color(0xFF64acc1)
                 .shiny()
                 .build();
         new SubstanceBuilder("fire_dragonsteel")
                 .packageTransitionMetal()
                 .color(0xFF5e1718)
-                .overrides(INGOT, "iceandfire:dragonsteel_fire_ingot")
+                //.overrides(INGOT, "iceandfire:dragonsteel_fire_ingot")
                 .shiny()
                 .build();
         new SubstanceBuilder("lightning_dragonsteel")
                 .packageTransitionMetal()
                 .color(0xFF3a1338)
-                .overrides(INGOT, "iceandfire:dragonsteel_lightning_ingot")
+                //.overrides(INGOT, "iceandfire:dragonsteel_lightning_ingot")
                 .shiny()
                 .build();
     }

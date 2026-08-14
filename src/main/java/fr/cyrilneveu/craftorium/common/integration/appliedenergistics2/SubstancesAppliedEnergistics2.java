@@ -51,8 +51,9 @@ public final class SubstancesAppliedEnergistics2 {
         new SubstanceBuilder("pure_fluix")
                 .packageGem()
                 .overrides(GEM, "appliedenergistics2:material:12")
-                .color(0xFFa5cce2)
+                .color(0xFF614eab)
                 .style("gem")
+                .shiny()
                 .build();
     }
 }

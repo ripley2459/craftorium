@@ -429,6 +429,9 @@ substance.craftorium.niobium_titanium_alloy.name=Niobium Titanium Alloy
 substance.craftorium.niobium_tin_alloy.name=Niobium Tin Alloy
 substance.craftorium.neutronium.name=Neutronium
 substance.craftorium.infinity.name=Infinity
+substance.craftorium.pure_certus_quartz.name=Pure Certus Quartz
+substance.craftorium.pure_quartz.name=Pure Quartz
+substance.craftorium.pure_fluix.name=Pure Fluix
 
 # ##################################################
 # Veins

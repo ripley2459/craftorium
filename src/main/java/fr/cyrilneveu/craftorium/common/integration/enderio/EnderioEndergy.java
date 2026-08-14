@@ -30,31 +30,31 @@ public class EnderioEndergy {
             return;
 
         CRUDE_STEEL = new SubstanceBuilder("crude_steel")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(GRAVEL, 1, STONE, 1, CLAY, 1)
                 .build();
         CRYSTALLINE_ALLOY = new SubstanceBuilder("crystalline_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(PIEZALLITY, 1, GOLD, 1)
                 .build();
         MELODIC_ALLOY = new SubstanceBuilder("melodic_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 //.composition(END_STEEL, 1, POPPED_CHORUS, 1)
                 .build();
         STELLAR_ALLOY = new SubstanceBuilder("stellar_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(CLAY, 2, MELODIC_ALLOY, 1, NETHER_STAR, 1)
                 .build();
         CRYSTALLINE_PINK_SLIME = new SubstanceBuilder("crystalline_pink_slime")
-                .packageMetalloid()
+                .packageMetalExtended()
                 //.composition(e)
                 .build();
         ENERGETIC_SILVER = new SubstanceBuilder("energetic_silver")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(SILVER, 1, ENERGETIC_BLEND, 1)
                 .build();
         VIVID_ALLOY = new SubstanceBuilder("vivid_alloy")
-                .packageMetalloid()
+                .packageMetalExtended()
                 .composition(ENERGETIC_SILVER, 1, ENDER, 1)
                 .build();
 
