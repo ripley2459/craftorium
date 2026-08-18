@@ -48,6 +48,7 @@ item.craftorium.rotor.name=%s Rotor
 item.craftorium.screw.name=%s Screw
 item.craftorium.spring.name=%s Spring
 item.craftorium.wire.name=%s Wire
+item.craftorium.wafer.name=Wafer %s
 
 # Circuits
 item.craftorium.redstone_circuit.name=Redstone Circuit
@@ -348,7 +349,13 @@ substance.craftorium.tungsten_carbide_alloy.name=Tungsten Carbide Alloy
 substance.craftorium.tungsten_steel.name=Tungsten Steel
 substance.craftorium.wither.name=Wither
 substance.craftorium.wood.name=Wood
-substance.craftorium.ybco.name=YBCO
+substance.craftorium.ybco.name=
+
+substance.craftorium.doped_pn_silicon.name=Doped PN Silicon
+substance.craftorium.doped_gaas_silicon.name=Doped GAAS Silicon
+substance.craftorium.doped_graphene_silicon.name=Doped Graphene Silicon
+
+
 
 substance.craftorium.white.name=White
 substance.craftorium.orange.name=Orange

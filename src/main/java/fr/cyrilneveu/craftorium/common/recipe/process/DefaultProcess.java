@@ -30,6 +30,7 @@ public class DefaultProcess extends AProcess {
 
     @Override
     protected void addRecipes() {
+        recipes.add(this::boule);
         recipes.add(this::casing);
         recipes.add(this::dust);
         recipes.add(this::foil);
@@ -45,6 +46,7 @@ public class DefaultProcess extends AProcess {
         recipes.add(this::screw);
         recipes.add(this::spring);
         recipes.add(this::wire);
+        recipes.add(this::wafer);
 
         recipes.add(this::axe);
         recipes.add(this::cutter);
@@ -415,6 +417,20 @@ public class DefaultProcess extends AProcess {
                     .build());
     }
 
+    protected void boule(Substance substance) {
+        if (!substance.getItems().contains(BOULE))
+            return;
+
+        if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
+            CASTING.addRecipe(new MachineRecipeBuilder(BOULE.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), BOULE.getAmount())
+                    .produceItem(BOULE.asItemStack(substance))
+                    .consumeEnergy(75000)
+                    .duration(200)
+                    .configuration(CONFIGURATION_CASTING_FORM_BOULE)
+                    .build());
+    }
+
     protected void rotor(Substance substance) {
         if (!substance.getItems().contains(ROTOR))
             return;
@@ -468,6 +484,20 @@ public class DefaultProcess extends AProcess {
                     .consumeItem(FOIL.getOre(substance), 1)
                     .produceItem(WIRE.asItemStack(substance, 4))
                     .consumeEnergy(5000)
+                    .duration(200)
+                    .configuration(CONFIGURATION_CUTTER_FINE)
+                    .build());
+    }
+
+    protected void wafer(Substance substance) {
+        if (!substance.getItems().contains(WAFER))
+            return;
+
+        if (OreStack.oresExist(BOULE.getOre(substance)))
+            CUTTING.addRecipe(new MachineRecipeBuilder(WAFER.getName(substance).concat(BOULE.getName(substance)))
+                    .consumeItem(BOULE.getOre(substance), 1)
+                    .produceItem(WAFER.asItemStack(substance, 4))
+                    .consumeEnergy(25000)
                     .duration(200)
                     .configuration(CONFIGURATION_CUTTER_FINE)
                     .build());

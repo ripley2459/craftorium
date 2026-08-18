@@ -146,13 +146,7 @@ en die) - plus réaliste (un wafer est dopé après découpe, pas dans le bain d
 6. Cutter (`ram_die`/`power_die`/`calculus_die`/`quantum_calculus_die`,
    `RecipesHandler.java:375-399`) et Circuit Assembler (`microprocessor`→`mainframe`, `:440-481`) :
    **inchangés**, ils se débloquent automatiquement une fois les wafers finis disponibles.
-7. Retirer la branche générique morte : items `chip`, `resistor`, `diode`, `capacitor`,
-   `transistor`, `circuit_board_1/2/3` (`ACommonProxy.java:64-75`), recettes
-   `primitive_circuit`/`advanced_circuit`/`maxed_circuit` (`RecipesHandler.java:62-93`), et leurs
-   entrées `circuitTier1/2/3` dans `ACommonProxy.java` - sans risque, chaque tag concerné garde un
-   item valide (`advanced_redstone_circuit`/`redstone_circuit`, `microprocessor`, `processor`)
-   une fois les points 3-5 en place.
-8. `quantum_microprocessor`, `quantum_processor`, `wetware_microprocessor/processor/mainframe`,
+7. `quantum_microprocessor`, `quantum_processor`, `wetware_microprocessor/processor/mainframe`,
    `machine_spirit_infused_processor` : aucune recette, laissés de côté volontairement (probable
    intégration future QMD / thème "machine spirit"), pas de trou à combler maintenant.
 

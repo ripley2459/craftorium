@@ -60,6 +60,7 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItemDefinition SPRING;
     public static ASubstanceObject.SubstanceItemDefinition WIRE;
     public static ASubstanceObject.SubstanceItemDefinition BOULE;
+    public static ASubstanceObject.SubstanceItemDefinition WAFER;
 
     public static ASubstanceObject.SubstanceToolDefinition AXE;
     public static ASubstanceObject.SubstanceToolDefinition CUTTER;
@@ -123,6 +124,13 @@ public final class SubstancesObjects {
         WIRE = createSubstanceItem("wire").amount(FOIL.getAmount() / 4).build();
         ROTOR = createSubstanceItem("rotor").amount(PLATE.getAmount() * 2 + SCREW.getAmount() * 2 + RING.getAmount()).build();
         BOULE = createSubstanceItem("boule").amount(INGOT.getAmount() * 9).build();
+        WAFER = createSubstanceItem("wafer").amount(BOULE.getAmount() / 4).faces((reference, substance) -> {
+            int size = 1;
+            FaceProvider[] faces = new FaceProvider[size];
+            for (int i = 0; i < size; i++)
+                faces[i] = new FaceProvider(new ResourceLocation(MODID, String.join("/", "items", "circuits", reference.getName(substance))), RenderUtils.WHITE_COLOR);
+            return faces;
+        }).build();
 
         AXE = createTool("axe").provider(SubstancesObjects::createAxe).build();
         CUTTER = createTool("cutter").build();

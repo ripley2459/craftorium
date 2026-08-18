@@ -33,6 +33,9 @@ public final class Maps {
     public static final int CONFIGURATION_CASTING_FORM_FOIL = 7;
     public static final int CONFIGURATION_CASTING_FORM_PEARL = 8;
     public static final int CONFIGURATION_CASTING_FORM_RING = 9;
+    public static final int CONFIGURATION_CASTING_FORM_BOULE = 10;
+    public static final int CONFIGURATION_CASTING_ANNEAL = 20;
+
     public static final int CONFIGURATION_ELECTROLYZING_REFORMING = 2;
     public static RecipeMap ELECTROLYZING;
     public static RecipeMap MACERATING;

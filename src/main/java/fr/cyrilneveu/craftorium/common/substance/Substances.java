@@ -154,6 +154,9 @@ public final class Substances {
     public static Substance POLYACRYLONITRILE;
     public static Substance CARBON_FIBER;
     public static Substance NITROGEN;
+    public static Substance DOPED_PN_SILICON;
+    public static Substance DOPED_GAAS_SILICON;
+    public static Substance DOPED_GRAPHENE_SILICON;
     public static Tier TIER_ONE;
     public static Tier TIER_TWO;
     public static Tier TIER_THREE;
@@ -170,6 +173,7 @@ public final class Substances {
         initElements();
         initVeinMembers();
         initMain();
+        initCircuitry();
         initCarbonFiberChain();
 
         MinecraftForge.EVENT_BUS.post(new RegisterSubstancesEvent());
@@ -476,6 +480,24 @@ public final class Substances {
                     .color(value.getColor())
                     .build();
         }
+    }
+
+    private static void initCircuitry() {
+        DOPED_PN_SILICON = new SubstanceBuilder("doped_pn_silicon")
+                .composition(SILICON, 2, BORON, 1, ARSENIC, 1)
+                .packageMetalloid()
+                .items(BOULE, WAFER)
+                .build();
+        DOPED_GAAS_SILICON = new SubstanceBuilder("doped_gaas_silicon")
+                .composition(SILICON, 1, GALLIUM, 1)
+                .packageMetalloid()
+                .items(BOULE, WAFER)
+                .build();
+        DOPED_GRAPHENE_SILICON = new SubstanceBuilder("doped_graphene_silicon")
+                .composition(SILICON, 1, GRAPHENE, 1)
+                .packageMetalloid()
+                .items(BOULE, WAFER)
+                .build();
     }
 
     private static void initCarbonFiberChain() {
@@ -951,6 +973,7 @@ public final class Substances {
                 .temperature(1687f, 3538f)
                 .color(0xFFf0c8a0)
                 .packageMetalloid()
+                .items(BOULE, WAFER)
                 .build();
         MANGANESE = new SubstanceBuilder("manganese")
                 .element(25, "Mn", "manganese", Element.EGroup.TRANSITION_METAL, 54.9380443)
