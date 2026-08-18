@@ -1,11 +1,14 @@
 package fr.cyrilneveu.craftorium.api.machine.behaviour;
 
 import fr.cyrilneveu.craftorium.api.inventory.EnergySlotData;
+import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
 import fr.cyrilneveu.craftorium.api.mui.EnergyBar;
+import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.NBTUtils;
+import fr.cyrilneveu.craftorium.api.utils.Position;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -83,6 +86,10 @@ public class EnergyInventory implements IEnergyStorage, IMachineBehaviour, INBTS
         return transfer > 0 && energy < capacity;
     }
 
+    public int getTransfer() {
+        return transfer;
+    }
+
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityEnergy.ENERGY;
@@ -114,5 +121,32 @@ public class EnergyInventory implements IEnergyStorage, IMachineBehaviour, INBTS
     @Override
     public void pushWidgets(List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs) {
         widgets.add(new EnergyBar(slotData));
+    }
+
+    public static class EnergyInventoryProvider implements Machine.IGetBehaviours {
+        private final int posX;
+        private final int posY;
+        private final int capacity;
+        private final int transfer;
+
+        public EnergyInventoryProvider(int posX, int posY, int capacity, int transfer) {
+            this.posX = posX;
+            this.posY = posY;
+            this.capacity = capacity;
+            this.transfer = transfer;
+        }
+
+        public int getCapacity() {
+            return capacity;
+        }
+
+        public int getTransfer() {
+            return transfer;
+        }
+
+        @Override
+        public IMachineBehaviour get(MachineTile owner, Tier tier) {
+            return new EnergyInventory(owner, new EnergySlotData(new Position(posX, posY), capacity, transfer));
+        }
     }
 }

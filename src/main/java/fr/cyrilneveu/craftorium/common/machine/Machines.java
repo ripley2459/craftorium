@@ -1,10 +1,10 @@
 package fr.cyrilneveu.craftorium.common.machine;
 
 import fr.cyrilneveu.craftorium.api.block.CustomBlock;
-import fr.cyrilneveu.craftorium.api.config.Settings;
 import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.machine.MachineBlock;
 import fr.cyrilneveu.craftorium.api.machine.MachineBuilder;
+import fr.cyrilneveu.craftorium.api.machine.behaviour.EnergyInventory;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
@@ -193,9 +193,11 @@ public final class Machines {
 
         return new Aestheticism.ObjectAestheticism(faces, () -> {
             List<String> tooltips = new LinkedList<>();
-            if (Settings.globalSettings.showAdvancedTooltips)
-                tooltips.add(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName()));
-            //tooltips.add(Utils.localise("tooltip.craftorium.map.name", machine.));
+            for (Machine.IGetBehaviours provider : machine.getProviders()) {
+                if (provider instanceof EnergyInventory.EnergyInventoryProvider energyInventory)
+                    tooltips.add(Utils.localise("tooltip.craftorium.machine.slot.energy", energyInventory.getCapacity() * tier.getEnergyBuffer(), energyInventory.getTransfer() * tier.getEnergyBuffer()));
+            }
+            tooltips.add(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName()));
             return tooltips;
         }, false, null);
     }

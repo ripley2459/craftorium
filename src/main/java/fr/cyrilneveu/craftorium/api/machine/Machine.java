@@ -63,6 +63,10 @@ public class Machine implements Comparable<Machine> {
         return behaviours;
     }
 
+    public List<IGetBehaviours> getProviders() {
+        return providers;
+    }
+
     public MachineJeiData getJeiData() {
         return jeiData;
     }

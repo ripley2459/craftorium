@@ -3,7 +3,10 @@ package fr.cyrilneveu.craftorium.api.machine;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import fr.cyrilneveu.craftorium.api.config.Settings;
-import fr.cyrilneveu.craftorium.api.inventory.*;
+import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
+import fr.cyrilneveu.craftorium.api.inventory.ESlotFlow;
+import fr.cyrilneveu.craftorium.api.inventory.FluidSlotData;
+import fr.cyrilneveu.craftorium.api.inventory.ItemSlotData;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.*;
 import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
@@ -71,7 +74,7 @@ public class MachineBuilder {
 
     public MachineBuilder energy(int posX, int posY) {
         this.energy = true;
-        this.providers.add((m, t) -> new EnergyInventory(m, new EnergySlotData(new Position(posX, posY), Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer)));
+        this.providers.add(new EnergyInventory.EnergyInventoryProvider(posX, posY, Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer));
         return this;
     }
 

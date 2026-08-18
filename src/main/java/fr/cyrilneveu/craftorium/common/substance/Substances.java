@@ -1169,9 +1169,9 @@ public final class Substances {
 
         TIER_ONE = (Tier) new SubstanceBuilder("tier_one")
                 .isTier()
-                .fluidStorage(8.0f)
-                .energyStorage(8.0f, 8.0f)
-                .recipeSpeedMultiplier(12.0f)
+                .fluidStorage(1.0f)
+                .energyStorage(1.0f, 1.0f)
+                .recipeSpeedMultiplier(1.0f)
                 .pack(STEEL, STEEL, COPPER, BRONZE, COPPER)
                 .packageTier()
                 .color(0xFFdcdcdc)
