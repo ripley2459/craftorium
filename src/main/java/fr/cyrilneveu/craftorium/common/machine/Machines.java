@@ -1,10 +1,11 @@
 package fr.cyrilneveu.craftorium.common.machine;
 
 import fr.cyrilneveu.craftorium.api.block.CustomBlock;
+import fr.cyrilneveu.craftorium.api.machine.behaviour.IGetBehaviours;
 import fr.cyrilneveu.craftorium.api.machine.Machine;
 import fr.cyrilneveu.craftorium.api.machine.MachineBlock;
 import fr.cyrilneveu.craftorium.api.machine.MachineBuilder;
-import fr.cyrilneveu.craftorium.api.machine.behaviour.EnergyInventory;
+import fr.cyrilneveu.craftorium.api.machine.behaviour.EnergyInventoryProvider;
 import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.render.FaceProvider;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
@@ -31,6 +32,7 @@ public final class Machines {
     public static Machine MIXER;
     public static Machine CIRCUIT_ASSEMBLER;
     public static Machine ASSEMBLER;
+    public static Machine CHARGER;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -158,6 +160,17 @@ public final class Machines {
                 .playerInventory(7, 115)
                 .size(176, 198)
                 .build();
+        CHARGER = new MachineBuilder("charger")
+                .itemFree(61, 18).itemFree(79, 18).itemFree(91, 18)
+                .itemFree(61, 36).itemFree(79, 36).itemFree(91, 36)
+                .itemFree(61, 54).itemFree(79, 54).itemFree(91, 54)
+                .energyBuffer()
+                .energy(153, 131)
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "charger", "name"), true)
+                .text(8, 140, "container.inventory", false)
+                .playerInventory(7, 151)
+                .size(176, 234)
+                .build();
     }
 
     public static void close() {
@@ -193,8 +206,8 @@ public final class Machines {
 
         return new Aestheticism.ObjectAestheticism(faces, () -> {
             List<String> tooltips = new LinkedList<>();
-            for (Machine.IGetBehaviours provider : machine.getProviders()) {
-                if (provider instanceof EnergyInventory.EnergyInventoryProvider energyInventory)
+            for (IGetBehaviours provider : machine.getProviders()) {
+                if (provider instanceof EnergyInventoryProvider energyInventory)
                     tooltips.add(Utils.localise("tooltip.craftorium.machine.slot.energy", energyInventory.getCapacity() * tier.getEnergyBuffer(), energyInventory.getTransfer() * tier.getEnergyBuffer()));
             }
             tooltips.add(Utils.localise("tooltip.craftorium.tier.name", tier.getDisplayName()));

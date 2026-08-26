@@ -1,6 +1,7 @@
 package fr.cyrilneveu.craftorium.api.machine;
 
 import com.google.common.collect.ImmutableList;
+import fr.cyrilneveu.craftorium.api.machine.behaviour.IGetBehaviours;
 import fr.cyrilneveu.craftorium.api.machine.behaviour.IMachineBehaviour;
 import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
@@ -95,8 +96,4 @@ public class Machine implements Comparable<Machine> {
         return new Screen(widgetsT.toArray(widgetsT.toArray(new AWidget[0])), screenSize);
     }
 
-    @FunctionalInterface
-    public interface IGetBehaviours {
-        IMachineBehaviour get(MachineTile owner, Tier tier);
-    }
 }

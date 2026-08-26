@@ -1,5 +1,7 @@
 # TODO
 
+AI GENERATED BELLOW, DON'T EDIT MANUALLY AND NEVER ASK IT TO WORK ON IT WITH HEAVY SUPPERVISION.
+
 ## Bloquant - le mod ne fonctionne pas seul en l'état
 
 - [ ] **Aucune recette de synthèse d'alliage (élément → alliage).** `Substances.java` déclare des

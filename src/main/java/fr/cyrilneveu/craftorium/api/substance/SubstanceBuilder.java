@@ -454,6 +454,7 @@ public class SubstanceBuilder {
     public SubstanceBuilder packageOxide(Substance of) {
         packageMetalloid();
         property(OXIDE, new SubstanceProperties.OxideProperty(of));
+        color(of.getAestheticism().getBaseColor());
         return this;
     }
 

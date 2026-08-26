@@ -31,6 +31,20 @@ item.craftorium.shovel.name=%s Shovel
 item.craftorium.sword.name=%s Sword
 item.craftorium.wrench.name=%s Wrench
 
+item.craftorium.axe.name_alone=Axe
+item.craftorium.cutter.name_alone=Cutter
+item.craftorium.file.name_alone=File
+item.craftorium.hammer.name_alone=Hammer
+item.craftorium.hoe.name_alone=Hoe
+item.craftorium.knife.name_alone=Knife
+item.craftorium.mortar.name_alone=Mortar
+item.craftorium.pickaxe.name_alone=Pickaxe
+item.craftorium.saw.name_alone=Saw
+item.craftorium.screwdriver.name_alone=Screwdriver
+item.craftorium.shovel.name_alone=Shovel
+item.craftorium.sword.name_alone=Sword
+item.craftorium.wrench.name_alone=Wrench
+
 # Components
 item.craftorium.boule.name=%s Boule
 item.craftorium.casing.name=%s Casing
@@ -109,6 +123,7 @@ machine.craftorium.foundry.name=Foundry
 machine.craftorium.lathe.name=Lathe
 machine.craftorium.macerator.name=Macerator
 machine.craftorium.mixer.name=Mixer
+machine.craftorium.charger.name=Charger
 
 # Substances
 tile.craftorium.block.name=Block of %s
@@ -439,6 +454,12 @@ substance.craftorium.infinity.name=Infinity
 substance.craftorium.pure_certus_quartz.name=Pure Certus Quartz
 substance.craftorium.pure_quartz.name=Pure Quartz
 substance.craftorium.pure_fluix.name=Pure Fluix
+substance.craftorium.anglesite.name=Anglesite
+substance.craftorium.benitoite.name=Benitoite
+substance.craftorium.ludicrite.name=Ludicrite
+substance.craftorium.yellowrium.name=Yellowrium
+substance.craftorium.blutonium.name=Blutonium
+substance.craftorium.cyanite.name=Cyanite
 
 # ##################################################
 # Veins
@@ -497,7 +518,6 @@ vein.craftorium.spdodumene.name=Spdodumene
 vein.craftorium.stibnite.name=Stibnite
 vein.craftorium.stibnite_nether.name=Stibnite (Nether)
 
-
 # ##################################################
 # Others
 
@@ -509,6 +529,7 @@ itemGroup.tools=Tools
 
 # Tooltips
 tooltip.craftorium.tool.damage=Durability: %s/%s
+tooltip.craftorium.tool.crafting=Crafting component
 tooltip.craftorium.battery.energy=Energy: §c%s RF§r
 tooltip.craftorium.formula=§e%s§r
 tooltip.craftorium.machine.button.configuration=§7Configuration: §b%s§r

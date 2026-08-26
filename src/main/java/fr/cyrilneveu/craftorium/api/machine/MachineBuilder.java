@@ -27,7 +27,7 @@ import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.TEXT_COLOR;
 
 public class MachineBuilder {
     private String name;
-    private List<Machine.IGetBehaviours> providers = new LinkedList<>();
+    private List<IGetBehaviours> providers = new LinkedList<>();
     private List<ItemSlotData> items = new LinkedList<>();
     private List<FluidSlotData> fluids = new LinkedList<>();
     private List<AWidget> widgets = new LinkedList<>();
@@ -58,6 +58,13 @@ public class MachineBuilder {
         return this;
     }
 
+    public MachineBuilder itemFree(int posX, int posY) {
+        ItemSlotData data = new ItemSlotData(new Position(posX, posY), items.size(), ESlotFlow.FREE);
+        this.items.add(data);
+        this.slotJEI.add(data);
+        return this;
+    }
+
     public MachineBuilder fluidInput(int posX, int posY) {
         FluidSlotData data = new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.INPUT, 64000);
         this.fluids.add(data);
@@ -72,9 +79,16 @@ public class MachineBuilder {
         return this;
     }
 
+    private MachineBuilder fluidFree(int posX, int posY) {
+        FluidSlotData data = new FluidSlotData(new Position(posX, posY), fluids.size(), ESlotFlow.FREE, 64000);
+        this.fluids.add(data);
+        this.slotJEI.add(data);
+        return this;
+    }
+
     public MachineBuilder energy(int posX, int posY) {
         this.energy = true;
-        this.providers.add(new EnergyInventory.EnergyInventoryProvider(posX, posY, Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer));
+        this.providers.add(new EnergyInventoryProvider(posX, posY, Settings.machinesSettings.machineBaseStorage, Settings.machinesSettings.machineBaseTransfer));
         return this;
     }
 
@@ -97,6 +111,11 @@ public class MachineBuilder {
         this.map = map;
         this.providers.add((m, t) -> new RecipeProcessor(m, map, new Position(progressX, progressY), new Position(configurationX, ConfigurationY)));
         this.arrowJEI = new Position(progressX, progressY);
+        return this;
+    }
+
+    public MachineBuilder energyBuffer() {
+        this.providers.add((m, t) -> new Charger(m));
         return this;
     }
 

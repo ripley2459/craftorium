@@ -9,6 +9,7 @@ import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
+import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
 import fr.cyrilneveu.craftorium.common.recipe.Maps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
@@ -99,6 +100,14 @@ public abstract class ACommonProxy {
         new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
         new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
 
+        SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> new ItemBuilder(k)
+                .addTexture("substances/tools/" + k + "_base")
+                .addTexture("substances/tools/" + k)
+                .setTranslation(k + ".name_alone")
+                .tooltips("tooltip.craftorium.tool.crafting")
+                .setCreativeTab(CreativeTabs.TOOLS)
+                .build());
+
         SUBSTANCE_ITEMS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getItems().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> SUBSTANCES_REGISTRY.getAll().values().stream().filter(s -> s.getTools().contains(v) && s.shouldRegister(v)).forEach(v::createObject));
 
@@ -150,6 +159,7 @@ public abstract class ACommonProxy {
         OreDictionary.registerOre("circuitTier5", getItem("wetware_mainframe"));
         OreDictionary.registerOre("circuitTier6", getItem("machine_spirit_infused_processor"));
 
+        SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> OreDictionary.registerOre(k, getItem(k)));
         TIERS_REGISTRY.getAll().values().forEach(tier -> tier.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(tier), i.asItemStack(tier))));
 
         for (Substance substance : SUBSTANCES_REGISTRY.getAll().values()) {
