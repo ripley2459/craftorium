@@ -1,4 +1,4 @@
-package fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine;
+package fr.cyrilneveu.craftorium.api.machine;
 
 import fr.cyrilneveu.craftorium.api.inventory.ASlotData;
 import fr.cyrilneveu.craftorium.api.utils.Position;

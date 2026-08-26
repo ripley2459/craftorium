@@ -11,10 +11,10 @@ import fr.cyrilneveu.craftorium.api.substance.Tier;
 import fr.cyrilneveu.craftorium.api.utils.Size;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
-import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,9 +27,10 @@ public class Machine implements Comparable<Machine> {
     private final List<AWidget> widgets;
     private final List<ATabGroup.Tab> leftTabs;
     private final List<ATabGroup.Tab> rightTabs;
+    @Nullable
     private final MachineJeiData jeiData;
 
-    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs, MachineJeiData jeiData) {
+    public Machine(String name, ImmutableList<IGetBehaviours> providers, Size screenSize, List<AWidget> widgets, List<ATabGroup.Tab> leftTabs, List<ATabGroup.Tab> rightTabs, @Nullable MachineJeiData jeiData) {
         this.name = name;
         this.providers = providers;
         this.screenSize = screenSize;
@@ -68,6 +69,7 @@ public class Machine implements Comparable<Machine> {
         return providers;
     }
 
+    @Nullable
     public MachineJeiData getJeiData() {
         return jeiData;
     }

@@ -14,7 +14,6 @@ import fr.cyrilneveu.craftorium.api.mui.Text;
 import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMap;
 import fr.cyrilneveu.craftorium.api.utils.Position;
 import fr.cyrilneveu.craftorium.api.utils.Size;
-import fr.cyrilneveu.craftorium.common.integration.jei.recipe.machine.MachineJeiData;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -115,7 +114,7 @@ public class MachineBuilder {
     }
 
     public MachineBuilder energyBuffer() {
-        this.providers.add((m, t) -> new Charger(m));
+        this.providers.add((m, t) -> new Charger(m, Settings.machinesSettings.batteryBaseTransfer));
         return this;
     }
 
@@ -132,7 +131,8 @@ public class MachineBuilder {
         if (!fluids.isEmpty())
             providers.add((m, t) -> new FluidInventory(m, ImmutableList.copyOf(fluids)));
 
-        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs, new MachineJeiData(map.getName(), arrowJEI, slotJEI));
+        MachineJeiData jeiData = map != null ? new MachineJeiData(map.getName(), arrowJEI, slotJEI) : null;
+        Machine m = new Machine(name, ImmutableList.copyOf(providers), screenSize, widgets, leftTabs, rightTabs, jeiData);
 
         MACHINES_REGISTRY.put(name, m);
 

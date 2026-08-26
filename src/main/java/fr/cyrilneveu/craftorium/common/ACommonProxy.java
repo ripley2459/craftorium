@@ -98,7 +98,7 @@ public abstract class ACommonProxy {
         new ItemBuilder("wetware_microprocessor").addTexture("circuits/wetware_microprocessor").build();
         new ItemBuilder("wetware_processor").addTexture("circuits/wetware_processor").build();
         new ItemBuilder("wetware_mainframe").addTexture("circuits/wetware_mainframe").build();
-        new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
+        // new ItemBuilder("machine_spirit_infused_processor").addTexture("circuits/machine_spirit_infused_processor").build();
 
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> new ItemBuilder(k)
                 .addTexture("substances/tools/" + k + "_base")
@@ -157,7 +157,7 @@ public abstract class ACommonProxy {
         OreDictionary.registerOre("circuitTier4", getItem("wetware_processor"));
         OreDictionary.registerOre("circuitTier5", getItem("mainframe"));
         OreDictionary.registerOre("circuitTier5", getItem("wetware_mainframe"));
-        OreDictionary.registerOre("circuitTier6", getItem("machine_spirit_infused_processor"));
+        // OreDictionary.registerOre("circuitTier6", getItem("machine_spirit_infused_processor"));
 
         SUBSTANCE_TOOLS_REGISTRY.getAll().forEach((k, v) -> OreDictionary.registerOre(k, getItem(k)));
         TIERS_REGISTRY.getAll().values().forEach(tier -> tier.getItems().forEach(i -> OreDictionary.registerOre(i.getOre(tier), i.asItemStack(tier))));

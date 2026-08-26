@@ -74,6 +74,13 @@ public class ItemInventory implements IItemHandlerModifiable, IMachineBehaviour,
         return slots;
     }
 
+    public List<ItemStack> getStacks() {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (ItemSlotData slot : slots)
+            itemStacks.add(getStackInSlot(slot.getIndex()));
+        return itemStacks;
+    }
+
     public List<ItemStack> getStacksInInputs() {
         List<ItemStack> itemStacks = new ArrayList<>();
         for (ItemSlotData slot : slots) {

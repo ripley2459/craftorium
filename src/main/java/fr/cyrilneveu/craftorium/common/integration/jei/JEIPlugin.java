@@ -24,7 +24,10 @@ public final class JEIPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registry) {
         registry.addRecipeCategories(new VeinCategory(registry.getJeiHelpers().getGuiHelper()));
 
-        MACHINES_REGISTRY.getAll().forEach((s, m) -> registry.addRecipeCategories(new MachineRecipeCategory(m, registry.getJeiHelpers().getGuiHelper())));
+        MACHINES_REGISTRY.getAll().forEach((s, m) -> {
+            if (m.getJeiData() != null)
+                registry.addRecipeCategories(new MachineRecipeCategory(m, registry.getJeiHelpers().getGuiHelper()));
+        });
     }
 
     @Override
@@ -32,6 +35,9 @@ public final class JEIPlugin implements IModPlugin {
         registry.addAdvancedGuiHandlers(new TabMover());
 
         for (Machine machine : MACHINES_REGISTRY.getAll().values()) {
+            if (machine.getJeiData() == null)
+                continue;
+
             String id = String.join(":", MODID, machine.getName());
 
             for (Tier tier : TIERS_REGISTRY.getAll().values()) {
