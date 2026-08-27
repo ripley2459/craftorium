@@ -33,6 +33,7 @@ public final class Machines {
     public static Machine CIRCUIT_ASSEMBLER;
     public static Machine ASSEMBLER;
     public static Machine CHARGER;
+    public static Machine SOLID_FUEL_GENERATOR;
 
     public static void init() {
         if (MACHINES_REGISTRY.isInitialized())
@@ -167,6 +168,15 @@ public final class Machines {
                 .energyBuffer()
                 .energy(153, 77)
                 .text(176 / 2, 6, String.join(".", "machine", MODID, "charger", "name"), true)
+                .text(8, 86, "container.inventory", false)
+                .playerInventory(7, 97)
+                .build();
+        SOLID_FUEL_GENERATOR = new MachineBuilder("solid_fuel_generator")
+                .itemInput(79, 36)
+                .solidFuelGenerator(81,56)
+                .flowControlled()
+                .energy(153, 77)
+                .text(176 / 2, 6, String.join(".", "machine", MODID, "solid_fuel_generator", "name"), true)
                 .text(8, 86, "container.inventory", false)
                 .playerInventory(7, 97)
                 .build();

@@ -124,6 +124,7 @@ machine.craftorium.lathe.name=Lathe
 machine.craftorium.macerator.name=Macerator
 machine.craftorium.mixer.name=Mixer
 machine.craftorium.charger.name=Charger
+machine.craftorium.solid_fuel_generator.name=Solid Fuel Generator
 
 # Substances
 tile.craftorium.block.name=Block of %s

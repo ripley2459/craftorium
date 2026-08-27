@@ -91,6 +91,12 @@ public class MachineBuilder {
         return this;
     }
 
+    public MachineBuilder solidFuelGenerator(int posX, int posY) {
+        this.energy = true;
+        this.providers.add((m, t) -> new SolidFuelGenerator(m, Settings.machinesSettings.batteryBaseTransfer, new Position(posX, posY)));
+        return this;
+    }
+
     public MachineBuilder playerInventory(int posX, int posY) {
         this.providers.add((m, t) -> new PlayerInventory(new Position(posX, posY)));
         return this;
