@@ -24,6 +24,8 @@ import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
 import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
+import static net.minecraft.init.Blocks.FURNACE;
+import static net.minecraft.init.Items.WATER_BUCKET;
 
 public final class RecipesHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
@@ -47,6 +49,7 @@ public final class RecipesHandler {
         registerBenderRecipe(TIER_ONE, "circuitTier1");
         registerCutterRecipe(TIER_ONE, "circuitTier1");
         registerLatheRecipe(TIER_ONE, "circuitTier1");
+        registerSolidFuelGeneratorRecipe(TIER_ONE, "circuitTier1");
 
         registerMotorRecipe(TIER_TWO);
         registerPistonRecipe(TIER_TWO);
@@ -66,6 +69,7 @@ public final class RecipesHandler {
         registerBenderRecipe(TIER_TWO, "circuitTier2");
         registerCutterRecipe(TIER_TWO, "circuitTier2");
         registerLatheRecipe(TIER_TWO, "circuitTier2");
+        registerSolidFuelGeneratorRecipe(TIER_TWO, "circuitTier2");
 
         registerMotorRecipe(TIER_THREE);
         registerPistonRecipe(TIER_THREE);
@@ -85,6 +89,7 @@ public final class RecipesHandler {
         registerBenderRecipe(TIER_THREE, "circuitTier3");
         registerCutterRecipe(TIER_THREE, "circuitTier3");
         registerLatheRecipe(TIER_THREE, "circuitTier3");
+        registerSolidFuelGeneratorRecipe(TIER_THREE, "circuitTier3");
 
         registerMotorRecipe(TIER_FOUR);
         registerPistonRecipe(TIER_FOUR);
@@ -104,6 +109,7 @@ public final class RecipesHandler {
         registerBenderRecipe(TIER_FOUR, "circuitTier4");
         registerCutterRecipe(TIER_FOUR, "circuitTier4");
         registerLatheRecipe(TIER_FOUR, "circuitTier4");
+        registerSolidFuelGeneratorRecipe(TIER_FOUR, "circuitTier4");
 
         registerMotorRecipe(TIER_FIVE);
         registerPistonRecipe(TIER_FIVE);
@@ -123,6 +129,7 @@ public final class RecipesHandler {
         registerBenderRecipe(TIER_FIVE, "circuitTier5");
         registerCutterRecipe(TIER_FIVE, "circuitTier5");
         registerLatheRecipe(TIER_FIVE, "circuitTier5");
+        registerSolidFuelGeneratorRecipe(TIER_FIVE, "circuitTier5");
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
                 .consumeItem(new ItemStack(Blocks.LOG))
@@ -397,6 +404,9 @@ public final class RecipesHandler {
 
             electrolyzing:
             {
+                if (!composition.isComposite())
+                    break electrolyzing;
+
                 if (!OreStack.oresExist(DUST.getOre(substance)))
                     break electrolyzing;
 
@@ -698,4 +708,20 @@ public final class RecipesHandler {
                 'W', WIRE.asIngredient(tier.getEnergy())
         );
     }
+
+    private static void registerSolidFuelGeneratorRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(SOLID_FUEL_GENERATOR))
+            return;
+
+        RecipeManager.addShapedRecipe(SOLID_FUEL_GENERATOR.getName(tier), SOLID_FUEL_GENERATOR.asItemStack(tier),
+                "RCR", "BHB", "EFE",
+                'R', ROTOR.asIngredient(tier.getMechanical()),
+                'C', OreStack.getIngredient(circuit),
+                'B', new ItemStack(WATER_BUCKET),
+                'H', new ItemStack(FURNACE),
+                'E', HEAT_EXCHANGER.asIngredient(tier),
+                'F', MACHINE_FRAME.asIngredient(tier)
+        );
+    }
+
 }

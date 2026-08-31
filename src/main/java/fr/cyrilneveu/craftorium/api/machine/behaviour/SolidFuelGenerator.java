@@ -4,7 +4,6 @@ import fr.cyrilneveu.craftorium.api.machine.EMachineStates;
 import fr.cyrilneveu.craftorium.api.machine.MachineTile;
 import fr.cyrilneveu.craftorium.api.mui.ATabGroup;
 import fr.cyrilneveu.craftorium.api.mui.AWidget;
-import fr.cyrilneveu.craftorium.api.mui.ProgressArrow;
 import fr.cyrilneveu.craftorium.api.mui.ProgressBurnTime;
 import fr.cyrilneveu.craftorium.api.utils.CustomLazy;
 import fr.cyrilneveu.craftorium.api.utils.Position;
@@ -12,9 +11,13 @@ import fr.cyrilneveu.craftorium.api.utils.Utils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 
 import java.util.List;
 
@@ -78,6 +81,29 @@ public class SolidFuelGenerator implements IMachineBehaviour, ITickable, INBTSer
             burning = true;
             owner.setState(EMachineStates.WORKING);
             owner.markDirty();
+        }
+
+        pushEnergy();
+        owner.markDirty();
+    }
+
+    private void pushEnergy() {
+        for (EnumFacing side : EnumFacing.VALUES) {
+            TileEntity tile = owner.getWorld().getTileEntity(owner.getPos().offset(side));
+            if (tile == null)
+                continue;
+
+            if (tile.hasCapability(CapabilityEnergy.ENERGY, side.getOpposite())) {
+                IEnergyStorage inv = tile.getCapability(CapabilityEnergy.ENERGY, side.getOpposite());
+                if (inv == null)
+                    continue;
+
+                int extractable = energyInventory.extractEnergy(io, true);
+                int inserted = inv.receiveEnergy(extractable, false);
+                energyInventory.extractEnergy(inserted, false);
+                if (energyInventory.getEnergyStored() <= 0)
+                    return;
+            }
         }
     }
 
