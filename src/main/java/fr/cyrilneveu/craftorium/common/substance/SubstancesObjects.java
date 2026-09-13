@@ -254,7 +254,7 @@ public final class SubstancesObjects {
     private static void createTool(ASubstanceObject reference, Substance substance) {
         IItemBehaviour[] behaviours = new IItemBehaviour[1];
 
-        behaviours[0] = new DurabilityBehaviour(substance);
+        behaviours[0] = new DurabilityBehaviour(INGOT.getOre(substance), substance.getEfficiency().getDurability());
 
         CustomItem item = new CustomItem(behaviours, defaultAestheticism(reference, substance));
         item.setMaxStackSize(1);

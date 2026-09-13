@@ -39,6 +39,7 @@ public final class RecipesHandler {
         registerSensorRecipe(TIER_ONE, ENDER, "circuitTier1");
         registerBatteryRecipe(TIER_ONE);
         registerRobotArmRecipe(TIER_ONE, "circuitTier1");
+        registerMachineFrame(TIER_ONE);
 
         registerCircuitAssemblerRecipe(TIER_ONE, "circuitTier1");
         registerMixerRecipe(TIER_ONE, "circuitTier1");
@@ -50,6 +51,7 @@ public final class RecipesHandler {
         registerCutterRecipe(TIER_ONE, "circuitTier1");
         registerLatheRecipe(TIER_ONE, "circuitTier1");
         registerSolidFuelGeneratorRecipe(TIER_ONE, "circuitTier1");
+        registerChargerRecipe(TIER_ONE, "circuitTier1");
 
         registerMotorRecipe(TIER_TWO);
         registerPistonRecipe(TIER_TWO);
@@ -59,6 +61,7 @@ public final class RecipesHandler {
         registerSensorRecipe(TIER_TWO, ENDER, "circuitTier2");
         registerBatteryRecipe(TIER_TWO);
         registerRobotArmRecipe(TIER_TWO, "circuitTier2");
+        registerMachineFrame(TIER_TWO);
 
         registerCircuitAssemblerRecipe(TIER_TWO, "circuitTier2");
         registerMixerRecipe(TIER_TWO, "circuitTier2");
@@ -70,6 +73,7 @@ public final class RecipesHandler {
         registerCutterRecipe(TIER_TWO, "circuitTier2");
         registerLatheRecipe(TIER_TWO, "circuitTier2");
         registerSolidFuelGeneratorRecipe(TIER_TWO, "circuitTier2");
+        registerChargerRecipe(TIER_TWO, "circuitTier2");
 
         registerMotorRecipe(TIER_THREE);
         registerPistonRecipe(TIER_THREE);
@@ -79,6 +83,7 @@ public final class RecipesHandler {
         registerSensorRecipe(TIER_THREE, ENDER, "circuitTier3");
         registerBatteryRecipe(TIER_THREE);
         registerRobotArmRecipe(TIER_THREE, "circuitTier3");
+        registerMachineFrame(TIER_THREE);
 
         registerCircuitAssemblerRecipe(TIER_THREE, "circuitTier3");
         registerMixerRecipe(TIER_THREE, "circuitTier3");
@@ -90,6 +95,7 @@ public final class RecipesHandler {
         registerCutterRecipe(TIER_THREE, "circuitTier3");
         registerLatheRecipe(TIER_THREE, "circuitTier3");
         registerSolidFuelGeneratorRecipe(TIER_THREE, "circuitTier3");
+        registerChargerRecipe(TIER_THREE, "circuitTier3");
 
         registerMotorRecipe(TIER_FOUR);
         registerPistonRecipe(TIER_FOUR);
@@ -99,6 +105,7 @@ public final class RecipesHandler {
         registerSensorRecipe(TIER_FOUR, ENDER, "circuitTier4");
         registerBatteryRecipe(TIER_FOUR);
         registerRobotArmRecipe(TIER_FOUR, "circuitTier4");
+        registerMachineFrame(TIER_FOUR);
 
         registerCircuitAssemblerRecipe(TIER_FOUR, "circuitTier4");
         registerMixerRecipe(TIER_FOUR, "circuitTier4");
@@ -110,6 +117,7 @@ public final class RecipesHandler {
         registerCutterRecipe(TIER_FOUR, "circuitTier4");
         registerLatheRecipe(TIER_FOUR, "circuitTier4");
         registerSolidFuelGeneratorRecipe(TIER_FOUR, "circuitTier4");
+        registerChargerRecipe(TIER_FOUR, "circuitTier4");
 
         registerMotorRecipe(TIER_FIVE);
         registerPistonRecipe(TIER_FIVE);
@@ -119,6 +127,7 @@ public final class RecipesHandler {
         registerSensorRecipe(TIER_FIVE, ENDER, "circuitTier5");
         registerBatteryRecipe(TIER_FIVE);
         registerRobotArmRecipe(TIER_FIVE, "circuitTier5");
+        registerMachineFrame(TIER_FIVE);
 
         registerCircuitAssemblerRecipe(TIER_FIVE, "circuitTier5");
         registerMixerRecipe(TIER_FIVE, "circuitTier5");
@@ -130,6 +139,7 @@ public final class RecipesHandler {
         registerCutterRecipe(TIER_FIVE, "circuitTier5");
         registerLatheRecipe(TIER_FIVE, "circuitTier5");
         registerSolidFuelGeneratorRecipe(TIER_FIVE, "circuitTier5");
+        registerChargerRecipe(TIER_FIVE, "circuitTier5");
 
         CUTTING.addRecipe(new MachineRecipeBuilder("oak_planks")
                 .consumeItem(new ItemStack(Blocks.LOG))
@@ -583,6 +593,20 @@ public final class RecipesHandler {
         );
     }
 
+    private static void registerMachineFrame(Tier tier) {
+        if (!tier.getBlocks().contains(MACHINE_FRAME))
+            return;
+
+        RecipeManager.addShapedRecipe(MACHINE_FRAME.getName(tier), MACHINE_FRAME.asItemStack(tier),
+                "WBV", "GH ",
+                'G', GEAR.asIngredient(tier.getMechanical()),
+                'B', BATTERY.asIngredient(tier),
+                'H', HULL.asIngredient(tier.getCarcass()),
+                'V', WRENCH.asIngredient(null),
+                'W', WIRE.asIngredient(tier.getEnergy())
+        );
+    }
+
     private static void registerCircuitAssemblerRecipe(Tier tier, String circuit) {
         if (!tier.getMachines().contains(CIRCUIT_ASSEMBLER))
             return;
@@ -724,4 +748,16 @@ public final class RecipesHandler {
         );
     }
 
+    private static void registerChargerRecipe(Tier tier, String circuit) {
+        if (!tier.getMachines().contains(CHARGER))
+            return;
+
+        RecipeManager.addShapedRecipe(CHARGER.getName(tier), CHARGER.asItemStack(tier),
+                "GBG", "CFC",
+                'G', GEAR.asIngredient(tier.getMechanical()),
+                'B', BATTERY.asIngredient(tier),
+                'C', OreStack.getIngredient(circuit),
+                'F', MACHINE_FRAME.asIngredient(tier)
+        );
+    }
 }

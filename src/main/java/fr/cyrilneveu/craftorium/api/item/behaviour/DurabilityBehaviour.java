@@ -20,9 +20,9 @@ public final class DurabilityBehaviour implements IItemBehaviour {
     private final int maxDamage;
     private int damage;
 
-    public DurabilityBehaviour(Substance substance) {
-        this.repairable = new OreStack(INGOT.getOre(substance));
-        this.maxDamage = substance.getEfficiency().getDurability();
+    public DurabilityBehaviour(String repairMat, int maxDamage) {
+        this.repairable = new OreStack(repairMat);
+        this.maxDamage = maxDamage;
     }
 
     public static int getDamage(ItemStack stack) {
