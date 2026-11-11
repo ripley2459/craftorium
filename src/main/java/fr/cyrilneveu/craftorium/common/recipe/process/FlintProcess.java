@@ -1,7 +1,7 @@
 package fr.cyrilneveu.craftorium.common.recipe.process;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
-import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;

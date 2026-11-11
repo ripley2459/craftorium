@@ -11,7 +11,7 @@ import fr.cyrilneveu.craftorium.api.substance.object.SubstanceBlock;
 import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
-import fr.cyrilneveu.craftorium.common.recipe.Maps;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeMaps;
 import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
@@ -205,7 +205,7 @@ public abstract class ACommonProxy {
     }
 
     public void construct(FMLConstructionEvent event) {
-        Maps.init();
+        RecipeMaps.init();
         Machines.init();
         SubstancesObjects.init();
         Substances.init();
@@ -232,6 +232,6 @@ public abstract class ACommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
-        Maps.close();
+        RecipeMaps.close();
     }
 }

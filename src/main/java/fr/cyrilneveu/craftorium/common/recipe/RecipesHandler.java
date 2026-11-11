@@ -2,7 +2,6 @@ package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
-import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.Tier;
@@ -21,7 +20,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 import static net.minecraft.init.Blocks.FURNACE;

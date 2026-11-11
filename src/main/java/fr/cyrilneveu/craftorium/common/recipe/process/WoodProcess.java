@@ -2,11 +2,11 @@ package fr.cyrilneveu.craftorium.common.recipe.process;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
-import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.CONFIGURATION_CUTTER_LARGE;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.CUTTING;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.CONFIGURATION_CUTTER_LARGE;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.CUTTING;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public class WoodProcess extends DefaultProcess {

@@ -2,12 +2,11 @@ package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
-import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
 import fr.cyrilneveu.craftorium.common.ACommonProxy;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 import static fr.cyrilneveu.craftorium.common.substance.Substances.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 

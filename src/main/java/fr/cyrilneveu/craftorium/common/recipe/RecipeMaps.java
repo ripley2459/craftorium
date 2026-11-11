@@ -5,7 +5,7 @@ import fr.cyrilneveu.craftorium.api.recipe.machine.RecipeMapBuilder;
 
 import static fr.cyrilneveu.craftorium.api.Registries.MACHINE_MAPS_REGISTRY;
 
-public final class Maps {
+public final class RecipeMaps {
     public static final int CONFIGURATION_COMPRESSOR_ZIP = 1;
     public static final int CONFIGURATION_COMPRESSOR_UNZIP = 2;
     public static final int CONFIGURATION_COMPRESSOR_PRESSING = 3;

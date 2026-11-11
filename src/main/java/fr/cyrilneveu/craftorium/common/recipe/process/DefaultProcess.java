@@ -3,7 +3,7 @@ package fr.cyrilneveu.craftorium.common.recipe.process;
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
 import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
-import fr.cyrilneveu.craftorium.api.recipe.vanilla.RecipeManager;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCE_BLOCKS_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCE_ITEMS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public class DefaultProcess extends AProcess {

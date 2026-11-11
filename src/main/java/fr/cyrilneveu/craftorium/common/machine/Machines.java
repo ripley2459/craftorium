@@ -19,7 +19,7 @@ import java.util.List;
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
 import static fr.cyrilneveu.craftorium.api.Registries.*;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.MACHINES;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 
 public final class Machines {
     public static Machine ELECTROLYZER;

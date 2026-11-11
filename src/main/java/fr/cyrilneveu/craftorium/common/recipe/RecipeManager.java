@@ -1,7 +1,8 @@
-package fr.cyrilneveu.craftorium.api.recipe.vanilla;
+package fr.cyrilneveu.craftorium.common.recipe;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
+import fr.cyrilneveu.craftorium.api.recipe.vanilla.DummyRecipe;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import net.minecraft.item.ItemStack;
@@ -13,9 +14,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static fr.cyrilneveu.craftorium.CraftoriumTags.MODID;
-import static fr.cyrilneveu.craftorium.common.recipe.Maps.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 
 public final class RecipeManager {
+    public static int computeRecipeDuration() {
+        return 0;
+    }
+
+    public static int computeRecipeEnergyCost() {
+        return 0;
+    }
+
     public static void removeRecipe(ResourceLocation location) {
         ForgeRegistries.RECIPES.register(new DummyRecipe().setRegistryName(location));
     }
