@@ -1,4 +1,4 @@
-//version: 1762213476
+//version: 1784768619
 /*
  * DO NOT CHANGE THIS FILE!
  * Also, you may replace this file at any time if there is an update available.
@@ -6,12 +6,11 @@
  * You can also run ./gradlew updateBuildScript to update your buildscript.
  */
 
-
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.gtnewhorizons.retrofuturagradle.MinecraftExtension
 import com.gtnewhorizons.retrofuturagradle.mcp.MCPTasks
-import com.gtnewhorizons.retrofuturagradle.mcp.ReobfuscatedJar
 import com.gtnewhorizons.retrofuturagradle.minecraft.MinecraftTasks
+import com.gtnewhorizons.retrofuturagradle.mcp.ReobfuscatedJar
 import com.gtnewhorizons.retrofuturagradle.minecraft.RunMinecraftTask
 import com.gtnewhorizons.retrofuturagradle.util.Distribution
 import com.modrinth.minotaur.dependencies.ModDependency
@@ -25,8 +24,6 @@ import org.gradle.internal.logging.text.StyledTextOutputFactory
 import org.jetbrains.gradle.ext.Gradle
 
 import javax.inject.Inject
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 import static org.gradle.internal.logging.text.StyledTextOutput.Style
 
@@ -100,6 +97,8 @@ propertyDefaultIfUnset("modrinthRelations", "")
 propertyDefaultIfUnsetWithEnvVar("curseForgeProjectId", "", "CURSEFORGE_PROJECT_ID")
 propertyDefaultIfUnset("curseForgeRelations", "")
 propertyDefaultIfUnsetWithEnvVar("releaseType", "release", "RELEASE_TYPE")
+propertyDefaultIfUnset("clientEnvironment", true)
+propertyDefaultIfUnset("serverEnvironment", true)
 propertyDefaultIfUnset("generateDefaultChangelog", false)
 propertyDefaultIfUnset("customMavenPublishUrl", "")
 propertyDefaultIfUnset("mavenArtifactGroup", getDefaultArtifactGroup())
@@ -336,15 +335,11 @@ if (!modVersion) {
     }
 }
 
-if (includeMCVersionJar.toBoolean()) {
+if (includeMCVersionJar.toBoolean()){
     version = "${minecraftVersion}-${modVersion}"
-} else {
-    version = modVersion
 }
-
-if (getReleaseType() == "alpha") {
-    def timestamp = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss").withZone(java.time.ZoneOffset.UTC).format(Instant.now())
-    version += "-${timestamp}"
+else {
+    version = modVersion
 }
 
 group = modGroup
@@ -532,7 +527,7 @@ dependencies {
         annotationProcessor 'com.google.code.gson:gson:2.8.9'
 
         mixinProviderSpec = modUtils.enableMixins(mixinProviderSpec, mixinConfigRefmap)
-        api(mixinProviderSpec) {
+        api (mixinProviderSpec) {
             transitive = false
         }
 
@@ -569,7 +564,7 @@ dependencies {
 
     compileOnlyApi 'org.jetbrains:annotations:24.1.0'
     annotationProcessor 'org.jetbrains:annotations:24.1.0'
-    patchedMinecraft('net.minecraft:launchwrapper:1.12') {
+    patchedMinecraft('net.minecraft:launchwrapper:1.17.4') {
         transitive = false
     }
 
@@ -818,7 +813,7 @@ if (usesShadowedDependencies.toBoolean()) {
         finalizedBy(tasks.shadowJar)
     }
     tasks.named('reobfJar', ReobfuscatedJar) {
-        inputJar.set(tasks.named('shadowJar', ShadowJar).flatMap({ it.archiveFile }))
+        inputJar.set(tasks.named('shadowJar', ShadowJar).flatMap({it.archiveFile}))
     }
     AdhocComponentWithVariants javaComponent = (AdhocComponentWithVariants) project.components.findByName('java')
     javaComponent.withVariantsFromConfiguration(configurations.shadowRuntimeElements) {
@@ -1181,7 +1176,7 @@ tasks.register('generateChangelog') {
                 .collect { ['--', it] }).flatten())
 
         if (changelog) {
-            changelog = "Changes since ${lastTag}:\n${{ ("\n" + changelog).replaceAll("\n", "\n* ") }}"
+            changelog = "Changes since ${lastTag}:\n${{("\n" + changelog).replaceAll("\n", "\n* ")}}"
         }
         def f = getFile('build/changelog.md')
         changelog = changelog ?: 'There have been no changes.'
@@ -1214,6 +1209,12 @@ if (cfApiKey.isPresent() || deploymentDebug.toBoolean()) {
             mainFile.addModLoader 'Forge'
             mainFile.addJavaVersion "Java 8"
             mainFile.addGameVersion minecraftVersion
+            if (serverEnvironment.toBoolean()) {
+                mainFile.addEnvironment "Server"
+            }
+            if (clientEnvironment.toBoolean()) {
+                mainFile.addEnvironment "Client"
+            }
 
             if (curseForgeRelations.size() != 0) {
                 String[] deps = curseForgeRelations.split(';')
@@ -1226,8 +1227,8 @@ if (cfApiKey.isPresent() || deploymentDebug.toBoolean()) {
                     def types = [
                             'req'   : 'requiredDependency', 'required': 'requiredDependency',
                             'opt'   : 'optionalDependency', 'optional': 'optionalDependency',
-                            'embed' : 'embeddedLibrary', 'embedded': 'embeddedLibrary',
-                            'incomp': 'incompatible', 'fail': 'incompatible']
+                            'embed' : 'embeddedLibrary',    'embedded': 'embeddedLibrary',
+                            'incomp': 'incompatible',       'fail'    : 'incompatible']
                     if (types.containsKey(type)) type = types[type]
                     if (!(type in ['requiredDependency', 'embeddedLibrary', 'optionalDependency', 'tool', 'incompatible'])) {
                         throw new Exception('Invalid Curseforge dependency type: ' + type)
@@ -1381,7 +1382,6 @@ def getReleaseType() {
  * Next, if 'generateDefaultChangelog' option is enabled, use that.
  * Otherwise, try to use a CHANGELOG.md file at root directory.
  */
-
 def getChangelog() {
     def final changelogEnv = providers.environmentVariable('CHANGELOG_LOCATION')
     if (changelogEnv.isPresent()) {
