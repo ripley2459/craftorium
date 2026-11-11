@@ -10,7 +10,7 @@ import fr.cyrilneveu.craftorium.api.property.Aestheticism;
 import fr.cyrilneveu.craftorium.api.property.Efficiency;
 import fr.cyrilneveu.craftorium.api.property.Temperature;
 import fr.cyrilneveu.craftorium.api.property.Toughness;
-import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
+import fr.cyrilneveu.craftorium.api.recipe.IProcess;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.Composition;
 import fr.cyrilneveu.craftorium.api.substance.property.ISubstanceProperty;
@@ -28,7 +28,7 @@ import static fr.cyrilneveu.craftorium.api.substance.property.SubstancePropertie
 import static fr.cyrilneveu.craftorium.api.utils.RenderUtils.ERROR_COLOR;
 import static fr.cyrilneveu.craftorium.api.utils.Utils.EPSILON;
 import static fr.cyrilneveu.craftorium.common.machine.Machines.*;
-import static fr.cyrilneveu.craftorium.common.recipe.Processes.DEFAULT_PROCESS;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeUtils.DEFAULT_PROCESS;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public class SubstanceBuilder {
@@ -41,7 +41,7 @@ public class SubstanceBuilder {
     private Efficiency efficiency;
     private Toughness toughness = new Toughness(5.0f, 10.0f, "pickaxe", 2);
     private Temperature temperature = Temperature.EMPTY;
-    private AProcess process = DEFAULT_PROCESS;
+    private IProcess process = DEFAULT_PROCESS;
     private Map<SubstanceProperties.KeyProperties, ISubstanceProperty> properties = new HashMap<>();
     private Set<ASubstanceObject.SubstanceItemDefinition> items = new TreeSet<>();
     private Set<ASubstanceObject.SubstanceToolDefinition> tools = new TreeSet<>();
@@ -131,7 +131,7 @@ public class SubstanceBuilder {
         return this;
     }
 
-    public SubstanceBuilder recipe(AProcess process) {
+    public SubstanceBuilder process(IProcess process) {
         this.process = process;
         return this;
     }

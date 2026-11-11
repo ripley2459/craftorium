@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCES_REGISTRY;
 import static fr.cyrilneveu.craftorium.api.Registries.TIERS_REGISTRY;
-import static fr.cyrilneveu.craftorium.common.recipe.Processes.*;
+import static fr.cyrilneveu.craftorium.common.recipe.RecipeUtils.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Substances {
@@ -194,7 +194,7 @@ public final class Substances {
                 .style("wood")
                 .color(0xFF663f16)
                 .sound(SoundType.WOOD)
-                .recipe(WOOD_PROCESS)
+                .process(WOOD_PROCESS)
                 .build();
         STONE = new SubstanceBuilder("stone")
                 .items(DUST, PLATE, ROD)
@@ -206,7 +206,7 @@ public final class Substances {
                 .style("mineral")
                 .color(0xFFb5b5b5)
                 .sound(SoundType.STONE)
-                .recipe(STONE_PROCESS)
+                .process(STONE_PROCESS)
                 .build();
         SOUL_SAND = new SubstanceBuilder("soul_sand")
                 .items(DUST)
@@ -223,7 +223,7 @@ public final class Substances {
                 .color(0xFFd6d48b)
                 .build();
         FLINT = new SubstanceBuilder("flint")
-                .recipe(FLINT_PROCESS)
+                .process(FLINT_PROCESS)
                 .items(DUST, GEM)
                 .tools(FILE, KNIFE, SAW)
                 .blocks(BLOCK)

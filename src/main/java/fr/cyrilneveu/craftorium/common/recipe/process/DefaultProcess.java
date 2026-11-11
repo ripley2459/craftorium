@@ -1,15 +1,14 @@
 package fr.cyrilneveu.craftorium.common.recipe.process;
 
 import fr.cyrilneveu.craftorium.api.inventory.OreStack;
+import fr.cyrilneveu.craftorium.api.recipe.IProcess;
 import fr.cyrilneveu.craftorium.api.recipe.machine.MachineRecipeBuilder;
-import fr.cyrilneveu.craftorium.api.recipe.process.AProcess;
-import fr.cyrilneveu.craftorium.common.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.api.substance.Substance;
 import fr.cyrilneveu.craftorium.api.substance.SubstanceStack;
 import fr.cyrilneveu.craftorium.api.substance.object.ASubstanceObject;
 import fr.cyrilneveu.craftorium.api.substance.property.SubstanceProperties;
 import fr.cyrilneveu.craftorium.api.utils.Utils;
-import fr.cyrilneveu.craftorium.common.recipe.Processes;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -21,52 +20,64 @@ import static fr.cyrilneveu.craftorium.api.Registries.SUBSTANCE_ITEMS_REGISTRY;
 import static fr.cyrilneveu.craftorium.common.recipe.RecipeMaps.*;
 import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
-public class DefaultProcess extends AProcess {
-    public DefaultProcess(String name) {
-        super(name);
+public class DefaultProcess implements IProcess {
+    @Override
+    public void processSubstance(Substance substance) {
+        boule(substance);
+        casing(substance);
+        dust(substance);
+        foil(substance);
+        gear(substance);
+        gem(substance);
+        ingot(substance);
+        mesh(substance);
+        nugget(substance);
+        pearl(substance);
+        plate(substance);
+        ring(substance);
+        rod(substance);
+        rotor(substance);
+        screw(substance);
+        spring(substance);
+        wire(substance);
+        wafer(substance);
 
-        Processes.PROCESSES_REGISTRY.put(name, this);
+        axe(substance);
+        cutter(substance);
+        file(substance);
+        hammer(substance);
+        hoe(substance);
+        knife(substance);
+        mortar(substance);
+        pickaxe(substance);
+        saw(substance);
+        screwdriver(substance);
+        shovel(substance);
+        sword(substance);
+        wrench(substance);
+
+        block(substance);
+        frame(substance);
+        hull(substance);
+        machineFrame(substance);
+        ore(substance);
+
+        gas(substance);
+        liquid(substance);
     }
 
-    @Override
-    protected void addRecipes() {
-        recipes.add(this::boule);
-        recipes.add(this::casing);
-        recipes.add(this::dust);
-        recipes.add(this::foil);
-        recipes.add(this::gear);
-        recipes.add(this::gem);
-        recipes.add(this::ingot);
-        recipes.add(this::nugget);
-        recipes.add(this::pearl);
-        recipes.add(this::plate);
-        recipes.add(this::ring);
-        recipes.add(this::rod);
-        recipes.add(this::rotor);
-        recipes.add(this::screw);
-        recipes.add(this::spring);
-        recipes.add(this::wire);
-        recipes.add(this::wafer);
+    protected void boule(Substance substance) {
+        if (!substance.getItems().contains(BOULE))
+            return;
 
-        recipes.add(this::axe);
-        recipes.add(this::cutter);
-        recipes.add(this::file);
-        recipes.add(this::hammer);
-        recipes.add(this::hoe);
-        recipes.add(this::knife);
-        recipes.add(this::mortar);
-        recipes.add(this::pickaxe);
-        recipes.add(this::saw);
-        recipes.add(this::screwdriver);
-        recipes.add(this::shovel);
-        recipes.add(this::sword);
-        recipes.add(this::wrench);
-
-        recipes.add(this::block);
-        recipes.add(this::frame);
-        recipes.add(this::hull);
-
-        recipes.add(this::liquid);
+        if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
+            CASTING.addRecipe(new MachineRecipeBuilder(BOULE.getName(substance))
+                    .consumeFluid(LIQUID.getName(substance), BOULE.getAmount())
+                    .produceItem(BOULE.asItemStack(substance))
+                    .consumeEnergy(75000)
+                    .duration(200)
+                    .configuration(CONFIGURATION_CASTING_FORM_BOULE)
+                    .build());
     }
 
     protected void casing(Substance substance) {
@@ -74,7 +85,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(WRENCH.getOre(substance), PLATE.getOre(substance)))
-            RecipeManager.addShapedRecipe(CASING.getName(substance), CASING.asItemStack(substance), "WP", 'W', WRENCH.asIngredient(substance), 'P', PLATE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(CASING.getName(substance), CASING.asItemStack(substance), "WP", 'W', WRENCH.asIngredient(substance), 'P', PLATE.asIngredient(substance));
 
         if (OreStack.oresExist(PLATE.getOre(substance)))
             BENDING.addRecipe(new MachineRecipeBuilder(CASING.getName(substance).concat(PLATE.getName(substance)))
@@ -91,18 +102,18 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(MORTAR.getOre(substance), INGOT.getOre(substance)))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(INGOT.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), INGOT.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat(INGOT.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), INGOT.asIngredient(substance));
         if (OreStack.oresExist(MORTAR.getOre(substance), GEM.getOre(substance)))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(GEM.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), GEM.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat(GEM.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), GEM.asIngredient(substance));
         if (OreStack.oresExist(MORTAR.getOre(substance), PEARL.getOre(substance)))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(PEARL.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), PEARL.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat(PEARL.getName(substance)), DUST.asItemStack(substance), MORTAR.asIngredient(substance), PEARL.asIngredient(substance));
         if (OreStack.oresExist(MORTAR.getOre(substance), ORE.getOre(substance)))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat(ORE.getName(substance)), DUST.asItemStack(substance, 2), MORTAR.asIngredient(substance), ORE.asIngredient(substance));
 
         if (OreStack.oresExist(ORE.getOre(substance), "dustPetrotheum"))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("_petro_ore"), DUST.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPetrotheum"));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat("_petro_ore"), DUST.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPetrotheum"));
         if (OreStack.oresExist(INGOT.getOre(substance), "dustPetrotheum"))
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("_petro_ingot"), DUST.asItemStack(substance, 1), INGOT.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat("_petro_ingot"), DUST.asItemStack(substance, 1), INGOT.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
 
         if (OreStack.oresExist(INGOT.getOre(substance)))
             MACERATING.addRecipe(new MachineRecipeBuilder(DUST.getName(substance).concat(INGOT.getName(substance)))
@@ -171,7 +182,7 @@ public class DefaultProcess extends AProcess {
                     dusts[i++] = DUST.asIngredient(stack.getSubstance());
             }
 
-            RecipeManager.addShapelessRecipe(DUST.getName(substance).concat("blend"), DUST.asItemStack(substance, amount), dusts);
+            RecipeUtils.addShapelessRecipe(DUST.getName(substance).concat("blend"), DUST.asItemStack(substance, amount), dusts);
         }
 
         mixing:
@@ -193,7 +204,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(FILE.getOre(substance), PLATE.getOre(substance)))
-            RecipeManager.addShapedRecipe(FOIL.getName(substance), FOIL.asItemStack(substance, 2), "F", "P", 'F', FILE.asIngredient(substance), 'P', PLATE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(FOIL.getName(substance), FOIL.asItemStack(substance, 2), "F", "P", 'F', FILE.asIngredient(substance), 'P', PLATE.asIngredient(substance));
 
         if (OreStack.oresExist(PLATE.getOre(substance)))
             CUTTING.addRecipe(new MachineRecipeBuilder(FOIL.getName(substance).concat(PLATE.getName(substance)))
@@ -218,7 +229,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(KNIFE.getOre(substance), PLATE.getOre(substance), FILE.getOre(substance)))
-            RecipeManager.addShapedRecipe(GEAR.getName(substance), GEAR.asItemStack(substance), "C", "P", "F", 'C', KNIFE.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(GEAR.getName(substance), GEAR.asItemStack(substance), "C", "P", "F", 'C', KNIFE.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'F', FILE.asIngredient(substance));
 
         if (OreStack.oresExist(PLATE.getOre(substance)))
             CUTTING.addRecipe(new MachineRecipeBuilder(GEAR.getName(substance).concat(PLATE.getName(substance)))
@@ -244,11 +255,11 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(ORE.getOre(substance)))
-            RecipeManager.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), GEM.asItemStack(substance), 0.7f);
+            RecipeUtils.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), GEM.asItemStack(substance), 0.7f);
         if (OreStack.oresExist(NUGGET.getOre(substance)))
-            RecipeManager.zip(substance, NUGGET, GEM);
+            RecipeUtils.zip(substance, NUGGET, GEM);
         if (OreStack.oresExist(BLOCK.getOre(substance)))
-            RecipeManager.unzip(substance, BLOCK, GEM);
+            RecipeUtils.unzip(substance, BLOCK, GEM);
 
         if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
             CASTING.addRecipe(new MachineRecipeBuilder(GEM.getName(substance))
@@ -265,20 +276,20 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(ORE.getOre(substance)))
-            RecipeManager.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), INGOT.asItemStack(substance), 0.7f);
+            RecipeUtils.addFurnaceRecipe(new OreStack(ORE.getOre(substance)), INGOT.asItemStack(substance), 0.7f);
         if (OreStack.oresExist(DUST.getOre(substance)))
-            RecipeManager.addFurnaceRecipe(new OreStack(DUST.getOre(substance)), INGOT.asItemStack(substance));
+            RecipeUtils.addFurnaceRecipe(new OreStack(DUST.getOre(substance)), INGOT.asItemStack(substance));
         if (OreStack.oresExist(NUGGET.getOre(substance)))
-            RecipeManager.zip(substance, NUGGET, INGOT);
+            RecipeUtils.zip(substance, NUGGET, INGOT);
         if (OreStack.oresExist(BLOCK.getOre(substance)))
-            RecipeManager.unzip(substance, BLOCK, INGOT);
+            RecipeUtils.unzip(substance, BLOCK, INGOT);
 
         if (OreStack.oresExist(ORE.getOre(substance), "dustPyrotheum"))
-            RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_ore"), INGOT.asItemStack(substance, 1), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+            RecipeUtils.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_ore"), INGOT.asItemStack(substance, 1), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
         if (OreStack.oresExist(DUST.getOre(substance), "dustPyrotheum"))
-            RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_dust"), INGOT.asItemStack(substance, 1), DUST.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
+            RecipeUtils.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_dust"), INGOT.asItemStack(substance, 1), DUST.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"));
         if (OreStack.oresExist(ORE.getOre(substance), "dustPyrotheum", "dustPetrotheum"))
-            RecipeManager.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_petro_dust"), INGOT.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"), OreStack.getIngredient("dustPetrotheum"));
+            RecipeUtils.addShapelessRecipe(INGOT.getName(substance).concat("_pyro_petro_dust"), INGOT.asItemStack(substance, 2), ORE.asIngredient(substance), OreStack.getIngredient("dustPyrotheum"), OreStack.getIngredient("dustPetrotheum"));
 
         if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
             CASTING.addRecipe(new MachineRecipeBuilder(INGOT.getName(substance))
@@ -290,16 +301,23 @@ public class DefaultProcess extends AProcess {
                     .build());
     }
 
+    protected void mesh(Substance substance) {
+        if (!substance.getItems().contains(MESH))
+            return;
+
+        // TODO
+    }
+
     protected void nugget(Substance substance) {
         if (!substance.getItems().contains(NUGGET))
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance)))
-            RecipeManager.unzip(substance, INGOT, NUGGET);
+            RecipeUtils.unzip(substance, INGOT, NUGGET);
         if (OreStack.oresExist(GEM.getOre(substance)))
-            RecipeManager.unzip(substance, GEM, NUGGET);
+            RecipeUtils.unzip(substance, GEM, NUGGET);
         if (OreStack.oresExist(PEARL.getOre(substance)))
-            RecipeManager.unzip(substance, PEARL, NUGGET);
+            RecipeUtils.unzip(substance, PEARL, NUGGET);
 
         if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
             CASTING.addRecipe(new MachineRecipeBuilder(NUGGET.getName(substance))
@@ -316,9 +334,9 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(NUGGET.getOre(substance)))
-            RecipeManager.zip(substance, NUGGET, PEARL);
+            RecipeUtils.zip(substance, NUGGET, PEARL);
         if (OreStack.oresExist(BLOCK.getOre(substance)))
-            RecipeManager.unzip(substance, BLOCK, PEARL);
+            RecipeUtils.unzip(substance, BLOCK, PEARL);
 
         if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
             CASTING.addRecipe(new MachineRecipeBuilder(PEARL.getName(substance))
@@ -335,7 +353,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), INGOT.getOre(substance)))
-            RecipeManager.addShapedRecipe(PLATE.getName(substance), PLATE.asItemStack(substance), "H", "I", "I", 'H', HAMMER.asIngredient(substance), 'I', INGOT.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(PLATE.getName(substance), PLATE.asItemStack(substance), "H", "I", "I", 'H', HAMMER.asIngredient(substance), 'I', INGOT.asIngredient(substance));
 
         if (OreStack.oresExist(INGOT.getOre(substance)))
             COMPRESSING.addRecipe(new MachineRecipeBuilder(PLATE.getName(substance).concat(INGOT.getName(substance)))
@@ -370,7 +388,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(CUTTER.getOre(substance), ROD.getOre(substance), WRENCH.getOre(substance)))
-            RecipeManager.addShapedRecipe(RING.getName(substance), RING.asItemStack(substance), "CRW", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(RING.getName(substance), RING.asItemStack(substance), "CRW", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
 
         if (OreStack.oresExist(ROD.getOre(substance)))
             BENDING.addRecipe(new MachineRecipeBuilder(RING.getName(substance).concat(ROD.getName(substance)))
@@ -396,7 +414,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(FILE.getOre(substance), INGOT.getOre(substance)))
-            RecipeManager.addShapelessRecipe(ROD.getName(substance), ROD.asItemStack(substance, 2), FILE.asIngredient(substance), INGOT.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(ROD.getName(substance), ROD.asItemStack(substance, 2), FILE.asIngredient(substance), INGOT.asIngredient(substance));
 
         if (OreStack.oresExist(INGOT.getOre(substance)))
             SPINNING.addRecipe(new MachineRecipeBuilder(ROD.getName(substance).concat(INGOT.getName(substance)))
@@ -417,26 +435,12 @@ public class DefaultProcess extends AProcess {
                     .build());
     }
 
-    protected void boule(Substance substance) {
-        if (!substance.getItems().contains(BOULE))
-            return;
-
-        if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
-            CASTING.addRecipe(new MachineRecipeBuilder(BOULE.getName(substance))
-                    .consumeFluid(LIQUID.getName(substance), BOULE.getAmount())
-                    .produceItem(BOULE.asItemStack(substance))
-                    .consumeEnergy(75000)
-                    .duration(200)
-                    .configuration(CONFIGURATION_CASTING_FORM_BOULE)
-                    .build());
-    }
-
     protected void rotor(Substance substance) {
         if (!substance.getItems().contains(ROTOR))
             return;
 
         if (OreStack.oresExist(CUTTER.getOre(substance), SCREWDRIVER.getOre(substance), PLATE.getOre(substance), SCREW.getOre(substance), RING.getOre(substance)))
-            RecipeManager.addShapedRecipe(ROTOR.getName(substance), ROTOR.asItemStack(substance), "CP ", "RDR", " PS", 'C', CUTTER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'R', SCREW.asIngredient(substance), 'D', RING.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(ROTOR.getName(substance), ROTOR.asItemStack(substance), "CP ", "RDR", " PS", 'C', CUTTER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'R', SCREW.asIngredient(substance), 'D', RING.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance));
     }
 
     protected void screw(Substance substance) {
@@ -444,7 +448,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(ROD.getOre(substance), SAW.getOre(substance), HAMMER.getOre(substance), FILE.getOre(substance)))
-            RecipeManager.addShapedRecipe(SCREW.getName(substance), SCREW.asItemStack(substance, 2), " SH", "FR ", 'S', SAW.asIngredient(substance), 'F', FILE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(SCREW.getName(substance), SCREW.asItemStack(substance, 2), " SH", "FR ", 'S', SAW.asIngredient(substance), 'F', FILE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
         if (OreStack.oresExist(ROD.getOre(substance)))
             SPINNING.addRecipe(new MachineRecipeBuilder(SCREW.getName(substance).concat(ROD.getName(substance)))
                     .consumeItem(ROD.getOre(substance), 1)
@@ -460,7 +464,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(CUTTER.getOre(substance), WRENCH.getOre(substance), HAMMER.getOre(substance)))
-            RecipeManager.addShapedRecipe(SPRING.getName(substance), SPRING.asItemStack(substance), "CRW", " H ", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(SPRING.getName(substance), SPRING.asItemStack(substance), "CRW", " H ", 'C', CUTTER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'H', HAMMER.asIngredient(substance));
 
         if (OreStack.oresExist(ROD.getOre(substance)))
             BENDING.addRecipe(new MachineRecipeBuilder(SPRING.getName(substance).concat(ROD.getName(substance)))
@@ -477,7 +481,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(CUTTER.getOre(substance), FOIL.getOre(substance)))
-            RecipeManager.addShapelessRecipe(WIRE.getName(substance), WIRE.asItemStack(substance, 4), CUTTER.asIngredient(substance), FOIL.asIngredient(substance));
+            RecipeUtils.addShapelessRecipe(WIRE.getName(substance), WIRE.asItemStack(substance, 4), CUTTER.asIngredient(substance), FOIL.asIngredient(substance));
 
         if (OreStack.oresExist(FOIL.getOre(substance)))
             CUTTING.addRecipe(new MachineRecipeBuilder(WIRE.getName(substance).concat(FOIL.getName(substance)))
@@ -508,7 +512,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(AXE.getName(substance), AXE.asItemStack(substance), "II", "IS", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(AXE.getName(substance), AXE.asItemStack(substance), "II", "IS", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void cutter(Substance substance) {
@@ -516,7 +520,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), SCREWDRIVER.getOre(substance), PLATE.getOre(substance), GEAR.getOre(substance), SCREW.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(CUTTER.getName(substance), CUTTER.asItemStack(substance), "PSP", "FGW", "RCR", 'P', PLATE.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance), 'F', FILE.asIngredient(substance), 'G', GEAR.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'R', "stickWood", 'C', SCREW.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(CUTTER.getName(substance), CUTTER.asItemStack(substance), "PSP", "FGW", "RCR", 'P', PLATE.asIngredient(substance), 'S', SCREWDRIVER.asIngredient(substance), 'F', FILE.asIngredient(substance), 'G', GEAR.asIngredient(substance), 'W', WRENCH.asIngredient(substance), 'R', "stickWood", 'C', SCREW.asIngredient(substance));
     }
 
     protected void file(Substance substance) {
@@ -524,7 +528,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (substance.getTools().contains(FILE) && OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), PLATE.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(FILE.getName(substance), FILE.asItemStack(substance), "PH", "S ", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(FILE.getName(substance), FILE.asItemStack(substance), "PH", "S ", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void hammer(Substance substance) {
@@ -532,7 +536,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(HAMMER.getName(substance), HAMMER.asItemStack(substance), "IF", "S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(HAMMER.getName(substance), HAMMER.asItemStack(substance), "IF", "S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
     }
 
     protected void hoe(Substance substance) {
@@ -540,7 +544,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(HOE.getName(substance), HOE.asItemStack(substance), "II", " S", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(HOE.getName(substance), HOE.asItemStack(substance), "II", " S", " S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void knife(Substance substance) {
@@ -548,7 +552,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(CUTTER.getOre(substance), FILE.getOre(substance), PLATE.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(KNIFE.getName(substance), KNIFE.asItemStack(substance), "FPC", " R ", 'P', PLATE.asIngredient(substance), 'R', "stickWood", 'C', CUTTER.asIngredient(substance), 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(KNIFE.getName(substance), KNIFE.asItemStack(substance), "FPC", " R ", 'P', PLATE.asIngredient(substance), 'R', "stickWood", 'C', CUTTER.asIngredient(substance), 'F', FILE.asIngredient(substance));
     }
 
     protected void mortar(Substance substance) {
@@ -556,7 +560,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(FILE.getOre(substance), INGOT.getOre(substance)))
-            RecipeManager.addShapedRecipe(MORTAR.getName(substance), MORTAR.asItemStack(substance), "IF", "B ", 'I', INGOT.getOre(substance), 'B', Ingredient.fromItem(Items.BOWL), 'F', FILE.getOre(substance));
+            RecipeUtils.addShapedRecipe(MORTAR.getName(substance), MORTAR.asItemStack(substance), "IF", "B ", 'I', INGOT.getOre(substance), 'B', Ingredient.fromItem(Items.BOWL), 'F', FILE.getOre(substance));
     }
 
     protected void pickaxe(Substance substance) {
@@ -564,7 +568,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(PICKAXE.getName(substance), PICKAXE.asItemStack(substance), "III", " S ", " S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(PICKAXE.getName(substance), PICKAXE.asItemStack(substance), "III", " S ", " S ", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void saw(Substance substance) {
@@ -572,7 +576,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), PLATE.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(SAW.getName(substance), SAW.asItemStack(substance), "PS", "FH", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(SAW.getName(substance), SAW.asItemStack(substance), "PS", "FH", 'H', HAMMER.asIngredient(substance), 'P', PLATE.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
     }
 
     protected void screwdriver(Substance substance) {
@@ -580,7 +584,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), ROD.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(SCREWDRIVER.getName(substance), SCREWDRIVER.asItemStack(substance), "HR", "SF", 'H', HAMMER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(SCREWDRIVER.getName(substance), SCREWDRIVER.asItemStack(substance), "HR", "SF", 'H', HAMMER.asIngredient(substance), 'R', ROD.asIngredient(substance), 'S', "stickWood", 'F', FILE.asIngredient(substance));
     }
 
     protected void shovel(Substance substance) {
@@ -588,7 +592,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(SHOVEL.getName(substance), SHOVEL.asItemStack(substance), "I", "S", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(SHOVEL.getName(substance), SHOVEL.asItemStack(substance), "I", "S", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void sword(Substance substance) {
@@ -596,7 +600,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance), "stickWood"))
-            RecipeManager.addShapedRecipe(SWORD.getName(substance), SWORD.asItemStack(substance), "I", "I", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
+            RecipeUtils.addShapedRecipe(SWORD.getName(substance), SWORD.asItemStack(substance), "I", "I", "S", 'I', INGOT.asIngredient(substance), 'S', "stickWood");
     }
 
     protected void wrench(Substance substance) {
@@ -604,7 +608,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(HAMMER.getOre(substance), FILE.getOre(substance), PLATE.getOre(substance), ROD.getOre(substance)))
-            RecipeManager.addShapedRecipe(WRENCH.getName(substance), WRENCH.asItemStack(substance), "P P", "FPH", " R ", 'P', PLATE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance), 'F', FILE.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(WRENCH.getName(substance), WRENCH.asItemStack(substance), "P P", "FPH", " R ", 'P', PLATE.asIngredient(substance), 'R', ROD.asIngredient(substance), 'H', HAMMER.asIngredient(substance), 'F', FILE.asIngredient(substance));
     }
 
     protected void block(Substance substance) {
@@ -612,11 +616,11 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(INGOT.getOre(substance)))
-            RecipeManager.zip(substance, INGOT, BLOCK);
+            RecipeUtils.zip(substance, INGOT, BLOCK);
         if (OreStack.oresExist(GEM.getOre(substance)))
-            RecipeManager.zip(substance, GEM, BLOCK);
+            RecipeUtils.zip(substance, GEM, BLOCK);
         if (OreStack.oresExist(PEARL.getOre(substance)))
-            RecipeManager.zip(substance, PEARL, BLOCK);
+            RecipeUtils.zip(substance, PEARL, BLOCK);
 
         if (FluidRegistry.isFluidRegistered(LIQUID.getName(substance)))
             CASTING.addRecipe(new MachineRecipeBuilder(BLOCK.getName(substance))
@@ -633,7 +637,7 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(ROD.getOre(substance), WRENCH.getOre(substance)))
-            RecipeManager.addShapedRecipe(FRAME.getName(substance), FRAME.asItemStack(substance), "RRR", "RWR", "RRR", 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(FRAME.getName(substance), FRAME.asItemStack(substance), "RRR", "RWR", "RRR", 'R', ROD.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
     }
 
     protected void hull(Substance substance) {
@@ -641,7 +645,25 @@ public class DefaultProcess extends AProcess {
             return;
 
         if (OreStack.oresExist(PLATE.getOre(substance), WRENCH.getOre(substance)))
-            RecipeManager.addShapedRecipe(HULL.getName(substance), HULL.asItemStack(substance), "PPP", "PWP", "PPP", 'P', PLATE.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
+            RecipeUtils.addShapedRecipe(HULL.getName(substance), HULL.asItemStack(substance), "PPP", "PWP", "PPP", 'P', PLATE.asIngredient(substance), 'W', WRENCH.asIngredient(substance));
+    }
+
+    protected void machineFrame(Substance substance) {
+        if (!substance.getBlocks().contains(MACHINE_FRAME))
+            return;
+
+        // TODO
+    }
+
+    protected void ore(Substance substance) {
+        // Nothing
+    }
+
+    protected void gas(Substance substance) {
+        if (!substance.getFluids().contains(GAS))
+            return;
+
+        // TODO
     }
 
     protected void liquid(Substance substance) {

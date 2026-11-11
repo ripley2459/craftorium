@@ -124,7 +124,7 @@ public class MachineRecipeBuilder {
     }
 
     public MachineRecipe build() {
-        this.name = Utils.generateRecipeName(itemsIn, fluidsIn, itemsOut, fluidsOut);
+        this.name = Utils.generateRecipeName(configuration, itemsIn, fluidsIn, itemsOut, fluidsOut);
         return new MachineRecipe(name, itemsIn, fluidsIn, itemsOut, fluidsOut, energyIn, energyOut, duration, configuration);
     }
 }

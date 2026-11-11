@@ -31,6 +31,7 @@ import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.SUBSTANCES;
 import static fr.cyrilneveu.craftorium.common.inventory.CreativeTabs.TOOLS;
 
 public final class SubstancesObjects {
+    // Tiered items
     public static ASubstanceObject.SubstanceItemDefinition BATTERY;
     public static ASubstanceObject.SubstanceItemDefinition BUZZSAW;
     public static ASubstanceObject.SubstanceItemDefinition EMITTER;
@@ -43,6 +44,8 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItemDefinition SCANNER;
     public static ASubstanceObject.SubstanceItemDefinition SENSOR;
 
+    // Items
+    public static ASubstanceObject.SubstanceItemDefinition BOULE;
     public static ASubstanceObject.SubstanceItemDefinition CASING;
     public static ASubstanceObject.SubstanceItemDefinition DUST;
     public static ASubstanceObject.SubstanceItemDefinition FOIL;
@@ -58,10 +61,10 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceItemDefinition ROTOR;
     public static ASubstanceObject.SubstanceItemDefinition SCREW;
     public static ASubstanceObject.SubstanceItemDefinition SPRING;
-    public static ASubstanceObject.SubstanceItemDefinition WIRE;
-    public static ASubstanceObject.SubstanceItemDefinition BOULE;
     public static ASubstanceObject.SubstanceItemDefinition WAFER;
+    public static ASubstanceObject.SubstanceItemDefinition WIRE;
 
+    // Tools
     public static ASubstanceObject.SubstanceToolDefinition AXE;
     public static ASubstanceObject.SubstanceToolDefinition CUTTER;
     public static ASubstanceObject.SubstanceToolDefinition FILE;
@@ -76,15 +79,16 @@ public final class SubstancesObjects {
     public static ASubstanceObject.SubstanceToolDefinition SWORD;
     public static ASubstanceObject.SubstanceToolDefinition WRENCH;
 
+    // Blocks
     public static ASubstanceObject.SubstanceBlockDefinition BLOCK;
     public static ASubstanceObject.SubstanceBlockDefinition FRAME;
     public static ASubstanceObject.SubstanceBlockDefinition HULL;
+    public static ASubstanceObject.SubstanceBlockDefinition MACHINE_FRAME;
     public static ASubstanceObject.SubstanceBlockDefinition ORE;
 
-    public static ASubstanceObject.SubstanceBlockDefinition MACHINE_FRAME;
-
-    public static ASubstanceObject.SubstanceFluidDefinition LIQUID;
+    // Liquids
     public static ASubstanceObject.SubstanceGasDefinition GAS;
+    public static ASubstanceObject.SubstanceFluidDefinition LIQUID;
 
     public static void init() {
         if (SUBSTANCE_ITEMS_REGISTRY.isInitialized() || SUBSTANCE_TOOLS_REGISTRY.isInitialized() || SUBSTANCE_BLOCKS_REGISTRY.isInitialized() || SUBSTANCE_FLUIDS_REGISTRY.isInitialized())

@@ -12,7 +12,7 @@ import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.*;
 
 public final class Circuitry {
     public static void registerRecipes() {
-        RecipeManager.addShapedRecipe("circuit_board_redstone", ACommonProxy.getItemStack("circuit_board_redstone", 6),
+        RecipeUtils.addShapedRecipe("circuit_board_redstone", ACommonProxy.getItemStack("circuit_board_redstone", 6),
                 "TSR",
                 "PPP",
                 "RSG",
@@ -22,7 +22,7 @@ public final class Circuitry {
                 'G', OreStack.getIngredient("glue"),
                 'R', DUST.asIngredient(REDSTONE)
         );
-        RecipeManager.addShapedRecipe("redstone_circuit", ACommonProxy.getItemStack("redstone_circuit"),
+        RecipeUtils.addShapedRecipe("redstone_circuit", ACommonProxy.getItemStack("redstone_circuit"),
                 " C ",
                 "RPR",
                 "FDF",
@@ -32,7 +32,7 @@ public final class Circuitry {
                 'F', ACommonProxy.getItemStack("redstone_resistor"),
                 'D', ACommonProxy.getItemStack("redstone_capacitor")
         );
-        RecipeManager.addShapedRecipe("advanced_redstone_circuit", ACommonProxy.getItemStack("advanced_redstone_circuit"),
+        RecipeUtils.addShapedRecipe("advanced_redstone_circuit", ACommonProxy.getItemStack("advanced_redstone_circuit"),
                 "RCD",
                 "FPF",
                 "HCR",
@@ -44,7 +44,7 @@ public final class Circuitry {
                 'H', ACommonProxy.getItemStack("redstone_diode")
         );
 
-        RecipeManager.addShapedRecipe("primitive_circuit", ACommonProxy.getItemStack("primitive_circuit"),
+        RecipeUtils.addShapedRecipe("primitive_circuit", ACommonProxy.getItemStack("primitive_circuit"),
                 "RCR",
                 "FPD",
                 'C', ACommonProxy.getItemStack("chip"),
@@ -53,7 +53,7 @@ public final class Circuitry {
                 'F', ACommonProxy.getItemStack("resistor"),
                 'D', ACommonProxy.getItemStack("diode")
         );
-        RecipeManager.addShapedRecipe("advanced_circuit", ACommonProxy.getItemStack("advanced_circuit"),
+        RecipeUtils.addShapedRecipe("advanced_circuit", ACommonProxy.getItemStack("advanced_circuit"),
                 "RCR",
                 "FPD",
                 "FGW",
@@ -65,7 +65,7 @@ public final class Circuitry {
                 'W', ACommonProxy.getItemStack("capacitor"),
                 'G', WIRE.asIngredient(COPPER)
         );
-        RecipeManager.addShapedRecipe("maxed_circuit", ACommonProxy.getItemStack("maxed_circuit"),
+        RecipeUtils.addShapedRecipe("maxed_circuit", ACommonProxy.getItemStack("maxed_circuit"),
                 "RCR",
                 "FPD",
                 "FCW",
@@ -77,7 +77,7 @@ public final class Circuitry {
                 'W', ACommonProxy.getItemStack("capacitor")
         );
 
-        RecipeManager.addShapedRecipe("redstone_capacitor", ACommonProxy.getItemStack("redstone_capacitor", 3),
+        RecipeUtils.addShapedRecipe("redstone_capacitor", ACommonProxy.getItemStack("redstone_capacitor", 3),
                 "FFF",
                 "MST",
                 "WCW",
@@ -88,7 +88,7 @@ public final class Circuitry {
                 'C', CUTTER.asIngredient(null),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
-        RecipeManager.addShapedRecipe("redstone_resistor", ACommonProxy.getItemStack("redstone_resistor", 3),
+        RecipeUtils.addShapedRecipe("redstone_resistor", ACommonProxy.getItemStack("redstone_resistor", 3),
                 " W ",
                 "FDC",
                 " W ",
@@ -97,7 +97,7 @@ public final class Circuitry {
                 'C', CUTTER.asIngredient(null),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
-        RecipeManager.addShapedRecipe("redstone_chip", ACommonProxy.getItemStack("redstone_chip"),
+        RecipeUtils.addShapedRecipe("redstone_chip", ACommonProxy.getItemStack("redstone_chip"),
                 "PCP",
                 "VVV",
                 "PWP",
@@ -106,7 +106,7 @@ public final class Circuitry {
                 'V', ACommonProxy.getItemStack("redstone_diode"),
                 'W', WIRE.asIngredient(REDSTONE_ALLOY)
         );
-        RecipeManager.addShapedRecipe("redstone_diode", ACommonProxy.getItemStack("redstone_diode", 3),
+        RecipeUtils.addShapedRecipe("redstone_diode", ACommonProxy.getItemStack("redstone_diode", 3),
                 " G ",
                 "TDR",
                 "JCW",

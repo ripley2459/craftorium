@@ -24,67 +24,54 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.minecraftforge.oredict.OreDictionary.*;
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
-public final class Utils
-{
+public final class Utils {
     public static final float EPSILON = 0.001f;
     public static final float BASE_TEMPERATURE = 273.15f;
     public static final int BASE_AMOUNT = 144;
     public static final String EMPTY_FLUID_STACK = "Empty";
     public static final IItemBehaviour[] NO_BEHAVIOUR = new IItemBehaviour[0];
 
-    public static String localise(String localisationKey, Object... substitutions)
-    {
+    public static String localise(String localisationKey, Object... substitutions) {
         return FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? net.minecraft.util.text.translation.I18n.translateToLocalFormatted(localisationKey, substitutions) : net.minecraft.client.resources.I18n.format(localisationKey, substitutions);
     }
 
-    public static boolean isShiftDown()
-    {
+    public static boolean isShiftDown() {
         return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
     }
 
-    public static boolean isCtrlDown()
-    {
+    public static boolean isCtrlDown() {
         return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
     }
 
-    public static boolean isAdvancedTooltipsOn()
-    {
+    public static boolean isAdvancedTooltipsOn() {
         return Minecraft.getMinecraft().gameSettings.advancedItemTooltips;
     }
 
-    public static Supplier<List<String>> generateTooltipProvider(String... localisationKeys)
-    {
+    public static Supplier<List<String>> generateTooltipProvider(String... localisationKeys) {
         return localisationKeys.length == 0 ? Collections::emptyList : () -> Arrays.asList(localisationKeys);
     }
 
-    public static String toCamelCase(String input)
-    {
+    public static String toCamelCase(String input) {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, input);
     }
 
-    public static String toUpperCamelCase(String input)
-    {
+    public static String toUpperCamelCase(String input) {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, input);
     }
 
-    public static String[] cleanArray(String[] array)
-    {
+    public static String[] cleanArray(String[] array) {
         return Arrays.stream(array).filter(x -> !StringUtils.isBlank(x)).toArray(String[]::new);
     }
 
-    public static <I> boolean all(I[] iterable, Function<I, Boolean> condition)
-    {
+    public static <I> boolean all(I[] iterable, Function<I, Boolean> condition) {
         return all(Arrays.asList(iterable), condition);
     }
 
-    public static <I> boolean all(Iterable<I> iterable, Function<I, Boolean> condition)
-    {
-        for (I value : iterable)
-        {
-            if (!condition.apply(value))
-            {
+    public static <I> boolean all(Iterable<I> iterable, Function<I, Boolean> condition) {
+        for (I value : iterable) {
+            if (!condition.apply(value)) {
                 return false;
             }
         }
@@ -92,17 +79,13 @@ public final class Utils
         return true;
     }
 
-    public static <I> boolean atLeastOne(I[] iterable, Function<I, Boolean> condition)
-    {
+    public static <I> boolean atLeastOne(I[] iterable, Function<I, Boolean> condition) {
         return atLeastOne(Arrays.asList(iterable), condition);
     }
 
-    public static <I> boolean atLeastOne(Iterable<I> iterable, Function<I, Boolean> condition)
-    {
-        for (I value : iterable)
-        {
-            if (condition.apply(value))
-            {
+    public static <I> boolean atLeastOne(Iterable<I> iterable, Function<I, Boolean> condition) {
+        for (I value : iterable) {
+            if (condition.apply(value)) {
                 return true;
             }
         }
@@ -110,20 +93,16 @@ public final class Utils
         return false;
     }
 
-    public static <I> boolean atLeastHalf(I[] iterable, Function<I, Boolean> condition)
-    {
+    public static <I> boolean atLeastHalf(I[] iterable, Function<I, Boolean> condition) {
         return atLeastHalf(Arrays.asList(iterable), condition);
     }
 
-    public static <I> boolean atLeastHalf(Iterable<I> iterable, Function<I, Boolean> condition)
-    {
+    public static <I> boolean atLeastHalf(Iterable<I> iterable, Function<I, Boolean> condition) {
         int size = 0;
         int validate = 0;
-        for (I value : iterable)
-        {
+        for (I value : iterable) {
             size++;
-            if (condition.apply(value))
-            {
+            if (condition.apply(value)) {
                 validate++;
             }
         }
@@ -132,18 +111,14 @@ public final class Utils
     }
 
     @Nullable
-    public static <I> I first(I[] iterable, Function<I, Boolean> condition)
-    {
+    public static <I> I first(I[] iterable, Function<I, Boolean> condition) {
         return first(Arrays.asList(iterable), condition);
     }
 
     @Nullable
-    public static <I> I first(Iterable<I> iterable, Function<I, Boolean> condition)
-    {
-        for (I value : iterable)
-        {
-            if (condition.apply(value))
-            {
+    public static <I> I first(Iterable<I> iterable, Function<I, Boolean> condition) {
+        for (I value : iterable) {
+            if (condition.apply(value)) {
                 return value;
             }
         }
@@ -151,13 +126,11 @@ public final class Utils
         return null;
     }
 
-    public static String numbersToDown(String input)
-    {
+    public static String numbersToDown(String input) {
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(input);
         StringBuffer buffer = new StringBuffer();
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             int digit = Integer.parseInt(matcher.group());
             String replacement = toSubscript(digit);
             matcher.appendReplacement(buffer, replacement);
@@ -167,27 +140,22 @@ public final class Utils
         return buffer.toString();
     }
 
-    public static String toSnakeCase(String input)
-    {
+    public static String toSnakeCase(String input) {
         // return input.replaceAll("[-\\s]+", "_").replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
         return input.replaceAll("([a-z])([A-Z])", "$1_$2").replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2").replaceAll("([a-zA-Z])([0-9])", "$1_$2").replaceAll("([0-9])([a-zA-Z])", "$1_$2").toLowerCase();
     }
 
-    private static String toSubscript(int digit)
-    {
+    private static String toSubscript(int digit) {
         char subscriptDigit = (char) ('\u2080' + digit);
         return Character.toString(subscriptDigit);
     }
 
-    public static String formatFluidAmount(int amount)
-    {
+    public static String formatFluidAmount(int amount) {
         return amount < 1000 ? amount + "mB" : String.format("%.1fB", (double) amount / Fluid.BUCKET_VOLUME);
     }
 
-    public static ModelRotation getRotationForFacing(EnumFacing facing)
-    {
-        return switch (facing)
-        {
+    public static ModelRotation getRotationForFacing(EnumFacing facing) {
+        return switch (facing) {
             case DOWN -> ModelRotation.X90_Y0;
             case UP -> ModelRotation.X270_Y0;
             case NORTH -> ModelRotation.X0_Y0;
@@ -197,55 +165,46 @@ public final class Utils
         };
     }
 
-    public static String generateRecipeName(List<OreStack> itemsIn, List<FluidStack> fluidsIn, WeightedList<ItemStack> itemsOut, WeightedList<FluidStack> fluidsOut)
-    {
+    public static String generateRecipeName(int configuration, List<OreStack> itemsIn, List<FluidStack> fluidsIn, WeightedList<ItemStack> itemsOut, WeightedList<FluidStack> fluidsOut) {
         List<String> components = new ArrayList<>();
 
-        for (OreStack oreStack : itemsIn)
-        {
+        components.add(configuration + "");
+
+        for (OreStack oreStack : itemsIn) {
             components.add(getOreStackName(oreStack));
         }
 
-        for (FluidStack fluidStack : fluidsIn)
-        {
+        for (FluidStack fluidStack : fluidsIn) {
             components.add(getFluidStackName(fluidStack));
         }
 
         components.add("to");
 
-        for (ItemStack itemStack : itemsOut)
-        {
+        for (ItemStack itemStack : itemsOut) {
             components.add(getItemStackName(itemStack));
         }
 
-        for (FluidStack fluidStack : fluidsOut)
-        {
+        for (FluidStack fluidStack : fluidsOut) {
             components.add(getFluidStackName(fluidStack));
         }
 
         return String.join("_", components);
     }
 
-    public static String getOreStackName(OreStack stack)
-    {
-        if (stack.isOreDict())
-        {
+    public static String getOreStackName(OreStack stack) {
+        if (stack.isOreDict()) {
             return stack.getAmount() + "x" + "ore:" + stack.getOreDictName();
-        }
-        else
-        {
+        } else {
             return getItemStackName(stack.getItemStack());
         }
     }
 
-    public static String getItemStackName(ItemStack stack)
-    {
+    public static String getItemStackName(ItemStack stack) {
         int meta = stack.getMetadata();
         return stack.getCount() + "x" + stack.getItem().getRegistryName() + (meta == WILDCARD_VALUE ? "" : ":" + meta);
     }
 
-    public static String getFluidStackName(FluidStack stack)
-    {
+    public static String getFluidStackName(FluidStack stack) {
         return stack.amount + "xfluid:" + stack.getFluid().getName();
     }
 }

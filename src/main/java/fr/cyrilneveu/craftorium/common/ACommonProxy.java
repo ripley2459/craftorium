@@ -12,7 +12,7 @@ import fr.cyrilneveu.craftorium.api.world.VeinGenerator;
 import fr.cyrilneveu.craftorium.common.inventory.CreativeTabs;
 import fr.cyrilneveu.craftorium.common.machine.Machines;
 import fr.cyrilneveu.craftorium.common.recipe.RecipeMaps;
-import fr.cyrilneveu.craftorium.common.recipe.RecipesHandler;
+import fr.cyrilneveu.craftorium.common.recipe.RecipeManager;
 import fr.cyrilneveu.craftorium.common.substance.Substances;
 import fr.cyrilneveu.craftorium.common.substance.SubstancesObjects;
 import fr.cyrilneveu.craftorium.common.world.Veins;
@@ -136,10 +136,10 @@ public abstract class ACommonProxy {
     protected static void onRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
         registerOres();
 
-        RecipesHandler.unregisterRecipes(event);
-        RecipesHandler.registerRecipes(event);
+        RecipeManager.unregisterRecipes(event);
+        RecipeManager.registerRecipes(event);
 
-        SUBSTANCES_REGISTRY.getAll().values().forEach(s -> s.getProcess().registerRecipes(s));
+        SUBSTANCES_REGISTRY.getAll().values().forEach(s -> s.getProcess().processSubstance(s));
     }
 
     protected static void registerOres() {
