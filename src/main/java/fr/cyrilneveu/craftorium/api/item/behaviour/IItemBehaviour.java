@@ -30,6 +30,18 @@ public interface IItemBehaviour {
         return false;
     }
 
+    default int getMaxDamage(ItemStack stack) {
+        return 0;
+    }
+
+    default int getDamage(ItemStack stack) {
+        return 0;
+    }
+
+    default void setDamage(ItemStack stack, int damage) {
+
+    }
+
     default boolean hasContainerItem(ItemStack stack) {
         return false;
     }

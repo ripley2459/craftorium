@@ -18,24 +18,30 @@ import static fr.cyrilneveu.craftorium.common.substance.SubstancesObjects.INGOT;
 public final class DurabilityBehaviour implements IItemBehaviour {
     private final OreStack repairable;
     private final int maxDamage;
-    private int damage;
 
     public DurabilityBehaviour(String repairMat, int maxDamage) {
         this.repairable = new OreStack(repairMat);
         this.maxDamage = maxDamage;
     }
 
-    public static int getDamage(ItemStack stack) {
-        return NBTUtils.getIntValue(DAMAGE_NBT_KEY, stack);
-    }
-
-    public static void setDamage(ItemStack stack, int newDamage) {
-        NBTUtils.setValue(DAMAGE_NBT_KEY, newDamage, stack);
-    }
-
     @Override
     public boolean isDamageable() {
         return true;
+    }
+
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return maxDamage;
+    }
+
+    @Override
+    public int getDamage(ItemStack stack) {
+        return NBTUtils.getIntValue(DAMAGE_NBT_KEY, stack);
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int newDamage) {
+        NBTUtils.setValue(DAMAGE_NBT_KEY, Math.max(0, newDamage), stack);
     }
 
     @Override

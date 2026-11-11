@@ -101,6 +101,26 @@ public class CustomItem extends Item implements ICustomModel {
     }
 
     @Override
+    public int getMaxDamage(ItemStack stack) {
+        IItemBehaviour behaviour = Utils.first(behaviours, IItemBehaviour::isDamageable);
+        return behaviour != null ? behaviour.getMaxDamage(stack) : super.getMaxDamage(stack);
+    }
+
+    @Override
+    public int getDamage(ItemStack stack) {
+        IItemBehaviour behaviour = Utils.first(behaviours, IItemBehaviour::isDamageable);
+        return behaviour != null ? behaviour.getDamage(stack) : super.getDamage(stack);
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage) {
+        IItemBehaviour behaviour = Utils.first(behaviours, IItemBehaviour::isDamageable);
+        if (behaviour != null)
+            behaviour.setDamage(stack, damage);
+        else super.setDamage(stack, damage);
+    }
+
+    @Override
     public boolean hasContainerItem(ItemStack stack) {
         return Utils.atLeastOne(behaviours, b -> b.hasContainerItem(stack)) || super.hasContainerItem(stack);
     }
@@ -113,7 +133,7 @@ public class CustomItem extends Item implements ICustomModel {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return super.getIsRepairable(toRepair, repair);
+        return Utils.atLeastOne(behaviours, b -> b.getIsRepairable(toRepair, repair)) || super.getIsRepairable(toRepair, repair);
     }
 
     @Override
