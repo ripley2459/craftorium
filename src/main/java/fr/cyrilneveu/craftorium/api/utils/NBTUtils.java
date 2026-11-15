@@ -18,7 +18,7 @@ public final class NBTUtils {
     }
 
     public static int getIntValue(String name, ItemStack itemStack) {
-        return getIntValue(name, getNBT(itemStack));
+        return itemStack.hasTagCompound() ? getIntValue(name, itemStack.getTagCompound()) : 0;
     }
 
     public static int getIntValue(String name, NBTTagCompound nbt) {

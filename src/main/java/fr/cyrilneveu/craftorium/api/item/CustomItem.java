@@ -23,6 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -108,8 +109,12 @@ public class CustomItem extends Item implements ICustomModel {
 
     @Override
     public int getDamage(ItemStack stack) {
+        int meta = super.getDamage(stack);
+        if (meta == OreDictionary.WILDCARD_VALUE)
+            return meta;
+
         IItemBehaviour behaviour = Utils.first(behaviours, IItemBehaviour::isDamageable);
-        return behaviour != null ? behaviour.getDamage(stack) : super.getDamage(stack);
+        return behaviour != null ? behaviour.getDamage(stack) : meta;
     }
 
     @Override
